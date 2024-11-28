@@ -1,7 +1,7 @@
+import 'package:betak/core/constants/constants.dart';
 import 'package:betak/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
 
 class CustomButton1 extends StatelessWidget {
   const CustomButton1(
@@ -39,7 +39,7 @@ class CustomButton1 extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: textStyle ?? TextStyle(fontFamily: kInterLight,fontWeight: FontWeight.w300,color: textColor ?? const Color(0xffF3F3F3) ,fontSize:fontSize ?? 22),
+            style: textStyle ?? TextStyle(fontFamily: Constants.kInterLight,fontWeight: FontWeight.w300,color: textColor ?? const Color(0xffF3F3F3) ,fontSize:fontSize ?? 22),
           )),
     );
   }
