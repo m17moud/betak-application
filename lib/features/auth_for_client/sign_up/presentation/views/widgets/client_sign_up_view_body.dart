@@ -1,4 +1,7 @@
-import 'package:betak/core/widgets/phone_text_field.dart';
+import 'package:betak/generated/assets.dart';
+
+import '../../../../../../core/utils/routes_manager.dart';
+import '../../../../../../core/widgets/phone_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -6,7 +9,6 @@ import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/widgets/custom_button.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/password_text_field.dart';
-import '../../../../../../generated/assets.dart';
 
 class ClientSignUpViewBody extends StatefulWidget {
   const ClientSignUpViewBody({super.key});
@@ -40,7 +42,9 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                                Navigator.pop(context);
+                    },
                     icon: const Icon(
                       Icons.arrow_back,
                       color: Color(0xFF455A64),
@@ -67,7 +71,7 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -83,7 +87,7 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -100,7 +104,7 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -116,12 +120,10 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
             ),
           
             
-            const SizedBox(
-              height: 10,
-            ),
+        
             
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -137,7 +139,7 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
               screenWidth: screenWidth,
             ),
          
-             SizedBox(
+             const SizedBox(
             height: 15,
           ),
           Row( mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +150,9 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
                     .copyWith(color: Styles.flyByNight),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                      Navigator.pushReplacementNamed(context, Routes.clientSignInRoute);
+                },
                 child: Text(
                   "تسجيل الدخول",
                   style: Styles.styleSemiBoldInter20

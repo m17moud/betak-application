@@ -15,10 +15,10 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
 
-      backgroundColor: const Color(0xFFF3F7F8),
-      body: const HomeViewBody(),
+      backgroundColor: Color(0xFFF3F7F8),
+      body: HomeViewBody(),
      
     );
   }

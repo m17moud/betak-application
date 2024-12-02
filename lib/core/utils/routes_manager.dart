@@ -1,21 +1,21 @@
 import 'color_manager.dart';
 import 'string_manager.dart';
 
-import 'package:betak/features/auth_for_client/sign_in/presentation/views/client_sign_in_view.dart';
-import 'package:betak/features/auth_for_client/sign_up/presentation/views/client_password_view.dart';
-import 'package:betak/features/auth_for_client/sign_up/presentation/views/client_sign_up_view.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/presentation/views/merchant_sign_in_view.dart';
-import 'package:betak/features/auth_for_merchants/sign_up/presentation/views/merchant_password_view.dart';
-import 'package:betak/features/auth_for_merchants/sign_up/presentation/views/merchant_sign_up_view.dart';
-import 'package:betak/features/home/presentation/views/home_view.dart';
-import 'package:betak/features/product/presentation/views/product_view.dart';
-import 'package:betak/features/splash/presentation/views/loading_splash_view.dart';
-import 'package:betak/features/splash/presentation/views/splash_view.dart';
+import '../../features/auth_for_client/sign_in/presentation/views/client_sign_in_view.dart';
+import '../../features/auth_for_client/sign_up/presentation/views/client_password_view.dart';
+import '../../features/auth_for_client/sign_up/presentation/views/client_sign_up_view.dart';
+import '../../features/auth_for_merchants/sign_in/presentation/views/merchant_sign_in_view.dart';
+import '../../features/auth_for_merchants/sign_up/presentation/views/merchant_password_view.dart';
+import '../../features/auth_for_merchants/sign_up/presentation/views/merchant_sign_up_view.dart';
+import '../../features/home/presentation/views/home_view.dart';
+import '../../features/product/presentation/views/product_view.dart';
+import '../../features/splash/presentation/views/loading_splash_view.dart';
+import '../../features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Routes {
-  static const String loadingSplashRoute = "/loading_splash_view";
+  static const String loadingSplashRoute = "/";
   static const String splashRoute = "/splash_view";
 
   static const String clientSignInRoute = "/client_sign_in_view";
@@ -29,47 +29,37 @@ class Routes {
   static const String homeRoute = "/home_view";
   static const String productRoute = "/product_view";
 
-
-
   // static const String instructionsRoute = "/iInstructionsScreen";
 
   static Map<String, dynamic> routesList = {
-    loadingSplashRoute:const LoadingSplashView(),
-    splashRoute:const SplashView(),
-
-    clientSignInRoute:const ClientSignInView(),
-    clientSignUpRoute:const ClientSignUpView(),
-    clientPasswordRoute:const ClientPasswordView(),
-
-    merchantSignInRoute:const MerchantSignInView(),
-    merchantSignUpRoute:const MerchantSignUpView(),
-    merchantPasswordRoute:const MerchantPasswordView(),
-
+    loadingSplashRoute: const LoadingSplashView(),
+    splashRoute: const SplashView(),
+    clientSignInRoute: const ClientSignInView(),
+    clientSignUpRoute: const ClientSignUpView(),
+    clientPasswordRoute: const ClientPasswordView(),
+    merchantSignInRoute: const MerchantSignInView(),
+    merchantSignUpRoute: const MerchantSignUpView(),
+    merchantPasswordRoute: const MerchantPasswordView(),
     homeRoute: const HomeView(),
-    productRoute:const ProductView(),
-
-
+    productRoute: const ProductView(),
   };
 
   static Scaffold get unDefinedRoute {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle:
-        const SystemUiOverlayStyle(statusBarColor: ColorManager.white),
+            const SystemUiOverlayStyle(statusBarColor: ColorManager.white),
         title: Text(AppStrings.noRouteFound[NoRoute.title.index]),
       ),
       body: Center(child: Text(AppStrings.noRouteFound[NoRoute.body.index])),
     );
   }
 }
+
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     if (settings.name != null) {
       try {
-        final args = settings.arguments;
-
-
-
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => Routes.routesList[settings.name]);

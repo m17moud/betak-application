@@ -1,13 +1,14 @@
-import 'package:betak/core/widgets/phone_text_field.dart';
+import 'package:betak/generated/assets.dart';
+
+import '../../../../../../core/utils/routes_manager.dart';
+import '../../../../../../core/widgets/phone_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/widgets/custom_button.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/password_text_field.dart';
-import '../../../../../../generated/assets.dart';
 
 class MerchantSignUpViewBody extends StatefulWidget {
   const MerchantSignUpViewBody({super.key});
@@ -19,7 +20,7 @@ class MerchantSignUpViewBody extends StatefulWidget {
 class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
 
   var _dropDownValue = 'ازياء نسائيه';
-  var _items = [
+  final _items = [
     'ازياء نسائيه',
     'اجهزه اللابتوب',
     'العاب الفيديو',
@@ -48,7 +49,9 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                                Navigator.pop(context);
+                    },
                     icon: const Icon(
                       Icons.arrow_back,
                       color: Color(0xFF455A64),
@@ -75,7 +78,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -91,7 +94,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -107,7 +110,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -123,7 +126,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -139,7 +142,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -154,7 +157,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -197,7 +200,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -214,7 +217,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
             ),
             
             const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 14),
+              padding: EdgeInsets.only(left: 2, bottom: 5),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -240,7 +243,9 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                     .copyWith(color: Styles.flyByNight),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                      Navigator.pushReplacementNamed(context, Routes.merchantSignInRoute);
+                },
                 child: Text(
                   "تسجيل الدخول",
                   style: Styles.styleSemiBoldInter20

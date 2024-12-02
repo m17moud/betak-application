@@ -26,7 +26,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     setState(() {
       if(index == 2){
         index=0;
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>OnBoardingSecondaryView()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const OnBoardingSecondaryView()));
       }
     });
   }

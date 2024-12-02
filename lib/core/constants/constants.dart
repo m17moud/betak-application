@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 
 class Constants {
 
 
  //api urls
   static const String baseUrl = "https://baitak88.com/";
-  static const String PKey= "pkey";
+  static const String pKey= "pkey";
 
   static const String clientSignUp = "addCustomer.php";
   static const String clientSignUpPKey = "RVNLCinYW-YH8P06VtODBv2dE2dG1hmlzrzJUFk3RrGD83QH0u9kvHJWOxWvZofp";

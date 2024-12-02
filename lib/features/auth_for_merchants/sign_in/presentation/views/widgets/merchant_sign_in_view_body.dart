@@ -1,8 +1,8 @@
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/core/widgets/custom_button.dart';
-import 'package:betak/features/auth_for_client/sign_in/presentation/views/widgets/facebook_sign_up_button.dart';
-import 'package:betak/features/auth_for_client/sign_in/presentation/views/widgets/google_sign_up_button.dart';
 import 'package:betak/generated/assets.dart';
+
+import '../../../../../../core/utils/routes_manager.dart';
+import '../../../../../../core/utils/styles.dart';
+import '../../../../../../core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -34,7 +34,9 @@ class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
             children: [
               Align(
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(
                     Icons.arrow_back,
                     color: Color(0xFF455A64),
@@ -101,7 +103,7 @@ class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           Container(
             height: 65,
@@ -135,16 +137,29 @@ class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           PasswordTextField(
             borderRadius: 12,
             hint: 'قم بادخال كلمة المرور',
             checkVisibility: true,
             screenWidth: screenWidth,
+          ),              const SizedBox(height: 5,),
+
+          Row(mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(onTap: () {
+                
+              },
+                child: const Text("هل نسيت كلمة السر؟"),
+              )
+            ],
           ),
-          SizedBox(height: 20,),
-          Row( mainAxisAlignment: MainAxisAlignment.center,
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "ليس لديك حساب؟ ",
@@ -152,9 +167,15 @@ class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
                     .copyWith(color: Styles.flyByNight),
               ),
               InkWell(
-                onTap: () {},
-                child: Text("إنشاء حساب",  style: Styles.styleSemiBoldInter20
-                  .copyWith(color: Styles.blueSky),),
+                onTap: () {
+                  Navigator.pushReplacementNamed(
+                      context, Routes.merchantSignUpRoute);
+                },
+                child: Text(
+                  "إنشاء حساب",
+                  style: Styles.styleSemiBoldInter20
+                      .copyWith(color: Styles.blueSky),
+                ),
               )
             ],
           ),

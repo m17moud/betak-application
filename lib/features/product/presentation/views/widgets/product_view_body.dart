@@ -56,7 +56,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top:.5, bottom:.5),
+                        padding: const EdgeInsets.only(top:.5, bottom:.5),
                         child: CustomIconButton(
                           color: const Color(0xFF999999),
                           icon: const Icon(

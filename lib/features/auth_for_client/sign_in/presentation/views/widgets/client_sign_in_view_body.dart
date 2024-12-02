@@ -1,8 +1,8 @@
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/core/widgets/custom_button.dart';
-import 'package:betak/features/auth_for_client/sign_in/presentation/views/widgets/facebook_sign_up_button.dart';
-import 'package:betak/features/auth_for_client/sign_in/presentation/views/widgets/google_sign_up_button.dart';
 import 'package:betak/generated/assets.dart';
+
+import '../../../../../../core/utils/routes_manager.dart';
+import '../../../../../../core/utils/styles.dart';
+import '../../../../../../core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -35,7 +35,9 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                        Navigator.pop(context);
+                  },
                   icon: const Icon(
                     Icons.arrow_back,
                     color: Color(0xFF455A64),
@@ -114,7 +116,7 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           Container(
             height: 65,
@@ -148,7 +150,7 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           PasswordTextField(
             borderRadius: 12,
@@ -156,7 +158,18 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
             checkVisibility: true,
             screenWidth: screenWidth,
           ),
-          SizedBox(
+               const SizedBox(height: 5,),
+
+          Row(mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(onTap: () {
+                
+              },
+                child: const Text("هل نسيت كلمة السر؟"),
+              )
+            ],
+          ),
+          const SizedBox(
             height: 20,
           ),
           Row( mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +180,9 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
                     .copyWith(color: Styles.flyByNight),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                      Navigator.pushReplacementNamed(context, Routes.clientSignUpRoute);
+                },
                 child: Text(
                   "إنشاء حساب",
                   style: Styles.styleSemiBoldInter20
@@ -179,7 +194,7 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
           SizedBox(
             height: screenHeight > 892 ? 40 : 30,
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
             child: CustomButton1(

@@ -1,11 +1,4 @@
-import 'package:betak/core/widgets/choose_user_type.dart';
-import 'package:betak/features/auth_for_client/sign_in/presentation/views/client_sign_in_view.dart';
-import 'package:betak/features/auth_for_client/sign_up/presentation/views/client_sign_up_view.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/presentation/views/merchant_sign_in_view.dart';
-import 'package:betak/features/auth_for_merchants/sign_up/presentation/views/merchant_sign_up_view.dart';
-import 'package:betak/features/home/presentation/views/home_view.dart';
-import 'package:betak/features/splash/presentation/views/splash_view.dart';
-import 'package:device_preview/device_preview.dart';
+import '../core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +19,8 @@ class BetakApplication extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       //  builder: DevicePreview.appBuilder,
-      home: SplashView(),
+      initialRoute: Routes.loadingSplashRoute, // Set initial route
+      onGenerateRoute: RouteGenerator.getRoute, // Use RouteGenerator for navigation
     );
   }
 }
