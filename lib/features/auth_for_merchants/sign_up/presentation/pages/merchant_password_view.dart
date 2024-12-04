@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_merchants/sign_up/presentation/views/widgets/merchant_password_view_body.dart';
+import 'package:betak/features/auth_for_merchants/sign_up/presentation/widgets/merchant_password_view_body.dart';
 import 'package:flutter/material.dart';
 
 class MerchantPasswordView extends StatelessWidget {

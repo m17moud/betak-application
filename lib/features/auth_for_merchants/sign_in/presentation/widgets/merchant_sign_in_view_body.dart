@@ -1,21 +1,21 @@
 import 'package:betak/generated/assets.dart';
 
-import '../../../../../../core/utils/routes_manager.dart';
-import '../../../../../../core/utils/styles.dart';
-import '../../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../../core/widgets/password_text_field.dart';
+import '../../../../../core/widgets/password_text_field.dart';
 
-class ClientSignInViewBody extends StatefulWidget {
-  const ClientSignInViewBody({super.key});
+class MerchantSignInViewBody extends StatefulWidget {
+  const MerchantSignInViewBody({super.key});
 
   @override
-  State<ClientSignInViewBody> createState() => _ClientSignInViewBodyState();
+  State<MerchantSignInViewBody> createState() => _MerchantSignInViewBodyState();
 }
 
-class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
+class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -33,10 +33,9 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
           Row(
             children: [
               Align(
-                alignment: Alignment.topLeft,
                 child: IconButton(
                   onPressed: () {
-                        Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -52,26 +51,14 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
           ),
           Center(child: SvgPicture.asset(Assets.imagesLogo1)),
           const SizedBox(
-            height: 30,
+            height: 25,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-             
-              Text(
-                'مرحبا بك في ',
-                style: Styles.styleSemiBoldInter30
-                    .copyWith(color: Styles.flyByNight),
-              ),
-               Text(
-                'بيتك',
-                style:
-                    Styles.styleSemiBoldInter30.copyWith(color: Styles.blueSky),
-              ),
-            ],
+          Text(
+            'تسجيل دخول التاجر',
+            style: Styles.styleSemiBoldInter30.copyWith(color: Styles.blueSky),
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 31),
@@ -157,8 +144,7 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
             hint: 'قم بادخال كلمة المرور',
             checkVisibility: true,
             screenWidth: screenWidth,
-          ),
-               const SizedBox(height: 5,),
+          ),              const SizedBox(height: 5,),
 
           Row(mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -172,7 +158,8 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
           const SizedBox(
             height: 20,
           ),
-          Row( mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "ليس لديك حساب؟ ",
@@ -181,7 +168,8 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
               ),
               InkWell(
                 onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.clientSignUpRoute);
+                  Navigator.pushReplacementNamed(
+                      context, Routes.merchantSignUpRoute);
                 },
                 child: Text(
                   "إنشاء حساب",
@@ -200,7 +188,7 @@ class _ClientSignInViewBodyState extends State<ClientSignInViewBody> {
             child: CustomButton1(
               backgroundColor: Styles.blueSky,
               onPressed: () {},
-              text: 'تسجيل دخول',
+              text: 'تسجيل الدخول',
               textStyle:
                   Styles.styleSemiBoldInter18.copyWith(color: Colors.white),
               buttonWidth: screenWidth * 0.9,

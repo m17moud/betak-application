@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_client/sign_up/presentation/views/widgets/client_sign_up_view_body.dart';
+import 'package:betak/features/auth_for_client/sign_up/presentation/widgets/client_sign_up_view_body.dart';
 import 'package:flutter/material.dart';
 
 class ClientSignUpView extends StatelessWidget {

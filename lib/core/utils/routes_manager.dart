@@ -1,13 +1,12 @@
 import 'color_manager.dart';
 import 'string_manager.dart';
 
-import '../../features/auth_for_client/sign_in/presentation/views/client_sign_in_view.dart';
-import '../../features/auth_for_client/sign_up/presentation/views/client_password_view.dart';
-import '../../features/auth_for_client/sign_up/presentation/views/client_sign_up_view.dart';
-import '../../features/auth_for_merchants/sign_in/presentation/views/merchant_sign_in_view.dart';
-import '../../features/auth_for_merchants/sign_up/presentation/views/merchant_password_view.dart';
-import '../../features/auth_for_merchants/sign_up/presentation/views/merchant_sign_up_view.dart';
-import '../../features/home/presentation/views/home_view.dart';
+import '../../features/auth_for_client/sign_in/presentation/pages/client_sign_in_view.dart';
+import '../../features/auth_for_client/sign_up/presentation/pages/client_sign_up_view.dart';
+import '../../features/auth_for_merchants/sign_in/presentation/pages/merchant_sign_in_view.dart';
+import '../../features/auth_for_merchants/sign_up/presentation/pages/merchant_password_view.dart';
+import '../../features/auth_for_merchants/sign_up/presentation/pages/merchant_sign_up_view.dart';
+import '../../features/home/presentation/pages/home_view.dart';
 import '../../features/product/presentation/views/product_view.dart';
 import '../../features/splash/presentation/views/loading_splash_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
@@ -36,7 +35,6 @@ class Routes {
     splashRoute: const SplashView(),
     clientSignInRoute: const ClientSignInView(),
     clientSignUpRoute: const ClientSignUpView(),
-    clientPasswordRoute: const ClientPasswordView(),
     merchantSignInRoute: const MerchantSignInView(),
     merchantSignUpRoute: const MerchantSignUpView(),
     merchantPasswordRoute: const MerchantPasswordView(),

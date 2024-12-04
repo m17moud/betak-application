@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../core/utils/styles.dart';
-import '../../../../../../core/widgets/custom_button.dart';
-import '../../../../../../core/widgets/password_text_field.dart';
-import '../../../../../../generated/assets.dart';
+import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/password_text_field.dart';
+import '../../../../../generated/assets.dart';
 
 class MerchantPasswordViewBody extends StatelessWidget {
   const MerchantPasswordViewBody({super.key});

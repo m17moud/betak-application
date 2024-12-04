@@ -1,15 +1,15 @@
 import 'package:betak/generated/assets.dart';
 
-import '../../../../../../core/utils/routes_manager.dart';
-import '../../../../../../core/widgets/custom_title_text.dart';
-import '../../../../../../core/widgets/phone_text_field.dart';
+import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/widgets/custom_title_text.dart';
+import '../../../../../core/widgets/phone_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../core/utils/styles.dart';
-import '../../../../../../core/widgets/custom_button.dart';
-import '../../../../../../core/widgets/custom_text_field.dart';
-import '../../../../../../core/widgets/password_text_field.dart';
+import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/widgets/password_text_field.dart';
 
 class ClientSignUpViewBody extends StatefulWidget {
   const ClientSignUpViewBody({super.key});
