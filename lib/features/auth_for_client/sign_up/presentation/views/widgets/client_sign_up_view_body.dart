@@ -1,6 +1,7 @@
 import 'package:betak/generated/assets.dart';
 
 import '../../../../../../core/utils/routes_manager.dart';
+import '../../../../../../core/widgets/custom_title_text.dart';
 import '../../../../../../core/widgets/phone_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,8 +19,6 @@ class ClientSignUpViewBody extends StatefulWidget {
 }
 
 class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
-
-
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -29,12 +28,10 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-       
-           const SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Row(
@@ -43,11 +40,11 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
                   alignment: Alignment.topLeft,
                   child: IconButton(
                     onPressed: () {
-                                Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                     icon: const Icon(
                       Icons.arrow_back,
-                      color: Color(0xFF455A64),
+                      color: Styles.flyByNight,
                       size: 22,
                     ),
                   ),
@@ -67,69 +64,24 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
               style:
                   Styles.styleSemiBoldInter30.copyWith(color: Styles.blueSky),
             ),
-          const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'اسم المستخدم',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            CustomTitleText(text: "اسم المستخدم"),
             CustomTextField(
               screenWidth: screenWidth,
               hint: 'قم بادخال اسمك',
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'البريد الالكتروني',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            CustomTitleText(text: 'البريد الالكتروني'),
             CustomTextField(
               screenWidth: screenWidth,
               hint: 'قم بادخال بريدك الالكتروني',
             ),
-           
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'رقم الهاتف',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
+            CustomTitleText(
+              text: 'رقم الهاتف',
             ),
             PhoneField(
               screenWidth: screenWidth,
             ),
-            const SizedBox(
-              height: 10,
-            ),
-          
-            
-        
-            
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'كلمة المرور',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
+            CustomTitleText(
+              text: 'كلمة المرور',
             ),
             PasswordTextField(
               hintColor: const Color(0xFF5D5D60),
@@ -138,31 +90,27 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
               checkVisibility: false,
               screenWidth: screenWidth,
             ),
-         
-             const SizedBox(
-            height: 15,
-          ),
-          Row( mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "لديك حساب بالفعل؟ ",
-                style: Styles.styleSemiBoldInter20
-                    .copyWith(color: Styles.flyByNight),
-              ),
-              InkWell(
-                onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.clientSignInRoute);
-                },
-                child: Text(
-                  "تسجيل الدخول",
-                  style: Styles.styleSemiBoldInter20
-                      .copyWith(color: Styles.blueSky),
-                ),
-              )
-            ],
-          ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomTitleText(text: "لديك حساب بالفعل؟ "),
+                InkWell(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.clientSignInRoute);
+                    },
+                    child: CustomTitleText(
+                      text: "تسجيل الدخول",
+                      style: Styles.styleSemiBoldInter20
+                          .copyWith(color: Styles.blueSky),
+                    ))
+              ],
+            ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 30,top: 5),
+              padding: const EdgeInsets.only(bottom: 30, top: 5),
               child: CustomButton1(
                 backgroundColor: Styles.blueSky,
                 onPressed: () {},

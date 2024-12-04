@@ -1,3 +1,5 @@
+import 'package:betak/core/widgets/custom_title_text.dart';
+import 'package:betak/features/auth_for_merchants/sign_up/presentation/views/widgets/category_list.dart';
 import 'package:betak/generated/assets.dart';
 
 import '../../../../../../core/utils/routes_manager.dart';
@@ -18,17 +20,6 @@ class MerchantSignUpViewBody extends StatefulWidget {
 }
 
 class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
-
-  var _dropDownValue = 'ازياء نسائيه';
-  final _items = [
-    'ازياء نسائيه',
-    'اجهزه اللابتوب',
-    'العاب الفيديو',
-    'اثاث',
-    'اجهزه منزليه',
-    'الالكترونيات'
-  ];
-
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -50,11 +41,11 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                   alignment: Alignment.topLeft,
                   child: IconButton(
                     onPressed: () {
-                                Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                     icon: const Icon(
                       Icons.arrow_back,
-                      color: Color(0xFF455A64),
+                      color: Styles.flyByNight,
                       size: 22,
                     ),
                   ),
@@ -74,188 +65,71 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
               style:
                   Styles.styleSemiBoldInter30.copyWith(color: Styles.blueSky),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'اسم المستخدم',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            const CustomTitleText(text: "اسم المستخدم"),
             CustomTextField(
               screenWidth: screenWidth,
               hint: 'قم بادخال اسمك',
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'البريد الالكتروني',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            const CustomTitleText(text: "البريد الالكتروني"),
             CustomTextField(
               screenWidth: screenWidth,
               hint: 'قم بادخال بريدك الالكتروني',
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'المتجر',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            const CustomTitleText(text: "المتجر"),
             CustomTextField(
               screenWidth: screenWidth,
               hint: 'قم بادخل اسم المتجر الخاص بك',
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'العنوان',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            const CustomTitleText(text: "العنوان"),
             CustomTextField(
               screenWidth: screenWidth,
               hint: 'قم بادخال عنوانك',
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'رقم الهاتف',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            const CustomTitleText(text: "رقم الهاتف"),
             PhoneField(
               screenWidth: screenWidth,
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'نوع المنتجات',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
-            Container(
-              height: 65,
-              width: screenWidth * 9,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE0E3E8),
-                border: Border.all(color: Colors.transparent),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: DropdownButton(
-                    iconSize: 30,
-                    underline: const SizedBox(),
-                    isExpanded: true,
-                    items: _items.map((String item) {
-                      return DropdownMenuItem(
-                        value: item,
-                        child: Text(item),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _dropDownValue = newValue!;
-                      });
-                    },
-                    value: _dropDownValue,
-                  ),
-                ),
-              ),
-            ),
-             const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'حساب الفيسبوك',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            const CustomTitleText(text: "نوع المنتجات"),
+            const CategoryList(),
+            const CustomTitleText(text: "حساب الفيسبوك"),
             CustomTextField(
               screenWidth: screenWidth,
               hint: 'رابط حسابك على الفيسبوك',
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            
-            const Padding(
-              padding: EdgeInsets.only(left: 2, bottom: 5),
-              child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'كلمة المرور',
-                    style: Styles.styleSemiBoldInter20,
-                  )),
-            ),
+            const CustomTitleText(text: "كلمة المرور"),
             PasswordTextField(
-              hintColor: const Color(0xFF5D5D60),
+              hintColor: Styles.flyByNight,
               borderRadius: 12,
               hint: 'أنشئ كلمة مرور حسابك',
               checkVisibility: false,
               screenWidth: screenWidth,
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
-               Row( mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "لديك حساب بالفعل؟ ",
-                style: Styles.styleSemiBoldInter20
-                    .copyWith(color: Styles.flyByNight),
-              ),
-              InkWell(
-                onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.merchantSignInRoute);
-                },
-                child: Text(
-                  "تسجيل الدخول",
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "لديك حساب بالفعل؟ ",
                   style: Styles.styleSemiBoldInter20
-                      .copyWith(color: Styles.blueSky),
+                      .copyWith(color: Styles.flyByNight),
                 ),
-              )
-            ],
-          ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, Routes.merchantSignInRoute);
+                  },
+                  child: Text(
+                    "تسجيل الدخول",
+                    style: Styles.styleSemiBoldInter20
+                        .copyWith(color: Styles.blueSky),
+                  ),
+                )
+              ],
+            ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 30,top: 5),
+              padding: const EdgeInsets.only(bottom: 30, top: 5),
               child: CustomButton1(
                 backgroundColor: Styles.blueSky,
                 onPressed: () {},
