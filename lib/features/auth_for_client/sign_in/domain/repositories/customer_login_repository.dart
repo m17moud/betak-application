@@ -11,6 +11,9 @@ abstract class CustomerLoginRepository {
     required String loginpassword,
   });
 
-  
+  Future<Either<Failure, void>> customerLogout();
+
+
+
 
 }

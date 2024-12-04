@@ -28,6 +28,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   json_serializable: ^6.8.0
   json_annotation: ^4.9.0
+  bloc: ^8.1.2
+  bloc_concurrency: ^0.2.5
 
 dev_dependencies:
   flutter_lints: ^4.0.0

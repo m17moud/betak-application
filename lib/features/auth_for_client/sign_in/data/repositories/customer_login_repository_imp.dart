@@ -3,6 +3,7 @@ import 'package:betak/core/errors/exceptions.dart';
 import 'package:betak/core/network/network_info.dart';
 import 'package:betak/features/auth_for_client/sign_in/data/models/customer_login_response_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../datasources/customer_login_local_data_source.dart';
 import '../datasources/customer_login_remote_data_source.dart';
@@ -62,6 +63,21 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
       return Left(NetworkFailure());
     }
   }
+  @override
+  Future<Either<Failure, void>> customerLogout() async {
 
+
+    if (await _networkInfo.isConnected) {
+
+      try {
+        await _local.logout();
+        return const Right(null);
+      } catch (e) {
+        return  Left(ServerFailure(e.toString()));
+      }
+    } else {
+      return Left(NetworkFailure());
+    }
+  }
 
 }

@@ -4,6 +4,8 @@ import 'package:betak/features/auth_for_client/sign_in/data/datasources/customer
 import 'package:betak/features/auth_for_client/sign_in/data/repositories/customer_login_repository_imp.dart';
 import 'package:betak/features/auth_for_client/sign_in/domain/repositories/customer_login_repository.dart';
 import 'package:betak/features/auth_for_client/sign_in/domain/usecases/customer_login_usecase.dart';
+import 'package:betak/features/auth_for_client/sign_in/domain/usecases/customer_logout_usecase.dart';
+import 'package:betak/features/auth_for_client/sign_in/presentation/cubit/customer_login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -15,12 +17,15 @@ import 'core/network/network_info.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-//!bloc
-//Login Bloc
+//!cubit
+//Login cubit
+  sl.registerLazySingleton(() => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()));
 
 //!usecases
 //customer login usecses
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
+  sl.registerLazySingleton(() => CustomerLogoutUseCase(sl()));
+
 
 //!repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
