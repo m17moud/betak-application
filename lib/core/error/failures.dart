@@ -1,4 +1,5 @@
 
+import 'package:betak/core/constants/constants.dart';
 
 import 'package:dio/dio.dart';
 
@@ -50,4 +51,26 @@ class ServerFailure extends Failure {
       return ServerFailure('Oops There was an Error, Please try again');
     }
   }
+}
+
+class UnAuthorizedFailure extends Failure {
+  const UnAuthorizedFailure(
+      {String message = Constants.locUnAuthorizedErrorMessage})
+      : super(message);
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginAuthFailure extends Failure {
+  const LoginAuthFailure({String message = Constants.locLoginAuthErrorMessage})
+      : super( message);
+  @override
+  List<Object?> get props => [];
+}
+
+class NetworkFailure extends Failure {
+  const NetworkFailure({String message = Constants.locNetworkErrorMessage})
+      : super(message);
+  @override
+  List<Object?> get props => [];
 }

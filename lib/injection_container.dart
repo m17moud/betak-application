@@ -1,3 +1,9 @@
+
+import 'package:betak/features/auth_for_client/sign_in/data/datasources/customer_login_local_data_source.dart';
+import 'package:betak/features/auth_for_client/sign_in/data/datasources/customer_login_remote_data_source.dart';
+import 'package:betak/features/auth_for_client/sign_in/data/repositories/customer_login_repository_imp.dart';
+import 'package:betak/features/auth_for_client/sign_in/domain/repositories/customer_login_repository.dart';
+import 'package:betak/features/auth_for_client/sign_in/domain/usecases/customer_login_usecase.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -13,20 +19,20 @@ Future<void> init() async {
 //Login Bloc
 
 //!usecases
-//login usecses
-  // sl.registerLazySingleton(() => UserLoginUseCase(sl()));
+//customer login usecses
+  sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
 
 //!repositories
-  // sl.registerLazySingleton<UserLoginRepository>(
-  //   () => UserLoginRepositoryImp(networkInfo: sl(), local: sl(), remote: sl()),
-  // );
+  sl.registerLazySingleton<CustomerLoginRepository>(
+    () => CustomerLoginRepositoryImp(networkInfo: sl(), local: sl(), remote: sl()),
+  );
 
 //!data sources
 // Login
-  // sl.registerLazySingleton<UserRemoteDataSource>(
-  //     () => UserRemoteDataSourceImpl(dio: DioConsumer(dio: Dio())));
-  // sl.registerLazySingleton<UserLocalDataSource>(
-  //     () => UserLocalDataSourceImpl());
+   sl.registerLazySingleton<CustomerLoginRemoteDataSource>(
+      () => CustomerLoginRemoteDataSourceImpl(dio: DioConsumer(dio: Dio())));
+   sl.registerLazySingleton<CustomerLoginLocalDataSource>(
+       () => CustomerLoginLocalDataSourceImpl());
 
 //!core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
