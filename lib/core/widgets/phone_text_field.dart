@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class PhoneField extends StatefulWidget {
-  const PhoneField({super.key, required this.screenWidth});
+  const PhoneField({super.key, required this.screenWidth,this.controller});
   final double screenWidth;
+  final TextEditingController? controller;
 
 
   @override
@@ -28,6 +29,7 @@ class _PhoneFieldState extends State<PhoneField> {
           borderRadius: BorderRadius.circular(12),
         ),
         child: IntlPhoneField(
+          controller: widget.controller, // Attach the controller here
           // flagsButtonPadding: EdgeInsets.only(top: .25*65),
           focusNode: focusNode,
           decoration: const InputDecoration(
@@ -35,11 +37,16 @@ class _PhoneFieldState extends State<PhoneField> {
             EdgeInsets.symmetric(vertical: .3*65, horizontal: 20.0),
             border: InputBorder.none,
             hintStyle: TextStyle(color: Color(0xFF5D5D60),
+
+
             ),
+
           ),
           languageCode: "en",
           onChanged: (phone) {
             debugPrint(phone.completeNumber);
+
+
           },
           onCountryChanged: (country) {
             debugPrint('Country changed to: ${country.name}');

@@ -1,4 +1,5 @@
 
+import 'package:betak/core/Network/network_info.dart';
 import 'package:betak/features/auth_for_client/sign_in/data/datasources/customer_login_local_data_source.dart';
 import 'package:betak/features/auth_for_client/sign_in/data/datasources/customer_login_remote_data_source.dart';
 import 'package:betak/features/auth_for_client/sign_in/data/repositories/customer_login_repository_imp.dart';
@@ -12,38 +13,63 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'core/api/dio_consumer.dart';
-import 'core/network/network_info.dart';
+
+import 'package:betak/features/auth_for_client/sign_up/data/datasources/client_signup_remote_datasource.dart';
+import 'package:betak/features/auth_for_client/sign_up/data/repositories/client_signup_repository_impl.dart';
+import 'package:betak/features/auth_for_client/sign_up/domain/repositories/client_signup_repository.dart';
+import 'package:betak/features/auth_for_client/sign_up/domain/usecases/add_client_usecase.dart';
+import 'package:betak/features/auth_for_client/sign_up/presentation/cubit/sign_up_cubit.dart';
 
 final sl = GetIt.instance;
-
 Future<void> init() async {
-//!cubit
-//Login cubit
-  sl.registerLazySingleton(() => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()));
+  //! Core dependencies
+  sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton(() => InternetConnectionChecker());
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl())); // Register NetworkInfo early
+  sl.registerLazySingleton(() => DioConsumer(dio: sl()));
 
-//!usecases
-//customer login usecses
-  sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
-  sl.registerLazySingleton(() => CustomerLogoutUseCase(sl()));
+  //! External dependencies
+  sl.registerLazySingleton(() => http.Client());
 
-
-//!repositories
-  sl.registerLazySingleton<CustomerLoginRepository>(
-    () => CustomerLoginRepositoryImp(networkInfo: sl(), local: sl(), remote: sl()),
+  //! Data sources
+  // Login
+  sl.registerLazySingleton<CustomerLoginRemoteDataSource>(
+        () => CustomerLoginRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
+  );
+  sl.registerLazySingleton<CustomerLoginLocalDataSource>(
+        () => CustomerLoginLocalDataSourceImpl(),
   );
 
-//!data sources
-// Login
-   sl.registerLazySingleton<CustomerLoginRemoteDataSource>(
-      () => CustomerLoginRemoteDataSourceImpl(dio: DioConsumer(dio: Dio())));
-   sl.registerLazySingleton<CustomerLoginLocalDataSource>(
-       () => CustomerLoginLocalDataSourceImpl());
+  sl.registerLazySingleton<ClientSignupRemoteDatasource>(
+        () => ClientSignupRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
 
-//!core
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  //! Repositories
+  sl.registerLazySingleton<CustomerLoginRepository>(
+        () => CustomerLoginRepositoryImp(
+      networkInfo: sl(), // This will work because NetworkInfo is registered first
+      local: sl(),
+      remote: sl(),
+    ),
+  );
 
-  sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => Dio());
-  sl.registerLazySingleton(() => DioConsumer(dio: sl()));
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+  sl.registerLazySingleton<ClientSignupRepository>(
+        () => ClientSignupRepositoryImpl(
+      networkInfo: sl(),
+      clientSignupRemoteDatasource: sl(),
+    ),
+  );
+
+  //! Use cases
+  sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
+  sl.registerLazySingleton(() => CustomerLogoutUseCase(sl()));
+  sl.registerLazySingleton(() => AddClientUsecase(clientSignupRepository: sl()));
+
+  //! Cubits
+  sl.registerLazySingleton(
+        () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
+  );
+  sl.registerLazySingleton(
+        () => SignUpCubit(addClientUsecase: sl()),
+  );
 }

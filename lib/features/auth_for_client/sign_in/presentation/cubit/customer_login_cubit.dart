@@ -31,7 +31,7 @@ class CustomerLoginCubit extends Cubit<CustomerLoginState> {
     await customerLogin.call(Params(pkey: ApiConstants.clientSignInPKey,loginemail: email,loginpassword: password));
 
     failureOrLogin.fold(
-          (failure) => emit(LoginError(message: failure.errMessage)),
+          (failure) => emit(LoginError(message: failure.message)),
           (customerInfo) => emit(LoggedIn(customerInfo: customerInfo)),
     );
   }

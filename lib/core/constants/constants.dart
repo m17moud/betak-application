@@ -10,6 +10,7 @@ class Constants {
   static const String locNetworkErrorTitle = "network_error_title";
   static const String locNetworkErrorDescription = "network_error_description";
   static const String locNetworkErrorMessage = "network_error_message";
+  static const String locGeneralError = "general_error";
 
   //auth errors
   static const String locUnAuthorizedError = "unauthorized_error";

@@ -40,7 +40,7 @@ class ChooseUserType extends StatelessWidget {
             child: CustomButton1(
               backgroundColor: Styles.blueSky,
               onPressed: () {
-                Navigator.pushNamed(context, Routes.clientSignInRoute);
+                Navigator.pushNamed(context, Routes.clientSignUpRoute);
               },
               text: 'عميل',
               textStyle:
@@ -55,7 +55,7 @@ class ChooseUserType extends StatelessWidget {
             child: CustomButton1(
               backgroundColor: Styles.blueSky,
               onPressed: () {
-                Navigator.pushNamed(context, Routes.merchantSignInRoute);
+                Navigator.pushNamed(context, Routes.clientSignInRoute);
               },
               text: 'تاجر',
               textStyle:

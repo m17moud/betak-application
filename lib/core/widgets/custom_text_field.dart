@@ -5,10 +5,12 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.screenWidth,
     required this.hint,
+     this.controller
   });
 
   final double screenWidth;
   final String hint;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,12 @@ class CustomTextField extends StatelessWidget {
             border: InputBorder.none,
             hintText: hint,
             hintStyle: const TextStyle(color: Color(0xFF5D5D60),
+
             ),
           ),
           style: const TextStyle(color: Colors.black),
+          controller: controller,
+
         ),
       ),);
   }

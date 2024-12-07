@@ -1,6 +1,6 @@
 import 'package:betak/core/error/failures.dart';
 import 'package:betak/core/errors/exceptions.dart';
-import 'package:betak/core/network/network_info.dart';
+import 'package:betak/core/Network/network_info.dart';
 import 'package:betak/features/auth_for_client/sign_in/data/models/customer_login_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,11 +35,11 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         var customerData = await _remote.login(pkey,loginemail,loginpassword);
         await _local.storeCustomerData(customerData);
         return Right(customerData);
-      } on ServerException catch (e) {
-        return Left(ServerFailure(e.toString()));
+      } on ServerException {
+        return Left(ServerFailure());
 
       } catch (e) {
-        return Left(ServerFailure('Unexpected error: $e'));
+        return Left(ServerFailure());
       }
     } else {
       return Left(NetworkFailure());
@@ -48,7 +48,7 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
 
   @override
   Future<Either<Failure, void>> userLogout() async {
-    ;
+
 
     if (await _networkInfo.isConnected) {
 
@@ -56,7 +56,7 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  Left(ServerFailure(e.toString()));
+        return  Left(ServerFailure());
       }
     } else {
 
@@ -73,7 +73,7 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  Left(ServerFailure(e.toString()));
+        return  Left(ServerFailure());
       }
     } else {
       return Left(NetworkFailure());

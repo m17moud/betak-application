@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PasswordTextField extends StatefulWidget {
-  const PasswordTextField({super.key, required this.screenWidth, required this.checkVisibility,required this.hint, required this.borderRadius, this.hintColor});
+  const PasswordTextField({super.key, required this.screenWidth, required this.checkVisibility,required this.hint, required this.borderRadius, this.hintColor,this.controller});
 
   final double screenWidth;
   final double borderRadius;
   final bool checkVisibility;
   final String hint;
   final Color? hintColor;
+  final TextEditingController? controller;
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -61,6 +62,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               ),
             ),
             style: const TextStyle(color: Colors.black),
+            controller: widget.controller,
+
           ),
         ),
       ),
