@@ -1,5 +1,5 @@
-import 'package:betak/features/on_boarding/data/mdodel/on_boarding_model.dart';
-import 'package:betak/generated/assets.dart';
+import '../../../generated/assets.dart';
+import 'mdodel/on_boarding_model.dart';
 
 class OnBoardingItems {
   List<OnBoardingInfoModel> items = [

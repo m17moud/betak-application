@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    super.key,
-    required this.screenWidth,
-    required this.hint,
-  });
+  const CustomTextField(
+      {super.key,
+      required this.hint,
+      this.controller,
+      required this.validator,
+      required this.icon});
 
-  final double screenWidth;
+  final String? Function(String?)? validator;
   final String hint;
-
+  final TextEditingController? controller;
+  final IconData? icon;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 65,
-      width: screenWidth * 9,
-      decoration: BoxDecoration(
-        color: const Color(0xFFE0E3E8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: TextField(
-          decoration: InputDecoration(
-            contentPadding:
-            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-            border: InputBorder.none,
-            hintText: hint,
-            hintStyle: const TextStyle(color: Color(0xFF5D5D60),
-            ),
+    return TextFormField(
+      validator: validator,
+      controller: controller,
+      decoration: InputDecoration(
+          suffixIcon: Icon(icon),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+          hintText: hint,
+          hintStyle: const TextStyle(
+            color: Color(0xFF5D5D60),
           ),
-          style: const TextStyle(color: Colors.black),
-        ),
-      ),);
+          filled: true,
+          fillColor: const Color(0xFFE0E3E8),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
+          ),
+          errorStyle: const TextStyle(fontSize: 14)),
+      style: const TextStyle(color: Colors.black),
+      textAlignVertical: TextAlignVertical.center,
+    );
   }
 }

@@ -1,8 +1,9 @@
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/features/on_boarding/presentation/views/on_boarding_view.dart';
-import 'package:betak/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/choose_user_type.dart';
+import '../../../../../generated/assets.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -15,11 +16,12 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
     super.initState();
-    // Navigate to another view after 5 seconds
+    // Navigate to another view after 1 seconds
     Future.delayed(const Duration(seconds: 1), () {
       Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
         context,
-        MaterialPageRoute(builder: (context) => const OnBoardingView()), // Replace NextScreen with your target screen
+        MaterialPageRoute(builder: (context) => const ChooseUserType()), // Replace NextScreen with your target screen
       );
     });
   }

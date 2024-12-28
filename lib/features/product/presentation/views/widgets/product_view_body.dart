@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/features/product/presentation/views/widgets/custom_amount_button.dart';
-import 'package:betak/generated/assets.dart';
+
+import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/assets.dart';
+import 'custom_amount_button.dart';
 
 class ProductViewBody extends StatefulWidget {
   const ProductViewBody({super.key});
@@ -56,7 +57,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top:.5, bottom:.5),
+                        padding: const EdgeInsets.only(top:.5, bottom:.5),
                         child: CustomIconButton(
                           color: const Color(0xFF999999),
                           icon: const Icon(

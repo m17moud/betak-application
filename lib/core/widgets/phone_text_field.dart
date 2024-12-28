@@ -1,53 +1,51 @@
+import '../utils/string_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:flutter/services.dart';
 
-class PhoneField extends StatefulWidget {
-  const PhoneField({super.key, required this.screenWidth});
+class PhoneTextField extends StatelessWidget {
+  const PhoneTextField({
+    super.key,
+    required this.screenWidth,
+    this.controller,
+    required this.validator,
+    required this.icon,
+  });
+
+  final String? Function(String?)? validator;
   final double screenWidth;
-
-
-  @override
-  _PhoneFieldState createState() => _PhoneFieldState();
-}
-
-class _PhoneFieldState extends State<PhoneField> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
-
-  FocusNode focusNode = FocusNode();
+  final TextEditingController? controller;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Container(
-        height: 65,
-        width: widget.screenWidth * 9,
-        decoration: BoxDecoration(
-          color: const Color(0xFFE0E3E8),
-
+    return TextFormField(
+      controller: controller,
+      keyboardType: TextInputType.phone,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(15), // Limit phone number length
+      ],
+      validator: validator,
+      decoration: InputDecoration(
+        suffixIcon: Icon(icon),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+        hintText:
+            AppStrings.enterYourPhone.tr(), // Hint for the phone number field
+        hintStyle: const TextStyle(
+          color: Color(0xFF5D5D60),
+        ),
+        filled: true,
+        fillColor: const Color(0xFFE0E3E8),
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
         ),
-        child: IntlPhoneField(
-          // flagsButtonPadding: EdgeInsets.only(top: .25*65),
-          focusNode: focusNode,
-          decoration: const InputDecoration(
-            contentPadding:
-            EdgeInsets.symmetric(vertical: .3*65, horizontal: 20.0),
-            border: InputBorder.none,
-            hintStyle: TextStyle(color: Color(0xFF5D5D60),
-            ),
-          ),
-          languageCode: "en",
-          onChanged: (phone) {
-            debugPrint(phone.completeNumber);
-          },
-          onCountryChanged: (country) {
-            debugPrint('Country changed to: ${country.name}');
-          },
-          disableLengthCheck: true,
-
-        ),
+        errorStyle: const TextStyle(fontSize: 14),
       ),
+      style: const TextStyle(color: Colors.black),
+      textAlignVertical: TextAlignVertical.center,
     );
   }
 }

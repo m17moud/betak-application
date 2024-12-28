@@ -6,7 +6,7 @@ class OnBoardingSecondaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('saddas'),),
+      appBar: AppBar(),
      body: Container(),
     );
   }

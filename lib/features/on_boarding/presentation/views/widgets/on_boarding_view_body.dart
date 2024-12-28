@@ -1,8 +1,9 @@
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/features/on_boarding/presentation/views/on_boarding_secondary_view.dart';
-import 'package:betak/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/assets.dart';
+import '../on_boarding_secondary_view.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({
@@ -26,7 +27,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     setState(() {
       if(index == 2){
         index=0;
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>OnBoardingSecondaryView()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const OnBoardingSecondaryView()));
       }
     });
   }

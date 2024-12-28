@@ -1,53 +1,85 @@
+import 'package:equatable/equatable.dart';
+
+import '../utils/string_manager.dart';
 
 
-import 'package:dio/dio.dart';
 
-abstract class Failure {
-  final String errMessage;
+abstract class Failure extends Equatable {
+  final String message;
 
-  const Failure(this.errMessage);
+  const Failure({this.message = AppStrings.locGeneralError});
 }
 
+//Gemeral Failures
+
 class ServerFailure extends Failure {
-  ServerFailure(super.errMessage);
+  const ServerFailure({super.message = AppStrings.locServerErrorMessage});
+  @override
+  List<Object?> get props => [];
+}
 
-  factory ServerFailure.fromDioError(DioException dioError) {
-    switch (dioError.type) {
-      case DioExceptionType.connectionTimeout:
-        return ServerFailure('Connection timeout with ApiServer');
+class UnAuthorizedFailure extends Failure {
+  const UnAuthorizedFailure(
+      {super.message = AppStrings.locUnAuthorizedErrorMessage});
+  @override
+  List<Object?> get props => [];
+}
 
-      case DioExceptionType.sendTimeout:
-        return ServerFailure('Send timeout with ApiServer');
+class LoginAuthFailure extends Failure {
+  const LoginAuthFailure({super.message = AppStrings.locLoginAuthErrorMessage});
+  @override
+  List<Object?> get props => [];
+}
 
-      case DioExceptionType.receiveTimeout:
-        return ServerFailure('Receive timeout with ApiServer');
+class NetworkFailure extends Failure {
+  const NetworkFailure({super.message = AppStrings.locNetworkErrorMessage});
+  @override
+  List<Object?> get props => [];
+}
 
-      case DioExceptionType.badResponse:
-        return ServerFailure.fromResponse(
-            dioError.response!.statusCode, dioError.response!.data);
+class CacheFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
 
-      case DioExceptionType.cancel:
-        return ServerFailure('Request to ApiServer was cancelled');
+class UnimplementedFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
 
-      case DioExceptionType.unknown:
-        if (dioError.message!.contains('SocketException')) {
-          return ServerFailure('No Internet Connection');
-        }
-        return ServerFailure('Unexpected Error, Please try again!');
-      default:
-        return ServerFailure('Oops There was an Error, Please try again');
-    }
-  }
+//location failures
+class LocationFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
 
-  factory ServerFailure.fromResponse(int? statusCode, dynamic response) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServerFailure(response['error']['message']);
-    } else if (statusCode == 404) {
-      return ServerFailure('Your request not found, Please try later!');
-    } else if (statusCode == 500) {
-      return ServerFailure('Internal Server error, Please try later');
-    } else {
-      return ServerFailure('Oops There was an Error, Please try again');
-    }
-  }
+class LocationPermissionDeniedFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class LocationServiceDisabledFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class LocationPermissionDeniedForeverFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+//pick image failures
+class PickImageFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class CompressImageFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class UpdateFailure extends Failure {
+  @override
+  List<Object?> get props => [];
 }
