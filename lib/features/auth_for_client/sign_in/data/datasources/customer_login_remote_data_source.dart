@@ -1,9 +1,7 @@
-import 'package:betak/core/api/dio_consumer.dart';
-import 'package:betak/core/api/end_ponits.dart';
 import 'package:dio/dio.dart';
 
-
-
+import '../../../../../core/api/dio_consumer.dart';
+import '../../../../../core/api/end_ponits.dart';
 import '../models/customer_login_response_model.dart';
 
 abstract class CustomerLoginRemoteDataSource {

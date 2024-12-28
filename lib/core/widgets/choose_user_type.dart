@@ -1,7 +1,10 @@
+import '../utils/string_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+
 import '../utils/routes_manager.dart';
 import '../utils/styles.dart';
 import 'custom_button.dart';
-import 'package:flutter/material.dart';
 
 class ChooseUserType extends StatelessWidget {
   const ChooseUserType({super.key});
@@ -14,7 +17,6 @@ class ChooseUserType extends StatelessWidget {
         body: Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Column(
-          
         children: [
           const SizedBox(
             height: 45,
@@ -31,7 +33,7 @@ class ChooseUserType extends StatelessWidget {
             height: 30,
           ),
           Text(
-            "تسجيل الدخول كــ...",
+            AppStrings.chooseUserType.tr(),
             style:
                 Styles.styleSemiBoldInter22.copyWith(color: Styles.flyByNight),
           ),
@@ -40,9 +42,9 @@ class ChooseUserType extends StatelessWidget {
             child: CustomButton1(
               backgroundColor: Styles.blueSky,
               onPressed: () {
-                Navigator.pushNamed(context, Routes.clientSignUpRoute);
+                Navigator.pushNamed(context, Routes.clientSignInRoute);
               },
-              text: 'عميل',
+              text: AppStrings.cleint.tr(),
               textStyle:
                   Styles.styleSemiBoldInter22.copyWith(color: Colors.white),
               buttonWidth: screenWidth * 0.9,
@@ -55,9 +57,9 @@ class ChooseUserType extends StatelessWidget {
             child: CustomButton1(
               backgroundColor: Styles.blueSky,
               onPressed: () {
-                Navigator.pushNamed(context, Routes.clientSignInRoute);
+                Navigator.pushNamed(context, Routes.merchantSignInRoute);
               },
-              text: 'تاجر',
+              text: AppStrings.seller.tr(),
               textStyle:
                   Styles.styleSemiBoldInter22.copyWith(color: Colors.white),
               buttonWidth: screenWidth * 0.9,

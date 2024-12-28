@@ -1,11 +1,38 @@
-import 'package:betak/core/errors/error_model.dart';
 import 'package:dio/dio.dart';
 
+import 'error_model.dart';
+
+
+
+
+class LoginAuthException implements Exception {}
+
+class CacheException implements Exception {}
+
+class NetworkException implements Exception {}
+
+//location exceptions
+class LocationServiceIsDisabledException implements Exception {}
+
+class LocationPermissionDeniedException implements Exception {}
+
+class LocationPermissionDeniedForeverException implements Exception {}
 class ServerException implements Exception {
   final ErrorModel errModel;
 
   ServerException({required this.errModel});
 }
+class ServerLoginAuthException implements Exception {
+  final ErrorModel errModel;
+
+  ServerLoginAuthException({required this.errModel});
+}
+class UnAuthorizedException implements Exception {
+  final ErrorModel errModel;
+
+  UnAuthorizedException({required this.errModel});
+}
+
 
 void handleDioExceptions(DioException e) {
   switch (e.type) {
@@ -29,13 +56,13 @@ void handleDioExceptions(DioException e) {
           throw ServerException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 401: //unauthorized
-          throw ServerException(
+          throw UnAuthorizedException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 403: //forbidden
           throw ServerException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 404: //not found
-          throw ServerException(
+          throw ServerLoginAuthException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 409: //cofficient
           throw ServerException(

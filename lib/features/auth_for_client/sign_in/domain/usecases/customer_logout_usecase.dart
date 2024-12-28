@@ -1,7 +1,8 @@
-import 'package:betak/core/error/failures.dart';
-import 'package:betak/core/usecases/usecase.dart';
-import 'package:betak/features/auth_for_client/sign_in/domain/repositories/customer_login_repository.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../repositories/customer_login_repository.dart';
 
 
 class CustomerLogoutUseCase implements UseCase<void, NoParams> {

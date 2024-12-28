@@ -1,6 +1,7 @@
-import 'package:betak/core/api/dio_consumer.dart';
-import 'package:betak/core/api/end_ponits.dart';
 import 'package:dio/dio.dart';
+
+import '../../../../../core/api/dio_consumer.dart';
+import '../../../../../core/api/end_ponits.dart';
 
 abstract class ClientSignupRemoteDatasource {
   Future<void> clientSignup(FormData formData );

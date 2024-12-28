@@ -1,5 +1,5 @@
-import 'package:betak/core/constants/constants.dart';
-import 'package:betak/core/utils/styles.dart';
+import '../constants/constants.dart';
+import '../utils/styles.dart';
 import 'package:flutter/material.dart';
 
 

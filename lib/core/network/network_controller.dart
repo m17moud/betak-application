@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:betak/core/api/end_ponits.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import '../api/end_ponits.dart';
 import '../constants/constants.dart';
 
 class InternetController extends ChangeNotifier {

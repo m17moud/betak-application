@@ -1,9 +1,9 @@
-import 'package:betak/generated/assets.dart';
-
-import '../splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/assets.dart';
+import '../splash_view.dart';
 
 class LoadingSplashViewBody extends StatefulWidget {
   const LoadingSplashViewBody({super.key});

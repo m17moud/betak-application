@@ -11,7 +11,6 @@ class LoggedIn extends CustomerLoginState {
 
    LoggedIn({required this.customerInfo});
 
-  @override
   List<Object> get props => [customerInfo];
 }
 
@@ -22,6 +21,5 @@ class LoginError extends CustomerLoginState {
 
   LoginError({required this.message});
 
-  @override
   List<Object> get props => [message];
 }

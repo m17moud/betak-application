@@ -1,24 +1,23 @@
 
-import 'package:betak/core/Network/network_info.dart';
-import 'package:betak/features/auth_for_client/sign_in/data/datasources/customer_login_local_data_source.dart';
-import 'package:betak/features/auth_for_client/sign_in/data/datasources/customer_login_remote_data_source.dart';
-import 'package:betak/features/auth_for_client/sign_in/data/repositories/customer_login_repository_imp.dart';
-import 'package:betak/features/auth_for_client/sign_in/domain/repositories/customer_login_repository.dart';
-import 'package:betak/features/auth_for_client/sign_in/domain/usecases/customer_login_usecase.dart';
-import 'package:betak/features/auth_for_client/sign_in/domain/usecases/customer_logout_usecase.dart';
-import 'package:betak/features/auth_for_client/sign_in/presentation/cubit/customer_login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import 'core/Network/network_info.dart';
 import 'core/api/dio_consumer.dart';
-
-import 'package:betak/features/auth_for_client/sign_up/data/datasources/client_signup_remote_datasource.dart';
-import 'package:betak/features/auth_for_client/sign_up/data/repositories/client_signup_repository_impl.dart';
-import 'package:betak/features/auth_for_client/sign_up/domain/repositories/client_signup_repository.dart';
-import 'package:betak/features/auth_for_client/sign_up/domain/usecases/add_client_usecase.dart';
-import 'package:betak/features/auth_for_client/sign_up/presentation/cubit/sign_up_cubit.dart';
+import 'features/auth_for_client/sign_in/data/datasources/customer_login_local_data_source.dart';
+import 'features/auth_for_client/sign_in/data/datasources/customer_login_remote_data_source.dart';
+import 'features/auth_for_client/sign_in/data/repositories/customer_login_repository_imp.dart';
+import 'features/auth_for_client/sign_in/domain/repositories/customer_login_repository.dart';
+import 'features/auth_for_client/sign_in/domain/usecases/customer_login_usecase.dart';
+import 'features/auth_for_client/sign_in/domain/usecases/customer_logout_usecase.dart';
+import 'features/auth_for_client/sign_in/presentation/cubit/customer_login_cubit.dart';
+import 'features/auth_for_client/sign_up/data/datasources/client_signup_remote_datasource.dart';
+import 'features/auth_for_client/sign_up/data/repositories/client_signup_repository_impl.dart';
+import 'features/auth_for_client/sign_up/domain/repositories/client_signup_repository.dart';
+import 'features/auth_for_client/sign_up/domain/usecases/add_client_usecase.dart';
+import 'features/auth_for_client/sign_up/presentation/cubit/sign_up_cubit.dart';
 
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -66,10 +65,10 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddClientUsecase(clientSignupRepository: sl()));
 
   //! Cubits
-  sl.registerLazySingleton(
+  sl.registerFactory(
         () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
   );
-  sl.registerLazySingleton(
+  sl.registerFactory(
         () => SignUpCubit(addClientUsecase: sl()),
   );
 }

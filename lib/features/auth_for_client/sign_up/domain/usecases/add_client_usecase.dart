@@ -1,8 +1,9 @@
-import 'package:betak/core/error/failures.dart';
-import 'package:betak/core/usecases/usecase.dart';
-import 'package:betak/features/auth_for_client/sign_up/domain/repositories/client_signup_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../repositories/client_signup_repository.dart';
 
 class AddClientUsecase implements UseCase<void, FormData> {
   final ClientSignupRepository  clientSignupRepository;

@@ -1,4 +1,4 @@
-import 'package:betak/core/api/end_ponits.dart';
+import '../api/end_ponits.dart';
 
 class ErrorModel {
   final int status;

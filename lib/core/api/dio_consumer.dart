@@ -1,7 +1,8 @@
-import 'package:betak/core/api/api_consumer.dart';
-import 'package:betak/core/api/end_ponits.dart';
-import 'package:betak/core/errors/exceptions.dart';
 import 'package:dio/dio.dart';
+
+import '../errors/exceptions.dart';
+import 'api_consumer.dart';
+import 'end_ponits.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;

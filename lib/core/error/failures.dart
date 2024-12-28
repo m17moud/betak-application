@@ -1,41 +1,38 @@
-import 'package:betak/core/constants/constants.dart';
 import 'package:equatable/equatable.dart';
+
+import '../utils/string_manager.dart';
 
 
 
 abstract class Failure extends Equatable {
   final String message;
 
-  const Failure({this.message = Constants.locGeneralError});
+  const Failure({this.message = AppStrings.locGeneralError});
 }
 
 //Gemeral Failures
 
 class ServerFailure extends Failure {
-  const ServerFailure({String message = Constants.locServerErrorMessage})
-      : super(message: message);
+  const ServerFailure({super.message = AppStrings.locServerErrorMessage});
   @override
   List<Object?> get props => [];
 }
 
 class UnAuthorizedFailure extends Failure {
   const UnAuthorizedFailure(
-      {String message = Constants.locUnAuthorizedErrorMessage})
-      : super(message: message);
+      {super.message = AppStrings.locUnAuthorizedErrorMessage});
   @override
   List<Object?> get props => [];
 }
 
 class LoginAuthFailure extends Failure {
-  const LoginAuthFailure({String message = Constants.locLoginAuthErrorMessage})
-      : super(message: message);
+  const LoginAuthFailure({super.message = AppStrings.locLoginAuthErrorMessage});
   @override
   List<Object?> get props => [];
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure({String message = Constants.locNetworkErrorMessage})
-      : super(message: message);
+  const NetworkFailure({super.message = AppStrings.locNetworkErrorMessage});
   @override
   List<Object?> get props => [];
 }

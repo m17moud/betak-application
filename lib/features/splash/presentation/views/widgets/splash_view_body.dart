@@ -1,9 +1,9 @@
-import 'package:betak/generated/assets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/choose_user_type.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import '../../../../../generated/assets.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});

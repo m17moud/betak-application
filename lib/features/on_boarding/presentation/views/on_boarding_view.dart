@@ -1,4 +1,4 @@
-import 'package:betak/features/on_boarding/data/on_boarding_items.dart';
+import '../../data/on_boarding_items.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/on_boarding_view_body.dart';

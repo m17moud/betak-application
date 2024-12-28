@@ -1,6 +1,7 @@
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/generated/assets.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/assets.dart';
 
 class GoogleSignUpButton extends StatelessWidget {
   const GoogleSignUpButton({

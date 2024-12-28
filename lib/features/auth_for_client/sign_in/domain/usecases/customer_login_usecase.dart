@@ -1,9 +1,9 @@
-import 'package:betak/core/error/failures.dart';
-import 'package:betak/core/usecases/usecase.dart';
-import 'package:betak/features/auth_for_client/sign_in/data/models/customer_login_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../../data/models/customer_login_response_model.dart';
 import '../repositories/customer_login_repository.dart';
 
 class CustomerLoginUsecase implements UseCase<CustomerLoginResponseModel, Params> {

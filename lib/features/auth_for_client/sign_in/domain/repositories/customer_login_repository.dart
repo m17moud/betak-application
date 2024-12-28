@@ -1,8 +1,7 @@
-import 'package:betak/core/error/failures.dart';
-import 'package:betak/features/auth_for_client/sign_in/data/models/customer_login_response_model.dart';
-
-
 import 'package:dartz/dartz.dart';
+
+import '../../../../../core/error/failures.dart';
+import '../../data/models/customer_login_response_model.dart';
 
 abstract class CustomerLoginRepository {
   Future<Either<Failure, CustomerLoginResponseModel>> CustomerLogin({

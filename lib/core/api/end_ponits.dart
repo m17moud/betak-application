@@ -22,7 +22,7 @@ class ApiConstants {
 //api keys
 
   static String status = "status";
-  static String errorMessage = "ErrorMessage";
+  static String errorMessage = "error";
   static String email = "email";
   static String password = "password";
   static String token = "token";

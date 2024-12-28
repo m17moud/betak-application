@@ -1,5 +1,6 @@
-import 'package:betak/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/utils/styles.dart';
 
 class CustomSearchTextField extends StatelessWidget {
   const CustomSearchTextField({super.key, required this.screenWidth});

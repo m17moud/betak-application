@@ -1,12 +1,13 @@
-import 'package:betak/generated/assets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
+import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/password_text_field.dart';
+import '../../../../../core/widgets/text_form_validation.dart';
+import '../../../../../generated/assets.dart';
 
 class MerchantSignInViewBody extends StatefulWidget {
   const MerchantSignInViewBody({super.key});
@@ -24,31 +25,9 @@ class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(
-            height: 45,
-          ),
-          Row(
-            children: [
-              Align(
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Color(0xFF455A64),
-                    size: 22,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 12,
-          ),
+                              const SizedBox(height: 60),
+
           Center(child: SvgPicture.asset(Assets.imagesLogo1)),
           const SizedBox(
             height: 25,
@@ -113,15 +92,10 @@ class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Center(
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                  border: InputBorder.none,
-                  hintText: 'قم بادخال بريدك الالكتروني',
-                  hintStyle: TextStyle(color: Colors.black),
-                ),
-                style: TextStyle(color: Colors.black),
+              child: CustomTextField(
+                icon: Icons.email,
+                validator: validateEmail,
+                hint: 'قم بادخال بريدك الالكتروني',
               ),
             ),
           ),
@@ -140,17 +114,20 @@ class _MerchantSignInViewBodyState extends State<MerchantSignInViewBody> {
             height: 5,
           ),
           PasswordTextField(
+            validator: validatePassword,
             borderRadius: 12,
             hint: 'قم بادخال كلمة المرور',
             checkVisibility: true,
             screenWidth: screenWidth,
-          ),              const SizedBox(height: 5,),
-
-          Row(mainAxisAlignment: MainAxisAlignment.end,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              InkWell(onTap: () {
-                
-              },
+              InkWell(
+                onTap: () {},
                 child: const Text("هل نسيت كلمة السر؟"),
               )
             ],

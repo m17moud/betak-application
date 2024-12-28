@@ -1,7 +1,8 @@
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../core/utils/styles.dart';
+import '../../../../generated/assets.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});

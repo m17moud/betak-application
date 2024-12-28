@@ -1,15 +1,12 @@
-import 'package:betak/core/error/failures.dart';
-import 'package:betak/core/errors/exceptions.dart';
-import 'package:betak/core/Network/network_info.dart';
-import 'package:betak/features/auth_for_client/sign_in/data/models/customer_login_response_model.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 
+import '../../../../../core/Network/network_info.dart';
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/errors/exceptions.dart';
+import '../../domain/repositories/customer_login_repository.dart';
 import '../datasources/customer_login_local_data_source.dart';
 import '../datasources/customer_login_remote_data_source.dart';
-
-
-import '../../domain/repositories/customer_login_repository.dart';
+import '../models/customer_login_response_model.dart';
 
 class CustomerLoginRepositoryImp extends CustomerLoginRepository {
   final CustomerLoginRemoteDataSource _remote;
@@ -36,17 +33,17 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         await _local.storeCustomerData(customerData);
         return Right(customerData);
       } on ServerException {
-        return Left(ServerFailure());
-
-      } catch (e) {
-        return Left(ServerFailure());
+        return const Left(ServerFailure());
+      } on ServerLoginAuthException {
+        return const Left(LoginAuthFailure());
+      } on UnAuthorizedException {
+        return const Left(UnAuthorizedFailure());
       }
     } else {
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure());
     }
   }
 
-  @override
   Future<Either<Failure, void>> userLogout() async {
 
 
@@ -56,11 +53,11 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  Left(ServerFailure());
+        return  const Left(ServerFailure());
       }
     } else {
 
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure());
     }
   }
   @override

@@ -1,6 +1,43 @@
 class AppStrings {
   //!localization strings
 
+// initial
+  static const String chooseUserType= "chooseUserType";
+  static const String cleint= "cleint";
+  static const String seller= "seller";
+  static const String betak= "betak";
+  static const String welcomeTo= "welcomeTo";
+  static const String loginWithEmail= "loginWithEmail";
+  static const String email= "email";
+  static const String enterYourEmail= "enterYourEmail";
+  static const String password= "password";
+  static const String enterYourPassword= "enterYourPassword";
+  static const String forgotPassword= "forgotPassword";
+  static const String dontHaveAccount= "dontHaveAccount";
+  static const String signUp= "signUp";
+  static const String login= "login";
+  static const String createNewAccount= "createNewAccount";
+  static const String username= "username";
+  static const String enterYourName= "enterYourName";
+  static const String phoneNumber= "phoneNumber";
+  static const String enterYourPhone= "enterYourPhone";
+  static const String createYourPassword= "createYourPassword";
+  static const String alreadyHaveAcount= "alreadyHaveAcount";
+
+
+// text validation
+  static const String pleaseEnterYourUsername = "pleaseEnterYourUsername";
+  static const String pleaseEnterYourEmail = "pleaseEnterYourEmail";
+  static const String pleaseEnterAValidEmail = "pleaseEnterAValidEmail";
+  static const String pleaseEnterYourPass = "pleaseEnterYourPass";
+  static const String passwordMustBe = "passwordMustBe";
+  static const String pleaseEnterYourFacebook = "pleaseEnterYourFacebook";
+  static const String pleaseEnterAValidFacebook = "pleaseEnterAValidFacebook";
+  static const String pleaseEnterYourAddress = "pleaseEnterYourAddress";
+  static const String pleaseEnterYourShopName = "pleaseEnterYourShopName";
+  static const String pleaseEnterYourPhoneNumber = "pleaseEnterYourPhoneNumber";
+  static const String phoneNumberMustBe11 = "PhoneNumberMustBe11";
+
   //errors
   static const String locGeneralError = "general_error";
   static const String locTryAgain = "try_again";
@@ -24,22 +61,24 @@ class AppStrings {
   //login errors
   static const String locLoginError = "login_error";
   static const String locLoginErrorMessage = "login_error_message";
+  //sign up
+
+  static const String successSignup = "successSignup";
+  static const String verifyEmailMessage = "verifyEmailMessage";
 
 //login auth error
   static const String locLoginAuthError = "login_auth_error";
   static const String locLoginAuthErrorMessage = "login_auth_error_message";
 
   //general
-  static const String locAppName = "app_name";
-
-
+  static const String pleaseWait = "pleaseWait";
+  static const String error = "error";
+  static const String ok = "ok";
 
   static const List<String> noRouteFound = [
     "ما هذا المكان!",
     "يبدوا ان هنالك خطأ ما!"
   ];
-
 }
 
 enum NoRoute { title, body }
-

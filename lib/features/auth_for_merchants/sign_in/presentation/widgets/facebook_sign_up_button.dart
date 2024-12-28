@@ -1,6 +1,7 @@
-import 'package:betak/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../../core/utils/styles.dart';
 
 class FacebookSignUpButton extends StatelessWidget {
   const FacebookSignUpButton({
