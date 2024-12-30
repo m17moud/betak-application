@@ -1,6 +1,6 @@
-import '../../data/on_boarding_items.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/on_boarding_items.dart';
 import 'widgets/on_boarding_view_body.dart';
 
 class OnBoardingView extends StatefulWidget {

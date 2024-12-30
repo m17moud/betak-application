@@ -1,7 +1,8 @@
-import '../utils/string_manager.dart';
-import '../utils/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/string_manager.dart';
+import '../utils/styles.dart';
 
 class LoadingDialog extends StatelessWidget {
   const LoadingDialog({super.key});

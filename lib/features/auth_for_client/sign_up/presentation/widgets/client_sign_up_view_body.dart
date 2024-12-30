@@ -1,24 +1,22 @@
-import '../../../../../core/utils/string_manager.dart';
-import '../../../../../core/widgets/success_signup_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import '../../../../../core/widgets/loading_dialog.dart';
-import '../../../../../core/widgets/login_error_dialog.dart';
-import '../../../../../core/widgets/text_form_validation.dart';
-import '../cubit/sign_up_cubit.dart';
-import '../../../../../generated/assets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/utils/routes_manager.dart';
-import '../../../../../core/widgets/custom_title_text.dart';
-import '../../../../../core/widgets/phone_text_field.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/widgets/custom_title_text.dart';
+import '../../../../../core/widgets/loading_dialog.dart';
+import '../../../../../core/widgets/login_error_dialog.dart';
 import '../../../../../core/widgets/password_text_field.dart';
+import '../../../../../core/widgets/phone_text_field.dart';
+import '../../../../../core/widgets/success_signup_dialog.dart';
+import '../../../../../core/widgets/text_form_validation.dart';
+import '../../../../../generated/assets.dart';
+import '../cubit/sign_up_cubit.dart';
 
 class ClientSignUpViewBody extends StatefulWidget {
   const ClientSignUpViewBody({super.key});

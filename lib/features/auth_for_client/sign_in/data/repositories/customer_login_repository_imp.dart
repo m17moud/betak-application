@@ -70,10 +70,10 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  Left(ServerFailure());
+        return  const Left(const ServerFailure());
       }
     } else {
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure());
     }
   }
 

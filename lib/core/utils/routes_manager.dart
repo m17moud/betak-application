@@ -5,7 +5,7 @@ import '../../features/auth_for_client/sign_in/presentation/pages/client_sign_in
 import '../../features/auth_for_client/sign_up/presentation/pages/client_sign_up_view.dart';
 import '../../features/auth_for_merchants/sign_in/presentation/pages/merchant_sign_in_view.dart';
 import '../../features/auth_for_merchants/sign_up/presentation/pages/merchant_sign_up_view.dart';
-import '../../features/home/presentation/pages/home_view.dart';
+import '../../features/home/presentation/pages/home_cleint_view.dart';
 import '../../features/product/presentation/views/product_view.dart';
 import '../../features/splash/presentation/views/loading_splash_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
@@ -23,7 +23,7 @@ class Routes {
   static const String merchantSignInRoute = "/merchant_sign_in_view";
   static const String merchantSignUpRoute = "/merchant_sign_up_view";
 
-  static const String homeRoute = "/home_view";
+  static const String homeCleintRoute = "/home_Cleint_view";
   static const String productRoute = "/product_view";
 
   // static const String instructionsRoute = "/iInstructionsScreen";
@@ -35,7 +35,7 @@ class Routes {
     clientSignUpRoute: const ClientSignUpView(),
     merchantSignInRoute: const MerchantSignInView(),
     merchantSignUpRoute: const MerchantSignUpView(),
-    homeRoute: const HomeView(),
+    homeCleintRoute: const HomeCleintView(),
     productRoute: const ProductView(),
   };
 
