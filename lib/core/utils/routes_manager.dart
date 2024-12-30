@@ -1,3 +1,4 @@
+import 'package:betak/features/home/presentation/pages/home_merchant_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,7 +24,8 @@ class Routes {
   static const String merchantSignInRoute = "/merchant_sign_in_view";
   static const String merchantSignUpRoute = "/merchant_sign_up_view";
 
-  static const String homeCleintRoute = "/home_Cleint_view";
+  static const String homeCleintRoute = "/home_cleint_view";
+  static const String homeMerchantRoute = "/home_merchant_view";
   static const String productRoute = "/product_view";
 
   // static const String instructionsRoute = "/iInstructionsScreen";
@@ -36,6 +38,7 @@ class Routes {
     merchantSignInRoute: const MerchantSignInView(),
     merchantSignUpRoute: const MerchantSignUpView(),
     homeCleintRoute: const HomeCleintView(),
+    homeMerchantRoute: const HomeMerchantView(),
     productRoute: const ProductView(),
   };
 

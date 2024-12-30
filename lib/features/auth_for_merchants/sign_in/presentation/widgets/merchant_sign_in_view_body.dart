@@ -38,7 +38,7 @@ class MerchantSignInViewBody extends StatelessWidget {
           );
         } else if (state is LoggedIn) {
           Navigator.of(context).pop(); // Hide loading dialog
-          Navigator.pushReplacementNamed(context, Routes.homeRoute);
+          Navigator.pushReplacementNamed(context, Routes.homeMerchantRoute);
         } else if (state is LoginError) {
           Navigator.of(context).pop(); // Hide loading dialog
           showDialog(
@@ -69,13 +69,12 @@ class MerchantSignInViewBody extends StatelessWidget {
                           style: Styles.styleSemiBoldInter30
                               .copyWith(color: Styles.blueSky),
                         ),
-
                       ],
                     ),
                     const SizedBox(height: 30),
                     Padding(
                       padding:
-                      EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                       child: Row(
                         children: [
                           const Expanded(

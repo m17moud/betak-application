@@ -20,7 +20,7 @@ class BetakApplication extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       //  builder: DevicePreview.appBuilder,
-      initialRoute: Routes.loadingSplashRoute, 
+      initialRoute: Routes.loadingSplashRoute,
       onGenerateRoute:
           RouteGenerator.getRoute, // Use RouteGenerator for navigation
     );
