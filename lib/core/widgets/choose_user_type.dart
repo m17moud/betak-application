@@ -1,8 +1,8 @@
-import '../utils/string_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/routes_manager.dart';
+import '../utils/string_manager.dart';
 import '../utils/styles.dart';
 import 'custom_button.dart';
 

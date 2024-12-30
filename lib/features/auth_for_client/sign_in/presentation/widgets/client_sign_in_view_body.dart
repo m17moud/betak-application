@@ -1,3 +1,5 @@
+import '../../../../../core/utils/color_manager.dart';
+
 import '../../../../../core/widgets/login_error_dialog.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -21,6 +23,8 @@ class ClientSignInViewBody extends StatelessWidget {
 
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  ClientSignInViewBody({super.key});
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -37,7 +41,7 @@ class ClientSignInViewBody extends StatelessWidget {
           );
         } else if (state is LoggedIn) {
           Navigator.of(context).pop(); // Hide loading dialog
-          Navigator.pushReplacementNamed(context, Routes.homeRoute);
+          Navigator.pushReplacementNamed(context, Routes.homeCleintRoute);
         } else if (state is LoginError) {
           Navigator.of(context).pop(); // Hide loading dialog
           showDialog(
@@ -187,7 +191,7 @@ class ClientSignInViewBody extends StatelessWidget {
                         },
                         text: AppStrings.login.tr(),
                         textStyle: Styles.styleSemiBoldInter18
-                            .copyWith(color: Colors.white),
+                            .copyWith(color: ColorManager.white),
                         buttonWidth: screenWidth * 0.9,
                         buttonHeight: screenHeight * 0.08,
                         borderRadius: BorderRadius.circular(12),

@@ -13,11 +13,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      iconSize: 25,
+      iconSize: 35,
       type: BottomNavigationBarType.fixed,
       elevation: 0,
-      backgroundColor: Colors.white,
       currentIndex: currentIndex,
+      backgroundColor: Colors.grey[200],
       unselectedItemColor: const Color(0xFF455A64),
       selectedItemColor: Styles.blueSky,
       unselectedLabelStyle: Styles.styleBoldIrinaSans12,
@@ -25,44 +25,14 @@ class BottomNavigationBarWidget extends StatelessWidget {
       onTap: onTap,
       items: const [
         BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.only(top: 14),
-              child: Icon(
-                Icons.person,
-              ),
-            ),
-            label: 'الحساب'),
+          icon: Icon(
+            Icons.category_outlined,
+          ),
+          label: 'منتجاتي',
+        ),
         BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.only(top: 14),
-              child: Icon(
-                Icons.search,
-              ),
-            ),
-            label: 'بحث'),
-        BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.only(top: 14),
-              child: Icon(
-                FontAwesomeIcons.truck,
-                size: 25,
-              ),
-            ),
-            label: 'شحن'),
-        BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.only(top: 14),
-              child: Icon(
-                Icons.category_outlined,
-              ),
-            ),
-            label: 'الفئات'),
-        BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.only(top: 14),
-              child: Icon(
-                FontAwesomeIcons.houseChimney,
-              ),
+            icon: Icon(
+              FontAwesomeIcons.houseChimney,
             ),
             label: 'الرئيسية'),
       ],
