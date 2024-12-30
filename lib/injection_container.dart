@@ -2,6 +2,13 @@ import 'features/home/data/datasources/home_department_remote_data_source.dart';
 import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/data/datasources/merchant_login_local_data_source.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/data/datasources/merchant_login_remote_data_source.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/data/repositories/merchant_login_repository_imp.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/domain/repositories/merchant_login_repository.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_login_usecase.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_logout_usecase.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -47,6 +54,13 @@ Future<void> init() async {
   sl.registerLazySingleton<ClientSignupRemoteDatasource>(
     () => ClientSignupRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
+
+  sl.registerLazySingleton<MerchantLoginRemoteDataSource>(
+        () => MerchantLoginRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
+  );
+  sl.registerLazySingleton<MerchantLoginLocalDataSource>(
+        () => MerchantLoginLocalDataSourceImpl(),
+  );
   //home
   sl.registerLazySingleton<HomeDepartmentRemoteDataSource>(
     () => HomeDepartmentRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
@@ -71,17 +85,32 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeDepartmentRepository>(
     () => HomeDepartmentRepositoryImpl(remote: sl(), networkInfo: sl()),
   );
+
+  sl.registerLazySingleton<MerchantLoginRepository>(
+        () => MerchantLoginRepositoryImp(
+      networkInfo: sl(), // This will work because NetworkInfo is registered first
+      local: sl(),
+      remote: sl(),
+    ),
+  );
+
   //! Use cases
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
   sl.registerLazySingleton(() => CustomerLogoutUseCase(sl()));
   sl.registerLazySingleton(
       () => AddClientUsecase(clientSignupRepository: sl()));
 
+  sl.registerLazySingleton(() => MerchantLoginUsecase(sl()));
+  sl.registerLazySingleton(() => MerchantLogoutUseCase(sl()));
+
   sl.registerLazySingleton(() => HomeUsecase(sl()));
 
   //! Cubits
   sl.registerFactory(
     () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
+  );
+  sl.registerFactory(
+        () => MerchantLoginCubit(merchantLogin: sl(), merchantLogout: sl()),
   );
   sl.registerFactory(
     () => SignUpCubit(addClientUsecase: sl()),

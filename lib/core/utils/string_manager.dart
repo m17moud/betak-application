@@ -23,6 +23,8 @@ class AppStrings {
   static const String enterYourPhone= "enterYourPhone";
   static const String createYourPassword= "createYourPassword";
   static const String alreadyHaveAcount= "alreadyHaveAcount";
+  static const String merchantSignIn= "merchantSignIn";
+
 
 
 // text validation
