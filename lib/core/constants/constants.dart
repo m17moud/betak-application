@@ -5,6 +5,8 @@ class Constants {
 
 //secure storage Specific
   static const String customerSecureStorage = "customerData";
+  static const String merchantSecureStorage = "merchantData";
+
 
 
   static const kTranstionDuration = Duration(milliseconds: 250);

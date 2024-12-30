@@ -1,4 +1,11 @@
 
+import 'package:betak/features/auth_for_merchants/sign_in/data/datasources/merchant_login_local_data_source.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/data/datasources/merchant_login_remote_data_source.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/data/repositories/merchant_login_repository_imp.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/domain/repositories/merchant_login_repository.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_login_usecase.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_logout_usecase.dart';
+import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -43,6 +50,13 @@ Future<void> init() async {
         () => ClientSignupRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
+  sl.registerLazySingleton<MerchantLoginRemoteDataSource>(
+        () => MerchantLoginRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
+  );
+  sl.registerLazySingleton<MerchantLoginLocalDataSource>(
+        () => MerchantLoginLocalDataSourceImpl(),
+  );
+
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
         () => CustomerLoginRepositoryImp(
@@ -59,14 +73,29 @@ Future<void> init() async {
     ),
   );
 
+
+  sl.registerLazySingleton<MerchantLoginRepository>(
+        () => MerchantLoginRepositoryImp(
+      networkInfo: sl(), // This will work because NetworkInfo is registered first
+      local: sl(),
+      remote: sl(),
+    ),
+  );
+
   //! Use cases
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
   sl.registerLazySingleton(() => CustomerLogoutUseCase(sl()));
   sl.registerLazySingleton(() => AddClientUsecase(clientSignupRepository: sl()));
 
+  sl.registerLazySingleton(() => MerchantLoginUsecase(sl()));
+  sl.registerLazySingleton(() => MerchantLogoutUseCase(sl()));
+
   //! Cubits
   sl.registerFactory(
         () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
+  );
+  sl.registerFactory(
+        () => MerchantLoginCubit(merchantLogin: sl(), merchantLogout: sl()),
   );
   sl.registerFactory(
         () => SignUpCubit(addClientUsecase: sl()),

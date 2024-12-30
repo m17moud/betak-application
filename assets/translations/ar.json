@@ -42,5 +42,6 @@
     "phoneNumber": "رقم الهاتف",
     "enterYourPhone": "قم بإدخال رقم هاتفك",
     "createYourPassword": "أنشئ كلمة مرور حسابك",
-    "alreadyHaveAcount": "لديك حساب بالفعل ؟ "
+    "alreadyHaveAcount": "لديك حساب بالفعل ؟ ",
+    "merchantSignIn": "تسجيل دخول التاجر"
 }
