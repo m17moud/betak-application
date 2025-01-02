@@ -34,8 +34,10 @@ String? validateFacebookLink(String? value) {
   if (value == null || value.isEmpty) {
     return AppStrings.pleaseEnterYourFacebook.tr();
   }
-  final regex =
-      RegExp(r'^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]/');
+
+  final regex = RegExp(
+    r"^(https:\/\/www\.facebook\.com\/(share\/\S+|[\w\.]+(\?[\w=&%]+)?)\/?)$",
+  );
 
   if (!regex.hasMatch(value)) {
     return AppStrings.pleaseEnterAValidFacebook.tr();

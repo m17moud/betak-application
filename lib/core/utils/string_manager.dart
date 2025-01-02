@@ -4,7 +4,7 @@ class AppStrings {
 // initial
   static const String chooseUserType= "chooseUserType";
   static const String cleint= "cleint";
-  static const String seller= "seller";
+  static const String merchant= "merchant";
   static const String betak= "betak";
   static const String welcomeTo= "welcomeTo";
   static const String loginWithEmail= "loginWithEmail";
@@ -24,6 +24,13 @@ class AppStrings {
   static const String createYourPassword= "createYourPassword";
   static const String alreadyHaveAcount= "alreadyHaveAcount";
   static const String merchantSignIn= "merchantSignIn";
+  static const String shop= "shop";
+  static const String enterYourShop= "enterYourShop";
+  static const String address= "address";
+  static const String enterYourAddress= "enterYourAddress";
+  static const String productsType= "productsType";
+  static const String facebookAccount= "facebookAccount";
+  static const String enterYourFacebook= "enterYourFacebook";
 
 
 

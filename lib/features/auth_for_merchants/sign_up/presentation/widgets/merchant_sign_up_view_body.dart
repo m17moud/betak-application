@@ -1,15 +1,284 @@
+// import 'package:betak/core/utils/string_manager.dart';
+// import 'package:betak/features/auth_for_merchants/sign_up/presentation/cubit/merchant_sign_up_cubit.dart';
+// import 'package:betak/features/home/presentation/cubit/home_cubit.dart';
+// import 'package:easy_localization/easy_localization.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_svg/svg.dart';
+
+// import '../../../../../core/utils/routes_manager.dart';
+// import '../../../../../core/utils/styles.dart';
+// import '../../../../../core/widgets/custom_button.dart';
+// import '../../../../../core/widgets/custom_text_field.dart';
+// import '../../../../../core/widgets/custom_title_text.dart';
+// import '../../../../../core/widgets/loading_dialog.dart';
+// import '../../../../../core/widgets/login_error_dialog.dart';
+// import '../../../../../core/widgets/password_text_field.dart';
+// import '../../../../../core/widgets/phone_text_field.dart';
+// import '../../../../../core/widgets/success_signup_dialog.dart';
+// import '../../../../../core/widgets/text_form_validation.dart';
+// import '../../../../../generated/assets.dart';
+// import '../../../../../injection_container.dart';
+// import 'category_list.dart';
+
+// class MerchantSignUpViewBody extends StatefulWidget {
+//   const MerchantSignUpViewBody({super.key});
+
+//   @override
+//   State<MerchantSignUpViewBody> createState() => _MerchantSignUpViewBodyState();
+// }
+
+// class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
+//   final _formKey = GlobalKey<FormState>();
+//   final TextEditingController _emailController = TextEditingController();
+//   final TextEditingController _passwordController = TextEditingController();
+//   final TextEditingController _nameController = TextEditingController();
+//   final TextEditingController _phoneController = TextEditingController();
+//   final TextEditingController _facebookUrlController = TextEditingController();
+//   final TextEditingController _addressController = TextEditingController();
+//   final TextEditingController _shopController = TextEditingController();
+//   final TextEditingController _productsTypeController = TextEditingController();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var screenWidth = MediaQuery.of(context).size.width;
+//     var screenHeight = MediaQuery.of(context).size.height;
+//     return BlocListener<MerchantSignUpCubit, MerchantSignUpState>(
+//       listener: (context, state) {
+//         if (state is MerchantSignUpLoading) {
+//           showDialog(
+//             context: context,
+//             builder: (context) {
+//               return const LoadingDialog();
+//             },
+//           );
+//         } else if (state is MerchantSignUpSuccess) {
+//           Navigator.of(context).pop(); // Hide loading dialog
+//           showDialog(
+//             context: context,
+//             builder: (context) {
+//               return const SuccessSignupDialog(
+//                 clientOrMerchant: AppStrings.merchant,
+//               );
+//             },
+//           );
+//         } else if (state is MerchantSignUpError) {
+//           Navigator.of(context).pop(); // Hide loading dialog
+//           showDialog(
+//             context: context,
+//             builder: (context) {
+//               return LoginErrorDialog(message: state.message);
+//             },
+//           );
+//         }
+//       },
+//       child: Form(
+//         key: _formKey,
+//         child: SingleChildScrollView(
+//           child: Padding(
+//             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               children: [
+//                 const SizedBox(height: 60),
+//                 Center(
+//                     child: SvgPicture.asset(
+//                   Assets.imagesLogo1,
+//                   height: 70,
+//                 )),
+//                 const SizedBox(
+//                   height: 10,
+//                 ),
+//                 Text(
+//                   AppStrings.createNewAccount.tr(),
+//                   style: Styles.styleSemiBoldInter30
+//                       .copyWith(color: Styles.blueSky),
+//                 ),
+//                 CustomTitleText(text: AppStrings.username.tr()),
+//                 CustomTextField(
+//                   controller: _nameController,
+//                   icon: Icons.person,
+//                   validator: validateUsername,
+//                   hint: AppStrings.enterYourName.tr(),
+//                 ),
+//                 CustomTitleText(
+//                   text: AppStrings.email.tr(),
+//                 ),
+//                 CustomTextField(
+//                   controller: _emailController,
+//                   icon: Icons.email,
+//                   validator: validateEmail,
+//                   hint: AppStrings.enterYourEmail.tr(),
+//                 ),
+//                 CustomTitleText(
+//                   text: AppStrings.shop.tr(),
+//                 ),
+//                 CustomTextField(
+//                   controller: _shopController,
+//                   icon: Icons.store,
+//                   validator: validateShop,
+//                   hint: AppStrings.enterYourShop.tr(),
+//                 ),
+//                 CustomTitleText(
+//                   text: AppStrings.address.tr(),
+//                 ),
+//                 CustomTextField(
+//                   controller: _addressController,
+//                   icon: Icons.edit_road_rounded,
+//                   validator: validateAddress,
+//                   hint: AppStrings.enterYourAddress.tr(),
+//                 ),
+//                 CustomTitleText(
+//                   text: AppStrings.phoneNumber.tr(),
+//                 ),
+//                 PhoneTextField(
+//                   controller: _phoneController,
+//                   icon: Icons.phone,
+//                   validator: validatePhoneNumber,
+//                   screenWidth: screenWidth,
+//                 ),
+//                 CustomTitleText(
+//                   text: AppStrings.productsType.tr(),
+//                 ),
+//                 BlocProvider(
+//                   create: (context) => sl<HomeCubit>(),
+//                   child: BlocBuilder<HomeCubit, HomeState>(
+//                     builder: (context, state) {
+//                       if (state is HomeInitial) {
+//                         context.read<HomeCubit>().getDepartments();
+//                       }
+//                       if (state is HomeDepartmentsLoading) {
+//                         print("'''''''''''''''''''''''''");
+//                         return CircularProgressIndicator(
+//                           color: Styles.blueSky,
+//                         );
+//                       }
+//                       if (state is HomeDepartmentsSuccess) {
+//                         final DepName = state.departmentInfo
+//                             .map((departmentInfo) => departmentInfo.name)
+//                             .toList();
+//                         return CategoryList(
+//                           departments: DepName,
+//                           onChanged: (value) {},
+//                         );
+//                       }
+//                       if (state is HomeDepartmentsError) {
+//                         return Text("An error happend");
+//                       }
+
+//                       return const SizedBox();
+//                     },
+//                   ),
+//                 ),
+//                 CustomTitleText(
+//                   text: AppStrings.facebookAccount.tr(),
+//                 ),
+//                 CustomTextField(
+//                   controller: _facebookUrlController,
+//                   icon: Icons.facebook,
+//                   validator: validateFacebookLink,
+//                   hint: AppStrings.enterYourFacebook.tr(),
+//                 ),
+//                 CustomTitleText(
+//                   text: AppStrings.password.tr(),
+//                 ),
+//                 PasswordTextField(
+//                   controller: _passwordController,
+//                   validator: validatePassword,
+//                   hintColor: Styles.flyByNight,
+//                   borderRadius: 12,
+//                   hint: AppStrings.createYourPassword.tr(),
+//                   checkVisibility: false,
+//                   screenWidth: screenWidth,
+//                 ),
+//                 const SizedBox(
+//                   height: 10,
+//                 ),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Text(
+//                       AppStrings.alreadyHaveAcount.tr(),
+//                       style: Styles.styleSemiBoldInter20
+//                           .copyWith(color: Styles.flyByNight),
+//                     ),
+//                     InkWell(
+//                       onTap: () {
+//                         Navigator.pushReplacementNamed(
+//                             context, Routes.merchantSignInRoute);
+//                       },
+//                       child: Text(
+//                         AppStrings.login.tr(),
+//                         style: Styles.styleSemiBoldInter20
+//                             .copyWith(color: Styles.blueSky),
+//                       ),
+//                     )
+//                   ],
+//                 ),
+//                 Padding(
+//                   padding: const EdgeInsets.only(bottom: 30, top: 5),
+//                   child: CustomButton1(
+//                     backgroundColor: Styles.blueSky,
+//                     onPressed: () {
+//                       final email = _emailController.text.trim();
+//                       final password = _passwordController.text.trim();
+//                       final name = _nameController.text.trim();
+//                       final phone = _phoneController.text.trim();
+//                       final address = _addressController.text.trim();
+//                       final facebookUrl = _facebookUrlController.text.trim();
+//                       final shop = _shopController.text.trim();
+//                       final productsType = "gggggg";
+//                       if (_formKey.currentState?.validate() ?? false) {
+//                         context.read<MerchantSignUpCubit>().signup(
+//                             name,
+//                             email,
+//                             password,
+//                             phone,
+//                             shop,
+//                             facebookUrl,
+//                             address,
+//                             productsType);
+//                       }
+//                     },
+//                     text: AppStrings.signUp.tr(),
+//                     textStyle: Styles.styleSemiBoldInter18
+//                         .copyWith(color: Colors.white),
+//                     buttonWidth: screenWidth * 0.9,
+//                     buttonHeight: screenHeight * .08,
+//                     borderRadius: BorderRadius.circular(12),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+import 'package:betak/core/utils/string_manager.dart';
+import 'package:betak/features/auth_for_merchants/sign_up/presentation/cubit/merchant_sign_up_cubit.dart';
+import 'package:betak/features/home/presentation/cubit/home_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/custom_title_text.dart';
+import '../../../../../core/widgets/loading_dialog.dart';
+import '../../../../../core/widgets/login_error_dialog.dart';
 import '../../../../../core/widgets/password_text_field.dart';
 import '../../../../../core/widgets/phone_text_field.dart';
+import '../../../../../core/widgets/success_signup_dialog.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
 import '../../../../../generated/assets.dart';
+import '../../../../../injection_container.dart';
 import 'category_list.dart';
 
 class MerchantSignUpViewBody extends StatefulWidget {
@@ -20,121 +289,227 @@ class MerchantSignUpViewBody extends StatefulWidget {
 }
 
 class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _facebookUrlController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _shopController = TextEditingController();
+  final TextEditingController _productsTypeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().getDepartments();
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
-    final _formKey = GlobalKey<FormState>();
-    return Form(
-      key: _formKey,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 60),
-              Center(
-                  child: SvgPicture.asset(
-                Assets.imagesLogo1,
-                height: 70,
-              )),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                ' سجل حساب جديد',
-                style:
-                    Styles.styleSemiBoldInter30.copyWith(color: Styles.blueSky),
-              ),
-              const CustomTitleText(text: "اسم المستخدم"),
-              const CustomTextField(
-                icon: Icons.person,
-                validator: validateUsername,
-                hint: 'قم بادخال اسمك',
-              ),
-              const CustomTitleText(text: "البريد الالكتروني"),
-              const CustomTextField(
-                icon: Icons.email,
-                validator: validateEmail,
-                hint: 'قم بادخال بريدك الالكتروني',
-              ),
-              const CustomTitleText(text: "المتجر"),
-              const CustomTextField(
-                icon: Icons.store,
-                validator: validateShop,
-                hint: 'قم بادخل اسم المتجر الخاص بك',
-              ),
-              const CustomTitleText(text: "العنوان"),
-              const CustomTextField(
-                icon: Icons.edit_road_rounded,
-                validator: validateAddress,
-                hint: 'قم بادخال عنوانك',
-              ),
-              const CustomTitleText(text: "رقم الهاتف"),
-              PhoneTextField(
-                icon: Icons.phone,
-                validator: validatePhoneNumber,
-                screenWidth: screenWidth,
-              ),
-              const CustomTitleText(text: "نوع المنتجات"),
-              const CategoryList(),
-              const CustomTitleText(text: "حساب الفيسبوك"),
-              const CustomTextField(
-                icon: Icons.facebook,
-                validator: validateFacebookLink,
-                hint: 'رابط حسابك على الفيسبوك',
-              ),
-              const CustomTitleText(text: "كلمة المرور"),
-              PasswordTextField(
-                validator: validatePassword,
-                hintColor: Styles.flyByNight,
-                borderRadius: 12,
-                hint: 'أنشئ كلمة مرور حسابك',
-                checkVisibility: false,
-                screenWidth: screenWidth,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "لديك حساب بالفعل؟ ",
-                    style: Styles.styleSemiBoldInter20
-                        .copyWith(color: Styles.flyByNight),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, Routes.merchantSignInRoute);
-                    },
-                    child: Text(
-                      "تسجيل الدخول",
-                      style: Styles.styleSemiBoldInter20
-                          .copyWith(color: Styles.blueSky),
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30, top: 5),
-                child: CustomButton1(
-                  backgroundColor: Styles.blueSky,
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {}
-                  },
-                  text: 'تسجيل حساب جديد',
-                  textStyle:
-                      Styles.styleSemiBoldInter18.copyWith(color: Colors.white),
-                  buttonWidth: screenWidth * 0.9,
-                  buttonHeight: screenHeight * .08,
-                  borderRadius: BorderRadius.circular(12),
+
+    return BlocListener<MerchantSignUpCubit, MerchantSignUpState>(
+      listener: (context, state) {
+        if (state is MerchantSignUpLoading) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return const LoadingDialog();
+            },
+          );
+        } else if (state is MerchantSignUpSuccess) {
+          Navigator.of(context).pop(); // Hide loading dialog
+          showDialog(
+            context: context,
+            builder: (context) {
+              return const SuccessSignupDialog(
+                clientOrMerchant: AppStrings.merchant,
+              );
+            },
+          );
+        } else if (state is MerchantSignUpError) {
+          Navigator.of(context).pop(); // Hide loading dialog
+          showDialog(
+            context: context,
+            builder: (context) {
+              return LoginErrorDialog(message: state.message);
+            },
+          );
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 60),
+                Center(
+                    child: SvgPicture.asset(
+                  Assets.imagesLogo1,
+                  height: 70,
+                )),
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-            ],
+                Text(
+                  AppStrings.createNewAccount.tr(),
+                  style: Styles.styleSemiBoldInter30
+                      .copyWith(color: Styles.blueSky),
+                ),
+                CustomTitleText(text: AppStrings.username.tr()),
+                CustomTextField(
+                  controller: _nameController,
+                  icon: Icons.person,
+                  validator: validateUsername,
+                  hint: AppStrings.enterYourName.tr(),
+                ),
+                CustomTitleText(
+                  text: AppStrings.email.tr(),
+                ),
+                CustomTextField(
+                  controller: _emailController,
+                  icon: Icons.email,
+                  validator: validateEmail,
+                  hint: AppStrings.enterYourEmail.tr(),
+                ),
+                CustomTitleText(
+                  text: AppStrings.shop.tr(),
+                ),
+                CustomTextField(
+                  controller: _shopController,
+                  icon: Icons.store,
+                  validator: validateShop,
+                  hint: AppStrings.enterYourShop.tr(),
+                ),
+                CustomTitleText(
+                  text: AppStrings.address.tr(),
+                ),
+                CustomTextField(
+                  controller: _addressController,
+                  icon: Icons.edit_road_rounded,
+                  validator: validateAddress,
+                  hint: AppStrings.enterYourAddress.tr(),
+                ),
+                CustomTitleText(
+                  text: AppStrings.phoneNumber.tr(),
+                ),
+                PhoneTextField(
+                  controller: _phoneController,
+                  icon: Icons.phone,
+                  validator: validatePhoneNumber,
+                  screenWidth: screenWidth,
+                ),
+                CustomTitleText(
+                  text: AppStrings.productsType.tr(),
+                ),
+                BlocBuilder<HomeCubit, HomeState>(
+                  builder: (context, state) {
+                    if (state is HomeDepartmentsLoading) {
+                      return CircularProgressIndicator(
+                        color: Styles.blueSky,
+                      );
+                    }
+                    if (state is HomeDepartmentsSuccess) {
+                      final DepName = state.departmentInfo
+                          .map((departmentInfo) => departmentInfo.name)
+                          .toList();
+                      return CategoryList(
+                        departments: DepName,
+                        onChanged: (value) {},
+                      );
+                    }
+                    if (state is HomeDepartmentsError) {
+                      return Text("An error happened");
+                    }
+                    return const SizedBox();
+                  },
+                ),
+                CustomTitleText(
+                  text: AppStrings.facebookAccount.tr(),
+                ),
+                CustomTextField(
+                  controller: _facebookUrlController,
+                  icon: Icons.facebook,
+                  validator: validateFacebookLink,
+                  hint: AppStrings.enterYourFacebook.tr(),
+                ),
+                CustomTitleText(
+                  text: AppStrings.password.tr(),
+                ),
+                PasswordTextField(
+                  controller: _passwordController,
+                  validator: validatePassword,
+                  hintColor: Styles.flyByNight,
+                  borderRadius: 12,
+                  hint: AppStrings.createYourPassword.tr(),
+                  checkVisibility: false,
+                  screenWidth: screenWidth,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppStrings.alreadyHaveAcount.tr(),
+                      style: Styles.styleSemiBoldInter20
+                          .copyWith(color: Styles.flyByNight),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, Routes.merchantSignInRoute);
+                      },
+                      child: Text(
+                        AppStrings.login.tr(),
+                        style: Styles.styleSemiBoldInter20
+                            .copyWith(color: Styles.blueSky),
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30, top: 5),
+                  child: CustomButton1(
+                    backgroundColor: Styles.blueSky,
+                    onPressed: () {
+                      final email = _emailController.text.trim();
+                      final password = _passwordController.text.trim();
+                      final name = _nameController.text.trim();
+                      final phone = _phoneController.text.trim();
+                      final address = _addressController.text.trim();
+                      final facebookUrl = _facebookUrlController.text.trim();
+                      final shop = _shopController.text.trim();
+                      final productsType = "gggggg";
+                      if (_formKey.currentState?.validate() ?? false) {
+                        context.read<MerchantSignUpCubit>().signup(
+                            name,
+                            email,
+                            password,
+                            phone,
+                            shop,
+                            facebookUrl,
+                            address,
+                            productsType);
+                      }
+                    },
+                    text: AppStrings.signUp.tr(),
+                    textStyle: Styles.styleSemiBoldInter18
+                        .copyWith(color: Colors.white),
+                    buttonWidth: screenWidth * 0.9,
+                    buttonHeight: screenHeight * .08,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -51,7 +51,9 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
           showDialog(
             context: context,
             builder: (context) {
-              return const SuccessSignupDialog();
+              return const SuccessSignupDialog(
+                clientOrMerchant: AppStrings.cleint,
+              );
             },
           );
         } else if (state is SignUpError) {

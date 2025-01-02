@@ -27,7 +27,7 @@
     "successSignup": "تم إنشاء الحساب بنجاح",
     "verifyEmailMessage": "يرجى التحقق من الرابط الذي تم إرساله إلى حسابك للتأكد من بريدك الإلكتروني ثم سجل الدخول ",
     "chooseUserType": "تسجيل الدخول كــ...",
-    "seller": "تاجر",
+    "merchant": "تاجر",
     "cleint": "عميل",
     "betak": "بيتك",
     "welcomeTo": "مرحبا بك في ",
@@ -43,5 +43,12 @@
     "enterYourPhone": "قم بإدخال رقم هاتفك",
     "createYourPassword": "أنشئ كلمة مرور حسابك",
     "alreadyHaveAcount": "لديك حساب بالفعل ؟ ",
-    "merchantSignIn": "تسجيل دخول التاجر"
+    "merchantSignIn": "تسجيل دخول التاجر",
+    "shop": "المتجر",
+    "enterYourShop": "قم بادخال اسم المتجر الخاص بك",
+    "address": "العنوان",
+    "productsType": "نوع المنتجات",
+    "enterYourAddress": "قم بادخال عنوانك",
+    "facebookAccount": "حساب الفيسبوك",
+    "enterYourFacebook": "رابط حساب الفيسبوك"
 }

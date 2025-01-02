@@ -155,7 +155,7 @@ class MerchantSignInViewBody extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.pushReplacementNamed(
-                                context, Routes.clientSignUpRoute);
+                                context, Routes.merchantSignUpRoute);
                           },
                           child: CustomTitleText(
                             text: AppStrings.signUp.tr(),

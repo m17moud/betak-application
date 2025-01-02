@@ -9,8 +9,9 @@ import '../utils/styles.dart';
 class SuccessSignupDialog extends StatelessWidget {
   const SuccessSignupDialog({
     super.key,
+    required this.clientOrMerchant,
   });
-
+  final String clientOrMerchant;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -27,7 +28,14 @@ class SuccessSignupDialog extends StatelessWidget {
             style: const TextStyle(fontSize: 15),
           ),
           onPressed: () {
-          Navigator.pushReplacementNamed(context, Routes.clientSignInRoute);
+            if (clientOrMerchant == "cleint") {
+              Navigator.pop(context); // hide dialog
+              Navigator.pushReplacementNamed(context, Routes.clientSignInRoute);
+            } else {
+              Navigator.pop(context); // hide dialog
+              Navigator.pushReplacementNamed(
+                  context, Routes.merchantSignInRoute);
+            }
           },
         ),
       ],

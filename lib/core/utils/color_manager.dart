@@ -7,4 +7,5 @@ class ColorManager {
   static const Color darkerWhite = Color.fromARGB(255, 243, 245, 247);
   static const Color error = Color(0xffe61f34); // red color
   static const Color green = Colors.green; // green color
+  static const Color black = Colors.black; // green color
 }
