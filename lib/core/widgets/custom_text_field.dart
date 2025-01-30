@@ -1,3 +1,4 @@
+import 'package:betak/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -5,16 +6,19 @@ class CustomTextField extends StatelessWidget {
       {super.key,
       required this.hint,
       this.controller,
+      this.maxLines = 1,
       required this.validator,
-      required this.icon});
+       this.icon});
 
   final String? Function(String?)? validator;
   final String hint;
   final TextEditingController? controller;
   final IconData? icon;
+  final int maxLines;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines,
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
@@ -23,16 +27,16 @@ class CustomTextField extends StatelessWidget {
               const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
           hintText: hint,
           hintStyle: const TextStyle(
-            color: Color(0xFF5D5D60),
+            color: ColorManager.textFormHintColor,
           ),
           filled: true,
-          fillColor: const Color(0xFFE0E3E8),
+          fillColor: ColorManager.textFormFillColor,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
           errorStyle: const TextStyle(fontSize: 14)),
-      style: const TextStyle(color: Colors.black),
+      style: const TextStyle(color: ColorManager.black),
       textAlignVertical: TextAlignVertical.center,
     );
   }

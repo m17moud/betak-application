@@ -50,5 +50,18 @@
     "productsType": "نوع المنتجات",
     "enterYourAddress": "قم بادخال عنوانك",
     "facebookAccount": "حساب الفيسبوك",
-    "enterYourFacebook": "رابط حساب الفيسبوك"
+    "enterYourFacebook": "رابط حساب الفيسبوك",
+    "pleaseEnterProductName": "الرجاء ادخال اسم المنتج",
+    "cantBeLessThan5": "لا يمكن ان يكون اقل من 5 أحرف",
+    "cantBeLessThan10": "لا يمكن ان يكون اقل من 10 أحرف",
+    "pleaseEnterProductDesc": "الرجاء ادخال وصف المنتج",
+    "pleaseEnterProductPrice": "الرجاء ادخال سعر المنتج",
+    "confirm": "تأكيد",
+    "productName": "إسم المنتج",
+    "addNewProduct":"إضافة منتج جديد" ,
+    "enterProductName":"قم بكتابة اسم المنتج" ,
+    "enterProductPrice":"قم بكتابة سعر المنتج" ,
+    "enterProductDescription":"قم بكتابة وصف المنتج" ,
+    "price": "السعر",
+    "description":"الوصف" 
 }

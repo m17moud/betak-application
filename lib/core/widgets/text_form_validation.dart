@@ -68,3 +68,30 @@ String? validatePhoneNumber(String? value) {
   }
   return null;
 }
+
+String? validateProductName(String? value) {
+  if (value == null || value.isEmpty) {
+    return AppStrings.pleaseEnterProductName.tr();
+  }
+  if (value.length < 5) {
+    return  AppStrings.cantBeLessThan5.tr();
+  }
+  return null;
+}
+
+String? validateProductDescription(String? value) {
+  if (value == null || value.isEmpty) {
+    return AppStrings.pleaseEnterProductDesc.tr();
+  }
+  if (value.length < 10) {
+    return AppStrings.cantBeLessThan10.tr();
+  }
+  return null;
+}
+
+String? validateProductPrice(String? value) {
+  if (value == null || value.isEmpty) {
+    return AppStrings.pleaseEnterProductPrice.tr();
+  }
+  return null;
+}

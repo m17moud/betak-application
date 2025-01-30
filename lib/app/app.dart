@@ -1,5 +1,4 @@
-import 'package:betak/features/auth_for_merchants/sign_up/presentation/pages/merchant_sign_up_view.dart';
-import 'package:betak/features/home/presentation/pages/home_merchant_view.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,9 +20,8 @@ class BetakApplication extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      //  builder: DevicePreview.appBuilder,
-      // initialRoute: Routes.loadingSplashRoute,
-      home: HomeMerchantView(),
+       builder: DevicePreview.appBuilder,
+      initialRoute: Routes.loadingSplashRoute,
       onGenerateRoute:
           RouteGenerator.getRoute, // Use RouteGenerator for navigation
     );

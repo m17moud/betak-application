@@ -46,6 +46,21 @@ class AppStrings {
   static const String pleaseEnterYourShopName = "pleaseEnterYourShopName";
   static const String pleaseEnterYourPhoneNumber = "pleaseEnterYourPhoneNumber";
   static const String phoneNumberMustBe11 = "PhoneNumberMustBe11";
+  static const String pleaseEnterProductName = "pleaseEnterProductName";
+  static const String cantBeLessThan5 = "cantBeLessThan5";
+  static const String cantBeLessThan10 = "cantBeLessThan10";
+  static const String pleaseEnterProductDesc = "pleaseEnterProductDesc";
+  static const String pleaseEnterProductPrice = "pleaseEnterProductPrice";
+
+
+// Add product
+  static const String productName = "productName";
+  static const String addNewProduct = "addNewProduct";
+  static const String enterProductName = "enterProductName";
+  static const String price = "price";
+  static const String enterProductPrice = "enterProductPrice";
+  static const String enterProductDescription = "enterProductDescription";
+  static const String description = "description";
 
   //errors
   static const String locGeneralError = "general_error";
@@ -70,8 +85,8 @@ class AppStrings {
   //login errors
   static const String locLoginError = "login_error";
   static const String locLoginErrorMessage = "login_error_message";
+  
   //sign up
-
   static const String successSignup = "successSignup";
   static const String verifyEmailMessage = "verifyEmailMessage";
 
@@ -83,6 +98,7 @@ class AppStrings {
   static const String pleaseWait = "pleaseWait";
   static const String error = "error";
   static const String ok = "ok";
+  static const String confirm = "confirm";
 
   static const List<String> noRouteFound = [
     "ما هذا المكان!",
