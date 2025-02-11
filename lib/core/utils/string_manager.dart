@@ -76,6 +76,14 @@ class AppStrings {
   static const String pleaseWait = "pleaseWait";
   static const String error = "error";
   static const String ok = "ok";
+  // products
+  static const String noProductsFound = "noProductsFound";
+  static const String searchAboutProduct = "searchAboutProduct";
+  static const String emptySearchHistory = "emptySearchHistory";
+  static const String unknown = "unknown";
+  static const String EGP = "EGP";
+
+
 
   static const List<String> noRouteFound = [
     "ما هذا المكان!",

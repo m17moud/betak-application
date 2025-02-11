@@ -43,5 +43,10 @@
     "enterYourPhone": "قم بإدخال رقم هاتفك",
     "createYourPassword": "أنشئ كلمة مرور حسابك",
     "alreadyHaveAcount": "لديك حساب بالفعل ؟ ",
-    "merchantSignIn": "تسجيل دخول التاجر"
+    "merchantSignIn": "تسجيل دخول التاجر",
+    "noProductsFound": "لا يوجد مننجات ",
+    "emptySearchHistory": "لا يوجد سجل بحث",
+    "searchAboutProduct": "البحث عن منتج ",
+    "unknown": "غير معروف",
+    "EGP": "ج.م "
 }

@@ -9,27 +9,27 @@ part of 'merchant_login_response_model.dart';
 MerchantLoginResponseModel _$MerchantLoginResponseModelFromJson(
         Map<String, dynamic> json) =>
     MerchantLoginResponseModel(
-      sellerId: json['sellerId'] as String?,
-      sellerName: json['sellerName'] as String?,
-      sellerMobile: json['sellerMobile'] as String?,
-      sellerEmail: json['sellerEmail'] as String?,
-      sellerFacebook: json['sellerFacebook'] as String?,
-      sellerAddress: json['sellerAddress'] as String?,
-      sellerProductsType: json['sellerProductsType'] as String?,
-      sellerDate: json['sellerDate'] == null
+      SellerID: json['SellerID'] as String?,
+      SellerName: json['SellerName'] as String?,
+      SellerMobile: json['SellerMobile'] as String?,
+      SellerEmail: json['SellerEmail'] as String?,
+      SellerFacebook: json['SellerFacebook'] as String?,
+      SellerAddress: json['SellerAddress'] as String?,
+      SellerProductsType: json['SellerProductsType'] as String?,
+      SellerDate: json['SellerDate'] == null
           ? null
-          : DateTime.parse(json['sellerDate'] as String),
+          : DateTime.parse(json['SellerDate'] as String),
     );
 
 Map<String, dynamic> _$MerchantLoginResponseModelToJson(
         MerchantLoginResponseModel instance) =>
     <String, dynamic>{
-      'sellerId': instance.sellerId,
-      'sellerName': instance.sellerName,
-      'sellerMobile': instance.sellerMobile,
-      'sellerEmail': instance.sellerEmail,
-      'sellerFacebook': instance.sellerFacebook,
-      'sellerProductsType': instance.sellerProductsType,
-      'sellerAddress': instance.sellerAddress,
-      'sellerDate': instance.sellerDate?.toIso8601String(),
+      'SellerID': instance.SellerID,
+      'SellerName': instance.SellerName,
+      'SellerMobile': instance.SellerMobile,
+      'SellerEmail': instance.SellerEmail,
+      'SellerFacebook': instance.SellerFacebook,
+      'SellerProductsType': instance.SellerProductsType,
+      'SellerAddress': instance.SellerAddress,
+      'SellerDate': instance.SellerDate?.toIso8601String(),
     };

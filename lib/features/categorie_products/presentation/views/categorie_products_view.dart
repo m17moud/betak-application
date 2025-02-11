@@ -1,0 +1,26 @@
+import 'package:betak/core/utils/color_manager.dart';
+import 'package:betak/features/categorie_products/presentation/cubit/categorie_products_cubit.dart';
+import 'package:betak/features/home/data/models/home_department_response_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../injection_container.dart';
+
+import 'widgets/categorie_products_body.dart';
+
+class CategorieProductsView extends StatelessWidget {
+  HomeDepartmentResponseModel departmentResponseModel;
+   CategorieProductsView({super.key,required this.departmentResponseModel});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return BlocProvider(
+      create: (context) => sl<CategorieProductsCubit>(),
+      child:  Scaffold(
+        backgroundColor: ColorManager.white,
+        body: CategorieProductsViewBody(departmentResponseModel),
+      ),
+    );
+  }
+}
+

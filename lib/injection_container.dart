@@ -1,3 +1,9 @@
+import 'package:betak/features/categorie_products/data/datasources/products_remote_data_source.dart';
+import 'package:betak/features/categorie_products/data/repositories/products_repository_impl.dart';
+import 'package:betak/features/categorie_products/domain/repositories/product_repository.dart';
+import 'package:betak/features/categorie_products/domain/usecases/products_usecase.dart';
+import 'package:betak/features/categorie_products/presentation/cubit/categorie_products_cubit.dart';
+
 import 'features/home/data/datasources/home_department_remote_data_source.dart';
 import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
@@ -65,6 +71,11 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeDepartmentRemoteDataSource>(
     () => HomeDepartmentRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
   );
+
+
+  sl.registerLazySingleton<ProductsRemoteDataSource>(
+        () => ProductsRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
+  );
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
     () => CustomerLoginRepositoryImp(
@@ -93,6 +104,12 @@ Future<void> init() async {
       remote: sl(),
     ),
   );
+  sl.registerLazySingleton<ProductsRepository>(
+        () => ProductsRepositoryImpl(
+      networkInfo: sl(), // This will work because NetworkInfo is registered first
+      remote: sl(),
+    ),
+  );
 
   //! Use cases
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -104,6 +121,10 @@ Future<void> init() async {
   sl.registerLazySingleton(() => MerchantLogoutUseCase(sl()));
 
   sl.registerLazySingleton(() => HomeUsecase(sl()));
+
+  sl.registerLazySingleton(() => ProductsUsecase(sl()));
+
+
 
   //! Cubits
   sl.registerFactory(
@@ -117,5 +138,8 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(
     () => HomeCubit(homeUsecase: sl()),
+  );
+  sl.registerFactory(
+        () => CategorieProductsCubit(productsUsecase: sl()),
   );
 }

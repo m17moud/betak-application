@@ -1,21 +1,21 @@
+
+import 'package:betak/features/categorie_products/data/models/products_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
 import '../../../../../generated/assets.dart';
-import 'custom_amount_button.dart';
 
 class ProductViewBody extends StatefulWidget {
-  const ProductViewBody({super.key});
+  ProductsModel productsModel;
+
+   ProductViewBody({super.key,required this.productsModel});
 
   @override
   State<ProductViewBody> createState() => _ProductViewBodyState();
 }
 
 class _ProductViewBodyState extends State<ProductViewBody> {
-  num x = 0;
-  String selectedSize = 'L'; // Default selected size
-
-  final List<String> sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  bool isLiked = false; // State for like button
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,14 @@ class _ProductViewBodyState extends State<ProductViewBody> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image.asset(
-            Assets.imagesProduct,
-            fit: BoxFit.fill,
+          Stack(
+            children: [
+              Image.asset(
+                Assets.imagesProduct,
+                fit: BoxFit.fill,
+              ),
+
+            ],
           ),
           const Padding(
             padding: EdgeInsets.only(right: 12, top: 7),
@@ -37,131 +42,44 @@ class _ProductViewBodyState extends State<ProductViewBody> {
               alignment: Alignment.bottomRight,
               child: Text(
                 'بلوزه ساده بأكمام طويله',
-                style: Styles.styleBoldIrinaSans20,
+                style:Styles.styleBoldIrinaSans20,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 12, left: 16, top: 18),
-            child: Row(
-              children: [
-                Container(
-                  // width: width * 0.18, // Responsive width
-                  // height: height * 0.03, // Responsive height
-                    width:75,
-                  height: 22,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: const Color(0xFF999999))),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top:.5, bottom:.5),
-                        child: CustomIconButton(
-                          color: const Color(0xFF999999),
-                          icon: const Icon(
-                            Icons.remove,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                          onTap: () {
-                            setState(() {
-                              if (x == 0) {
-                                x = 0;
-                              } else {
-                                x--;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      const Spacer(),
-                      Text('$x'),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: .5, bottom: .5),
-                        child: CustomIconButton(
-                          color: const Color(0xFF455A64),
-                          icon: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                          onTap: () {
-                            setState(() {
-                              x++;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                Align(
-                  alignment: Alignment.centerRight,
+
+         Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+                const Padding(
+                padding: EdgeInsets.only(right: 12, top: 5),
+                child: Align(
+                  alignment: Alignment.bottomRight,
                   child: Text(
-                    'المقاس',
-                    style: Styles.styleBoldIrinaSans20
-                        .copyWith(fontWeight: FontWeight.w300),
+                    'البائع: احمد محمد', // Seller name added
+                    style: Styles.styleBoldInriaSans16
                   ),
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 22,
-          ),
-          SafeArea(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: sizes.map((size) {
-                  bool isSelected = size == selectedSize;
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: width * 0.02),
-                    // Adjusted margin
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedSize = size;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: Size(width * 0.18, height * 0.05),
-                        // Responsive button size
-                        backgroundColor:
-                            isSelected ? Colors.white : Styles.blueSky,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: height * 0.015,
-                            horizontal: width * 0.05), // Adjusted padding
-                      ),
-                      child: Text(
-                        size,
-                        style: TextStyle(
-                          fontSize: width * 0.03, // Responsive font size
-                          color: isSelected
-                              ? const Color(0xFF455A64)
-                              : Colors.white,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
               ),
-            ),
+              Container(
+                width: width * 0.25, // Responsive width
+                height: height * 0.05, // Responsive height
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: const Color(0xFFE4E4E4),
+                    )),
+                child: Center(
+                    child: Text(
+                      '500 LE',
+                      style:
+                      Styles.styleMediumInter13.copyWith(color: Colors.black),
+                    )),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+
           Padding(
-            padding: const EdgeInsets.only(right: 12, top: 21),
+            padding: const EdgeInsets.only(right: 12, top: 20),
             child: Align(
                 alignment: Alignment.bottomRight,
                 child: Text(
@@ -185,20 +103,24 @@ class _ProductViewBodyState extends State<ProductViewBody> {
             // Responsive padding
             child: Row(
               children: [
+
                 Container(
                   width: width * 0.25, // Responsive width
-                  height: height * 0.05, // Responsive height
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: const Color(0xFFE4E4E4),
-                      )),
+                  height: height * 0.06, // Responsive height
+
                   child: Center(
-                      child: Text(
-                    '500 LE',
-                    style:
-                        Styles.styleMediumInter13.copyWith(color: Colors.black),
-                  )),
+                    child:
+                    IconButton(
+                      icon: Icon(size: 45,
+                        isLiked ? Icons.favorite : Icons.favorite_border,
+                        color: isLiked ? Colors.red : Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isLiked = !isLiked;
+                        });
+                      },
+                    ),),
                 ),
                 const Spacer(),
                 ElevatedButton.icon(
@@ -219,16 +141,17 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  icon: Image.asset(Assets.imagesShoppingCart),
+
+                  icon: Icon(Icons.facebook, color: Colors.white,size: 30, ),
                   label: Center(
                       child: Text(
-                    'اضافه الي عربه التسوق',
-                    style: Styles.styleBoldIrinaSans20.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                        height: 1),
-                    textAlign: TextAlign.center,
-                  )),
+                        'التواصل عبر الفيسبوك',
+                        style: Styles.styleBoldIrinaSans20.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            height: 1),
+                        textAlign: TextAlign.center,
+                      )),
                 )
               ],
             ),
