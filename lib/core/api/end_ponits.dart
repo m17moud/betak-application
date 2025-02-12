@@ -1,6 +1,6 @@
 class ApiConstants {
   //api urls
-  static const String baseUrl = "https://baitak88.com/";
+  static const String baseUrl = "https://baiytak.com/";
   static const String pKey = "pkey";
 
   static const String clientSignUp = "addCustomer.php";

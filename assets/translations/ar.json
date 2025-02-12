@@ -58,10 +58,14 @@
     "pleaseEnterProductPrice": "الرجاء ادخال سعر المنتج",
     "confirm": "تأكيد",
     "productName": "إسم المنتج",
-    "addNewProduct":"إضافة منتج جديد" ,
-    "enterProductName":"قم بكتابة اسم المنتج" ,
-    "enterProductPrice":"قم بكتابة سعر المنتج" ,
-    "enterProductDescription":"قم بكتابة وصف المنتج" ,
+    "addNewProduct": "إضافة منتج جديد",
+    "enterProductName": "قم بكتابة اسم المنتج",
+    "enterProductPrice": "قم بكتابة سعر المنتج",
+    "enterProductDescription": "قم بكتابة وصف المنتج",
     "price": "السعر",
-    "description":"الوصف" 
+    "description": "الوصف",
+    "categoriesError": "خطأ في تحميل الاقسام يرجى التحقق من اتصالك بالإنترنت",
+    "tryAgain": "إعادة المحاولة",
+    "chooseCategory": "اختر الفئة",
+    "mustChooseCategory": "يجب ان تختار فئة المنتجات"
 }

@@ -31,7 +31,8 @@ class AppStrings {
   static const String productsType= "productsType";
   static const String facebookAccount= "facebookAccount";
   static const String enterYourFacebook= "enterYourFacebook";
-
+  static const String chooseCategory = "chooseCategory";
+  static const String mustChooseCategory = "mustChooseCategory";
 
 
 // text validation
@@ -51,6 +52,9 @@ class AppStrings {
   static const String cantBeLessThan10 = "cantBeLessThan10";
   static const String pleaseEnterProductDesc = "pleaseEnterProductDesc";
   static const String pleaseEnterProductPrice = "pleaseEnterProductPrice";
+  static const String categoriesError = "categoriesError";
+  static const String tryAgain = "tryAgain";
+
 
 
 // Add product

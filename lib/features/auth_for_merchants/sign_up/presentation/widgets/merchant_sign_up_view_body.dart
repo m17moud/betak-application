@@ -1,10 +1,11 @@
 // import 'package:betak/core/utils/string_manager.dart';
+// import 'package:betak/core/widgets/loading_error.dart';
 // import 'package:betak/features/auth_for_merchants/sign_up/presentation/cubit/merchant_sign_up_cubit.dart';
 // import 'package:betak/features/home/presentation/cubit/home_cubit.dart';
 // import 'package:easy_localization/easy_localization.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 // import '../../../../../core/utils/routes_manager.dart';
 // import '../../../../../core/utils/styles.dart';
@@ -18,7 +19,6 @@
 // import '../../../../../core/widgets/success_signup_dialog.dart';
 // import '../../../../../core/widgets/text_form_validation.dart';
 // import '../../../../../generated/assets.dart';
-// import '../../../../../injection_container.dart';
 // import 'category_list.dart';
 
 // class MerchantSignUpViewBody extends StatefulWidget {
@@ -37,12 +37,18 @@
 //   final TextEditingController _facebookUrlController = TextEditingController();
 //   final TextEditingController _addressController = TextEditingController();
 //   final TextEditingController _shopController = TextEditingController();
-//   final TextEditingController _productsTypeController = TextEditingController();
+//   String? productsType;
+//   @override
+//   void initState() {
+//     super.initState();
+//     context.read<HomeCubit>().getDepartments();
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
 //     var screenWidth = MediaQuery.of(context).size.width;
 //     var screenHeight = MediaQuery.of(context).size.height;
+
 //     return BlocListener<MerchantSignUpCubit, MerchantSignUpState>(
 //       listener: (context, state) {
 //         if (state is MerchantSignUpLoading) {
@@ -141,35 +147,33 @@
 //                 CustomTitleText(
 //                   text: AppStrings.productsType.tr(),
 //                 ),
-//                 BlocProvider(
-//                   create: (context) => sl<HomeCubit>(),
-//                   child: BlocBuilder<HomeCubit, HomeState>(
-//                     builder: (context, state) {
-//                       if (state is HomeInitial) {
-//                         context.read<HomeCubit>().getDepartments();
-//                       }
-//                       if (state is HomeDepartmentsLoading) {
-//                         print("'''''''''''''''''''''''''");
-//                         return CircularProgressIndicator(
-//                           color: Styles.blueSky,
-//                         );
-//                       }
-//                       if (state is HomeDepartmentsSuccess) {
-//                         final DepName = state.departmentInfo
-//                             .map((departmentInfo) => departmentInfo.name)
-//                             .toList();
-//                         return CategoryList(
-//                           departments: DepName,
-//                           onChanged: (value) {},
-//                         );
-//                       }
-//                       if (state is HomeDepartmentsError) {
-//                         return Text("An error happend");
-//                       }
-
-//                       return const SizedBox();
-//                     },
-//                   ),
+//                 BlocBuilder<HomeCubit, HomeState>(
+//                   builder: (context, state) {
+//                     if (state is HomeDepartmentsLoading) {
+//                       return const CircularProgressIndicator(
+//                         color: Styles.blueSky,
+//                       );
+//                     }
+//                     if (state is HomeDepartmentsSuccess) {
+//                       final depName = state.departmentInfo
+//                           .map((departmentInfo) => departmentInfo.name)
+//                           .toList();
+//                       return CategoryList(
+//                         departments: depName,
+//                         onChanged: (value) {
+//                           productsType=value;
+//                         },
+//                       );
+//                     }
+//                     if (state is HomeDepartmentsError) {
+//                       return LoadingError(
+//                           text: AppStrings.categoriesError,
+//                           onPressed: () {
+//                             context.read<HomeCubit>().getDepartments();
+//                           });
+//                     }
+//                     return const SizedBox();
+//                   },
 //                 ),
 //                 CustomTitleText(
 //                   text: AppStrings.facebookAccount.tr(),
@@ -228,7 +232,6 @@
 //                       final address = _addressController.text.trim();
 //                       final facebookUrl = _facebookUrlController.text.trim();
 //                       final shop = _shopController.text.trim();
-//                       final productsType = "gggggg";
 //                       if (_formKey.currentState?.validate() ?? false) {
 //                         context.read<MerchantSignUpCubit>().signup(
 //                             name,
@@ -238,7 +241,7 @@
 //                             shop,
 //                             facebookUrl,
 //                             address,
-//                             productsType);
+//                             productsType!);
 //                       }
 //                     },
 //                     text: AppStrings.signUp.tr(),
@@ -259,6 +262,7 @@
 // }
 
 import 'package:betak/core/utils/string_manager.dart';
+import 'package:betak/core/widgets/loading_error.dart';
 import 'package:betak/features/auth_for_merchants/sign_up/presentation/cubit/merchant_sign_up_cubit.dart';
 import 'package:betak/features/home/presentation/cubit/home_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -278,7 +282,6 @@ import '../../../../../core/widgets/phone_text_field.dart';
 import '../../../../../core/widgets/success_signup_dialog.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
 import '../../../../../generated/assets.dart';
-import '../../../../../injection_container.dart';
 import 'category_list.dart';
 
 class MerchantSignUpViewBody extends StatefulWidget {
@@ -297,7 +300,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
   final TextEditingController _facebookUrlController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _shopController = TextEditingController();
-  final TextEditingController _productsTypeController = TextEditingController();
+  String? productsType;
 
   @override
   void initState() {
@@ -411,21 +414,27 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                 BlocBuilder<HomeCubit, HomeState>(
                   builder: (context, state) {
                     if (state is HomeDepartmentsLoading) {
-                      return CircularProgressIndicator(
+                      return const CircularProgressIndicator(
                         color: Styles.blueSky,
                       );
                     }
                     if (state is HomeDepartmentsSuccess) {
-                      final DepName = state.departmentInfo
+                      final depName = state.departmentInfo
                           .map((departmentInfo) => departmentInfo.name)
                           .toList();
                       return CategoryList(
-                        departments: DepName,
-                        onChanged: (value) {},
+                        departments: depName,
+                        onChanged: (value) {
+                          productsType = value;
+                        },
                       );
                     }
                     if (state is HomeDepartmentsError) {
-                      return Text("An error happened");
+                      return LoadingError(
+                          text: AppStrings.categoriesError,
+                          onPressed: () {
+                            context.read<HomeCubit>().getDepartments();
+                          });
                     }
                     return const SizedBox();
                   },
@@ -480,6 +489,18 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                   child: CustomButton1(
                     backgroundColor: Styles.blueSky,
                     onPressed: () {
+                      if (productsType == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              AppStrings.mustChooseCategory.tr(),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        );
+                        return;
+                      }
                       final email = _emailController.text.trim();
                       final password = _passwordController.text.trim();
                       final name = _nameController.text.trim();
@@ -487,7 +508,6 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                       final address = _addressController.text.trim();
                       final facebookUrl = _facebookUrlController.text.trim();
                       final shop = _shopController.text.trim();
-                      final productsType = "gggggg";
                       if (_formKey.currentState?.validate() ?? false) {
                         context.read<MerchantSignUpCubit>().signup(
                             name,
@@ -497,7 +517,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                             shop,
                             facebookUrl,
                             address,
-                            productsType);
+                            productsType!);
                       }
                     },
                     text: AppStrings.signUp.tr(),

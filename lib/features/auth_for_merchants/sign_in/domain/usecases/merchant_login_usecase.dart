@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_merchants/sign_in/data/models/merchant_login_response_model.dart';
+import '../../data/models/merchant_login_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 

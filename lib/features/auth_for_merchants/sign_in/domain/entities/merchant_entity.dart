@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:equatable/equatable.dart';
 
 class MerchantEntity extends Equatable {
@@ -20,6 +22,7 @@ class MerchantEntity extends Equatable {
     required this.sellerAddress,
     required this.sellerDate,
   });
+  @override
   List<Object?> get props =>
       [sellerId,sellerName,sellerMobile,sellerEmail,sellerFacebook,sellerProductsType,sellerAddress,sellerDate ];
 }

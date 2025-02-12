@@ -1,4 +1,9 @@
-import 'package:betak/features/auth_for_merchants/sign_up/domain/usecases/add_merchant_usecase.dart';
+import 'features/add_product/data/datasources/add_product_remote_datasource.dart';
+import 'features/add_product/data/repositories/add_product_repository_impl.dart';
+import 'features/add_product/domain/repositories/add_product_repository.dart';
+import 'features/add_product/domain/usecases/add_product_usecase.dart';
+import 'features/add_product/presentation/cubit/add_product_cubit.dart';
+import 'features/auth_for_merchants/sign_up/domain/usecases/add_merchant_usecase.dart';
 
 import 'features/auth_for_merchants/sign_up/data/datasources/merchant_signup_remote_datasource.dart';
 import 'features/auth_for_merchants/sign_up/data/repositories/merchant_signup_repository_impl.dart';
@@ -8,13 +13,13 @@ import 'features/home/data/datasources/home_department_remote_data_source.dart';
 import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/data/datasources/merchant_login_local_data_source.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/data/datasources/merchant_login_remote_data_source.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/data/repositories/merchant_login_repository_imp.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/domain/repositories/merchant_login_repository.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_login_usecase.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_logout_usecase.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import 'features/auth_for_merchants/sign_in/data/datasources/merchant_login_local_data_source.dart';
+import 'features/auth_for_merchants/sign_in/data/datasources/merchant_login_remote_data_source.dart';
+import 'features/auth_for_merchants/sign_in/data/repositories/merchant_login_repository_imp.dart';
+import 'features/auth_for_merchants/sign_in/domain/repositories/merchant_login_repository.dart';
+import 'features/auth_for_merchants/sign_in/domain/usecases/merchant_login_usecase.dart';
+import 'features/auth_for_merchants/sign_in/domain/usecases/merchant_logout_usecase.dart';
+import 'features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -75,6 +80,11 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeDepartmentRemoteDataSource>(
     () => HomeDepartmentRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
   );
+
+// add product
+sl.registerLazySingleton<AddProductRemoteDatasource>(
+    () => AddProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
     () => CustomerLoginRepositoryImp(
@@ -104,13 +114,16 @@ Future<void> init() async {
 
   sl.registerLazySingleton<MerchantLoginRepository>(
     () => MerchantLoginRepositoryImp(
-      networkInfo:
-          sl(), 
+      networkInfo: sl(),
       local: sl(),
       remote: sl(),
     ),
   );
 
+  // add product
+  sl.registerLazySingleton<AddProductRepository>(
+    () => AddProductRepositoryImpl(addProductRemoteDatasource: sl(), networkInfo: sl()),
+  );
   //! Use cases
   //client
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -124,6 +137,9 @@ Future<void> init() async {
       () => AddMerchantUsecase(merchantSignupRepository: sl()));
   //home
   sl.registerLazySingleton(() => HomeUsecase(sl()));
+  
+  // add product
+sl.registerLazySingleton(() => AddProductUsecase(addProductRepository: sl()));
 
   //! Cubits
   sl.registerFactory(
@@ -140,5 +156,8 @@ Future<void> init() async {
   );
   sl.registerFactory(
     () => HomeCubit(homeUsecase: sl()),
+  );
+   sl.registerFactory(
+    () => AddProductCubit(addProductUsecase: sl()),
   );
 }

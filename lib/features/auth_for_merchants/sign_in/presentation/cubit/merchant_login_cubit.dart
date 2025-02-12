@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:betak/features/auth_for_merchants/sign_in/data/models/merchant_login_response_model.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_login_usecase.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_logout_usecase.dart';
+import '../../data/models/merchant_login_response_model.dart';
+import '../../domain/usecases/merchant_login_usecase.dart';
+import '../../domain/usecases/merchant_logout_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

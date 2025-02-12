@@ -1,4 +1,4 @@
-import 'package:betak/core/utils/color_manager.dart';
+import '../utils/color_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {

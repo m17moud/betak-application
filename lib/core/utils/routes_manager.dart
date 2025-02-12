@@ -1,4 +1,6 @@
-import 'package:betak/features/home/presentation/pages/home_merchant_view.dart';
+import '../widgets/choose_user_type.dart';
+import '../../features/add_product/presentation/pages/add_product_screen.dart';
+import '../../features/home/presentation/pages/home_merchant_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,6 +18,7 @@ import 'string_manager.dart';
 class Routes {
   static const String loadingSplashRoute = "/";
   static const String splashRoute = "/splash_view";
+  static const String chooseUserType = "/choose_user_type";
 
   static const String clientSignInRoute = "/client_sign_in_view";
   static const String clientSignUpRoute = "/client_sign_up_view";
@@ -27,6 +30,7 @@ class Routes {
   static const String homeCleintRoute = "/home_cleint_view";
   static const String homeMerchantRoute = "/home_merchant_view";
   static const String productRoute = "/product_view";
+  static const String addProductRoute = "/add_product_screen";
 
   // static const String instructionsRoute = "/iInstructionsScreen";
 
@@ -40,6 +44,8 @@ class Routes {
     homeCleintRoute: const HomeCleintView(),
     homeMerchantRoute: const HomeMerchantView(),
     productRoute: const ProductView(),
+    addProductRoute: const AddProductScreen(),
+    chooseUserType: const ChooseUserType(),
   };
 
   static Scaffold get unDefinedRoute {
