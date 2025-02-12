@@ -29,7 +29,7 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
   }) async {
     if (await _networkInfo.isConnected) {
       try {
-        var merchantData = await _remote.login(pkey,loginemail,loginpassword);
+        MerchantLoginResponseModel merchantData = await _remote.login(pkey,loginemail,loginpassword);
         await _local.storeMerchantData(merchantData);
         return Right(merchantData);
       } on ServerException {

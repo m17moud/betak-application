@@ -1,3 +1,6 @@
+import 'package:betak/features/categorie_products/data/models/products_model.dart';
+import 'package:betak/features/categorie_products/presentation/views/categorie_products_view.dart';
+import 'package:betak/features/home/data/models/home_department_response_model.dart';
 import 'package:betak/features/home/presentation/pages/home_merchant_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,21 +29,29 @@ class Routes {
 
   static const String homeCleintRoute = "/home_cleint_view";
   static const String homeMerchantRoute = "/home_merchant_view";
+
+  static const String categorieProducts = "/categorie_products_view";
+
   static const String productRoute = "/product_view";
 
   // static const String instructionsRoute = "/iInstructionsScreen";
 
-  static Map<String, dynamic> routesList = {
-    loadingSplashRoute: const LoadingSplashView(),
-    splashRoute: const SplashView(),
-    clientSignInRoute: const ClientSignInView(),
-    clientSignUpRoute: const ClientSignUpView(),
-    merchantSignInRoute: const MerchantSignInView(),
-    merchantSignUpRoute: const MerchantSignUpView(),
-    homeCleintRoute: const HomeCleintView(),
-    homeMerchantRoute: const HomeMerchantView(),
-    productRoute: const ProductView(),
+  static Map<String, Widget Function(BuildContext, dynamic)> routesList = {
+    loadingSplashRoute: (context, _) => const LoadingSplashView(),
+    splashRoute: (context, _) => const SplashView(),
+    clientSignInRoute: (context, _) => const ClientSignInView(),
+    clientSignUpRoute: (context, _) => const ClientSignUpView(),
+    merchantSignInRoute: (context, _) => const MerchantSignInView(),
+    merchantSignUpRoute: (context, _) => const MerchantSignUpView(),
+    homeCleintRoute: (context, _) => const HomeCleintView(),
+    homeMerchantRoute: (context, _) => const HomeMerchantView(),
+    categorieProducts: (context, args) => CategorieProductsView(
+        departmentResponseModel: args as HomeDepartmentResponseModel),
+    productRoute: (context, args) =>  ProductView(
+        productsModel: args as ProductsModel),
+
   };
+
 
   static Scaffold get unDefinedRoute {
     return Scaffold(
@@ -54,24 +65,21 @@ class Routes {
   }
 }
 
-class RouteGenerator {
-  static Route<dynamic> getRoute(RouteSettings settings) {
-    if (settings.name != null) {
-      try {
-        return MaterialPageRoute(
-            settings: settings,
-            builder: (context) => Routes.routesList[settings.name]);
-      } on Exception {
-        return _unDefinedRoute();
-      }
-    } else {
-      return _unDefinedRoute();
-    }
-  }
 
-  static MaterialPageRoute _unDefinedRoute() {
-    return MaterialPageRoute(
-      builder: (context) => Routes.unDefinedRoute,
-    );
+  class RouteGenerator {
+  static Route<dynamic> getRoute(RouteSettings settings) {
+  final routeName = settings.name;
+  final arguments = settings.arguments;
+
+  if (Routes.routesList.containsKey(routeName)) {
+  return MaterialPageRoute(
+  settings: settings,
+  builder: (context) => Routes.routesList[routeName]!(context, arguments),
+  );
+  } else {
+  return MaterialPageRoute(
+  builder: (context) => Routes.unDefinedRoute,
+  );
+  }
   }
 }

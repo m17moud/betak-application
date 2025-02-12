@@ -1,3 +1,5 @@
+import 'package:betak/core/utils/routes_manager.dart';
+
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -35,25 +37,36 @@ class Categories extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  width: width * 0.35,
-                  height: height * 0.18,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey[200],
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: department.image!,
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: ColorManager.darkerWhite,
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
-                        color: ColorManager.white,
-                      ),
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(
+                      context,
+                      Routes.categorieProducts,
+                      arguments: department, // Replace with an actual instance
+                    );
+
+                  },
+                  child: Container(
+
+                    width: width * 0.35,
+                    height: height * 0.18,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.grey[200],
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                    fit: BoxFit.cover,
+                    child: CachedNetworkImage(
+                      imageUrl: department.image!,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: ColorManager.darkerWhite,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          color: ColorManager.white,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8),

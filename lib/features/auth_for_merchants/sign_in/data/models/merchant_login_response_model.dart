@@ -7,26 +7,26 @@ part "merchant_login_response_model.g.dart";
 
 @JsonSerializable()
 class MerchantLoginResponseModel {
-  String? sellerId;
-  String? sellerName;
-  String? sellerMobile;
-  String? sellerEmail;
-  String? sellerFacebook;
-  String? sellerProductsType;
-  String? sellerAddress;
-  DateTime? sellerDate;
+  String? SellerID;
+  String? SellerName;
+  String? SellerMobile;
+  String? SellerEmail;
+  String? SellerFacebook;
+  String? SellerProductsType;
+  String? SellerAddress;
+  DateTime? SellerDate;
 
 
 
   MerchantLoginResponseModel({
-    required this.sellerId,
-    required this.sellerName,
-    required this.sellerMobile,
-    required this.sellerEmail,
-    required this.sellerFacebook,
-    required this.sellerAddress,
-    required this.sellerProductsType,
-    required this.sellerDate,
+    required this.SellerID,
+    required this.SellerName,
+    required this.SellerMobile,
+    required this.SellerEmail,
+    required this.SellerFacebook,
+    required this.SellerAddress,
+    required this.SellerProductsType,
+    required this.SellerDate,
   });
 
   factory MerchantLoginResponseModel.fromJson(Map<String, dynamic> json) => _$MerchantLoginResponseModelFromJson(json);

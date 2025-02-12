@@ -31,6 +31,9 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
       try {
         var customerData = await _remote.login(pkey,loginemail,loginpassword);
         await _local.storeCustomerData(customerData);
+
+        ;
+
         return Right(customerData);
       } on ServerException {
         return const Left(ServerFailure());
