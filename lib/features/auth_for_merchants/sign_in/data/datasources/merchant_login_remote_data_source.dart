@@ -25,9 +25,8 @@ class MerchantLoginRemoteDataSourceImpl extends MerchantLoginRemoteDataSource {
       data: formData
     );
 
-print("*******************************************${response[0]}");
       var logResponse = MerchantLoginResponseModel.fromJson(response[0]);
-    // print("*******************************************${logResponse.}");
+
 
       return logResponse;
 

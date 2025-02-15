@@ -1,8 +1,7 @@
 
 
 
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
-import 'package:betak/features/home/data/models/home_department_response_model.dart';
+import '../models/products_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/api/dio_consumer.dart';

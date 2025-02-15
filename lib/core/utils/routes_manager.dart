@@ -1,7 +1,9 @@
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
-import 'package:betak/features/categorie_products/presentation/views/categorie_products_view.dart';
-import 'package:betak/features/home/data/models/home_department_response_model.dart';
-import 'package:betak/features/home/presentation/pages/home_merchant_view.dart';
+import '../../features/categorie_products/data/models/products_model.dart';
+import '../../features/categorie_products/presentation/views/categorie_products_view.dart';
+import '../../features/home/data/models/home_department_response_model.dart';
+import '../widgets/choose_user_type.dart';
+import '../../features/add_product/presentation/pages/add_product_screen.dart';
+import '../../features/home/presentation/pages/home_merchant_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,6 +21,7 @@ import 'string_manager.dart';
 class Routes {
   static const String loadingSplashRoute = "/";
   static const String splashRoute = "/splash_view";
+  static const String chooseUserType = "/choose_user_type";
 
   static const String clientSignInRoute = "/client_sign_in_view";
   static const String clientSignUpRoute = "/client_sign_up_view";
@@ -33,6 +36,7 @@ class Routes {
   static const String categorieProducts = "/categorie_products_view";
 
   static const String productRoute = "/product_view";
+  static const String addProductRoute = "/add_product_screen";
 
   // static const String instructionsRoute = "/iInstructionsScreen";
 
@@ -50,6 +54,8 @@ class Routes {
     productRoute: (context, args) =>  ProductView(
         productsModel: args as ProductsModel),
 
+    addProductRoute:  (context, _) =>const AddProductScreen(),
+    chooseUserType:  (context, _) =>const ChooseUserType(),
   };
 
 

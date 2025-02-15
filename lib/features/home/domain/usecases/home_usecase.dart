@@ -1,10 +1,10 @@
-import '../../data/models/home_department_response_model.dart';
-import '../repositories/home_department_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
+import '../../data/models/home_department_response_model.dart';
+import '../repositories/home_department_repository.dart';
 
 class HomeUsecase
     implements UseCase<List<HomeDepartmentResponseModel>, Params> {

@@ -22,6 +22,7 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         _networkInfo = networkInfo;
 
   @override
+  // ignore: non_constant_identifier_names
   Future<Either<Failure, CustomerLoginResponseModel>> CustomerLogin({
     required String pkey,
     required String loginemail,
@@ -32,7 +33,7 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         var customerData = await _remote.login(pkey,loginemail,loginpassword);
         await _local.storeCustomerData(customerData);
 
-        ;
+        
 
         return Right(customerData);
       } on ServerException {
@@ -73,7 +74,7 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  const Left(const ServerFailure());
+        return  const Left(ServerFailure());
       }
     } else {
       return const Left(NetworkFailure());

@@ -1,9 +1,9 @@
-import '../../../../core/api/end_ponits.dart';
-import '../../domain/usecases/home_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/api/end_ponits.dart';
 import '../../data/models/home_department_response_model.dart';
+import '../../domain/usecases/home_usecase.dart';
 
 part 'home_state.dart';
 

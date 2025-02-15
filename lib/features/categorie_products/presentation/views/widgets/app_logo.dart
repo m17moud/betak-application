@@ -1,6 +1,6 @@
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
-import 'package:betak/features/categorie_products/presentation/views/widgets/custom_search_text_field.dart';
+import 'package:animate_do/animate_do.dart';
+import '../../../../../core/utils/styles.dart';
+import 'custom_search_text_field.dart';
 import 'package:flutter/material.dart';
 
 class AppLogo extends StatelessWidget {
@@ -8,14 +8,10 @@ class AppLogo extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
-
-
   });
 
   final double height;
   final double width;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +28,11 @@ class AppLogo extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CustomSearchTextField(screenWidth: width,),
-
+          FadeInRight(
+              delay: const Duration(milliseconds: 500),
+              child: CustomSearchTextField(
+                screenWidth: width,
+              )),
         ],
       ),
     );

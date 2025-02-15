@@ -10,10 +10,10 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/custom_title_text.dart';
 import '../../../../../core/widgets/loading_dialog.dart';
-import '../../../../../core/widgets/login_error_dialog.dart';
+import '../../../../../core/widgets/error_dialog.dart';
 import '../../../../../core/widgets/password_text_field.dart';
 import '../../../../../core/widgets/phone_text_field.dart';
-import '../../../../../core/widgets/success_signup_dialog.dart';
+import '../../../../../core/widgets/success_dialog.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
 import '../../../../../generated/assets.dart';
 import '../cubit/sign_up_cubit.dart';
@@ -48,18 +48,26 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
           );
         } else if (state is SignUpSuccess) {
           Navigator.of(context).pop(); // Hide loading dialog
-          showDialog(
+
+          SuccessDialog.show(
             context: context,
-            builder: (context) {
-              return const SuccessSignupDialog();
+            message: AppStrings.verifyEmailMessage,
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.clientSignInRoute,
+                (route) => false,
+              );
             },
           );
         } else if (state is SignUpError) {
-          Navigator.of(context).pop(); // Hide loading dialog
-          showDialog(
+          Navigator.pop(context); // Hide loading dialog
+          ErrorDialog.show(
             context: context,
-            builder: (context) {
-              return LoginErrorDialog(message: state.message);
+            message: state.message,
+            onPressed: () {
+              Navigator.pop(context);
+              
             },
           );
         }

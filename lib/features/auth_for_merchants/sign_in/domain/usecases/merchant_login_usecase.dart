@@ -1,9 +1,9 @@
-import 'package:betak/features/auth_for_merchants/sign_in/data/models/merchant_login_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
+import '../../data/models/merchant_login_response_model.dart';
 import '../repositories/merchant_login_repository.dart';
 
 class MerchantLoginUsecase implements UseCase<MerchantLoginResponseModel, Params> {

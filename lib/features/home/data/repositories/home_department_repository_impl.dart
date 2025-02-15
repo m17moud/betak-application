@@ -1,11 +1,11 @@
-import '../datasources/home_department_remote_data_source.dart';
-import '../models/home_department_response_model.dart';
-import '../../domain/repositories/home_department_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/Network/network_info.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/errors/exceptions.dart';
+import '../../domain/repositories/home_department_repository.dart';
+import '../datasources/home_department_remote_data_source.dart';
+import '../models/home_department_response_model.dart';
 
 class HomeDepartmentRepositoryImpl extends HomeDepartmentRepository {
   final HomeDepartmentRemoteDataSource _remote;

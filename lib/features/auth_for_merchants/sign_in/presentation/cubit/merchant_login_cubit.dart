@@ -1,8 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
 
-import 'package:betak/features/auth_for_merchants/sign_in/data/models/merchant_login_response_model.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_login_usecase.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/domain/usecases/merchant_logout_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -12,7 +11,9 @@ import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
-
+import '../../data/models/merchant_login_response_model.dart';
+import '../../domain/usecases/merchant_login_usecase.dart';
+import '../../domain/usecases/merchant_logout_usecase.dart';
 
 part 'merchant_login_state.dart';
 

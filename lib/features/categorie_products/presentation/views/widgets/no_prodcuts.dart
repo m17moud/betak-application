@@ -1,11 +1,11 @@
 
-import 'package:betak/core/utils/string_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/styles.dart';
 
-class noProducts extends StatelessWidget {
-  const noProducts({
+class NoProducts extends StatelessWidget {
+  const NoProducts({
     super.key,
     required this.width,
   });

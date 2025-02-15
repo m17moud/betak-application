@@ -1,10 +1,11 @@
 
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
+import '../../../../categorie_products/data/models/products_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
 import '../../../../../generated/assets.dart';
 
+// ignore: must_be_immutable
 class ProductViewBody extends StatefulWidget {
   ProductsModel productsModel;
 
@@ -104,7 +105,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
             child: Row(
               children: [
 
-                Container(
+                SizedBox(
                   width: width * 0.25, // Responsive width
                   height: height * 0.06, // Responsive height
 
@@ -142,7 +143,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                     ),
                   ),
 
-                  icon: Icon(Icons.facebook, color: Colors.white,size: 30, ),
+                  icon: const Icon(Icons.facebook, color: Colors.white,size: 30, ),
                   label: Center(
                       child: Text(
                         'التواصل عبر الفيسبوك',

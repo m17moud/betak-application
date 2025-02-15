@@ -1,4 +1,4 @@
-import 'package:betak/core/utils/styles.dart';
+import '../../../../../core/utils/styles.dart';
 
 import 'package:flutter/material.dart';
 

@@ -1,9 +1,8 @@
-
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:json_annotation/json_annotation.dart';
 
 part "merchant_login_response_model.g.dart";
-
 
 @JsonSerializable()
 class MerchantLoginResponseModel {
@@ -14,9 +13,8 @@ class MerchantLoginResponseModel {
   String? SellerFacebook;
   String? SellerProductsType;
   String? SellerAddress;
+  String? SellerDepartment;
   DateTime? SellerDate;
-
-
 
   MerchantLoginResponseModel({
     required this.SellerID,
@@ -27,13 +25,11 @@ class MerchantLoginResponseModel {
     required this.SellerAddress,
     required this.SellerProductsType,
     required this.SellerDate,
+    required this.SellerDepartment,
   });
 
-  factory MerchantLoginResponseModel.fromJson(Map<String, dynamic> json) => _$MerchantLoginResponseModelFromJson(json);
-
+  factory MerchantLoginResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$MerchantLoginResponseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MerchantLoginResponseModelToJson(this);
-
-
 }
-

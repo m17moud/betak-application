@@ -4,7 +4,7 @@ class AppStrings {
 // initial
   static const String chooseUserType= "chooseUserType";
   static const String cleint= "cleint";
-  static const String seller= "seller";
+  static const String merchant= "merchant";
   static const String betak= "betak";
   static const String welcomeTo= "welcomeTo";
   static const String loginWithEmail= "loginWithEmail";
@@ -24,7 +24,15 @@ class AppStrings {
   static const String createYourPassword= "createYourPassword";
   static const String alreadyHaveAcount= "alreadyHaveAcount";
   static const String merchantSignIn= "merchantSignIn";
-
+  static const String shop= "shop";
+  static const String enterYourShop= "enterYourShop";
+  static const String address= "address";
+  static const String enterYourAddress= "enterYourAddress";
+  static const String productsType= "productsType";
+  static const String facebookAccount= "facebookAccount";
+  static const String enterYourFacebook= "enterYourFacebook";
+  static const String chooseCategory = "chooseCategory";
+  static const String mustChooseCategory = "mustChooseCategory";
 
 
 // text validation
@@ -39,6 +47,29 @@ class AppStrings {
   static const String pleaseEnterYourShopName = "pleaseEnterYourShopName";
   static const String pleaseEnterYourPhoneNumber = "pleaseEnterYourPhoneNumber";
   static const String phoneNumberMustBe11 = "PhoneNumberMustBe11";
+  static const String pleaseEnterProductName = "pleaseEnterProductName";
+  static const String cantBeLessThan5 = "cantBeLessThan5";
+  static const String cantBeLessThan10 = "cantBeLessThan10";
+  static const String pleaseEnterProductDesc = "pleaseEnterProductDesc";
+  static const String pleaseEnterProductPrice = "pleaseEnterProductPrice";
+  static const String categoriesError = "categoriesError";
+  static const String productsError = "productsError";
+  static const String tryAgain = "tryAgain";
+  static const String errorSignUpAgain = "errorSignUpAgain";
+
+
+
+// Add product
+  static const String productName = "productName";
+  static const String addNewProduct = "addNewProduct";
+  static const String enterProductName = "enterProductName";
+  static const String price = "price";
+  static const String enterProductPrice = "enterProductPrice";
+  static const String enterProductDescription = "enterProductDescription";
+  static const String description = "description";
+  static const String successAddProduct="successAddProduct";
+  static const String errorAddProduct="errorAddProduct";
+  static const String mustAddImage="mustAddImage";
 
   //errors
   static const String locGeneralError = "general_error";
@@ -63,8 +94,8 @@ class AppStrings {
   //login errors
   static const String locLoginError = "login_error";
   static const String locLoginErrorMessage = "login_error_message";
+  
   //sign up
-
   static const String successSignup = "successSignup";
   static const String verifyEmailMessage = "verifyEmailMessage";
 
@@ -76,12 +107,15 @@ class AppStrings {
   static const String pleaseWait = "pleaseWait";
   static const String error = "error";
   static const String ok = "ok";
+  static const String confirm = "confirm";
+  static const String continueText ="continueText";
+  static const String success ="success";
   // products
   static const String noProductsFound = "noProductsFound";
   static const String searchAboutProduct = "searchAboutProduct";
   static const String emptySearchHistory = "emptySearchHistory";
   static const String unknown = "unknown";
-  static const String EGP = "EGP";
+  static const String egp = "egp";
 
 
 

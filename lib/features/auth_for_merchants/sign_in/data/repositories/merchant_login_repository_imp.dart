@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';
@@ -70,10 +72,10 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  Left(ServerFailure());
+        return  const Left( ServerFailure());
       }
     } else {
-      return Left(NetworkFailure());
+      return const Left(NetworkFailure());
     }
   }
 

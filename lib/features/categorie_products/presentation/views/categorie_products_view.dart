@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:betak/core/utils/color_manager.dart';
 import 'package:betak/features/categorie_products/presentation/cubit/categorie_products_cubit.dart';
 import 'package:betak/features/home/data/models/home_department_response_model.dart';

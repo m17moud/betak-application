@@ -1,27 +1,28 @@
-import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/widgets/custom_title_text.dart';
+import '../../../../../core/widgets/error_dialog.dart';
+import '../../../../../core/widgets/loading_dialog.dart';
 import '../../../../../core/widgets/password_text_field.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
 import '../../../../../generated/assets.dart';
-import '../../../../../core/widgets/login_error_dialog.dart';
-import 'package:easy_localization/easy_localization.dart';
-
-import '../../../../../core/utils/string_manager.dart';
-import '../../../../../core/widgets/custom_title_text.dart';
-import '../../../../../core/widgets/loading_dialog.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/merchant_login_cubit.dart';
 
 class MerchantSignInViewBody extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  MerchantSignInViewBody({super.key});
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -37,16 +38,21 @@ class MerchantSignInViewBody extends StatelessWidget {
             },
           );
         } else if (state is LoggedIn) {
-          Navigator.of(context).pop(); // Hide loading dialog
-          Navigator.pushReplacementNamed(context, Routes.homeMerchantRoute);
-        } else if (state is LoginError) {
-          Navigator.of(context).pop(); // Hide loading dialog
-          showDialog(
-            context: context,
-            builder: (context) {
-              return LoginErrorDialog(message: state.message);
-            },
+           Navigator.pop(context); // Hide loading dialog
+            Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.homeMerchantRoute,
+            (route) => false,
           );
+        } else if (state is LoginError) {
+          Navigator.pop(context); // Hide loading dialog
+        ErrorDialog.show(
+                context: context,
+                message: state.message,
+                onPressed: () {
+                   Navigator.pop(context);
+                },
+              );
         }
       },
       builder: (context, state) {
@@ -155,7 +161,7 @@ class MerchantSignInViewBody extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.pushReplacementNamed(
-                                context, Routes.clientSignUpRoute);
+                                context, Routes.merchantSignUpRoute);
                           },
                           child: CustomTitleText(
                             text: AppStrings.signUp.tr(),

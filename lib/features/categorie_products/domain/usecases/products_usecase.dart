@@ -1,5 +1,5 @@
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
-import 'package:betak/features/categorie_products/domain/repositories/product_repository.dart';
+import '../../data/models/products_model.dart';
+import '../repositories/product_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 

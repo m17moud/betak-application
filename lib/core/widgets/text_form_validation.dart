@@ -34,8 +34,10 @@ String? validateFacebookLink(String? value) {
   if (value == null || value.isEmpty) {
     return AppStrings.pleaseEnterYourFacebook.tr();
   }
-  final regex =
-      RegExp(r'^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]/');
+
+  final regex = RegExp(
+    r"^(https:\/\/www\.facebook\.com\/(share\/\S+|[\w\.]+(\?[\w=&%]+)?)\/?)$",
+  );
 
   if (!regex.hasMatch(value)) {
     return AppStrings.pleaseEnterAValidFacebook.tr();
@@ -63,6 +65,33 @@ String? validatePhoneNumber(String? value) {
   }
   if (value.length != 11) {
     return AppStrings.phoneNumberMustBe11.tr();
+  }
+  return null;
+}
+
+String? validateProductName(String? value) {
+  if (value == null || value.isEmpty) {
+    return AppStrings.pleaseEnterProductName.tr();
+  }
+  if (value.length < 5) {
+    return  AppStrings.cantBeLessThan5.tr();
+  }
+  return null;
+}
+
+String? validateProductDescription(String? value) {
+  if (value == null || value.isEmpty) {
+    return AppStrings.pleaseEnterProductDesc.tr();
+  }
+  if (value.length < 10) {
+    return AppStrings.cantBeLessThan10.tr();
+  }
+  return null;
+}
+
+String? validateProductPrice(String? value) {
+  if (value == null || value.isEmpty) {
+    return AppStrings.pleaseEnterProductPrice.tr();
   }
   return null;
 }

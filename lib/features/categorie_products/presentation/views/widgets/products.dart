@@ -1,7 +1,7 @@
-
-import 'package:betak/core/utils/routes_manager.dart';
-import 'package:betak/core/utils/string_manager.dart';
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
+import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
+import '../../../data/models/products_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,6 +20,7 @@ class Products extends StatefulWidget {
   final List<ProductsModel> departmentProducts;
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductsState createState() => _ProductsState();
 }
 
@@ -31,7 +32,8 @@ class _ProductsState extends State<Products> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.width * 0.05),
       child: GridView.builder(
-        padding: EdgeInsets.only(bottom: widget.height * 0.02, top: widget.height * 0.01),
+        padding: EdgeInsets.only(
+            bottom: widget.height * 0.02, top: widget.height * 0.01),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: widget.width < 600 ? 2 : 2,
           crossAxisSpacing: widget.width * 0.03,
@@ -47,21 +49,21 @@ class _ProductsState extends State<Products> {
             onExit: (_) => setState(() => hoveredIndex = null),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, Routes.productRoute,arguments: product);
-
+                Navigator.pushNamed(context, Routes.productRoute,
+                    arguments: product);
               },
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 decoration: BoxDecoration(
                   boxShadow: hoveredIndex == index
                       ? [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                      offset: Offset(0, 4),
-                    ),
-                  ]
+                          const BoxShadow(
+                            color: ColorManager.black,
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                            offset: Offset(0, 4),
+                          ),
+                        ]
                       : [],
                 ),
                 child: Card(
@@ -74,7 +76,8 @@ class _ProductsState extends State<Products> {
                     children: [
                       Expanded(
                         child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(12)),
                           child: CachedNetworkImage(
                             imageUrl: product.images?.isNotEmpty == true
                                 ? product.images![0]
@@ -84,10 +87,11 @@ class _ProductsState extends State<Products> {
                               highlightColor: Colors.grey[100]!,
                               child: Container(
                                 width: double.infinity,
-                                color: Colors.white,
+                                color: ColorManager.white,
                               ),
                             ),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                             fit: BoxFit.fill,
                             width: double.infinity,
                             height: double.infinity,
@@ -104,15 +108,14 @@ class _ProductsState extends State<Products> {
                               style: TextStyle(
                                 fontSize: widget.width * 0.04,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: ColorManager.black,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 5),
-            Text(
-              " ${AppStrings.seller.tr()} : ${product.seller?.sname ?? AppStrings.unknown.tr()}",
-
+                            Text(
+                              " ${AppStrings.merchant.tr()} : ${product.seller?.sname ?? AppStrings.unknown.tr()}",
                               style: TextStyle(
                                 fontSize: widget.width * 0.035,
                                 color: Colors.grey[600],
@@ -123,7 +126,9 @@ class _ProductsState extends State<Products> {
                             const SizedBox(height: 5),
                             Row(
                               children: [
-                                Icon(Icons.thumb_up, color: Colors.blue, size: widget.width * 0.05),
+                                Icon(Icons.thumb_up,
+                                    color: ColorManager.blue,
+                                    size: widget.width * 0.05),
                                 const SizedBox(width: 4),
                                 Text(
                                   "${product.likes ?? 0}",
@@ -132,12 +137,12 @@ class _ProductsState extends State<Products> {
                                     color: Colors.grey[600],
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
-                                  "${product.pPrice ?? 0} ${AppStrings.EGP.tr()}",
+                                  "${product.pPrice ?? 0} ${AppStrings.egp.tr()}",
                                   style: TextStyle(
                                     fontSize: widget.width * 0.035,
-                                    color: Colors.blue,
+                                    color: ColorManager.blue,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
