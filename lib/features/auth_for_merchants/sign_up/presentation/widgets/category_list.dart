@@ -1,5 +1,3 @@
-
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +10,15 @@ class Category {
   final String name;
 
   Category({required this.id, required this.name});
+
+  // Override equality operator and hashCode to ensure unique object comparison
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          (other is Category && other.id == id && other.name == name);
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
 
 class CategoryList extends StatefulWidget {
@@ -86,9 +93,13 @@ class _CategoryListState extends State<CategoryList> {
               setState(() {
                 _dropDownValue = newValue;
               });
-              widget.onChanged(newValue!); // Notify the parent widget
+              if (newValue != null) {
+                widget.onChanged(newValue); // Notify the parent widget
+              }
             },
-            value: _dropDownValue,
+            value: widget.departments.contains(_dropDownValue)
+                ? _dropDownValue
+                : null,
           ),
         ),
       ),

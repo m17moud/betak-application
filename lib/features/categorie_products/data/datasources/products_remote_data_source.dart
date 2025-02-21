@@ -8,7 +8,7 @@ import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
 
 abstract class ProductsRemoteDataSource {
-  Future<List<ProductsModel>> getProducts(  String pkey,String depID);
+  Future<List<ProductsModel>> getProducts(  String pkey,String depID,String idType);
 }
 
 class ProductsRemoteDataSourceImpl
@@ -18,10 +18,10 @@ class ProductsRemoteDataSourceImpl
   ProductsRemoteDataSourceImpl({required this.dio});
 
   @override
-  Future<List<ProductsModel>> getProducts(  String pkey,String depID) async {
+  Future<List<ProductsModel>> getProducts(  String pkey,String depID,String idType) async {
     var formData = FormData.fromMap({
       ApiConstants.pKey: pkey,
-      'depr_id': depID});
+      idType: depID});
     List<ProductsModel> products = [];
     var response = await dio.post(ApiConstants.selectProducts, data: formData);
     for (var productsJson in response) {

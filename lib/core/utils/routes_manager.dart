@@ -1,3 +1,5 @@
+import 'package:betak/features/update_product/presentation/pages/manage_product_screen.dart';
+
 import '../../features/categorie_products/data/models/products_model.dart';
 import '../../features/categorie_products/presentation/views/categorie_products_view.dart';
 import '../../features/home/data/models/home_department_response_model.dart';
@@ -37,6 +39,8 @@ class Routes {
 
   static const String productRoute = "/product_view";
   static const String addProductRoute = "/add_product_screen";
+  static const String updateProductRoute = "/manage_product_screen";
+
 
   // static const String instructionsRoute = "/iInstructionsScreen";
 
@@ -53,6 +57,8 @@ class Routes {
         departmentResponseModel: args as HomeDepartmentResponseModel),
     productRoute: (context, args) =>  ProductView(
         productsModel: args as ProductsModel),
+    updateProductRoute: (context, args) =>  ManageProductScreen(
+        product: args as ProductsModel),
 
     addProductRoute:  (context, _) =>const AddProductScreen(),
     chooseUserType:  (context, _) =>const ChooseUserType(),

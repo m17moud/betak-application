@@ -5,6 +5,13 @@ import 'package:betak/features/categorie_products/data/repositories/products_rep
 import 'package:betak/features/categorie_products/domain/repositories/product_repository.dart';
 import 'package:betak/features/categorie_products/domain/usecases/products_usecase.dart';
 import 'package:betak/features/categorie_products/presentation/cubit/categorie_products_cubit.dart';
+import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+import 'package:betak/features/update_product/data/datasources/manage_product_remote_datasource.dart';
+import 'package:betak/features/update_product/data/repositories/manage_product_repository_impl.dart';
+import 'package:betak/features/update_product/domain/repositories/manage_product_repository.dart';
+import 'package:betak/features/update_product/domain/usecases/delete_product_usecase.dart';
+import 'package:betak/features/update_product/domain/usecases/update_product_usecase.dart';
+import 'package:betak/features/update_product/presentation/cubit/manage_product_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -91,7 +98,10 @@ Future<void> init() async {
 sl.registerLazySingleton<AddProductRemoteDatasource>(
     () => AddProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
-
+// update product
+  sl.registerLazySingleton<ManageProductRemoteDatasource>(
+        () => ManageProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
 
   sl.registerLazySingleton<ProductsRemoteDataSource>(
         () => ProductsRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
@@ -141,6 +151,11 @@ sl.registerLazySingleton<AddProductRemoteDatasource>(
   sl.registerLazySingleton<AddProductRepository>(
     () => AddProductRepositoryImpl(addProductRemoteDatasource: sl(), networkInfo: sl()),
   );
+
+  // update product
+  sl.registerLazySingleton<ManageProductRepository>(
+        () => ManageProductRepositoryImpl(manageProductRemoteDatasource: sl(), networkInfo: sl()),
+  );
   //! Use cases
   //client
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -159,6 +174,11 @@ sl.registerLazySingleton<AddProductRemoteDatasource>(
 sl.registerLazySingleton(() => AddProductUsecase(addProductRepository: sl()));
 
   sl.registerLazySingleton(() => ProductsUsecase(sl()));
+  // update product
+
+  sl.registerLazySingleton(() => UpdateProductUsecase(manageProductRepository: sl()));
+  sl.registerLazySingleton(() => DeleteProductUsecase(manageProductRepository: sl()));
+
 
 
 
@@ -183,5 +203,12 @@ sl.registerLazySingleton(() => AddProductUsecase(addProductRepository: sl()));
   );
   sl.registerFactory(
         () => CategorieProductsCubit(productsUsecase: sl()),
+  );
+  sl.registerFactory(
+        () => MerchantProductsCubit(productsUsecase: sl()),
+  );
+
+  sl.registerFactory(
+        () => ManageProductCubit(deleteProductUsecase:sl(),updateProductUsecase: sl()),
   );
 }

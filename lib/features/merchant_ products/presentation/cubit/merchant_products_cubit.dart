@@ -1,39 +1,41 @@
-import '../../data/models/products_model.dart';
-import '../../domain/usecases/products_usecase.dart';
+import 'package:betak/features/categorie_products/data/models/products_model.dart';
+import 'package:betak/features/categorie_products/domain/usecases/products_usecase.dart';
+
 
 import '../../../../core/api/end_ponits.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 
-part 'categorie_products_state.dart';
+part 'merchant_products_state.dart';
 
-class CategorieProductsCubit extends Cubit<CategorieProductsState> {
+class MerchantProductsCubit extends Cubit<MerchantProductsState> {
   final ProductsUsecase productsUsecase;
 
   // Store all products for search functionality
   List<ProductsModel> allProducts = [];
 
-  CategorieProductsCubit({required this.productsUsecase})
-      : super(CategorieProductsInitial());
+  MerchantProductsCubit({required this.productsUsecase})
+      : super(MerchantProductsInitial());
 
-  Future<void> getProducts(String depID) async {
-    emit(CategorieProductsLoading());
+  Future<void> getProducts(String merchantID) async {
+    emit(MerchantProductsLoading());
     final failureOrLogin = await productsUsecase.call(
       Params(
+        idType: "seller_id",
         pkey: ApiConstants.selectProductsPkey,
-        depID: depID,
-        idType: "depr_id"
+        depID: merchantID,
       ),
     );
 
     failureOrLogin.fold(
           (failure) {
-        emit(CategorieProductsError(message: failure.message));
+        emit(MerchantProductsError(message: failure.message));
       },
           (departmentProducts) {
-        allProducts = departmentProducts; // Store all products
-        emit(CategorieProductsSuccess(departmentProducts: departmentProducts));
+        allProducts = departmentProducts;
+// Store all products
+        emit(MerchantProductsSuccess(departmentProducts: departmentProducts));
       },
     );
   }
@@ -42,16 +44,16 @@ class CategorieProductsCubit extends Cubit<CategorieProductsState> {
   void searchProducts(String query) {
     if (query.isEmpty) {
       // If the query is empty, show all products again
-      emit(CategorieProductsSuccess(departmentProducts: allProducts));
+      emit(MerchantProductsSuccess(departmentProducts: allProducts));
     } else {
       final filteredProducts = allProducts
           .where((product) => product.pname!.toLowerCase().contains(query.toLowerCase()))
           .toList();
       if (filteredProducts.isEmpty) {
-        emit(CategorieProductsNoResults());
+        emit(MerchantProductsNoResults());
       } else {
         // If products are found, emit the filtered products
-        emit(CategorieProductsSuccess(departmentProducts: filteredProducts));
+        emit(MerchantProductsSuccess(departmentProducts: filteredProducts));
       }
     }
   }

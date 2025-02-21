@@ -13,14 +13,15 @@ class ProductsUsecase implements UseCase<List <ProductsModel>, Params> {
   late Params params;
   @override
   Future<Either<Failure,List <ProductsModel> >> call(params) async {
-    return await repository.getProducts(params.pkey,params.depID);
+    return await repository.getProducts(params.pkey,params.depID,params.idType);
     
   }
 }
 class Params extends Equatable {
   final String pkey;
   final String depID;
-  const Params({required this.pkey, required this.depID});
+  final String idType;
+  const Params({required this.pkey, required this.depID,required this.idType});
   @override
   List<Object?> get props => throw UnimplementedError();
 }

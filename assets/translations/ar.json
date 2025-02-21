@@ -79,5 +79,18 @@
     "successAddProduct": "تم اضافة المنتج",
     "errorAddProduct": "خطأ في إضافة المنتج يرجى المحاولة مرة أخرى",
     "mustAddImage": "يجب اضافة صورة",
-    "errorSignUpAgain": "حدث خطأ يرجى اعادة تسجيل الدخول مرة أخرى"
+    "errorSignUpAgain": "حدث خطأ يرجى اعادة تسجيل الدخول مرة أخرى",
+    "cancel": "إلغاء",
+    "updateProduct": " تعديل المنتج",
+    "successUpdateProduct": "تم تعديل المنتج" ,
+    "errorUpdateProduct": "خطأ في تعديل المنتج يرجى المحاولة مرة أخرى",
+    "deleteProduct": " حذف المنتج",
+    "successDeleteProduct": "تم حذف المنتج" ,
+    "errorDeleteProduct": "خطأ في حذف المنتج يرجى المحاولة مرة أخرى",
+    "deleteWarning": "هل أنت متأكد أنك تريد حذف هذا المنتج؟",
+    "addProduct": "إضافة منتج",
+    "logout": "تسجيل الخروج",
+    "logoutError": "خطأ في تسجيل الخروج يرجى المحاولة مرة أخرى",
+    "myProducts": "منتجاتي",
+    "mainPage": "الرئيسية"
 }
