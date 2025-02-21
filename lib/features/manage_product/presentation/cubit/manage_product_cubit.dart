@@ -1,6 +1,6 @@
 
 
-import 'package:betak/features/update_product/domain/usecases/delete_product_usecase.dart';
+import 'package:betak/features/manage_product/domain/usecases/delete_product_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

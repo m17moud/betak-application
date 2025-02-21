@@ -1,4 +1,5 @@
-import 'package:betak/features/update_product/presentation/pages/manage_product_screen.dart';
+
+import 'package:betak/features/manage_product/presentation/pages/manage_product_screen.dart';
 
 import '../../features/categorie_products/data/models/products_model.dart';
 import '../../features/categorie_products/presentation/views/categorie_products_view.dart';

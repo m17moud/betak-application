@@ -1,4 +1,4 @@
-import 'package:betak/features/update_product/domain/repositories/manage_product_repository.dart';
+import 'package:betak/features/manage_product/domain/repositories/manage_product_repository.dart';
 
 import '../datasources/manage_product_remote_datasource.dart';
 import 'package:dartz/dartz.dart';

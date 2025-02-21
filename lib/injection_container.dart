@@ -5,13 +5,14 @@ import 'package:betak/features/categorie_products/data/repositories/products_rep
 import 'package:betak/features/categorie_products/domain/repositories/product_repository.dart';
 import 'package:betak/features/categorie_products/domain/usecases/products_usecase.dart';
 import 'package:betak/features/categorie_products/presentation/cubit/categorie_products_cubit.dart';
+import 'package:betak/features/manage_product/data/datasources/manage_product_remote_datasource.dart';
+import 'package:betak/features/manage_product/data/repositories/manage_product_repository_impl.dart';
+import 'package:betak/features/manage_product/domain/repositories/manage_product_repository.dart';
+import 'package:betak/features/manage_product/domain/usecases/delete_product_usecase.dart';
+import 'package:betak/features/manage_product/domain/usecases/update_product_usecase.dart';
+import 'package:betak/features/manage_product/presentation/cubit/manage_product_cubit.dart';
 import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
-import 'package:betak/features/update_product/data/datasources/manage_product_remote_datasource.dart';
-import 'package:betak/features/update_product/data/repositories/manage_product_repository_impl.dart';
-import 'package:betak/features/update_product/domain/repositories/manage_product_repository.dart';
-import 'package:betak/features/update_product/domain/usecases/delete_product_usecase.dart';
-import 'package:betak/features/update_product/domain/usecases/update_product_usecase.dart';
-import 'package:betak/features/update_product/presentation/cubit/manage_product_cubit.dart';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
