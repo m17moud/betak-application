@@ -178,6 +178,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   hint: AppStrings.enterProductName.tr(),
                                   validator: validateProductName,
                                   icon: Icons.shopping_bag_outlined,
+
                                 ),
                                 CustomTitleText(text: AppStrings.price.tr()),
                                 CustomTextField(

@@ -1,8 +1,12 @@
-// ignore_for_file: use_build_context_synchronously
+
 
 import 'package:betak/core/utils/routes_manager.dart';
+import 'package:betak/core/utils/string_manager.dart';
 import 'package:betak/core/utils/styles.dart';
 import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+import 'package:betak/features/merchant_%20products/presentation/views/merchant_products_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,11 +21,16 @@ class HomeMerchantView extends StatefulWidget {
   const HomeMerchantView({super.key});
 
   @override
-  State<HomeMerchantView> createState() => _HomeViewState();
+  State<HomeMerchantView> createState() => _HomeMerchantViewState();
 }
 
-class _HomeViewState extends State<HomeMerchantView> {
+class _HomeMerchantViewState extends State<HomeMerchantView> {
   int _selectedIndex = 0;
+
+  final List<Widget> _screens = const [
+    HomeMerchantViewBody(),
+    MerchantProductsViewBody(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,116 +40,94 @@ class _HomeViewState extends State<HomeMerchantView> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double iconSize = screenWidth > 400 ? 30 : 22;
-    double labelFontSize = screenWidth > 400 ? 18 : 16;
-
-    return BlocProvider(
-      create: (context) => sl<HomeCubit>(),
-      child: BlocProvider(
-        create: (context) => sl<MerchantLoginCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => sl<HomeCubit>()),
+        BlocProvider(create: (context) => sl<MerchantLoginCubit>()),
+        BlocProvider(create: (context) => sl<MerchantProductsCubit>()),
+      ],
+      child: BlocListener<MerchantLoginCubit, MerchantLoginState>(
+        listener: (context, state) {
+          if (state is LoggedOut) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.chooseUserType,
+                  (route) => false,
+            );
+          } else if (state is LoginError) {
+            ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+              content: Text(AppStrings.logoutError.tr()),
+            ));
+          }
+        },
         child: BlocBuilder<MerchantLoginCubit, MerchantLoginState>(
           builder: (context, state) {
             return Scaffold(
-              floatingActionButton: _selectedIndex == 0
-                  ? FloatingActionButton.extended(
-                      backgroundColor: Styles.blueSky,
-                      label: const Text(
-                        'تسجيل الخروج',
-                        style: TextStyle(
-                            color: ColorManager.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      icon: const Icon(
-                        Icons.logout,
-                        color: ColorManager.white,
-                      ),
-                      onPressed: () async {
-                        await context.read<MerchantLoginCubit>().logoutUser();
-                        if (state is LoggedOut) {
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            Routes.chooseUserType,
-                            (route) => false,
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                              content: Text(
-                                  "خطأ في تسجيل الخروج يرجى المحاولة مرة أخرى")));
-                        }
-                      },
-                    )
-                  : FloatingActionButton.extended(
-                      backgroundColor: Styles.blueSky,
-                      label: const Text(
-                        'إضافة منتج',
-                        style: TextStyle(
-                            color: ColorManager.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      icon: const Icon(
-                        Icons.add,
-                        color: ColorManager.white,
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.addProductRoute);
-                      },
-                    ),
+              floatingActionButton: _buildFloatingActionButton(context),
               floatingActionButtonLocation: _selectedIndex == 1
                   ? FloatingActionButtonLocation.startFloat
                   : FloatingActionButtonLocation.endFloat,
               backgroundColor: ColorManager.white,
-              body: _selectedIndex == 0
-                  ? const HomeMerchantViewBody()
-                  : const ProductsScreen(),
-              bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: ColorManager.lightGrey,
-                currentIndex: _selectedIndex,
-                onTap: _onItemTapped,
-                selectedItemColor: Styles.blueSky,
-                selectedFontSize: labelFontSize,
-                unselectedFontSize: labelFontSize - 2,
-                type: BottomNavigationBarType.fixed,
-                showSelectedLabels: true,
-                showUnselectedLabels: true,
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      FontAwesomeIcons.houseChimney,
-                      size: _selectedIndex == 0 ? iconSize + 4 : iconSize,
-                      color: _selectedIndex == 0
-                          ? Styles.blueSky
-                          : Styles.flyByNight,
-                    ),
-                    label: 'الرئيسية',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.category_outlined,
-                      size: _selectedIndex == 1 ? iconSize + 4 : iconSize,
-                      color: _selectedIndex == 1
-                          ? Styles.blueSky
-                          : Styles.flyByNight,
-                    ),
-                    label: 'منتجاتي',
-                  ),
-                ],
+              body: IndexedStack(
+                index: _selectedIndex,
+                children: _screens,
               ),
+              bottomNavigationBar: _buildBottomNavigationBar(),
             );
           },
         ),
       ),
     );
   }
-}
 
-class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({super.key});
+  Widget _buildFloatingActionButton(BuildContext context) {
+    return FloatingActionButton.extended(
+      backgroundColor: Styles.blueSky,
+      label: Text(
+        _selectedIndex == 0 ? AppStrings.logout.tr() : AppStrings.addProduct.tr(),
+        style: const TextStyle(
+            color: ColorManager.white, fontWeight: FontWeight.bold),
+      ),
+      icon: Icon(
+        _selectedIndex == 0 ? Icons.logout : Icons.add,
+        color: ColorManager.white,
+      ),
+      onPressed: () async {
+        if (_selectedIndex == 0) {
+          await context.read<MerchantLoginCubit>().logoutUser();
+        } else {
+          Navigator.pushNamed(context, Routes.addProductRoute);
+        }
+      },
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Products Screen'),
+  Widget _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      backgroundColor: ColorManager.lightGrey,
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+      selectedItemColor: Styles.blueSky,
+      selectedFontSize: 16,
+      unselectedFontSize: 14,
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      items: [
+        _buildNavItem(FontAwesomeIcons.houseChimney, AppStrings.mainPage.tr(), 0),
+        _buildNavItem(Icons.category_outlined, AppStrings.myProducts.tr(), 1),
+      ],
+    );
+  }
+
+  BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
+    return BottomNavigationBarItem(
+      icon: Icon(
+        icon,
+        size: _selectedIndex == index ? 34 : 26,
+        color: _selectedIndex == index ? Styles.blueSky : Styles.flyByNight,
+      ),
+      label: label,
     );
   }
 }

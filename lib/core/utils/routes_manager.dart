@@ -1,3 +1,6 @@
+
+import 'package:betak/features/manage_product/presentation/pages/manage_product_screen.dart';
+
 import '../../features/category_products/data/models/products_model.dart';
 import '../../features/category_products/presentation/views/category_products_view.dart';
 import '../../features/home/data/models/home_department_response_model.dart';
@@ -39,6 +42,8 @@ class Routes {
   static const String clientProductRoute = "/client_product_view";
   static const String merchantProductRoute = "/merchant_product_view";
   static const String addProductRoute = "/add_product_screen";
+  static const String updateProductRoute = "/manage_product_screen";
+
 
   // static const String instructionsRoute = "/iInstructionsScreen";
 
@@ -57,6 +62,8 @@ class Routes {
         productsModel: args as ProductsModel),
  merchantProductRoute: (context, args) =>  MerchantProductView(
         productsModel: args as ProductsModel),
+    updateProductRoute: (context, args) =>  ManageProductScreen(
+        product: args as ProductsModel),
     addProductRoute:  (context, _) =>const AddProductScreen(),
     chooseUserType:  (context, _) =>const ChooseUserType(),
   };

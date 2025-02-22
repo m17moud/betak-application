@@ -33,6 +33,8 @@ class AppStrings {
   static const String enterYourFacebook= "enterYourFacebook";
   static const String chooseCategory = "chooseCategory";
   static const String mustChooseCategory = "mustChooseCategory";
+  static const String mainPage = "mainPage";
+
 
 
 // text validation
@@ -70,6 +72,20 @@ class AppStrings {
   static const String successAddProduct="successAddProduct";
   static const String errorAddProduct="errorAddProduct";
   static const String mustAddImage="mustAddImage";
+  static const String addProduct = "addProduct";
+
+
+  // update product
+  static const String updateProduct = "updateProduct";
+  static const String successUpdateProduct="successUpdateProduct";
+  static const String errorUpdateProduct="errorUpdateProduct";
+
+  // Delete product
+  static const String deleteProduct = "deleteProduct";
+  static const String successDeleteProduct="successDeleteProduct";
+  static const String errorDeleteProduct="errorDeleteProduct";
+  static const String deleteWarning="deleteWarning";
+
 
   //errors
   static const String locGeneralError = "general_error";
@@ -94,7 +110,12 @@ class AppStrings {
   //login errors
   static const String locLoginError = "login_error";
   static const String locLoginErrorMessage = "login_error_message";
-  
+  //logout
+  static const String logout = "logout";
+  static const String logoutError = "logoutError";
+
+
+
   //sign up
   static const String successSignup = "successSignup";
   static const String verifyEmailMessage = "verifyEmailMessage";
@@ -111,11 +132,14 @@ class AppStrings {
   static const String continueText ="continueText";
   static const String success ="success";
   // products
+  static const String myProducts = "myProducts";
   static const String noProductsFound = "noProductsFound";
   static const String searchAboutProduct = "searchAboutProduct";
   static const String emptySearchHistory = "emptySearchHistory";
   static const String unknown = "unknown";
   static const String egp = "egp";
+  static const String cancel = "cancel";
+
 
 
 

@@ -5,6 +5,14 @@ import 'package:betak/features/category_products/data/repositories/products_repo
 import 'package:betak/features/category_products/domain/repositories/product_repository.dart';
 import 'package:betak/features/category_products/domain/usecases/products_usecase.dart';
 import 'package:betak/features/category_products/presentation/cubit/category_products_cubit.dart';
+import 'package:betak/features/manage_product/data/datasources/manage_product_remote_datasource.dart';
+import 'package:betak/features/manage_product/data/repositories/manage_product_repository_impl.dart';
+import 'package:betak/features/manage_product/domain/repositories/manage_product_repository.dart';
+import 'package:betak/features/manage_product/domain/usecases/delete_product_usecase.dart';
+import 'package:betak/features/manage_product/domain/usecases/update_product_usecase.dart';
+import 'package:betak/features/manage_product/presentation/cubit/manage_product_cubit.dart';
+import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -46,11 +54,20 @@ import 'features/auth_for_merchants/sign_up/data/repositories/merchant_signup_re
 import 'features/auth_for_merchants/sign_up/domain/repositories/merchant_signup_repository.dart';
 import 'features/auth_for_merchants/sign_up/domain/usecases/add_merchant_usecase.dart';
 import 'features/auth_for_merchants/sign_up/presentation/cubit/merchant_sign_up_cubit.dart';
+import 'features/category_products/data/datasources/products_remote_data_source.dart';
+import 'features/category_products/data/repositories/products_repository_impl.dart';
+import 'features/category_products/domain/repositories/product_repository.dart';
+import 'features/category_products/domain/usecases/products_usecase.dart';
+import 'features/category_products/presentation/cubit/category_products_cubit.dart';
 import 'features/home/data/datasources/home_department_remote_data_source.dart';
 import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/repositories/home_department_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
+import 'features/manage_product/domain/usecases/delete_product_usecase.dart';
+import 'features/manage_product/domain/usecases/update_product_usecase.dart';
+import 'features/manage_product/presentation/cubit/manage_product_cubit.dart';
+import 'features/merchant_ products/presentation/cubit/merchant_products_cubit.dart';
 
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -95,6 +112,10 @@ Future<void> init() async {
 // add product
   sl.registerLazySingleton<AddProductRemoteDatasource>(
     () => AddProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
+// update product
+  sl.registerLazySingleton<ManageProductRemoteDatasource>(
+        () => ManageProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
   sl.registerLazySingleton<ProductsRemoteDataSource>(
@@ -165,6 +186,11 @@ Future<void> init() async {
     ),
   );
 
+  // update product
+  sl.registerLazySingleton<ManageProductRepository>(
+        () => ManageProductRepositoryImpl(manageProductRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
   //! Use cases
   //client
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -183,9 +209,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddProductUsecase(addProductRepository: sl()));
 
   sl.registerLazySingleton(() => ProductsUsecase(sl()));
+  // update product
 
-// add like
-  sl.registerLazySingleton(() => AddLikeUsecase(addLikeRepository: sl()));
+  sl.registerLazySingleton(() => UpdateProductUsecase(manageProductRepository: sl()));
+  sl.registerLazySingleton(() => DeleteProductUsecase(manageProductRepository: sl()));
+
+
+
 
   //! Cubits
   sl.registerFactory(
@@ -207,9 +237,13 @@ Future<void> init() async {
     () => AddProductCubit(addProductUsecase: sl()),
   );
   sl.registerFactory(
-    () => CategoryProductsCubit(productsUsecase: sl()),
+        () => CategorieProductsCubit(productsUsecase: sl()),
   );
   sl.registerFactory(
-    () => AddLikeCubit(addLikeUsecase: sl()),
+        () => MerchantProductsCubit(productsUsecase: sl()),
+  );
+
+  sl.registerFactory(
+        () => ManageProductCubit(deleteProductUsecase:sl(),updateProductUsecase: sl()),
   );
 }

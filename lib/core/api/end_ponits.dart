@@ -2,6 +2,8 @@ class ApiConstants {
   //api urls
   static const String baseUrl = "https://baiytak.com/";
   static const String pKey = "pkey";
+  static const String tp = "tp";
+
 
   static const String clientSignUp = "addCustomer.php";
   static const String clientSignUpPKey =
@@ -29,6 +31,20 @@ class ApiConstants {
   static const String selectProducts = "products.php";
   static const String selectProductsPkey =
       "_ZRFTUv09aUHSTol4r0Dp28PGcd8FsnDrs076u1Sr8s=";
+
+
+  static const String updateProducts = "updateData.php";
+  static const String updateProductsPkey =
+      "zlNfUI7_2ywfYcwy31cQHeTupyXtjUY9N3G6wAXwKmc=";
+  static const String updateProductsTP =
+      "wBBetRCZ1_-shJzRTPyQ9tAPs6PcynDpnZLMoTrI0CM=";
+
+  static const String deleteProducts = "delete.php";
+  static const String deleteProductsPkey =
+      "G7ZtPfW6ukrICE8DWauVfq4gt560lSfmF-qMluM71pw=";
+  static const String deleteProductsTP =
+      "09iLwSpUHJKh03w8PpU-csDFLAEL4Zi1j3scr01pPsZCuc49J41wF3b4dy9nkctp";
+
 
   static const String addLike = "Like.php";
   static const String addLikePkey =

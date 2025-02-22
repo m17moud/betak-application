@@ -21,12 +21,12 @@ class ProductsRepositoryImpl extends ProductsRepository {
   @override
   Future<Either<Failure, List<ProductsModel>>> getProducts(
      String pkey,
-     String depID,)
+     String depID,String idType)
   async {
     if (await _networkInfo.isConnected) {
       try {
         List<ProductsModel> productsData =
-        await _remote.getProducts(pkey,depID);
+        await _remote.getProducts(pkey,depID, idType);
         return Right(productsData);
       } on ServerException {
         return const Left(ServerFailure());
