@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:betak/features/add_like/domain/usecases/add_like_usecase.dart';
+import 'package:betak/features/add_like/presentation/cubit/add_like_cubit.dart';
 import 'package:betak/features/category_products/data/datasources/products_remote_data_source.dart';
 import 'package:betak/features/category_products/data/repositories/products_repository_impl.dart';
 import 'package:betak/features/category_products/domain/repositories/product_repository.dart';
@@ -12,7 +14,6 @@ import 'package:betak/features/manage_product/domain/usecases/delete_product_use
 import 'package:betak/features/manage_product/domain/usecases/update_product_usecase.dart';
 import 'package:betak/features/manage_product/presentation/cubit/manage_product_cubit.dart';
 import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
-
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -23,8 +24,6 @@ import 'core/api/dio_consumer.dart';
 import 'features/add_like/data/datasources/add_like_remote_dataSource.dart';
 import 'features/add_like/data/repositories/add_like_repository_impl.dart';
 import 'features/add_like/domain/repositories/add_like_repository.dart';
-import 'features/add_like/domain/usecases/add_like_usecase.dart';
-import 'features/add_like/presentation/cubit/add_like_cubit.dart';
 import 'features/add_product/data/datasources/add_product_remote_datasource.dart';
 import 'features/add_product/data/repositories/add_product_repository_impl.dart';
 import 'features/add_product/domain/repositories/add_product_repository.dart';
@@ -54,20 +53,11 @@ import 'features/auth_for_merchants/sign_up/data/repositories/merchant_signup_re
 import 'features/auth_for_merchants/sign_up/domain/repositories/merchant_signup_repository.dart';
 import 'features/auth_for_merchants/sign_up/domain/usecases/add_merchant_usecase.dart';
 import 'features/auth_for_merchants/sign_up/presentation/cubit/merchant_sign_up_cubit.dart';
-import 'features/category_products/data/datasources/products_remote_data_source.dart';
-import 'features/category_products/data/repositories/products_repository_impl.dart';
-import 'features/category_products/domain/repositories/product_repository.dart';
-import 'features/category_products/domain/usecases/products_usecase.dart';
-import 'features/category_products/presentation/cubit/category_products_cubit.dart';
 import 'features/home/data/datasources/home_department_remote_data_source.dart';
 import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/repositories/home_department_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
-import 'features/manage_product/domain/usecases/delete_product_usecase.dart';
-import 'features/manage_product/domain/usecases/update_product_usecase.dart';
-import 'features/manage_product/presentation/cubit/manage_product_cubit.dart';
-import 'features/merchant_ products/presentation/cubit/merchant_products_cubit.dart';
 
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -213,7 +203,9 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => UpdateProductUsecase(manageProductRepository: sl()));
   sl.registerLazySingleton(() => DeleteProductUsecase(manageProductRepository: sl()));
+// add like 
 
+  sl.registerLazySingleton(() => AddLikeUsecase(addLikeRepository: sl()));
 
 
 
@@ -237,12 +229,14 @@ Future<void> init() async {
     () => AddProductCubit(addProductUsecase: sl()),
   );
   sl.registerFactory(
-        () => CategorieProductsCubit(productsUsecase: sl()),
+        () => CategoryProductsCubit(productsUsecase: sl()),
   );
   sl.registerFactory(
         () => MerchantProductsCubit(productsUsecase: sl()),
   );
-
+  sl.registerFactory(
+        () => AddLikeCubit(addLikeUsecase: sl()),
+  );
   sl.registerFactory(
         () => ManageProductCubit(deleteProductUsecase:sl(),updateProductUsecase: sl()),
   );

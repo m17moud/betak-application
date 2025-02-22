@@ -1,10 +1,10 @@
-import '../datasources/add_product_remote_datasource.dart';
-import '../../domain/repositories/add_product_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/errors/exceptions.dart';
+import '../../domain/repositories/add_product_repository.dart';
+import '../datasources/add_product_remote_datasource.dart';
 
 class AddProductRepositoryImpl extends AddProductRepository {
   final NetworkInfo _networkInfo;

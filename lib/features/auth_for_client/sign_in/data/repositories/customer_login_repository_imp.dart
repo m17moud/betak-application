@@ -40,6 +40,8 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
         return const Left(LoginAuthFailure());
       } on UnAuthorizedException {
         return const Left(UnAuthorizedFailure());
+      } on ConflictException {
+        return const Left(ConflictFailure());
       }
     } else {
       return const Left(NetworkFailure());

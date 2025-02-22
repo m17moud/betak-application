@@ -1,5 +1,10 @@
+import '../../../../core/utils/string_manager.dart';
+import '../../../../core/utils/styles.dart';
+import '../../../auth_for_client/sign_in/presentation/cubit/customer_login_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../../../../core/utils/color_manager.dart';
 import '../../../../injection_container.dart';
@@ -18,9 +23,40 @@ class _HomeViewState extends State<HomeCleintView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<HomeCubit>(),
-      child: const Scaffold(
-        backgroundColor: ColorManager.white,
-        body: HomeCleintViewBody(),
+      child: BlocProvider(
+        create: (context) => sl<CustomerLoginCubit>(),
+        child: Scaffold(
+          backgroundColor: ColorManager.white,
+          body: const HomeCleintViewBody(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+          floatingActionButton: SpeedDial(
+            switchLabelPosition: false,
+            backgroundColor: Styles.blueSky,
+            animatedIcon: AnimatedIcons.menu_close,
+            animatedIconTheme: const IconThemeData(color: ColorManager.white),
+            overlayColor: ColorManager.black,
+            direction: SpeedDialDirection.right,
+            overlayOpacity: 0.4,
+            spaceBetweenChildren: 5,
+            children: [
+              // Logout button
+              SpeedDialChild(
+                child: const Icon(
+                  Icons.exit_to_app,
+                  color: ColorManager.white,
+                ),
+                label: AppStrings.logout.tr(),
+                labelStyle: Styles.styleBoldInriaSans16,
+                backgroundColor: ColorManager.error,
+                onTap: () async {
+                  await context.read<CustomerLoginCubit>().logoutUser();
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

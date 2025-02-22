@@ -1,21 +1,18 @@
-
-
-import 'package:betak/core/utils/routes_manager.dart';
-import 'package:betak/core/utils/string_manager.dart';
-import 'package:betak/core/utils/styles.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
-import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
-import 'package:betak/features/merchant_%20products/presentation/views/merchant_products_body.dart';
+import '../../../../core/utils/routes_manager.dart';
+import '../../../../core/utils/string_manager.dart';
+import '../../../../core/utils/styles.dart';
+import '../../../auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import '../../../merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+import '../../../merchant_%20products/presentation/views/merchant_products_body.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../core/utils/color_manager.dart';
 import '../../../../injection_container.dart';
 import '../cubit/home_cubit.dart';
 import '../widgets/home_merchant_view_body.dart';
-
 
 class HomeMerchantView extends StatefulWidget {
   const HomeMerchantView({super.key});
@@ -52,10 +49,10 @@ class _HomeMerchantViewState extends State<HomeMerchantView> {
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.chooseUserType,
-                  (route) => false,
+              (route) => false,
             );
           } else if (state is LoginError) {
-            ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(AppStrings.logoutError.tr()),
             ));
           }
@@ -63,10 +60,50 @@ class _HomeMerchantViewState extends State<HomeMerchantView> {
         child: BlocBuilder<MerchantLoginCubit, MerchantLoginState>(
           builder: (context, state) {
             return Scaffold(
-              floatingActionButton: _buildFloatingActionButton(context),
-              floatingActionButtonLocation: _selectedIndex == 1
-                  ? FloatingActionButtonLocation.startFloat
-                  : FloatingActionButtonLocation.endFloat,
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.endFloat,
+              floatingActionButton: SpeedDial(
+                switchLabelPosition: false,
+                backgroundColor: Styles.blueSky,
+                animatedIcon: AnimatedIcons.menu_close,
+                animatedIconTheme:
+                    const IconThemeData(color: ColorManager.white),
+                overlayColor: ColorManager.black,
+                direction: SpeedDialDirection.right,
+                overlayOpacity: 0.4,
+                spaceBetweenChildren: 5,
+                children: [
+                  SpeedDialChild(
+                    child: const Icon(
+                      Icons.add,
+                      color: ColorManager.white,
+                    ),
+                    label: AppStrings.addProduct.tr(),
+                    labelStyle: Styles.styleBoldInriaSans16,
+                    backgroundColor: ColorManager.green,
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.addProductRoute);
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                  // Logout button
+                  SpeedDialChild(
+                    child: const Icon(
+                      Icons.exit_to_app,
+                      color: ColorManager.white,
+                    ),
+                    label: AppStrings.logout.tr(),
+                    labelStyle: Styles.styleBoldInriaSans16,
+                    backgroundColor: ColorManager.error,
+                    onTap: () async {
+                      await context.read<MerchantLoginCubit>().logoutUser();
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                ],
+              ),
               backgroundColor: ColorManager.white,
               body: IndexedStack(
                 index: _selectedIndex,
@@ -77,28 +114,6 @@ class _HomeMerchantViewState extends State<HomeMerchantView> {
           },
         ),
       ),
-    );
-  }
-
-  Widget _buildFloatingActionButton(BuildContext context) {
-    return FloatingActionButton.extended(
-      backgroundColor: Styles.blueSky,
-      label: Text(
-        _selectedIndex == 0 ? AppStrings.logout.tr() : AppStrings.addProduct.tr(),
-        style: const TextStyle(
-            color: ColorManager.white, fontWeight: FontWeight.bold),
-      ),
-      icon: Icon(
-        _selectedIndex == 0 ? Icons.logout : Icons.add,
-        color: ColorManager.white,
-      ),
-      onPressed: () async {
-        if (_selectedIndex == 0) {
-          await context.read<MerchantLoginCubit>().logoutUser();
-        } else {
-          Navigator.pushNamed(context, Routes.addProductRoute);
-        }
-      },
     );
   }
 
@@ -114,13 +129,15 @@ class _HomeMerchantViewState extends State<HomeMerchantView> {
       showSelectedLabels: true,
       showUnselectedLabels: true,
       items: [
-        _buildNavItem(FontAwesomeIcons.houseChimney, AppStrings.mainPage.tr(), 0),
+        _buildNavItem(
+            FontAwesomeIcons.houseChimney, AppStrings.mainPage.tr(), 0),
         _buildNavItem(Icons.category_outlined, AppStrings.myProducts.tr(), 1),
       ],
     );
   }
 
-  BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
+  BottomNavigationBarItem _buildNavItem(
+      IconData icon, String label, int index) {
     return BottomNavigationBarItem(
       icon: Icon(
         icon,

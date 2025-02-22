@@ -1,12 +1,13 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/string_manager.dart';
 import '../../../data/models/products_model.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
 
 class Products extends StatefulWidget {
   const Products({

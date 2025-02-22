@@ -1,6 +1,6 @@
 
-import 'package:betak/core/utils/color_manager.dart';
-import 'package:betak/core/utils/string_manager.dart';
+import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../category_products/data/models/products_model.dart';

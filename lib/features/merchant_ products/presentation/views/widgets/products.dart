@@ -1,5 +1,4 @@
-import 'package:betak/core/utils/routes_manager.dart';
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
+import '../../../../../core/utils/routes_manager.dart';
 
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/string_manager.dart';
@@ -7,6 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../../category_products/data/models/products_model.dart';
 
 class Products extends StatefulWidget {
   const Products({

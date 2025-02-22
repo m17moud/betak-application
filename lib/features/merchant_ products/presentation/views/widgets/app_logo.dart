@@ -1,7 +1,6 @@
-import 'package:animate_do/animate_do.dart';
-import '../../../../../core/utils/styles.dart';
-import 'custom_search_text_field.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/styles.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({

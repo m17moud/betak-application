@@ -1,7 +1,8 @@
 
-import '../../../../../core/utils/string_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
 
 class NoProducts extends StatelessWidget {

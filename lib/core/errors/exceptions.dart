@@ -2,9 +2,6 @@ import 'package:dio/dio.dart';
 
 import 'error_model.dart';
 
-
-
-
 class LoginAuthException implements Exception {}
 
 class CacheException implements Exception {}
@@ -17,22 +14,30 @@ class LocationServiceIsDisabledException implements Exception {}
 class LocationPermissionDeniedException implements Exception {}
 
 class LocationPermissionDeniedForeverException implements Exception {}
+
 class ServerException implements Exception {
   final ErrorModel errModel;
 
   ServerException({required this.errModel});
 }
+
+class ConflictException implements Exception {
+  final ErrorModel errModel;
+
+  ConflictException({required this.errModel});
+}
+
 class ServerLoginAuthException implements Exception {
   final ErrorModel errModel;
 
   ServerLoginAuthException({required this.errModel});
 }
+
 class UnAuthorizedException implements Exception {
   final ErrorModel errModel;
 
   UnAuthorizedException({required this.errModel});
 }
-
 
 void handleDioExceptions(DioException e) {
   switch (e.type) {
@@ -64,10 +69,13 @@ void handleDioExceptions(DioException e) {
         case 404: //not found
           throw ServerLoginAuthException(
               errModel: ErrorModel.fromJson(e.response!.data));
-        case 409: //cofficient
-          throw ServerException(
+        case 409: //conflict
+          throw ConflictException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 422: //  Unprocessable Entity
+          throw ServerException(
+              errModel: ErrorModel.fromJson(e.response!.data));
+        case 500: //  Unprocessable Entity
           throw ServerException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 504: // Server exception

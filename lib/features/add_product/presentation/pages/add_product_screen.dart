@@ -1,5 +1,4 @@
 // ignore_for_file: library_private_types_in_public_api
-
 import 'dart:io';
 
 import 'package:betak/core/widgets/error_dialog.dart';
@@ -38,11 +37,24 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _pickImages() async {
+    if (images.length >= 2) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppStrings.cantAddMoreThan2Images.tr(),
+            style:
+                Styles.styleBoldInriaSans16.copyWith(color: ColorManager.white),
+          ),
+          backgroundColor: ColorManager.error,
+        ),
+      );
+      return;
+    }
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
       images.addAll(pickedFiles);
     });
-    }
+  }
 
   void _removeImage(int index) {
     setState(() {
@@ -83,7 +95,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           context: context,
                           message: AppStrings.errorAddProduct,
                           onPressed: () {
-                               Navigator.pushNamedAndRemoveUntil(
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
                               Routes.homeMerchantRoute,
                               (route) => false,
@@ -160,7 +172,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                         Icons.close,
                                                         size:
                                                             screenWidth * 0.05,
-                                                        color: ColorManager.white,
+                                                        color:
+                                                            ColorManager.white,
                                                       ),
                                                     ),
                                                   ),
@@ -178,7 +191,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   hint: AppStrings.enterProductName.tr(),
                                   validator: validateProductName,
                                   icon: Icons.shopping_bag_outlined,
-
                                 ),
                                 CustomTitleText(text: AppStrings.price.tr()),
                                 CustomTextField(
@@ -204,7 +216,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
-                                            content: Text(AppStrings.mustAddImage.tr()),
+                                            content: Text(
+                                                AppStrings.mustAddImage.tr()),
                                             backgroundColor: ColorManager.error,
                                           ),
                                         );
@@ -256,7 +269,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               );
             } else {
               return Center(
-                child: Text(AppStrings.errorSignUpAgain.tr()),
+                child: Text(AppStrings.errorLoginAgain.tr()),
               );
             }
           },

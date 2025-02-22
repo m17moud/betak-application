@@ -21,7 +21,7 @@
     "general_error": "حدث خطا ما",
     "try_again": "حاول مجددا",
     "server_error_message": "حدث خطأ ما في الخادم",
-    "unauthorized_error_message": "مستخدم غير مصرح به، يرجى المحاولة مرة أخرى",
+    "unauthorized_error_message": "يرجى التأكد من البريد الالكتروني و كلمة المرور و المحاولة مرة أخرى",
     "login_auth_error_message": "اسم المتسخدم او الرقم السري غير صحيح",
     "network_error_message": "يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى",
     "successSignup": "تم إنشاء الحساب بنجاح",
@@ -79,7 +79,7 @@
     "successAddProduct": "تم اضافة المنتج",
     "errorAddProduct": "خطأ في إضافة المنتج يرجى المحاولة مرة أخرى",
     "mustAddImage": "يجب اضافة صورة",
-    "errorSignUpAgain": "حدث خطأ يرجى اعادة تسجيل الدخول مرة أخرى",
+    "errorLoginAgain": "حدث خطأ يرجى اعادة تسجيل الدخول مرة أخرى",
     "cancel": "إلغاء",
     "updateProduct": " تعديل المنتج",
     "successUpdateProduct": "تم تعديل المنتج" ,
@@ -92,5 +92,8 @@
     "logout": "تسجيل الخروج",
     "logoutError": "خطأ في تسجيل الخروج يرجى المحاولة مرة أخرى",
     "myProducts": "منتجاتي",
-    "mainPage": "الرئيسية"
+    "mainPage": "الرئيسية",
+    "cantAddMoreThan2Images": "لا يمكن اضافة اكثر من صورتين",
+    "warning": "تحذير !",
+    "locConflictMessage": "لا يمكن تسجيل الدخول على أكثر من جهاز من فضلك سجل الخروج و أعد المحاولة"
 }

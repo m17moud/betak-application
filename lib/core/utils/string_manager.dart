@@ -57,7 +57,7 @@ class AppStrings {
   static const String categoriesError = "categoriesError";
   static const String productsError = "productsError";
   static const String tryAgain = "tryAgain";
-  static const String errorSignUpAgain = "errorSignUpAgain";
+  static const String errorLoginAgain = "errorLoginAgain";
 
 
 
@@ -101,6 +101,7 @@ class AppStrings {
   static const String locNetworkErrorTitle = "network_error_title";
   static const String locNetworkErrorDescription = "network_error_description";
   static const String locNetworkErrorMessage = "network_error_message";
+  static const String locConflictMessage = "locConflictMessage";
 
   //auth errors
   static const String locUnAuthorizedError = "unauthorized_error";
@@ -131,6 +132,7 @@ class AppStrings {
   static const String confirm = "confirm";
   static const String continueText ="continueText";
   static const String success ="success";
+  static const String warning="warning";
   // products
   static const String myProducts = "myProducts";
   static const String noProductsFound = "noProductsFound";
@@ -139,6 +141,7 @@ class AppStrings {
   static const String unknown = "unknown";
   static const String egp = "egp";
   static const String cancel = "cancel";
+  static const String cantAddMoreThan2Images = "cantAddMoreThan2Images";
 
 
 

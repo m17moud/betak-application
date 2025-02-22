@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
+import '../../../auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import '../../../category_products/data/models/products_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../core/utils/string_manager.dart';
 import '../../../../core/widgets/loading_error.dart';
@@ -14,12 +14,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/styles.dart';
 import '../../../../injection_container.dart';
 
-
 class MerchantProductsViewBody extends StatefulWidget {
   const MerchantProductsViewBody({super.key});
 
   @override
-  State<MerchantProductsViewBody> createState() => _MerchantProductsViewBodyState();
+  State<MerchantProductsViewBody> createState() =>
+      _MerchantProductsViewBodyState();
 }
 
 class _MerchantProductsViewBodyState extends State<MerchantProductsViewBody> {
@@ -38,32 +38,38 @@ class _MerchantProductsViewBodyState extends State<MerchantProductsViewBody> {
             return Column(
               children: [
                 FadeInDown(child: AppLogo(height: height, width: width)),
-          FadeInRight(
-          child: CategorieTitle(
-            departmentName: AppStrings.myProducts.tr(),
-            width: width,
-            height: height,
-          )),
+                FadeInRight(
+                    child: CategorieTitle(
+                  departmentName: AppStrings.myProducts.tr(),
+                  width: width,
+                  height: height,
+                )),
                 Expanded(
                   child: BlocProvider(
                     create: (context) => sl<MerchantProductsCubit>(),
-                    child: BlocBuilder<MerchantProductsCubit, MerchantProductsState>(
+                    child: BlocBuilder<MerchantProductsCubit,
+                        MerchantProductsState>(
                       builder: (context, state) {
                         if (state is MerchantProductsInitial) {
-                          context.read<MerchantProductsCubit>().getProducts(sellerData.SellerID!);
+                          context
+                              .read<MerchantProductsCubit>()
+                              .getProducts(sellerData.SellerID!);
                           return const Center(
-                            child: CircularProgressIndicator(color: Styles.blueSky),
+                            child: CircularProgressIndicator(
+                                color: Styles.blueSky),
                           );
                         }
 
                         if (state is MerchantProductsLoading) {
                           return const Center(
-                            child: CircularProgressIndicator(color: Styles.blueSky),
+                            child: CircularProgressIndicator(
+                                color: Styles.blueSky),
                           );
                         }
 
                         if (state is MerchantProductsSuccess) {
-                          List<ProductsModel> products = state.departmentProducts;
+                          List<ProductsModel> products =
+                              state.departmentProducts;
 
                           if (products.isEmpty) {
                             return FadeInUp(child: NoProducts(width: width));
@@ -84,7 +90,9 @@ class _MerchantProductsViewBodyState extends State<MerchantProductsViewBody> {
                               child: LoadingError(
                                   text: AppStrings.productsError,
                                   onPressed: () {
-                                    context.read<MerchantProductsCubit>().getProducts(sellerData.SellerID!);
+                                    context
+                                        .read<MerchantProductsCubit>()
+                                        .getProducts(sellerData.SellerID!);
                                   }),
                             ),
                           );
@@ -111,7 +119,7 @@ class _MerchantProductsViewBodyState extends State<MerchantProductsViewBody> {
             );
           } else {
             return Center(
-              child: Text(AppStrings.errorSignUpAgain.tr()),
+              child: Text(AppStrings.errorLoginAgain.tr()),
             );
           }
         },

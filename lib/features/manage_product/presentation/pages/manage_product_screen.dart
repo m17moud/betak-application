@@ -1,11 +1,9 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'dart:io';
 
-import 'package:betak/core/widgets/error_dialog.dart';
-import 'package:betak/core/widgets/loading_dialog.dart';
-import 'package:betak/core/widgets/success_dialog.dart';
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
+import '../../../../core/widgets/error_dialog.dart';
+import '../../../../core/widgets/loading_dialog.dart';
+import '../../../../core/widgets/success_dialog.dart';
+import '../../../../core/widgets/warning_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,16 +19,17 @@ import '../../../../core/widgets/custom_title_text.dart';
 import '../../../../core/widgets/text_form_validation.dart';
 import '../../../../injection_container.dart';
 import '../../../auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import '../../../category_products/data/models/products_model.dart';
 import '../cubit/manage_product_cubit.dart';
 
 class ManageProductScreen extends StatefulWidget {
-final  ProductsModel product ;
-  const ManageProductScreen({super.key,required this.product});
+  final ProductsModel product;
+  const ManageProductScreen({super.key, required this.product});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ManageProductScreen createState() => _ManageProductScreen();
 }
-
 
 class _ManageProductScreen extends State<ManageProductScreen> {
   late TextEditingController _nameController;
@@ -39,29 +38,43 @@ class _ManageProductScreen extends State<ManageProductScreen> {
   final ImagePicker _picker = ImagePicker();
   List<XFile> images = [];
   List<String> existingImages = [];
+  List<dynamic> allImages = [];
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-
-    // Initialize controllers with existing product data
     _nameController = TextEditingController(text: widget.product.pname);
     _priceController =
         TextEditingController(text: widget.product.pPrice?.toString() ?? '');
     _descriptionController =
         TextEditingController(text: widget.product.pdescribtion);
 
-    // Load existing images
     if (widget.product.images != null) {
       existingImages = List.from(widget.product.images!);
     }
+
+    allImages = [...existingImages];
   }
 
   Future<void> _pickImages() async {
+    if (images.length + existingImages.length >= 2) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppStrings.cantAddMoreThan2Images.tr(),
+            style:
+                Styles.styleBoldInriaSans16.copyWith(color: ColorManager.white),
+          ),
+          backgroundColor: ColorManager.error,
+        ),
+      );
+      return;
+    }
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
       images.addAll(pickedFiles);
+      allImages = [...existingImages, ...images];
     });
   }
 
@@ -72,6 +85,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
       } else {
         images.removeAt(index);
       }
+      allImages = [...existingImages, ...images];
     });
   }
 
@@ -112,7 +126,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
                             Routes.homeMerchantRoute,
-                                (route) => false,
+                            (route) => false,
                           );
                         },
                       );
@@ -128,12 +142,13 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               Routes.homeMerchantRoute,
-                                  (route) => false,
+                              (route) => false,
                             );
                           },
                         );
                       });
-                    }  if (state is DeleteProductLoading) {
+                    }
+                    if (state is DeleteProductLoading) {
                       return const LoadingDialog();
                     }
                     if (state is DeleteProductError) {
@@ -144,7 +159,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
                             Routes.homeMerchantRoute,
-                                (route) => false,
+                            (route) => false,
                           );
                         },
                       );
@@ -160,7 +175,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               Routes.homeMerchantRoute,
-                                  (route) => false,
+                              (route) => false,
                             );
                           },
                         );
@@ -180,7 +195,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                     child: CircleAvatar(
                                       radius: screenWidth * 0.2,
                                       backgroundColor:
-                                      ColorManager.textFormFillColor,
+                                          ColorManager.textFormFillColor,
                                       child: const Icon(
                                         Icons.camera_alt,
                                         size: 80,
@@ -190,32 +205,35 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                   ),
                                 ),
                                 SizedBox(height: screenHeight * 0.02),
-
-                                // Display existing images
-                                if (existingImages.isNotEmpty)
+                                if (allImages.isNotEmpty)
                                   SizedBox(
                                     height: screenHeight * 0.10,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: existingImages.length,
+                                      itemCount: allImages.length,
                                       itemBuilder: (context, index) {
                                         return Stack(
                                           children: [
                                             CircleAvatar(
                                               radius: screenWidth * 0.10,
-                                              backgroundImage:
-                                              NetworkImage(existingImages[index]),
+                                              backgroundImage: allImages[index]
+                                                      is String
+                                                  ? NetworkImage(
+                                                      allImages[index])
+                                                  : FileImage(File(
+                                                      allImages[index].path)),
                                             ),
                                             Positioned(
                                               top: 0,
                                               right: 0,
                                               child: GestureDetector(
-                                                onTap: () =>
-                                                    _removeImage(index, isExisting: true),
+                                                onTap: () => _removeImage(index,
+                                                    isExisting: allImages[index]
+                                                        is String),
                                                 child: CircleAvatar(
                                                   radius: screenWidth * 0.04,
                                                   backgroundColor:
-                                                  ColorManager.error,
+                                                      ColorManager.error,
                                                   child: Icon(
                                                     Icons.close,
                                                     size: screenWidth * 0.05,
@@ -229,54 +247,14 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                       },
                                     ),
                                   ),
-
-                                // Display newly added images
-                                if (images.isNotEmpty)
-                                  SizedBox(
-                                    height: screenHeight * 0.10,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: images.length,
-                                      itemBuilder: (context, index) {
-                                        return Stack(
-                                          children: [
-                                            CircleAvatar(
-                                              radius: screenWidth * 0.10,
-                                              backgroundImage: FileImage(
-                                                File(images[index].path),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              top: 0,
-                                              right: 0,
-                                              child: GestureDetector(
-                                                onTap: () => _removeImage(index),
-                                                child: CircleAvatar(
-                                                  radius: screenWidth * 0.04,
-                                                  backgroundColor:
-                                                  ColorManager.error,
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    size: screenWidth * 0.05,
-                                                    color: ColorManager.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  ),
-
-                                CustomTitleText(text: AppStrings.productName.tr()),
+                                CustomTitleText(
+                                    text: AppStrings.productName.tr()),
                                 CustomTextField(
                                   controller: _nameController,
                                   hint: AppStrings.enterProductName.tr(),
                                   validator: validateProductName,
                                   icon: Icons.shopping_bag_outlined,
                                 ),
-
                                 CustomTitleText(text: AppStrings.price.tr()),
                                 CustomTextField(
                                   controller: _priceController,
@@ -284,101 +262,97 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                   validator: validateProductPrice,
                                   icon: Icons.attach_money,
                                 ),
-
-                                CustomTitleText(text: AppStrings.description.tr()),
+                                CustomTitleText(
+                                    text: AppStrings.description.tr()),
                                 CustomTextField(
                                   controller: _descriptionController,
                                   maxLines: 4,
                                   hint: AppStrings.enterProductDescription.tr(),
                                   validator: validateProductDescription,
                                 ),
-
                                 SizedBox(height: screenHeight * 0.03),
-
                                 Center(
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      // Update Button
                                       CustomButton1(
                                         backgroundColor: Styles.blueSky,
                                         onPressed: () {
-                                          if (images.isEmpty && existingImages.isEmpty) {
-                                            ScaffoldMessenger.of(context).showSnackBar(
+                                          if (images.isEmpty &&
+                                              existingImages.isEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
                                               SnackBar(
-                                                content: Text(AppStrings.mustAddImage.tr()),
-                                                backgroundColor: ColorManager.error,
+                                                content: Text(AppStrings
+                                                    .mustAddImage
+                                                    .tr()),
+                                                backgroundColor:
+                                                    ColorManager.error,
                                               ),
                                             );
                                             return;
                                           }
 
                                           final name = _nameController.text;
-                                          final price = _priceController.text.trim();
-                                          final description = _descriptionController.text;
+                                          final price =
+                                              _priceController.text.trim();
+                                          final description =
+                                              _descriptionController.text;
 
-                                          if (_formKey.currentState?.validate() ?? false) {
-                                            context.read<ManageProductCubit>().updateProduct(
-                                              widget.product.id!,
-                                              name,
-                                              price,
-                                              sellerData.SellerID!,
-                                              description,
-                                              images,
-                                            );
+                                          if (_formKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            context
+                                                .read<ManageProductCubit>()
+                                                .updateProduct(
+                                                  widget.product.id!,
+                                                  name,
+                                                  price,
+                                                  sellerData.SellerID!,
+                                                  description,
+                                                  images,
+                                                );
                                           }
                                         },
                                         text: AppStrings.updateProduct.tr(),
-                                        textStyle: Styles.styleSemiBoldInter22.copyWith(color: ColorManager.white),
+                                        textStyle: Styles.styleSemiBoldInter22
+                                            .copyWith(
+                                                color: ColorManager.white),
                                         buttonWidth: screenWidth * 0.4,
                                         buttonHeight: screenHeight * 0.08,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
-
                                       CustomButton1(
                                         backgroundColor: ColorManager.error,
                                         onPressed: () {
-                                          final parentContext=context;
-
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: Text(AppStrings.confirm.tr()),
-                                              content: Text(AppStrings.deleteWarning.tr()),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () => Navigator.pop(context),
-                                                  child: Text(AppStrings.cancel.tr()),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-
-                                                    parentContext.read<ManageProductCubit>().deleteProduct(
-                                                      widget.product.id!,
-                                                      sellerData.SellerID!,
-                                                    );
-                                                  },
-                                                  child: Text(
-                                                    AppStrings.deleteProduct.tr(),
-                                                    style: TextStyle(color: ColorManager.error,),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          final parentContext = context;
+                                          WarningDialog.show(
+                                            context: parentContext,
+                                            message:
+                                                AppStrings.deleteWarning.tr(),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              parentContext
+                                                  .read<ManageProductCubit>()
+                                                  .deleteProduct(
+                                                    widget.product.id!,
+                                                    sellerData.SellerID!,
+                                                  );
+                                            },
                                           );
                                         },
                                         text: AppStrings.deleteProduct.tr(),
-                                        textStyle: Styles.styleSemiBoldInter22.copyWith(color: ColorManager.white),
+                                        textStyle: Styles.styleSemiBoldInter22
+                                            .copyWith(
+                                                color: ColorManager.white),
                                         buttonWidth: screenWidth * 0.4,
                                         buttonHeight: screenHeight * 0.08,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
-
                                     ],
                                   ),
                                 ),
-
                               ],
                             ),
                           ),

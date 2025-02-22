@@ -1,10 +1,9 @@
-import '../../../../core/utils/routes_manager.dart';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/styles.dart';
 
 class Categories extends StatelessWidget {

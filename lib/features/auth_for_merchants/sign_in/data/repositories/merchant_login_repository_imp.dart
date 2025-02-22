@@ -31,7 +31,8 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
   }) async {
     if (await _networkInfo.isConnected) {
       try {
-        MerchantLoginResponseModel merchantData = await _remote.login(pkey,loginemail,loginpassword);
+        MerchantLoginResponseModel merchantData =
+            await _remote.login(pkey, loginemail, loginpassword);
         await _local.storeMerchantData(merchantData);
         return Right(merchantData);
       } on ServerException {
@@ -40,6 +41,8 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
         return const Left(LoginAuthFailure());
       } on UnAuthorizedException {
         return const Left(UnAuthorizedFailure());
+      } on ConflictException {
+        return const Left(ConflictFailure());
       }
     } else {
       return const Left(NetworkFailure());
@@ -47,36 +50,29 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
   }
 
   Future<Either<Failure, void>> userLogout() async {
-
-
     if (await _networkInfo.isConnected) {
-
       try {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  const Left(ServerFailure());
+        return const Left(ServerFailure());
       }
     } else {
-
       return const Left(NetworkFailure());
     }
   }
+
   @override
   Future<Either<Failure, void>> MerchantLogout() async {
-
-
     if (await _networkInfo.isConnected) {
-
       try {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  const Left( ServerFailure());
+        return const Left(ServerFailure());
       }
     } else {
       return const Left(NetworkFailure());
     }
   }
-
 }

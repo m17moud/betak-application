@@ -1,10 +1,9 @@
-import '../../data/models/products_model.dart';
-import '../../domain/usecases/products_usecase.dart';
-
-import '../../../../core/api/end_ponits.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/api/end_ponits.dart';
+import '../../data/models/products_model.dart';
+import '../../domain/usecases/products_usecase.dart';
 
 part 'category_products_state.dart';
 

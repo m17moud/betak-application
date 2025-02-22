@@ -5,6 +5,7 @@ import 'package:betak/core/utils/string_manager.dart';
 import 'package:betak/core/utils/styles.dart';
 import 'package:betak/core/widgets/error_dialog.dart';
 import 'package:betak/features/add_like/presentation/cubit/add_like_cubit.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,7 +14,6 @@ import '../../../../injection_container.dart';
 import '../../../auth_for_client/sign_in/data/models/customer_login_response_model.dart';
 import '../../../auth_for_client/sign_in/presentation/cubit/customer_login_cubit.dart';
 import '../../../category_products/data/models/products_model.dart';
-import 'package:flutter/material.dart';
 import 'widgets/product_view_body.dart';
 
 class ClientProductView extends StatefulWidget {
@@ -49,7 +49,7 @@ class _ClientProductViewState extends State<ClientProductView> {
             // Handle logout scenario
             ErrorDialog.show(
               context: context,
-              message: AppStrings.errorSignUpAgain,
+              message: AppStrings.errorLoginAgain,
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,

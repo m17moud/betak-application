@@ -1,6 +1,6 @@
 
 
-import 'package:betak/features/manage_product/domain/usecases/delete_product_usecase.dart';
+import '../../domain/usecases/delete_product_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -43,7 +43,7 @@ class ManageProductCubit extends Cubit<ManageProductState> {
       'price': price,
       'uid': sid,
       'description': description,
-      'image': imageFiles, // Send the image files as part of the form data
+      'image[]': imageFiles, // Send the image files as part of the form data
     });
 
     emit(UpdateProductLoading());
@@ -60,14 +60,12 @@ class ManageProductCubit extends Cubit<ManageProductState> {
       final String pid,
       final String sid,
      ) async {
-    // Convert XFile to MultipartFile
 
-    // Add the converted files to FormData
     FormData formData = FormData.fromMap({
       ApiConstants.pKey: ApiConstants.deleteProductsPkey,
       ApiConstants.tp: ApiConstants.deleteProductsTP,
       'pid':pid,
-      'uid': sid, // Send the image files as part of the form data
+      'uid': sid, 
     });
 
     emit(DeleteProductLoading());

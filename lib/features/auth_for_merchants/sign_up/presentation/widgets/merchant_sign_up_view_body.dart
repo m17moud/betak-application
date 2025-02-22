@@ -1,24 +1,24 @@
-import '../../../../../core/utils/string_manager.dart';
-import '../../../../../core/widgets/loading_error.dart';
-import '../cubit/merchant_sign_up_cubit.dart';
-import '../../../../home/presentation/cubit/home_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/custom_title_text.dart';
-import '../../../../../core/widgets/loading_dialog.dart';
 import '../../../../../core/widgets/error_dialog.dart';
+import '../../../../../core/widgets/loading_dialog.dart';
+import '../../../../../core/widgets/loading_error.dart';
 import '../../../../../core/widgets/password_text_field.dart';
 import '../../../../../core/widgets/phone_text_field.dart';
 import '../../../../../core/widgets/success_dialog.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
 import '../../../../../generated/assets.dart';
+import '../../../../home/presentation/cubit/home_cubit.dart';
+import '../cubit/merchant_sign_up_cubit.dart';
 import 'category_list.dart';
 
 class MerchantSignUpViewBody extends StatefulWidget {

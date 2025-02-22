@@ -1,12 +1,12 @@
 
-import '../datasources/products_remote_data_source.dart';
-import '../models/products_model.dart';
-import '../../domain/repositories/product_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/Network/network_info.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/errors/exceptions.dart';
+import '../../domain/repositories/product_repository.dart';
+import '../datasources/products_remote_data_source.dart';
+import '../models/products_model.dart';
 
 class ProductsRepositoryImpl extends ProductsRepository {
   final ProductsRemoteDataSource _remote;

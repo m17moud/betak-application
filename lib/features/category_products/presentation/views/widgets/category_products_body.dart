@@ -1,16 +1,17 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/utils/string_manager.dart';
+import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/loading_error.dart';
+import '../../../../home/data/models/home_department_response_model.dart';
 import '../../../data/models/products_model.dart';
 import '../../cubit/category_products_cubit.dart';
 import 'app_logo.dart';
 import 'category_title.dart';
 import 'no_prodcuts.dart';
 import 'products.dart';
-import '../../../../home/data/models/home_department_response_model.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/utils/styles.dart';
 
 class CategoryProductsViewBody extends StatefulWidget {
   final HomeDepartmentResponseModel departmentResponseModel;
