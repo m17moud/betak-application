@@ -30,10 +30,8 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
   }) async {
     if (await _networkInfo.isConnected) {
       try {
-        var customerData = await _remote.login(pkey,loginemail,loginpassword);
+        var customerData = await _remote.login(pkey, loginemail, loginpassword);
         await _local.storeCustomerData(customerData);
-
-        
 
         return Right(customerData);
       } on ServerException {
@@ -49,36 +47,29 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
   }
 
   Future<Either<Failure, void>> userLogout() async {
-
-
     if (await _networkInfo.isConnected) {
-
       try {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  const Left(ServerFailure());
+        return const Left(ServerFailure());
       }
     } else {
-
       return const Left(NetworkFailure());
     }
   }
+
   @override
   Future<Either<Failure, void>> customerLogout() async {
-
-
     if (await _networkInfo.isConnected) {
-
       try {
         await _local.logout();
         return const Right(null);
       } catch (e) {
-        return  const Left(ServerFailure());
+        return const Left(ServerFailure());
       }
     } else {
       return const Left(NetworkFailure());
     }
   }
-
 }

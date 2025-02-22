@@ -1,162 +1,216 @@
 
-import '../../../../categorie_products/data/models/products_model.dart';
+import 'package:betak/core/utils/color_manager.dart';
+import 'package:betak/core/utils/string_manager.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../../../../category_products/data/models/products_model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:readmore/readmore.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../../generated/assets.dart';
 
 // ignore: must_be_immutable
 class ProductViewBody extends StatefulWidget {
   ProductsModel productsModel;
 
-   ProductViewBody({super.key,required this.productsModel});
+  ProductViewBody({
+    super.key,
+    required this.productsModel,
+  });
 
   @override
   State<ProductViewBody> createState() => _ProductViewBodyState();
 }
 
 class _ProductViewBodyState extends State<ProductViewBody> {
-  bool isLiked = false; // State for like button
+  final PageController _pageController = PageController();
+  int _currentPage = 0; // Track the current image
 
   @override
   Widget build(BuildContext context) {
-    // Get the screen width and height
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+    double paddingTop = height * 0.02;
+    double paddingRight = width * 0.05;
 
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              Image.asset(
-                Assets.imagesProduct,
-                fit: BoxFit.fill,
-              ),
-
-            ],
+          SizedBox(
+            height: height * 0.45,
+            child: widget.productsModel.images!.isNotEmpty
+                ? Column(
+                    children: [
+                      // Image Slider (PageView)
+                      Expanded(
+                        child: PageView.builder(
+                          controller: _pageController,
+                          itemCount: widget.productsModel.images!.length,
+                          itemBuilder: (context, index) {
+                            return Hero(
+                              tag: widget.productsModel.id!,
+                              child: CachedNetworkImage(
+                                imageUrl: widget.productsModel.images![index],
+                                fit: BoxFit.contain,
+                              ),
+                            );
+                          },
+                          onPageChanged: (index) {
+                            setState(() {
+                              _currentPage = index;
+                            });
+                          },
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          widget.productsModel.images!.length,
+                          (index) => AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: _currentPage == index ? 12 : 8,
+                            height: _currentPage == index ? 12 : 8,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentPage == index
+                                  ? Styles.blueSky
+                                  : ColorManager.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : const Center(child:  Text("لا يوجد صورة")),
           ),
-          const Padding(
-            padding: EdgeInsets.only(right: 12, top: 7),
+          Padding(
+            padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                'بلوزه ساده بأكمام طويله',
-                style:Styles.styleBoldIrinaSans20,
+                "${widget.productsModel.pname}",
+                style: Styles.styleBoldIrinaSans20.copyWith(
+                  fontSize: width * 0.06,
+                  color: ColorManager.black,
+                ),
               ),
             ),
           ),
-
-         Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-                const Padding(
-                padding: EdgeInsets.only(right: 12, top: 5),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    'البائع: احمد محمد', // Seller name added
-                    style: Styles.styleBoldInriaSans16
+          Padding(
+            padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: width * 0.4,
+                  height: height * 0.06,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorManager.priceBackgorundColor,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: ColorManager.grey,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                        "${widget.productsModel.pPrice.toString()} ${AppStrings.egp.tr()}",
+                        style: Styles.styleBoldInriaSans16),
                   ),
                 ),
-              ),
-              Container(
-                width: width * 0.25, // Responsive width
-                height: height * 0.05, // Responsive height
-                decoration: BoxDecoration(
+                Container(
+                  width: width * 0.4,
+                  height: height * 0.06,
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: const Color(0xFFE4E4E4),
-                    )),
-                child: Center(
-                    child: Text(
-                      '500 LE',
-                      style:
-                      Styles.styleMediumInter13.copyWith(color: Colors.black),
-                    )),
-              ),
-            ],
+                    color: Styles.flyByNight,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: ColorManager.grey,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.thumb_up,
+                          size: width * 0.047,
+                          color: Styles.blueSky,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          "${widget.productsModel.likes}",
+                          style: TextStyle(
+                            fontSize: width * 0.045,
+                            fontWeight: FontWeight.bold,
+                            color: Styles.blueSky,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-
           Padding(
-            padding: const EdgeInsets.only(right: 12, top: 20),
+            padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
             child: Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  'المواصفات',
-                  style: Styles.styleRegularIrina22.copyWith(fontSize: 20),
-                )),
+              alignment: Alignment.bottomRight,
+              child: Text(
+                'المواصفات',
+                style: Styles.styleRegularIrina22.copyWith(
+                  fontSize: width * 0.055,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: height * 0.02,horizontal: height*.03), // Responsive vertical padding
-            child: Text(
-              'بلوزة أنيقة مصممة بعناية لتناسب جميع الأذواق. تتميز بقصة عصرية وجذابة، مع تفاصيل دقيقة تضيف لمسة من الفخامة. مصنوعة من قماش ناعم وعالي الجودة يضمن الراحة والمرونة طوال اليوم. متوفرة بألوان متعددة لتتناسب مع جميع المناسبات، سواء كانت رسمية أو كاجوال',
-              style: Styles.styleRegularRoboto16
-                  .copyWith(fontFamily: 'Irina Sans'),
+              horizontal: width * 0.03,
+            ),
+            child: ReadMoreText(
+              widget.productsModel.pdescribtion!,
+              trimMode: TrimMode.Line,
+              trimLines: 2,
+              colorClickableText: ColorManager.black,
+              trimCollapsedText: 'عرض المزيد',
+              trimExpandedText: '.عرض اقل',
+              style: Styles.styleBoldIrinaSans20.copyWith(
+                
+              ),
               textAlign: TextAlign.justify,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-                left: width * 0.02, right: width * 0.02, bottom: height * 0.04),
-            // Responsive padding
-            child: Row(
-              children: [
-
-                SizedBox(
-                  width: width * 0.25, // Responsive width
-                  height: height * 0.06, // Responsive height
-
-                  child: Center(
-                    child:
-                    IconButton(
-                      icon: Icon(size: 45,
-                        isLiked ? Icons.favorite : Icons.favorite_border,
-                        color: isLiked ? Colors.red : Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isLiked = !isLiked;
-                        });
-                      },
-                    ),),
-                ),
-                const Spacer(),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Add your onPressed action here
-                  },
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(width * 0.7, height * 0.05),
-                    // Responsive button size
-                    backgroundColor: const Color(0xFF80CFFF),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+            padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: GestureDetector(
+                onTap: () {},
+                child: Text(
+                  "التاجر : ${widget.productsModel.seller!.sname}",
+                  style: TextStyle(
+                    fontSize: width * 0.047,
+                    fontWeight: FontWeight.bold,
+                    color: ColorManager.blue,
+                    decoration: TextDecoration.underline,
+                    decorationColor: ColorManager.blue,
                   ),
-
-                  icon: const Icon(Icons.facebook, color: Colors.white,size: 30, ),
-                  label: Center(
-                      child: Text(
-                        'التواصل عبر الفيسبوك',
-                        style: Styles.styleBoldIrinaSans20.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                            height: 1),
-                        textAlign: TextAlign.center,
-                      )),
-                )
-              ],
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

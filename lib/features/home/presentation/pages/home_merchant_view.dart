@@ -12,6 +12,7 @@ import '../../../../injection_container.dart';
 import '../cubit/home_cubit.dart';
 import '../widgets/home_merchant_view_body.dart';
 
+
 class HomeMerchantView extends StatefulWidget {
   const HomeMerchantView({super.key});
 

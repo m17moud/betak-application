@@ -1,3 +1,4 @@
+
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/string_manager.dart';
@@ -49,8 +50,8 @@ class _ProductsState extends State<Products> {
             onExit: (_) => setState(() => hoveredIndex = null),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, Routes.productRoute,
-                    arguments: product);
+                Navigator.pushNamed(context, Routes.clientProductRoute,
+                        arguments: product);
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
@@ -78,23 +79,26 @@ class _ProductsState extends State<Products> {
                         child: ClipRRect(
                           borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(12)),
-                          child: CachedNetworkImage(
-                            imageUrl: product.images?.isNotEmpty == true
-                                ? product.images![0]
-                                : 'https://via.placeholder.com/150',
-                            placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey[300]!,
-                              highlightColor: Colors.grey[100]!,
-                              child: Container(
-                                width: double.infinity,
-                                color: ColorManager.white,
+                          child: Hero(
+                            tag: product.id!,
+                            child: CachedNetworkImage(
+                              imageUrl: product.images?.isNotEmpty == true
+                                  ? product.images![0]
+                                  : 'https://via.placeholder.com/150',
+                              placeholder: (context, url) => Shimmer.fromColors(
+                                baseColor: Colors.grey[300]!,
+                                highlightColor: Colors.grey[100]!,
+                                child: Container(
+                                  width: double.infinity,
+                                  color: ColorManager.white,
+                                ),
                               ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              fit: BoxFit.contain,
+                              width: double.infinity,
+                              height: double.infinity,
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                            fit: BoxFit.fill,
-                            width: double.infinity,
-                            height: double.infinity,
                           ),
                         ),
                       ),

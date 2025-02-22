@@ -41,7 +41,7 @@ class Categories extends StatelessWidget {
                 onTap: () {
                    Navigator.pushNamed(
                       context,
-                      Routes.categorieProducts,
+                      Routes.categoryProducts,
                       arguments: department, 
                     );
                 },

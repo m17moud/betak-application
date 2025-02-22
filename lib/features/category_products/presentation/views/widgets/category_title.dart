@@ -2,8 +2,8 @@ import '../../../../../core/utils/styles.dart';
 
 import 'package:flutter/material.dart';
 
-class CategorieTitle extends StatelessWidget {
-  const CategorieTitle({
+class CategoryTitle extends StatelessWidget {
+  const CategoryTitle({
     super.key,
     required this.width,
     required this.height,

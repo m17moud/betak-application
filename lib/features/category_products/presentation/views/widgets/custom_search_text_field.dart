@@ -1,7 +1,7 @@
 
 import 'package:betak/core/utils/string_manager.dart';
-import 'package:betak/features/categorie_products/data/models/products_model.dart';
-import 'package:betak/features/categorie_products/presentation/cubit/categorie_products_cubit.dart';
+import 'package:betak/features/category_products/data/models/products_model.dart';
+import 'package:betak/features/category_products/presentation/cubit/category_products_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +32,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
             controller.text = product.pname!;
             controller.selection =
                 TextSelection.collapsed(offset: controller.text.length);
-            context.read<CategorieProductsCubit>().searchProducts(controller.text);
+            context.read<CategoryProductsCubit>().searchProducts(controller.text);
           },
         ),
       ),
@@ -42,7 +42,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
   Iterable<Widget> getSuggestions(SearchController controller) {
     final String input = controller.value.text;
     final List<ProductsModel> products =
-        context.read<CategorieProductsCubit>().allProducts;
+        context.read<CategoryProductsCubit>().allProducts;
 
     final Set<String> seenProductNames = {};
 
@@ -66,7 +66,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
             controller.text = product.pname!;
             controller.selection =
                 TextSelection.collapsed(offset: controller.text.length);
-            context.read<CategorieProductsCubit>().searchProducts(controller.text);
+            context.read<CategoryProductsCubit>().searchProducts(controller.text);
           },
         ),
         onTap: () {
@@ -128,14 +128,14 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
       viewLeading: GestureDetector(
         onTap: () {
 
-          context.read<CategorieProductsCubit>().searchProducts(_searchController.text);
+          context.read<CategoryProductsCubit>().searchProducts(_searchController.text);
           Navigator.of(context).pop();
 
         },
         child: const Icon(Icons.arrow_back),
       ),
       onChanged: (query) {
-        context.read<CategorieProductsCubit>().searchProducts(query);
+        context.read<CategoryProductsCubit>().searchProducts(query);
       },
     );
   }

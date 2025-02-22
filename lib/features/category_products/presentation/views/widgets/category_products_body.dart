@@ -2,9 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/widgets/loading_error.dart';
 import '../../../data/models/products_model.dart';
-import '../../cubit/categorie_products_cubit.dart';
+import '../../cubit/category_products_cubit.dart';
 import 'app_logo.dart';
-import 'categorie_title.dart';
+import 'category_title.dart';
 import 'no_prodcuts.dart';
 import 'products.dart';
 import '../../../../home/data/models/home_department_response_model.dart';
@@ -12,17 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/styles.dart';
 
-class CategorieProductsViewBody extends StatefulWidget {
+class CategoryProductsViewBody extends StatefulWidget {
   final HomeDepartmentResponseModel departmentResponseModel;
 
-  const CategorieProductsViewBody(this.departmentResponseModel, {super.key});
+  const CategoryProductsViewBody(this.departmentResponseModel, {super.key});
 
   @override
-  State<CategorieProductsViewBody> createState() =>
-      _CategorieProductsViewBodyState();
+  State<CategoryProductsViewBody> createState() =>
+      _CategoryProductsViewBodyState();
 }
 
-class _CategorieProductsViewBodyState extends State<CategorieProductsViewBody> {
+class _CategoryProductsViewBodyState extends State<CategoryProductsViewBody> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -32,31 +32,31 @@ class _CategorieProductsViewBodyState extends State<CategorieProductsViewBody> {
       children: [
         FadeInDown(child: AppLogo(height: height, width: width)),
         FadeInRight(
-          child: CategorieTitle(
+          child: CategoryTitle(
             departmentName: widget.departmentResponseModel.name!,
             width: width,
             height: height,
           ),
         ),
         Expanded(
-          child: BlocBuilder<CategorieProductsCubit, CategorieProductsState>(
+          child: BlocBuilder<CategoryProductsCubit, CategoryProductsState>(
             builder: (context, state) {
-              if (state is CategorieProductsInitial) {
+              if (state is CategoryProductsInitial) {
                 context
-                    .read<CategorieProductsCubit>()
+                    .read<CategoryProductsCubit>()
                     .getProducts(widget.departmentResponseModel.id!);
                 return const Center(
                   child: CircularProgressIndicator(color: Styles.blueSky),
                 );
               }
 
-              if (state is CategorieProductsLoading) {
+              if (state is CategoryProductsLoading) {
                 return const Center(
                   child: CircularProgressIndicator(color: Styles.blueSky),
                 );
               }
 
-              if (state is CategorieProductsSuccess) {
+              if (state is CategoryProductsSuccess) {
                 List<ProductsModel> products = state.departmentProducts;
 
                 if (products.isEmpty) {
@@ -72,19 +72,21 @@ class _CategorieProductsViewBodyState extends State<CategorieProductsViewBody> {
                 );
               }
 
-              if (state is CategorieProductsError) {
+              if (state is CategoryProductsError) {
                 return FadeInUp(
                   child: Center(
                     child: LoadingError(
                         text: AppStrings.productsError,
                         onPressed: () {
-                          context.read<CategorieProductsCubit>().getProducts(widget.departmentResponseModel.id!);
+                          context
+                              .read<CategoryProductsCubit>()
+                              .getProducts(widget.departmentResponseModel.id!);
                         }),
                   ),
                 );
               }
 
-              if (state is CategorieProductsNoResults) {
+              if (state is CategoryProductsNoResults) {
                 return FadeInUp(child: NoProducts(width: width));
               }
 

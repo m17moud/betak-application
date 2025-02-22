@@ -16,6 +16,7 @@ class BetakApplication extends StatelessWidget {
           Brightness.dark, // For dark icons on the status bar
     ));
     return MaterialApp(
+    
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

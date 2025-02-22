@@ -9,6 +9,8 @@ class ColorManager {
   static const Color green = Colors.green;
   static const Color black = Colors.black;
   static const Color blue = Colors.blue;
+  static const Color grey= Colors.grey;
+  static const Color priceBackgorundColor= Color(0xFFB3E5FC);
   static Color? lightGrey = Colors.grey[200];
   static const Color textFormFillColor = Color(0xFFE0E3E8);
   static const Color textFormHintColor = Color(0xFF5D5D60);

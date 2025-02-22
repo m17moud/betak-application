@@ -1,6 +1,7 @@
-import '../../features/categorie_products/data/models/products_model.dart';
-import '../../features/categorie_products/presentation/views/categorie_products_view.dart';
+import '../../features/category_products/data/models/products_model.dart';
+import '../../features/category_products/presentation/views/category_products_view.dart';
 import '../../features/home/data/models/home_department_response_model.dart';
+import '../../features/product/presentation/views/widgets/merchant_product_view.dart';
 import '../widgets/choose_user_type.dart';
 import '../../features/add_product/presentation/pages/add_product_screen.dart';
 import '../../features/home/presentation/pages/home_merchant_view.dart';
@@ -12,7 +13,7 @@ import '../../features/auth_for_client/sign_up/presentation/pages/client_sign_up
 import '../../features/auth_for_merchants/sign_in/presentation/pages/merchant_sign_in_view.dart';
 import '../../features/auth_for_merchants/sign_up/presentation/pages/merchant_sign_up_view.dart';
 import '../../features/home/presentation/pages/home_cleint_view.dart';
-import '../../features/product/presentation/views/product_view.dart';
+import '../../features/product/presentation/views/client_product_view.dart';
 import '../../features/splash/presentation/views/loading_splash_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 import 'color_manager.dart';
@@ -33,9 +34,10 @@ class Routes {
   static const String homeCleintRoute = "/home_cleint_view";
   static const String homeMerchantRoute = "/home_merchant_view";
 
-  static const String categorieProducts = "/categorie_products_view";
+  static const String categoryProducts = "/category_products_view";
 
-  static const String productRoute = "/product_view";
+  static const String clientProductRoute = "/client_product_view";
+  static const String merchantProductRoute = "/merchant_product_view";
   static const String addProductRoute = "/add_product_screen";
 
   // static const String instructionsRoute = "/iInstructionsScreen";
@@ -49,11 +51,12 @@ class Routes {
     merchantSignUpRoute: (context, _) => const MerchantSignUpView(),
     homeCleintRoute: (context, _) => const HomeCleintView(),
     homeMerchantRoute: (context, _) => const HomeMerchantView(),
-    categorieProducts: (context, args) => CategorieProductsView(
+    categoryProducts: (context, args) => CategoryProductsView(
         departmentResponseModel: args as HomeDepartmentResponseModel),
-    productRoute: (context, args) =>  ProductView(
+    clientProductRoute: (context, args) =>  ClientProductView(
         productsModel: args as ProductsModel),
-
+ merchantProductRoute: (context, args) =>  MerchantProductView(
+        productsModel: args as ProductsModel),
     addProductRoute:  (context, _) =>const AddProductScreen(),
     chooseUserType:  (context, _) =>const ChooseUserType(),
   };

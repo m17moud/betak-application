@@ -6,19 +6,19 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 
-part 'categorie_products_state.dart';
+part 'category_products_state.dart';
 
-class CategorieProductsCubit extends Cubit<CategorieProductsState> {
+class CategoryProductsCubit extends Cubit<CategoryProductsState> {
   final ProductsUsecase productsUsecase;
 
   // Store all products for search functionality
   List<ProductsModel> allProducts = [];
 
-  CategorieProductsCubit({required this.productsUsecase})
-      : super(CategorieProductsInitial());
+  CategoryProductsCubit({required this.productsUsecase})
+      : super(CategoryProductsInitial());
 
   Future<void> getProducts(String depID) async {
-    emit(CategorieProductsLoading());
+    emit(CategoryProductsLoading());
     final failureOrLogin = await productsUsecase.call(
       Params(
         pkey: ApiConstants.selectProductsPkey,
@@ -28,11 +28,11 @@ class CategorieProductsCubit extends Cubit<CategorieProductsState> {
 
     failureOrLogin.fold(
           (failure) {
-        emit(CategorieProductsError(message: failure.message));
+        emit(CategoryProductsError(message: failure.message));
       },
           (departmentProducts) {
         allProducts = departmentProducts; // Store all products
-        emit(CategorieProductsSuccess(departmentProducts: departmentProducts));
+        emit(CategoryProductsSuccess(departmentProducts: departmentProducts));
       },
     );
   }
@@ -41,16 +41,16 @@ class CategorieProductsCubit extends Cubit<CategorieProductsState> {
   void searchProducts(String query) {
     if (query.isEmpty) {
       // If the query is empty, show all products again
-      emit(CategorieProductsSuccess(departmentProducts: allProducts));
+      emit(CategoryProductsSuccess(departmentProducts: allProducts));
     } else {
       final filteredProducts = allProducts
           .where((product) => product.pname!.toLowerCase().contains(query.toLowerCase()))
           .toList();
       if (filteredProducts.isEmpty) {
-        emit(CategorieProductsNoResults());
+        emit(CategoryProductsNoResults());
       } else {
         // If products are found, emit the filtered products
-        emit(CategorieProductsSuccess(departmentProducts: filteredProducts));
+        emit(CategoryProductsSuccess(departmentProducts: filteredProducts));
       }
     }
   }

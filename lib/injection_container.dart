@@ -1,10 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:betak/features/categorie_products/data/datasources/products_remote_data_source.dart';
-import 'package:betak/features/categorie_products/data/repositories/products_repository_impl.dart';
-import 'package:betak/features/categorie_products/domain/repositories/product_repository.dart';
-import 'package:betak/features/categorie_products/domain/usecases/products_usecase.dart';
-import 'package:betak/features/categorie_products/presentation/cubit/categorie_products_cubit.dart';
+import 'package:betak/features/category_products/data/datasources/products_remote_data_source.dart';
+import 'package:betak/features/category_products/data/repositories/products_repository_impl.dart';
+import 'package:betak/features/category_products/domain/repositories/product_repository.dart';
+import 'package:betak/features/category_products/domain/usecases/products_usecase.dart';
+import 'package:betak/features/category_products/presentation/cubit/category_products_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +12,11 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'core/Network/network_info.dart';
 import 'core/api/dio_consumer.dart';
+import 'features/add_like/data/datasources/add_like_remote_dataSource.dart';
+import 'features/add_like/data/repositories/add_like_repository_impl.dart';
+import 'features/add_like/domain/repositories/add_like_repository.dart';
+import 'features/add_like/domain/usecases/add_like_usecase.dart';
+import 'features/add_like/presentation/cubit/add_like_cubit.dart';
 import 'features/add_product/data/datasources/add_product_remote_datasource.dart';
 import 'features/add_product/data/repositories/add_product_repository_impl.dart';
 import 'features/add_product/domain/repositories/add_product_repository.dart';
@@ -88,14 +93,20 @@ Future<void> init() async {
   );
 
 // add product
-sl.registerLazySingleton<AddProductRemoteDatasource>(
+  sl.registerLazySingleton<AddProductRemoteDatasource>(
     () => AddProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
-
   sl.registerLazySingleton<ProductsRemoteDataSource>(
-        () => ProductsRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
+    () => ProductsRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
   );
+
+// add like
+
+  sl.registerLazySingleton<AddLikeRemoteDataSource>(
+    () => AddLikeRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
+  );
+
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
     () => CustomerLoginRepositoryImp(
@@ -131,16 +142,29 @@ sl.registerLazySingleton<AddProductRemoteDatasource>(
     ),
   );
   sl.registerLazySingleton<ProductsRepository>(
-        () => ProductsRepositoryImpl(
-      networkInfo: sl(), // This will work because NetworkInfo is registered first
+    () => ProductsRepositoryImpl(
+      networkInfo:
+          sl(), // This will work because NetworkInfo is registered first
       remote: sl(),
     ),
   );
 
   // add product
   sl.registerLazySingleton<AddProductRepository>(
-    () => AddProductRepositoryImpl(addProductRemoteDatasource: sl(), networkInfo: sl()),
+    () => AddProductRepositoryImpl(
+      addProductRemoteDatasource: sl(),
+      networkInfo: sl(),
+    ),
   );
+
+// add like
+  sl.registerLazySingleton<AddLikeRepository>(
+    () => AddLikeRepositoryImpl(
+      addLikeRemoteDatasource: sl(),
+      networkInfo: sl(),
+    ),
+  );
+
   //! Use cases
   //client
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -154,13 +178,14 @@ sl.registerLazySingleton<AddProductRemoteDatasource>(
       () => AddMerchantUsecase(merchantSignupRepository: sl()));
   //home
   sl.registerLazySingleton(() => HomeUsecase(sl()));
-  
+
   // add product
-sl.registerLazySingleton(() => AddProductUsecase(addProductRepository: sl()));
+  sl.registerLazySingleton(() => AddProductUsecase(addProductRepository: sl()));
 
   sl.registerLazySingleton(() => ProductsUsecase(sl()));
 
-
+// add like
+  sl.registerLazySingleton(() => AddLikeUsecase(addLikeRepository: sl()));
 
   //! Cubits
   sl.registerFactory(
@@ -178,10 +203,13 @@ sl.registerLazySingleton(() => AddProductUsecase(addProductRepository: sl()));
   sl.registerFactory(
     () => HomeCubit(homeUsecase: sl()),
   );
-   sl.registerFactory(
+  sl.registerFactory(
     () => AddProductCubit(addProductUsecase: sl()),
   );
   sl.registerFactory(
-        () => CategorieProductsCubit(productsUsecase: sl()),
+    () => CategoryProductsCubit(productsUsecase: sl()),
+  );
+  sl.registerFactory(
+    () => AddLikeCubit(addLikeUsecase: sl()),
   );
 }

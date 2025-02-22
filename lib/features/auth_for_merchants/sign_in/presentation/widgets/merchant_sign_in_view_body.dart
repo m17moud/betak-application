@@ -38,21 +38,22 @@ class MerchantSignInViewBody extends StatelessWidget {
             },
           );
         } else if (state is LoggedIn) {
-           Navigator.pop(context); // Hide loading dialog
-            Navigator.pushNamedAndRemoveUntil(
+          
+          Navigator.pop(context); // Hide loading dialog
+          Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.homeMerchantRoute,
             (route) => false,
           );
         } else if (state is LoginError) {
           Navigator.pop(context); // Hide loading dialog
-        ErrorDialog.show(
-                context: context,
-                message: state.message,
-                onPressed: () {
-                   Navigator.pop(context);
-                },
-              );
+          ErrorDialog.show(
+            context: context,
+            message: state.message,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          );
         }
       },
       builder: (context, state) {

@@ -24,7 +24,6 @@ class Assets {
   static const String imagesCategory4='assets/images/category4.png';
   static const String imagesCategory5='assets/images/category5.png';
   static const String imagesCategory6='assets/images/category6.png';
-  static const String imagesProduct='assets/images/product.png';
   static const String imagesShoppingCart='assets/images/ShoppingCart.png';
 
 }

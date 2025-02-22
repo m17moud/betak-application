@@ -39,7 +39,7 @@ class AddProductCubit extends Cubit<AddProductState> {
       'price': price,
       'sid': sid,
       'description': description,
-      'image': imageFiles, // Send the image files as part of the form data
+      'image[]': imageFiles, // Send the image files as part of the form data
     });
 
     emit(AddProductLoading());

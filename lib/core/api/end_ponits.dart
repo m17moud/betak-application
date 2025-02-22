@@ -21,15 +21,22 @@ class ApiConstants {
 
   static const String home = "departments.php";
   static const String homePKey = "ZhV3JolXYZB8H6FX5xraFEYa7byx9wGRCXZcYP-Uc_U=";
-  
+
   static const String addProduct = "addProduct.php";
   static const String addProductPKey =
       "WXxakcr0HsSbhpu8b9eUSMrqtu1Xo_NpWfufT1c7jx6UzJ47VkWJ7Hich-HXqhCf";
 
-
   static const String selectProducts = "products.php";
   static const String selectProductsPkey =
       "_ZRFTUv09aUHSTol4r0Dp28PGcd8FsnDrs076u1Sr8s=";
+
+  static const String addLike = "Like.php";
+  static const String addLikePkey =
+      "A9aWJ9tSwUr008vlUt_YPkSHzi2jH_7XNKpExGVcMIk=";
+
+  static const String checkLike = "checkLike.php";
+  static const String checkLikePkey =
+      "A9aWJ9tSwUr008vlUt_YPkSHzi2jH_7XNKpExGVcMIk=";
 
 //api keys
 

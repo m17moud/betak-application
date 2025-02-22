@@ -21,5 +21,3 @@ void main() async {
 
   // runApp(const Betak());
 }
-
-
