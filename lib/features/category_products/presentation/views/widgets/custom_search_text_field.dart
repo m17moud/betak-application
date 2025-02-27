@@ -1,3 +1,4 @@
+import 'package:betak/core/utils/color_manager.dart';
 
 import '../../../../../core/utils/string_manager.dart';
 import '../../../data/models/products_model.dart';
@@ -23,7 +24,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
 
   Iterable<Widget> getHistoryList(SearchController controller) {
     return searchHistory.map(
-          (ProductsModel product) => ListTile(
+      (ProductsModel product) => ListTile(
         leading: const Icon(Icons.history),
         title: Text(product.pname!),
         trailing: IconButton(
@@ -32,7 +33,9 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
             controller.text = product.pname!;
             controller.selection =
                 TextSelection.collapsed(offset: controller.text.length);
-            context.read<CategoryProductsCubit>().searchProducts(controller.text);
+            context
+                .read<CategoryProductsCubit>()
+                .searchProducts(controller.text);
           },
         ),
       ),
@@ -46,19 +49,23 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
 
     final Set<String> seenProductNames = {};
 
-    final filteredProducts = products.where((product) {
-      final pname = product.pname!.toLowerCase();
-      if (seenProductNames.contains(pname)) {
-        return false;
-      } else {
-        seenProductNames.add(pname);
-        return true;
-      }
-    }).where((product) => product.pname!.toLowerCase().contains(input.toLowerCase())).toList();
+    final filteredProducts = products
+        .where((product) {
+          final pname = product.pname!.toLowerCase();
+          if (seenProductNames.contains(pname)) {
+            return false;
+          } else {
+            seenProductNames.add(pname);
+            return true;
+          }
+        })
+        .where((product) =>
+            product.pname!.toLowerCase().contains(input.toLowerCase()))
+        .toList();
 
     return filteredProducts.map(
-          (ProductsModel product) => ListTile(
-        leading: const Icon(Icons.shopping_cart, color: Colors.blue),
+      (ProductsModel product) => ListTile(
+        leading: const Icon(Icons.shopping_cart, color: ColorManager.blue),
         title: Text(product.pname!),
         trailing: IconButton(
           icon: const Icon(Icons.call_missed),
@@ -66,7 +73,9 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
             controller.text = product.pname!;
             controller.selection =
                 TextSelection.collapsed(offset: controller.text.length);
-            context.read<CategoryProductsCubit>().searchProducts(controller.text);
+            context
+                .read<CategoryProductsCubit>()
+                .searchProducts(controller.text);
           },
         ),
         onTap: () {
@@ -79,7 +88,8 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
 
   void handleSelection(ProductsModel selectedProduct) {
     setState(() {
-      searchHistory.removeWhere((product) => product.pname == selectedProduct.pname);
+      searchHistory
+          .removeWhere((product) => product.pname == selectedProduct.pname);
       if (searchHistory.length >= 5) {
         searchHistory.removeLast();
       }
@@ -92,12 +102,13 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
     return SearchAnchor.bar(
       searchController: _searchController,
       barHintText: AppStrings.searchAboutProduct.tr(),
-      barOverlayColor: WidgetStateProperty.all(Colors.white),
+      barOverlayColor: WidgetStateProperty.all(ColorManager.white),
       constraints: BoxConstraints(
         maxWidth: widget.screenWidth * 0.85,
         minHeight: 55,
       ),
-      barBackgroundColor: const WidgetStatePropertyAll(Color(0xFFF3F7F8)),
+      barBackgroundColor:
+          const WidgetStatePropertyAll(ColorManager.darkerWhite),
       barShape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -105,7 +116,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
       ),
       barHintStyle: WidgetStatePropertyAll(
         Styles.styleRegularInter16.copyWith(
-          color: const Color(0xFF455A64),
+          color: Styles.flyByNight,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -118,7 +129,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
             Center(
               child: Text(
                 AppStrings.emptySearchHistory.tr(),
-                style: const TextStyle(color: Colors.grey),
+                style: const TextStyle(color: ColorManager.grey),
               ),
             ),
           ];
@@ -127,10 +138,10 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
       },
       viewLeading: GestureDetector(
         onTap: () {
-
-          context.read<CategoryProductsCubit>().searchProducts(_searchController.text);
+          context
+              .read<CategoryProductsCubit>()
+              .searchProducts(_searchController.text);
           Navigator.of(context).pop();
-
         },
         child: const Icon(Icons.arrow_back),
       ),

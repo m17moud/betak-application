@@ -1,3 +1,4 @@
+import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/string_manager.dart';
 import '../../../../core/utils/styles.dart';
 import '../../../auth_for_client/sign_in/presentation/cubit/customer_login_cubit.dart';
@@ -21,41 +22,61 @@ class HomeCleintView extends StatefulWidget {
 class _HomeViewState extends State<HomeCleintView> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<HomeCubit>(),
-      child: BlocProvider(
-        create: (context) => sl<CustomerLoginCubit>(),
-        child: Scaffold(
-          backgroundColor: ColorManager.white,
-          body: const HomeCleintViewBody(),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-          floatingActionButton: SpeedDial(
-            switchLabelPosition: false,
-            backgroundColor: Styles.blueSky,
-            animatedIcon: AnimatedIcons.menu_close,
-            animatedIconTheme: const IconThemeData(color: ColorManager.white),
-            overlayColor: ColorManager.black,
-            direction: SpeedDialDirection.right,
-            overlayOpacity: 0.4,
-            spaceBetweenChildren: 5,
-            children: [
-              // Logout button
-              SpeedDialChild(
-                child: const Icon(
-                  Icons.exit_to_app,
-                  color: ColorManager.white,
-                ),
-                label: AppStrings.logout.tr(),
-                labelStyle: Styles.styleBoldInriaSans16,
-                backgroundColor: ColorManager.error,
-                onTap: () async {
-                  await context.read<CustomerLoginCubit>().logoutUser();
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => sl<HomeCubit>()),
+        BlocProvider(create: (context) => sl<CustomerLoginCubit>()),
+      ],
+      child: BlocListener<CustomerLoginCubit, CustomerLoginState>(
+        listener: (context, state) {
+          if (state is LoggedOut) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.chooseUserType,
+              (route) => false,
+            );
+          } else if (state is LoginError) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(AppStrings.logoutError.tr()),
+            ));
+          }
+        },
+        child: BlocBuilder<CustomerLoginCubit, CustomerLoginState>(
+          builder: (context, state) {
+            return Scaffold(
+              backgroundColor: ColorManager.white,
+              body: const HomeCleintViewBody(),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.endFloat,
+              floatingActionButton: SpeedDial(
+                switchLabelPosition: false,
+                backgroundColor: Styles.blueSky,
+                animatedIcon: AnimatedIcons.menu_close,
+                animatedIconTheme:
+                    const IconThemeData(color: ColorManager.white),
+                overlayColor: ColorManager.black,
+                direction: SpeedDialDirection.right,
+                overlayOpacity: 0.4,
+                spaceBetweenChildren: 5,
+                children: [
+                  SpeedDialChild(
+                    child: const Icon(
+                      Icons.exit_to_app,
+                      color: ColorManager.white,
+                    ),
+                    label: AppStrings.logout.tr(),
+                    labelStyle: Styles.styleBoldInriaSans16,
+                    backgroundColor: ColorManager.error,
+                    onTap: () async {
+                      await context.read<CustomerLoginCubit>().logoutUser();
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

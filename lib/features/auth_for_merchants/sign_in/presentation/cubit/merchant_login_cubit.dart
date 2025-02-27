@@ -34,8 +34,8 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
         loginpassword: password));
 
     failureOrLogin.fold(
-      (failure) => emit(LoginError(message: failure.message)),
-      (merchantInfo) => emit(LoggedIn(merchantInfo: merchantInfo)),
+      (failure) => emit(MerchantLoginError(message: failure.message)),
+      (merchantInfo) => emit(MerchantLoggedIn(merchantInfo: merchantInfo)),
     );
   }
 
@@ -45,10 +45,10 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
     try {
       final result = await merchantLogout.call(NoParams());
       if (result != const Left(NetworkFailure())) {
-        emit(LoggedOut());
+        emit(MerchantLoggedOut());
       }
     } catch (e) {
-      emit(LoginError(message: e.toString()));
+      emit(MerchantLoginError(message: e.toString()));
     }
   }
 
@@ -62,15 +62,15 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
           await secureStorage.read(key: Constants.merchantSecureStorage);
 
       if (authJson != null) {
-        emit(LoggedIn(
+        emit(MerchantLoggedIn(
           merchantInfo:
           MerchantLoginResponseModel.fromJson(jsonDecode(authJson)),
         ));
       } else {
-        emit(LoggedOut());
+        emit(MerchantLoggedOut());
       }
     } catch (e) {
-      emit(LoginError(message: e.toString()));
+      emit(MerchantLoginError(message: e.toString()));
     }
   }
 }

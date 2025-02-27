@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +12,11 @@ class Products extends StatefulWidget {
   const Products({
     super.key,
     required this.width,
+    required this.isMerchant,
     required this.height,
     required this.departmentProducts,
   });
-
+  final bool isMerchant;
   final double width;
   final double height;
   final List<ProductsModel> departmentProducts;
@@ -51,8 +51,19 @@ class _ProductsState extends State<Products> {
             onExit: (_) => setState(() => hoveredIndex = null),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, Routes.clientProductRoute,
-                        arguments: product);
+                if (widget.isMerchant) {
+                  Navigator.pushNamed(context, Routes.merchantProductRoute,
+                      arguments: {
+                        'isMerchant': widget.isMerchant,
+                        'productsModel': product,
+                      });
+                } else {
+                  Navigator.pushNamed(context, Routes.clientProductRoute,
+                      arguments: {
+                        'isMerchant': widget.isMerchant,
+                        'productsModel': product,
+                      });
+                }
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),

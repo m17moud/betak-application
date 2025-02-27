@@ -1,6 +1,10 @@
+import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import 'package:betak/injection_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/styles.dart';
+import '../../../auth_for_client/sign_in/presentation/cubit/customer_login_cubit.dart';
 import 'widgets/splash_view_body.dart';
 
 class SplashView extends StatelessWidget {
@@ -8,9 +12,15 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Styles.blueSky,
-      body: SplashViewBody(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => sl<MerchantLoginCubit>()),
+        BlocProvider(create: (context) => sl<CustomerLoginCubit>()),
+      ],
+      child: const Scaffold(
+        backgroundColor: Styles.blueSky,
+        body: SplashViewBody(),
+      ),
     );
   }
 }

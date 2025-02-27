@@ -15,8 +15,9 @@ import 'products.dart';
 
 class CategoryProductsViewBody extends StatefulWidget {
   final HomeDepartmentResponseModel departmentResponseModel;
-
-  const CategoryProductsViewBody(this.departmentResponseModel, {super.key});
+  final bool isMerchant;
+  const CategoryProductsViewBody(
+      {super.key, required this.isMerchant, required this.departmentResponseModel});
 
   @override
   State<CategoryProductsViewBody> createState() =>
@@ -65,7 +66,7 @@ class _CategoryProductsViewBodyState extends State<CategoryProductsViewBody> {
                 }
 
                 return FadeInLeft(
-                  child: Products(
+                  child: Products(isMerchant: widget.isMerchant,
                     width: width,
                     height: height,
                     departmentProducts: products,

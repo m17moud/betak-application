@@ -108,7 +108,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
         ),
         body: BlocBuilder<MerchantLoginCubit, MerchantLoginState>(
           builder: (context, state) {
-            if (state is LoggedIn) {
+            if (state is MerchantLoggedIn) {
               var sellerData = state.merchantInfo;
 
               return BlocProvider(

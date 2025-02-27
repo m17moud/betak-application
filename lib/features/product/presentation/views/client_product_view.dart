@@ -17,8 +17,10 @@ import '../../../category_products/data/models/products_model.dart';
 import 'widgets/product_view_body.dart';
 
 class ClientProductView extends StatefulWidget {
+  final bool isMerchant;
   final ProductsModel productsModel;
-  const ClientProductView({super.key, required this.productsModel});
+  const ClientProductView(
+      {super.key, required this.productsModel, required this.isMerchant});
 
   @override
   _ClientProductViewState createState() => _ClientProductViewState();
@@ -77,12 +79,13 @@ class _ClientProductViewState extends State<ClientProductView> {
                 backgroundColor: Styles.flyByNight,
                 title: Text(
                   widget.productsModel.pname!,
-                  style: Styles.styleBoldIrinaSans20
-                      .copyWith(color: ColorManager.lightGrey, fontSize: width * 0.05),
+                  style: Styles.styleBoldIrinaSans20.copyWith(
+                      color: ColorManager.lightGrey, fontSize: width * 0.05),
                 ),
               ),
               backgroundColor: ColorManager.white,
               body: ProductViewBody(
+                isMerchant: widget.isMerchant,
                 productsModel: widget.productsModel,
               ),
               bottomNavigationBar: Padding(

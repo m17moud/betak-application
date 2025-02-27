@@ -6,20 +6,20 @@ abstract class MerchantLoginState {}
 final class MerchantLoginInitial extends MerchantLoginState {}
 class Loading extends MerchantLoginState {}
 
-class LoggedIn extends MerchantLoginState {
+class MerchantLoggedIn extends MerchantLoginState {
   final MerchantLoginResponseModel merchantInfo;
 
-   LoggedIn({required this.merchantInfo});
+   MerchantLoggedIn({required this.merchantInfo});
 
   List<Object> get props => [merchantInfo];
 }
 
-class LoggedOut extends MerchantLoginState {}
+class MerchantLoggedOut extends MerchantLoginState {}
 
-class LoginError extends MerchantLoginState {
+class MerchantLoginError extends MerchantLoginState {
   final String message;
 
-  LoginError({required this.message});
+  MerchantLoginError({required this.message});
 
   List<Object> get props => [message];
 }

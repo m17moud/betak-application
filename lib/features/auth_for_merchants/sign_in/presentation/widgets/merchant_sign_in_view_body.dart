@@ -37,7 +37,7 @@ class MerchantSignInViewBody extends StatelessWidget {
               return const LoadingDialog();
             },
           );
-        } else if (state is LoggedIn) {
+        } else if (state is MerchantLoggedIn) {
           
           Navigator.pop(context); // Hide loading dialog
           Navigator.pushNamedAndRemoveUntil(
@@ -45,7 +45,7 @@ class MerchantSignInViewBody extends StatelessWidget {
             Routes.homeMerchantRoute,
             (route) => false,
           );
-        } else if (state is LoginError) {
+        } else if (state is MerchantLoginError) {
           Navigator.pop(context); // Hide loading dialog
           ErrorDialog.show(
             context: context,

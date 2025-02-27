@@ -6,10 +6,11 @@ import '../../../../../core/utils/color_manager.dart';
 import '../../../../category_products/data/models/products_model.dart';
 import 'product_view_body.dart';
 
-
 class MerchantProductView extends StatelessWidget {
   final ProductsModel productsModel;
-  const MerchantProductView({super.key, required this.productsModel});
+  final bool isMerchant;
+  const MerchantProductView(
+      {super.key, required this.productsModel, required this.isMerchant});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class MerchantProductView extends StatelessWidget {
       ),
       backgroundColor: ColorManager.white,
       body: ProductViewBody(
+        isMerchant: isMerchant,
         productsModel: productsModel,
       ),
       bottomNavigationBar: Padding(

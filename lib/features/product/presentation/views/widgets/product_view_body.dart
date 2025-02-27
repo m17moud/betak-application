@@ -1,19 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
+
+import 'package:betak/core/utils/routes_manager.dart';
 
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/string_manager.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../../../category_products/data/models/products_model.dart';
-import 'package:flutter/material.dart';
-import 'package:readmore/readmore.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../category_products/data/models/products_model.dart';
 
 // ignore: must_be_immutable
 class ProductViewBody extends StatefulWidget {
+  bool isMerchant;
   ProductsModel productsModel;
 
   ProductViewBody({
     super.key,
+    required this.isMerchant,
     required this.productsModel,
   });
 
@@ -83,7 +88,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                       ),
                     ],
                   )
-                : const Center(child:  Text("لا يوجد صورة")),
+                : const Center(child: Text("لا يوجد صورة")),
           ),
           Padding(
             padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
@@ -186,9 +191,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
               colorClickableText: ColorManager.black,
               trimCollapsedText: 'عرض المزيد',
               trimExpandedText: '.عرض اقل',
-              style: Styles.styleBoldIrinaSans20.copyWith(
-                
-              ),
+              style: Styles.styleBoldIrinaSans20.copyWith(),
               textAlign: TextAlign.justify,
             ),
           ),
@@ -197,7 +200,17 @@ class _ProductViewBodyState extends State<ProductViewBody> {
             child: Align(
               alignment: Alignment.bottomRight,
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.merchantProductForClientRoute,
+                    arguments: {
+                      'isMerchant': widget.isMerchant,
+                      'sellerModel': widget.productsModel.seller,
+                      'sellerId': widget.productsModel.sellerid
+                    },
+                  );
+                },
                 child: Text(
                   "التاجر : ${widget.productsModel.seller!.sname}",
                   style: TextStyle(

@@ -45,13 +45,13 @@ class _HomeMerchantViewState extends State<HomeMerchantView> {
       ],
       child: BlocListener<MerchantLoginCubit, MerchantLoginState>(
         listener: (context, state) {
-          if (state is LoggedOut) {
+          if (state is MerchantLoggedOut) {
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.chooseUserType,
               (route) => false,
             );
-          } else if (state is LoginError) {
+          } else if (state is MerchantLoginError) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(AppStrings.logoutError.tr()),
             ));
@@ -87,7 +87,6 @@ class _HomeMerchantViewState extends State<HomeMerchantView> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                   ),
-                  // Logout button
                   SpeedDialChild(
                     child: const Icon(
                       Icons.exit_to_app,

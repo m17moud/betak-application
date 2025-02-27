@@ -32,7 +32,7 @@ class _MerchantProductsViewBodyState extends State<MerchantProductsViewBody> {
       create: (context) => sl<MerchantLoginCubit>()..checkAuthStatus(),
       child: BlocBuilder<MerchantLoginCubit, MerchantLoginState>(
         builder: (context, state) {
-          if (state is LoggedIn) {
+          if (state is MerchantLoggedIn) {
             var sellerData = state.merchantInfo;
 
             return Column(
