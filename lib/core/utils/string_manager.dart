@@ -73,6 +73,8 @@ class AppStrings {
   static const String errorAddProduct="errorAddProduct";
   static const String mustAddImage="mustAddImage";
   static const String addProduct = "addProduct";
+  static const String productSizeError = "productSizeError";
+
 
 
   // update product

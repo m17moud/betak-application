@@ -19,5 +19,13 @@ class AddProductError extends AddProductState {
   @override
   List<Object> get props => [message];
 }
+class ProductSizeError extends AddProductState {
+  final String message;
+  const ProductSizeError({
+    required this.message,
+  });
+  @override
+  List<Object> get props => [message];
+}
 
 class AddProductInitial extends AddProductState {}
