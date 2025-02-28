@@ -226,7 +226,7 @@ Future<void> init() async {
     () => HomeCubit(homeUsecase: sl()),
   );
   sl.registerFactory(
-    () => AddProductCubit(addProductUsecase: sl()),
+    () => AddProductCubit(addProductUsecase: sl(),productsUsecase: sl()),
   );
   sl.registerFactory(
         () => CategoryProductsCubit(productsUsecase: sl()),

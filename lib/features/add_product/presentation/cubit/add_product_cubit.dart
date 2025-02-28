@@ -1,7 +1,11 @@
 
 
+import 'package:betak/core/utils/string_manager.dart';
+import 'package:betak/features/category_products/data/models/products_model.dart';
+import 'package:betak/features/category_products/domain/usecases/products_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,10 +16,26 @@ part 'add_product_state.dart';
 
 class AddProductCubit extends Cubit<AddProductState> {
   final AddProductUsecase addProductUsecase;
-
-  AddProductCubit({required this.addProductUsecase})
+  final ProductsUsecase productsUsecase;
+  AddProductCubit({required this.addProductUsecase,required this.productsUsecase})
       : super(AddProductInitial());
+  Future<int> getProducts(String merchantID) async {
+    final failureOrLogin = await productsUsecase.call(
+      Params(
+        idType: "seller_id",
+        pkey: ApiConstants.selectProductsPkey,
+        depID: merchantID,
+      ),
+    );
 
+    return failureOrLogin.fold(
+          (failure) {
+        emit(AddProductError(message: failure.message));
+        return 0;
+      },
+          (departmentProducts) => departmentProducts.length,
+    );
+  }
   Future<void> addProduct(
       final String did,
       final String name,
@@ -23,15 +43,20 @@ class AddProductCubit extends Cubit<AddProductState> {
       final String sid,
       final String description,
       final List<XFile?> image) async {
-    // Convert XFile to MultipartFile
+
+    int productCount = await getProducts(sid);
+
+    if (productCount >= 20) {
+      emit(ProductSizeError(message: AppStrings.productSizeError.tr()));
+      return;
+    }
+
     List<MultipartFile> imageFiles = [];
     for (var img in image) {
-      // You can also check mimeType here if needed
       var file = await MultipartFile.fromFile(img!.path, filename: img.name);
       imageFiles.add(file);
     }
 
-    // Add the converted files to FormData
     FormData formData = FormData.fromMap({
       ApiConstants.pKey: ApiConstants.addProductPKey,
       'did': did,
@@ -39,7 +64,7 @@ class AddProductCubit extends Cubit<AddProductState> {
       'price': price,
       'sid': sid,
       'description': description,
-      'image[]': imageFiles, // Send the image files as part of the form data
+      'image[]': imageFiles,
     });
 
     emit(AddProductLoading());
@@ -47,8 +72,9 @@ class AddProductCubit extends Cubit<AddProductState> {
     final failureOrLogin = await addProductUsecase.call(formData);
 
     failureOrLogin.fold(
-      (failure) => emit(AddProductError(message: failure.message)),
-      (success) => emit(AddProductSuccess()),
+          (failure) => emit(AddProductError(message: failure.message)),
+          (success) => emit(AddProductSuccess()),
     );
   }
+
 }

@@ -91,7 +91,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       return const LoadingDialog();
                     }
                     if (state is AddProductError) {
-                      ErrorDialog.show(
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+
+    ErrorDialog.show(
                           context: context,
                           message: AppStrings.errorAddProduct,
                           onPressed: () {
@@ -100,7 +102,25 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               Routes.homeMerchantRoute,
                               (route) => false,
                             );
-                          });
+                          },
+    );
+    });
+                    }
+                    if (state is ProductSizeError) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+
+                        ErrorDialog.show(
+                          context: context,
+                          message: AppStrings.productSizeError,
+                          onPressed: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              Routes.homeMerchantRoute,
+                                  (route) => false,
+                            );
+                          },
+                        );
+                      });
                     }
                     if (state is AddProductSuccess) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
