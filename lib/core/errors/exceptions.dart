@@ -27,6 +27,13 @@ class ConflictException implements Exception {
   ConflictException({required this.errModel});
 }
 
+class GoneException implements Exception {
+  final ErrorModel errModel;
+
+  GoneException({required this.errModel});
+}
+
+
 class ServerLoginAuthException implements Exception {
   final ErrorModel errModel;
 
@@ -71,6 +78,9 @@ void handleDioExceptions(DioException e) {
               errModel: ErrorModel.fromJson(e.response!.data));
         case 409: //conflict
           throw ConflictException(
+              errModel: ErrorModel.fromJson(e.response!.data));
+               case 410: //Deleted
+          throw GoneException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 422: //  Unprocessable Entity
           throw ServerException(

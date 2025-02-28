@@ -1,3 +1,4 @@
+import '../../../../../core/utils/color_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +62,8 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                   SvgPicture.asset(Assets.imagesLogo),
                   const SizedBox(height: 8),
                   Text(AppStrings.splashScreenText.tr(),
-                      style: Styles.styleRegularInter16),
+                      style: Styles.styleBoldInriaSans16
+                          .copyWith(color: ColorManager.white)),
                 ],
               ),
             );

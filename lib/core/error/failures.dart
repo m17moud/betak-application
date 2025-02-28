@@ -18,6 +18,12 @@ class ServerFailure extends Failure {
   List<Object?> get props => [];
 }
 
+class GoneFailure extends Failure {
+  const GoneFailure({super.message = AppStrings.locGoneMessage});
+  @override
+  List<Object?> get props => [];
+}
+
 class ConflictFailure extends Failure {
   const ConflictFailure({super.message = AppStrings.locConflictMessage});
   @override

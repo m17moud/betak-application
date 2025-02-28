@@ -104,7 +104,8 @@ class AppStrings {
   static const String locNetworkErrorTitle = "network_error_title";
   static const String locNetworkErrorDescription = "network_error_description";
   static const String locNetworkErrorMessage = "network_error_message";
-  static const String locConflictMessage = "locConflictMessage";
+  static const String locConflictMessage = "conflictMessage";
+  static const String locGoneMessage = "goneMessage";
 
   //auth errors
   static const String locUnAuthorizedError = "unauthorized_error";
