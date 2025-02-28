@@ -1,7 +1,6 @@
 
 
 import 'package:betak/core/utils/string_manager.dart';
-import 'package:betak/features/category_products/data/models/products_model.dart';
 import 'package:betak/features/category_products/domain/usecases/products_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';

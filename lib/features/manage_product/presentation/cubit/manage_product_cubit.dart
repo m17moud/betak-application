@@ -1,7 +1,6 @@
-
+// ignore_for_file: depend_on_referenced_packages
 
 import 'dart:io';
-
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -19,8 +18,8 @@ class ManageProductCubit extends Cubit<ManageProductState> {
   final UpdateProductUsecase updateProductUsecase;
   final DeleteProductUsecase deleteProductUsecase;
 
-
-  ManageProductCubit({required this.updateProductUsecase,required this.deleteProductUsecase})
+  ManageProductCubit(
+      {required this.updateProductUsecase, required this.deleteProductUsecase})
       : super(UpdateProductInitial());
 // Convert URLs to XFile before updating the product
   Future<List<XFile>> convertUrlsToXFiles(List<String> imageUrls) async {
@@ -36,11 +35,12 @@ class ManageProductCubit extends Cubit<ManageProductState> {
           finalImages.add(XFile(file.path));
         }
       } catch (e) {
-        emit(UpdateProductError( message: e.toString()));
+        emit(UpdateProductError(message: e.toString()));
       }
     }
     return finalImages;
   }
+
   Future<void> updateProduct(
       final String pid,
       final String name,
@@ -61,7 +61,7 @@ class ManageProductCubit extends Cubit<ManageProductState> {
     FormData formData = FormData.fromMap({
       ApiConstants.pKey: ApiConstants.updateProductsPkey,
       ApiConstants.tp: ApiConstants.updateProductsTP,
-      'id':pid,
+      'id': pid,
       'name': name,
       'price': price,
       'uid': sid,
@@ -80,15 +80,14 @@ class ManageProductCubit extends Cubit<ManageProductState> {
   }
 
   Future<void> deleteProduct(
-      final String pid,
-      final String sid,
-     ) async {
-
+    final String pid,
+    final String sid,
+  ) async {
     FormData formData = FormData.fromMap({
       ApiConstants.pKey: ApiConstants.deleteProductsPkey,
       ApiConstants.tp: ApiConstants.deleteProductsTP,
-      'pid':pid,
-      'uid': sid, 
+      'pid': pid,
+      'uid': sid,
     });
 
     emit(DeleteProductLoading());
@@ -96,9 +95,8 @@ class ManageProductCubit extends Cubit<ManageProductState> {
     final failureOrLogin = await deleteProductUsecase.call(formData);
 
     failureOrLogin.fold(
-          (failure) => emit(DeleteProductError(message: failure.message)),
-          (success) => emit(DeleteProductSuccess()),
+      (failure) => emit(DeleteProductError(message: failure.message)),
+      (success) => emit(DeleteProductSuccess()),
     );
   }
-
 }
