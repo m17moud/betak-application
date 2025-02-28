@@ -1,8 +1,8 @@
-import '../../../../../core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/styles.dart';
 import '../../../../category_products/data/models/products_model.dart';
 import 'product_view_body.dart';
 

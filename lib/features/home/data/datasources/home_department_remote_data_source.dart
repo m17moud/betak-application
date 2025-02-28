@@ -1,9 +1,9 @@
 
-import 'package:betak/features/home/data/models/home_department_response_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
+import '../models/home_department_response_model.dart';
 
 abstract class HomeDepartmentRemoteDataSource {
   Future<List<HomeDepartmentResponseModel>> getDepartments(String pkey);

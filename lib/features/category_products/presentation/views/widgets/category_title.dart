@@ -1,6 +1,6 @@
-import '../../../../../core/utils/styles.dart';
-
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/styles.dart';
 
 class CategoryTitle extends StatelessWidget {
   const CategoryTitle({

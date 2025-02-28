@@ -24,7 +24,6 @@ class InternetController extends ChangeNotifier {
       if (!await InternetController.hasGlobalNetwork()) {
         return false;
       }
-      // print("connected to global netowrk ");
 
       var url = "${ApiConstants.baseUrl}/";
       var res = await http.get(Uri.parse(url), headers: {

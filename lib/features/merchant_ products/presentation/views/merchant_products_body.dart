@@ -1,18 +1,19 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/utils/string_manager.dart';
+import '../../../../core/utils/styles.dart';
+import '../../../../core/widgets/loading_error.dart';
+import '../../../../injection_container.dart';
 import '../../../auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
 import '../../../category_products/data/models/products_model.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../../../core/utils/string_manager.dart';
-import '../../../../core/widgets/loading_error.dart';
 import '../cubit/merchant_products_cubit.dart';
 import 'widgets/app_logo.dart';
 import 'widgets/categorie_title.dart';
 import 'widgets/no_prodcuts.dart';
 import 'widgets/products.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/styles.dart';
-import '../../../../injection_container.dart';
 
 class MerchantProductsViewBody extends StatefulWidget {
   const MerchantProductsViewBody({super.key});

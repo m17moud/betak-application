@@ -1,7 +1,8 @@
-import '../utils/color_manager.dart';
-import '../utils/string_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/color_manager.dart';
+import '../utils/string_manager.dart';
 
 class LoadingError extends StatelessWidget {
   final String text;

@@ -1,4 +1,4 @@
-import 'package:betak/core/utils/routes_manager.dart';
+import '../../../../../core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,6 +17,7 @@ class _LoadingSplashViewBodyState extends State<LoadingSplashViewBody> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, Routes.splashRoute);
     });
   }

@@ -1,11 +1,11 @@
 
 
 
-import '../models/products_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
+import '../models/products_model.dart';
 
 abstract class ProductsRemoteDataSource {
   Future<List<ProductsModel>> getProducts(  String pkey,String depID,String idType);

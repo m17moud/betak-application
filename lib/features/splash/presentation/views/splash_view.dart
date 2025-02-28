@@ -1,5 +1,5 @@
-import 'package:betak/features/auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
-import 'package:betak/injection_container.dart';
+import '../../../auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
+import '../../../../injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

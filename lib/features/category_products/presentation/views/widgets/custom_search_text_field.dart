@@ -1,4 +1,4 @@
-import 'package:betak/core/utils/color_manager.dart';
+import '../../../../../core/utils/color_manager.dart';
 
 import '../../../../../core/utils/string_manager.dart';
 import '../../../data/models/products_model.dart';

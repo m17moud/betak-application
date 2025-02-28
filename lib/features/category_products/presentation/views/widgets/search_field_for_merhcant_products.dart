@@ -1,22 +1,24 @@
+import '../../../../../core/utils/color_manager.dart';
+
+import '../../../../../core/utils/string_manager.dart';
+import '../../../../merchant_ products/presentation/cubit/merchant_products_cubit.dart';
+import '../../../data/models/products_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../category_products/data/models/products_model.dart';
-import '../../../../merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
 
-class CustomSearchTextField extends StatefulWidget {
-  const CustomSearchTextField({super.key, required this.screenWidth});
+class SearchFieldForMerhcantProducts extends StatefulWidget {
+  const SearchFieldForMerhcantProducts({super.key, required this.screenWidth});
 
   final double screenWidth;
 
   @override
-  State<CustomSearchTextField> createState() => _CustomSearchTextFieldState();
+  State<SearchFieldForMerhcantProducts> createState() => _SearchFieldForMerhcantProductsState();
 }
 
-class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
+class _SearchFieldForMerhcantProductsState extends State<SearchFieldForMerhcantProducts> {
   List<ProductsModel> searchHistory = [];
   final SearchController _searchController = SearchController();
 
@@ -46,19 +48,24 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
         context.read<MerchantProductsCubit>().allProducts;
 
     final Set<String> seenProductNames = {};
-    final filteredProducts = products.where((product) {
-      final pname = product.pname!.toLowerCase();
-      if (seenProductNames.contains(pname)) {
-        return false;
-      } else {
-        seenProductNames.add(pname);
-        return pname.contains(input.toLowerCase());
-      }
-    }).toList();
+
+    final filteredProducts = products
+        .where((product) {
+          final pname = product.pname!.toLowerCase();
+          if (seenProductNames.contains(pname)) {
+            return false;
+          } else {
+            seenProductNames.add(pname);
+            return true;
+          }
+        })
+        .where((product) =>
+            product.pname!.toLowerCase().contains(input.toLowerCase()))
+        .toList();
 
     return filteredProducts.map(
       (ProductsModel product) => ListTile(
-        leading: const Icon(Icons.shopping_cart, color: Colors.blue),
+        leading: const Icon(Icons.shopping_cart, color: ColorManager.blue),
         title: Text(product.pname!),
         trailing: IconButton(
           icon: const Icon(Icons.call_missed),
@@ -95,12 +102,13 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
     return SearchAnchor.bar(
       searchController: _searchController,
       barHintText: AppStrings.searchAboutProduct.tr(),
-      barOverlayColor: WidgetStateProperty.all(Colors.white),
+      barOverlayColor: WidgetStateProperty.all(ColorManager.white),
       constraints: BoxConstraints(
         maxWidth: widget.screenWidth * 0.85,
         minHeight: 55,
       ),
-      barBackgroundColor: const WidgetStatePropertyAll(Color(0xFFF3F7F8)),
+      barBackgroundColor:
+          const WidgetStatePropertyAll(ColorManager.darkerWhite),
       barShape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -108,7 +116,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
       ),
       barHintStyle: WidgetStatePropertyAll(
         Styles.styleRegularInter16.copyWith(
-          color: const Color(0xFF455A64),
+          color: Styles.flyByNight,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -121,7 +129,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
             Center(
               child: Text(
                 AppStrings.emptySearchHistory.tr(),
-                style: const TextStyle(color: Colors.grey),
+                style: const TextStyle(color: ColorManager.grey),
               ),
             ),
           ];
@@ -139,7 +147,6 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
       ),
       onChanged: (query) {
         context.read<MerchantProductsCubit>().searchProducts(query);
-        setState(() {});
       },
     );
   }

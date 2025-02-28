@@ -1,4 +1,4 @@
-import 'package:betak/core/utils/routes_manager.dart';
+import '../../../../../core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,6 +23,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       _navigated = true;
       Future.delayed(const Duration(seconds: 1), () {
         if (mounted) {
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacementNamed(context, routeName);
         }
       });
