@@ -14,7 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getDepartments() async {
     emit(HomeDepartmentsLoading());
-    final failureOrLogin = await homeUsecase.call(const Params(
+    final failureOrLogin = await homeUsecase.call( Params(
       pkey: ApiConstants.homePKey,
     ));
 

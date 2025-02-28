@@ -1,70 +1,67 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiConstants {
-  //api urls
-  static const String baseUrl = "https://baiytak.com/";
-  static const String pKey = "pkey";
-  static const String tp = "tp";
+  // API URLs
+  static String get baseUrl => dotenv.env['BASE_URL'] ?? 'https://default-url.com/';
+  static String get pKey => dotenv.env['PKEY'] ?? 'default_pkey';
+  static String get tp => dotenv.env['TP'] ?? 'default_tp';
 
+  // Client SignUp
+  static String get clientSignUp => dotenv.env['CLIENT_SIGN_UP'] ?? 'default_path';
+  static String get clientSignUpPKey => dotenv.env['CLIENT_SIGN_UP_PKEY'] ?? 'default_pkey';
 
-  static const String clientSignUp = "addCustomer.php";
-  static const String clientSignUpPKey =
-      "RVNLCinYW-YH8P06VtODBv2dE2dG1hmlzrzJUFk3RrGD83QH0u9kvHJWOxWvZofp";
+  // Client SignIn
+  static String get clientSignIn => dotenv.env['CLIENT_SIGN_IN'] ?? 'default_path';
+  static String get clientSignInPKey => dotenv.env['CLIENT_SIGN_IN_PKEY'] ?? 'default_pkey';
 
-  static const String clientSignIn = "customer_Login.php";
-  static const String clientSignInPKey =
-      "NJaFaJJQE2bOUUNObqjLJ6S2u0w1t5IOM1Vju2U8U6k=";
+  // Merchant SignUp
+  static String get merchantSignUp => dotenv.env['MERCHANT_SIGN_UP'] ?? 'default_path';
+  static String get merchantSignUpPKey => dotenv.env['MERCHANT_SIGN_UP_PKEY'] ?? 'default_pkey';
 
-  static const String merchantSignUp = "addSeller.php";
-  static const String merchantSignUpPKey =
-      "Rd9XllPgn6bsIdFe3AUk3dUxCDdp2pNZNjYWtLxFivRH1PuyOqdV2LwyR0OWT8j2";
+  // Merchant SignIn
+  static String get merchantSignIn => dotenv.env['MERCHANT_SIGN_IN'] ?? 'default_path';
+  static String get merchantSignInPKey => dotenv.env['MERCHANT_SIGN_IN_PKEY'] ?? 'default_pkey';
 
-  static const String merchantSignIn = "seller_Login.php";
-  static const String merchantSignInPKey =
-      "Hg-CGkNmGLs9KZmLZTz-VqXMkPpDt2b5RCpznPmnPntYmVXeBSQuiWe2y50rRS_C";
+  // Home
+  static String get home => dotenv.env['HOME'] ?? 'default_path';
+  static String get homePKey => dotenv.env['HOME_PKEY'] ?? 'default_pkey';
 
-  static const String home = "departments.php";
-  static const String homePKey = "ZhV3JolXYZB8H6FX5xraFEYa7byx9wGRCXZcYP-Uc_U=";
+  // Add Product
+  static String get addProduct => dotenv.env['ADD_PRODUCT'] ?? 'default_path';
+  static String get addProductPKey => dotenv.env['ADD_PRODUCT_PKEY'] ?? 'default_pkey';
 
-  static const String addProduct = "addProduct.php";
-  static const String addProductPKey =
-      "WXxakcr0HsSbhpu8b9eUSMrqtu1Xo_NpWfufT1c7jx6UzJ47VkWJ7Hich-HXqhCf";
+  // Select Products
+  static String get selectProducts => dotenv.env['SELECT_PRODUCTS'] ?? 'default_path';
+  static String get selectProductsPKey => dotenv.env['SELECT_PRODUCTS_PKEY'] ?? 'default_pkey';
 
-  static const String selectProducts = "products.php";
-  static const String selectProductsPkey =
-      "_ZRFTUv09aUHSTol4r0Dp28PGcd8FsnDrs076u1Sr8s=";
+  // Update Products
+  static String get updateProducts => dotenv.env['UPDATE_PRODUCTS'] ?? 'default_path';
+  static String get updateProductsPKey => dotenv.env['UPDATE_PRODUCTS_PKEY'] ?? 'default_pkey';
+  static String get updateProductsTP => dotenv.env['UPDATE_PRODUCTS_TP'] ?? 'default_pkey';
 
+  // Delete Products
+  static String get deleteProducts => dotenv.env['DELETE_PRODUCTS'] ?? 'default_path';
+  static String get deleteProductsPKey => dotenv.env['DELETE_PRODUCTS_PKEY'] ?? 'default_pkey';
+  static String get deleteProductsTP => dotenv.env['DELETE_PRODUCTS_TP'] ?? 'default_pkey';
 
-  static const String updateProducts = "updateData.php";
-  static const String updateProductsPkey =
-      "zlNfUI7_2ywfYcwy31cQHeTupyXtjUY9N3G6wAXwKmc=";
-  static const String updateProductsTP =
-      "wBBetRCZ1_-shJzRTPyQ9tAPs6PcynDpnZLMoTrI0CM=";
+  // Add Like
+  static String get addLike => dotenv.env['ADD_LIKE'] ?? 'default_path';
+  static String get addLikePKey => dotenv.env['ADD_LIKE_PKEY'] ?? 'default_pkey';
 
-  static const String deleteProducts = "delete.php";
-  static const String deleteProductsPkey =
-      "G7ZtPfW6ukrICE8DWauVfq4gt560lSfmF-qMluM71pw=";
-  static const String deleteProductsTP =
-      "09iLwSpUHJKh03w8PpU-csDFLAEL4Zi1j3scr01pPsZCuc49J41wF3b4dy9nkctp";
+  // Check Like
+  static String get checkLike => dotenv.env['CHECK_LIKE'] ?? 'default_path';
+  static String get checkLikePKey => dotenv.env['CHECK_LIKE_PKEY'] ?? 'default_pkey';
 
-
-  static const String addLike = "Like.php";
-  static const String addLikePkey =
-      "A9aWJ9tSwUr008vlUt_YPkSHzi2jH_7XNKpExGVcMIk=";
-
-  static const String checkLike = "checkLike.php";
-  static const String checkLikePkey =
-      "A9aWJ9tSwUr008vlUt_YPkSHzi2jH_7XNKpExGVcMIk=";
-
-//api keys
-
-  static String status = "status";
-  static String errorMessage = "error";
-  static String email = "email";
-  static String password = "password";
-  static String token = "token";
-  static String message = "message";
-  static String id = "id";
-  static String name = "name";
-  static String phone = "phone";
-  static String confirmPassword = "confirmPassword";
-  static String location = "location";
+  // API Keys
+  static String get status => dotenv.env['STATUS'] ?? 'default_status';
+  static String get errorMessage => dotenv.env['ERROR_MESSAGE'] ?? 'default_error_message';
+  static String get email => dotenv.env['EMAIL'] ?? 'default_email';
+  static String get password => dotenv.env['PASSWORD'] ?? 'default_password';
+  static String get token => dotenv.env['TOKEN'] ?? 'default_token';
+  static String get message => dotenv.env['MESSAGE'] ?? 'default_message';
+  static String get id => dotenv.env['ID'] ?? 'default_id';
+  static String get name => dotenv.env['NAME'] ?? 'default_name';
+  static String get phone => dotenv.env['PHONE'] ?? 'default_phone';
+  static String get confirmPassword => dotenv.env['CONFIRM_PASSWORD'] ?? 'default_confirm_password';
+  static String get location => dotenv.env['LOCATION'] ?? 'default_location';
 }

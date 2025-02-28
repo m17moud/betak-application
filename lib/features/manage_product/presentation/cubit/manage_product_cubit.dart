@@ -60,7 +60,7 @@ class ManageProductCubit extends Cubit<ManageProductState> {
     }
 
     FormData formData = FormData.fromMap({
-      ApiConstants.pKey: ApiConstants.updateProductsPkey,
+      ApiConstants.pKey: ApiConstants.updateProductsPKey,
       ApiConstants.tp: ApiConstants.updateProductsTP,
       'id': pid,
       'name': name,
@@ -85,7 +85,7 @@ class ManageProductCubit extends Cubit<ManageProductState> {
     final String sid,
   ) async {
     FormData formData = FormData.fromMap({
-      ApiConstants.pKey: ApiConstants.deleteProductsPkey,
+      ApiConstants.pKey: ApiConstants.deleteProductsPKey,
       ApiConstants.tp: ApiConstants.deleteProductsTP,
       'pid': pid,
       'uid': sid,

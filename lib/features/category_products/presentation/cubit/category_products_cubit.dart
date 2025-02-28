@@ -20,7 +20,7 @@ class CategoryProductsCubit extends Cubit<CategoryProductsState> {
     emit(CategoryProductsLoading());
     final failureOrLogin = await productsUsecase.call(
       Params(
-        pkey: ApiConstants.selectProductsPkey,
+        pkey: ApiConstants.selectProductsPKey,
         depID: depID,
         idType: "depr_id"
       ),

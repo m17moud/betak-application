@@ -1,7 +1,5 @@
 
 
-import '../../../../core/utils/string_manager.dart';
-import '../../../category_products/domain/usecases/products_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,6 +7,8 @@ import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/api/end_ponits.dart';
+import '../../../../core/utils/string_manager.dart';
+import '../../../category_products/domain/usecases/products_usecase.dart';
 import '../../domain/usecases/add_product_usecase.dart';
 
 part 'add_product_state.dart';
@@ -22,7 +22,7 @@ class AddProductCubit extends Cubit<AddProductState> {
     final failureOrLogin = await productsUsecase.call(
       Params(
         idType: "seller_id",
-        pkey: ApiConstants.selectProductsPkey,
+        pkey: ApiConstants.selectProductsPKey,
         depID: merchantID,
       ),
     );

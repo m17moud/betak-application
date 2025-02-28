@@ -23,7 +23,7 @@ class MerchantProductsCubit extends Cubit<MerchantProductsState> {
     final failureOrLogin = await productsUsecase.call(
       Params(
         idType: "seller_id",
-        pkey: ApiConstants.selectProductsPkey,
+        pkey: ApiConstants.selectProductsPKey,
         depID: merchantID,
       ),
     );

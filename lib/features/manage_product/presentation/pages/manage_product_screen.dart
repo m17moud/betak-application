@@ -1,13 +1,10 @@
 import 'dart:io';
-import '../../../../core/widgets/error_dialog.dart';
-import '../../../../core/widgets/loading_dialog.dart';
-import '../../../../core/widgets/success_dialog.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../core/widgets/warning_dialog.dart';
+
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/string_manager.dart';
@@ -15,7 +12,11 @@ import '../../../../core/utils/styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/custom_title_text.dart';
+import '../../../../core/widgets/error_dialog.dart';
+import '../../../../core/widgets/loading_dialog.dart';
+import '../../../../core/widgets/success_dialog.dart';
 import '../../../../core/widgets/text_form_validation.dart';
+import '../../../../core/widgets/warning_dialog.dart';
 import '../../../../injection_container.dart';
 import '../../../auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
 import '../../../category_products/data/models/products_model.dart';

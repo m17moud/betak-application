@@ -14,7 +14,7 @@ class AddLikeCubit extends Cubit<AddLikeState> {
 
   Future<void> addLike(final String customerId, final String productId) async {
     FormData formData = FormData.fromMap({
-      ApiConstants.pKey: ApiConstants.addLikePkey,
+      ApiConstants.pKey: ApiConstants.addLikePKey,
       'customer_id': customerId,
       'product_id': productId,
     });
@@ -32,7 +32,7 @@ class AddLikeCubit extends Cubit<AddLikeState> {
   Future<void> checkLike(
       final String customerId, final String productId) async {
     FormData formData = FormData.fromMap({
-      ApiConstants.pKey: ApiConstants.checkLikePkey,
+      ApiConstants.pKey: ApiConstants.checkLikePKey,
       'customer_id': customerId,
       'product_id': productId,
     });

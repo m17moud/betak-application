@@ -24,8 +24,8 @@ dependencies:
     sdk: flutter
   flutter_animate: ^4.5.2
   flutter_bloc: ^8.1.6
+  flutter_dotenv: ^5.2.1
   flutter_launcher_icons: ^0.14.3
-  flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^9.2.4
   flutter_speed_dial: ^7.0.0
   flutter_svg: ^2.0.10+1
@@ -61,6 +61,7 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/.
+    - .env
   # example:
   # fonts:
   #   - family: Schyler
