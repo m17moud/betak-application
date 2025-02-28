@@ -5,13 +5,14 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/api/end_ponits.dart';
 import '../../domain/usecases/delete_product_usecase.dart';
 import '../../domain/usecases/update_product_usecase.dart';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
+
 part 'manage_product_state.dart';
 
 class ManageProductCubit extends Cubit<ManageProductState> {

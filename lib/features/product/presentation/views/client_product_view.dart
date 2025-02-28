@@ -5,6 +5,7 @@ import 'package:betak/core/utils/string_manager.dart';
 import 'package:betak/core/utils/styles.dart';
 import 'package:betak/core/widgets/error_dialog.dart';
 import 'package:betak/features/add_like/presentation/cubit/add_like_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -127,7 +128,8 @@ class _ClientProductViewState extends State<ClientProductView> {
                                 if (isLiked) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text('تم اضافة اعجاب للمنتج',
+                                      content: Text(
+                                          AppStrings.likeAddSuccess.tr(),
                                           style: Styles.styleSemiBoldInter18
                                               .copyWith(
                                                   fontSize: width * 0.045,
@@ -169,7 +171,7 @@ class _ClientProductViewState extends State<ClientProductView> {
                       ),
                       label: Center(
                         child: Text(
-                          'التواصل عبر الفيسبوك',
+                        AppStrings.connectViaFacebook.tr(),
                           style: Styles.styleBoldIrinaSans20
                               .copyWith(color: ColorManager.white),
                           textAlign: TextAlign.center,

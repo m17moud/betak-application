@@ -1,13 +1,12 @@
-import '../../../../../core/utils/color_manager.dart';
-
-import '../../../../../core/utils/string_manager.dart';
-import '../../../../merchant_ products/presentation/cubit/merchant_products_cubit.dart';
-import '../../../data/models/products_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../merchant_ products/presentation/cubit/merchant_products_cubit.dart';
+import '../../../data/models/products_model.dart';
 
 class SearchFieldForMerhcantProducts extends StatefulWidget {
   const SearchFieldForMerhcantProducts({super.key, required this.screenWidth});

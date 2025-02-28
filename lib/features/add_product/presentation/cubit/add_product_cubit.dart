@@ -1,7 +1,7 @@
 
 
-import 'package:betak/core/utils/string_manager.dart';
-import 'package:betak/features/category_products/domain/usecases/products_usecase.dart';
+import '../../../../core/utils/string_manager.dart';
+import '../../../category_products/domain/usecases/products_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';

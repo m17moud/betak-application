@@ -1,13 +1,12 @@
-import '../../../../../core/utils/color_manager.dart';
-
-import '../../../../../core/utils/string_manager.dart';
-import '../../../data/models/products_model.dart';
-import '../../cubit/category_products_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../data/models/products_model.dart';
+import '../../cubit/category_products_cubit.dart';
 
 class CustomSearchTextField extends StatefulWidget {
   const CustomSearchTextField({super.key, required this.screenWidth});

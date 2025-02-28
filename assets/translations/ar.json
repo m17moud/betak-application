@@ -82,10 +82,10 @@
     "errorLoginAgain": "حدث خطأ يرجى اعادة تسجيل الدخول مرة أخرى",
     "cancel": "إلغاء",
     "updateProduct": " تعديل المنتج",
-    "successUpdateProduct": "تم تعديل المنتج" ,
+    "successUpdateProduct": "تم تعديل المنتج",
     "errorUpdateProduct": "خطأ في تعديل المنتج يرجى المحاولة مرة أخرى",
     "deleteProduct": " حذف المنتج",
-    "successDeleteProduct": "تم حذف المنتج" ,
+    "successDeleteProduct": "تم حذف المنتج",
     "errorDeleteProduct": "خطأ في حذف المنتج يرجى المحاولة مرة أخرى",
     "deleteWarning": "هل أنت متأكد أنك تريد حذف هذا المنتج؟",
     "addProduct": "إضافة منتج",
@@ -96,5 +96,14 @@
     "cantAddMoreThan2Images": "لا يمكن اضافة اكثر من صورتين",
     "warning": "تحذير !",
     "locConflictMessage": "لا يمكن تسجيل الدخول على أكثر من جهاز من فضلك سجل الخروج و أعد المحاولة",
-    "productSizeError": "عذرا.. لا يمكنك اضافة اكثر من 20 منتج "
+    "productSizeError": "عذرا.. لا يمكنك اضافة اكثر من 20 منتج ",
+    "splashScreenText": "أشترى,بيع,اكسب...كرر",
+    "likeAddSuccess": "تم اضافة اعجاب للمنتج",
+    "connectViaFacebook": "التواصل عبر الفيسبوك",
+    "noImgae": "لا يوجد صورة",
+    "specifications": "المواصفات",
+    "viewLess": "عرض أقل",
+    "viewMore": "عرض المزيد",
+    "theMerchant": "التاجر",
+    "merchantProducts": "منتجات التاجر"
 }

@@ -24,17 +24,8 @@ class AppLogo extends StatelessWidget {
             "assets/images/logo.png",
             height: height * .1,
           ),
-          // const SizedBox(
-          //   height: 10,
-          // ),
-          // FadeInRight(
-          //     delay: const Duration(milliseconds: 500),
-          //     child: CustomSearchTextField(
-          //       screenWidth: width,
-          //     )),
         ],
       ),
     );
   }
 }
-

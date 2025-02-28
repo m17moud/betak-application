@@ -1,3 +1,5 @@
+import '../../../../../core/utils/string_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -61,7 +63,7 @@ class MerchantProductView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment
-                    .center, // Ensure the icon is centered vertically
+                    .center, 
                 children: [
                   Icon(
                     Icons.facebook,
@@ -70,9 +72,9 @@ class MerchantProductView extends StatelessWidget {
                   ),
                   SizedBox(
                       width: width *
-                          0.03), // Add some space between the icon and text
+                          0.03), 
                   Text(
-                    'التواصل عبر الفيسبوك',
+                    AppStrings.connectViaFacebook.tr(),
                     style: Styles.styleBoldIrinaSans20
                         .copyWith(color: ColorManager.white),
                     textAlign: TextAlign.center,

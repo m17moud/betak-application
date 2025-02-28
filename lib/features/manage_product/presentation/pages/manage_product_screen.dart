@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:betak/core/widgets/error_dialog.dart';
-import 'package:betak/core/widgets/loading_dialog.dart';
-import 'package:betak/core/widgets/success_dialog.dart';
+import '../../../../core/widgets/error_dialog.dart';
+import '../../../../core/widgets/loading_dialog.dart';
+import '../../../../core/widgets/success_dialog.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,6 @@ import '../../../../injection_container.dart';
 import '../../../auth_for_merchants/sign_in/presentation/cubit/merchant_login_cubit.dart';
 import '../../../category_products/data/models/products_model.dart';
 import '../cubit/manage_product_cubit.dart';
-
 
 class ManageProductScreen extends StatefulWidget {
   final ProductsModel product;
@@ -118,19 +117,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                     if (state is UpdateProductLoading) {
                       return const LoadingDialog();
                     }
-                    // if (state is UpdateProductError) {
-                    //   ErrorDialog.show(
-                    //     context: context,
-                    //     message: AppStrings.errorUpdateProduct,
-                    //     onPressed: () {
-                    //       Navigator.pushNamedAndRemoveUntil(
-                    //         context,
-                    //         Routes.homeMerchantRoute,
-                    //         (route) => false,
-                    //       );
-                    //     },
-                    //   );
-                    // }
+
                     if (state is UpdateProductError) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         ErrorDialog.show(
@@ -140,7 +127,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               Routes.homeMerchantRoute,
-                                  (route) => false,
+                              (route) => false,
                             );
                           },
                         );
@@ -294,7 +281,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                     children: [
                                       CustomButton1(
                                         backgroundColor: Styles.blueSky,
-                                        onPressed: () async{
+                                        onPressed: () async {
                                           if (images.isEmpty &&
                                               existingImages.isEmpty) {
                                             ScaffoldMessenger.of(context)
@@ -319,20 +306,19 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                           if (_formKey.currentState
                                                   ?.validate() ??
                                               false) {
-
-                                            context.read<ManageProductCubit>().updateProduct(
-                                              widget.product.id!,
-                                              name,
-                                              price,
-                                              sellerData.SellerID!,
-                                              description,
-                                              existingImages,
-                                              images,  // ✅ This list now excludes removed images
-                                            );
+                                            context
+                                                .read<ManageProductCubit>()
+                                                .updateProduct(
+                                                  widget.product.id!,
+                                                  name,
+                                                  price,
+                                                  sellerData.SellerID!,
+                                                  description,
+                                                  existingImages,
+                                                  images, // This list now excludes removed images
+                                                );
                                           }
                                         },
-
-
                                         text: AppStrings.updateProduct.tr(),
                                         textStyle: Styles.styleSemiBoldInter22
                                             .copyWith(

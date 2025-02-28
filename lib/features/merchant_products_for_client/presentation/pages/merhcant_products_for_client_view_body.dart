@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animate_do/animate_do.dart';
-import 'package:betak/features/category_products/presentation/views/widgets/merchant_products_app_logo.dart';
 import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+import 'package:betak/features/merchant_products_for_client/widgets/merchant_products_app_logo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,7 @@ import '../../../merchant_ products/presentation/views/widgets/categorie_title.d
 
 // ignore: must_be_immutable
 class MerhcantProductsForClientViewBody extends StatefulWidget {
-  bool isMerchant ;
+  bool isMerchant;
   String sellerId;
   Seller sellerModel;
   MerhcantProductsForClientViewBody({
@@ -39,10 +40,12 @@ class _MerchantProductsViewBodyState
 
     return Column(
       children: [
-        FadeInDown(child: MerchantProductsAppLogo(height: height, width: width)),
+        FadeInDown(
+            child: MerchantProductsAppLogo(height: height, width: width)),
         FadeInRight(
             child: CategorieTitle(
-          departmentName: "منتجات التاجر ${widget.sellerModel.sname}",
+          departmentName:
+              " ${AppStrings.merchantProducts.tr()} ${widget.sellerModel.sname}",
           width: width,
           height: height,
         )),
@@ -73,7 +76,7 @@ class _MerchantProductsViewBodyState
 
                 return FadeInLeft(
                   child: Products(
-                isMerchant:  widget.isMerchant   ,
+                    isMerchant: widget.isMerchant,
                     width: width,
                     height: height,
                     departmentProducts: products,

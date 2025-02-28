@@ -1,3 +1,6 @@
+import '../../../../../core/utils/string_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../../../core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,8 +61,8 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                 children: [
                   SvgPicture.asset(Assets.imagesLogo),
                   const SizedBox(height: 8),
-                  const Text('أشترى,بيع,اكسب...كرر',
-                      style: Styles.styleRegularJua15),
+                  Text(AppStrings.splashScreenText.tr(),
+                      style: Styles.styleRegularInter16),
                 ],
               ),
             );

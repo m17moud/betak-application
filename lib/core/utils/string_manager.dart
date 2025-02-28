@@ -3,6 +3,7 @@ class AppStrings {
 
 // initial
   static const String chooseUserType= "chooseUserType";
+  static const String splashScreenText= "splashScreenText";
   static const String cleint= "cleint";
   static const String merchant= "merchant";
   static const String betak= "betak";
@@ -144,6 +145,14 @@ class AppStrings {
   static const String egp = "egp";
   static const String cancel = "cancel";
   static const String cantAddMoreThan2Images = "cantAddMoreThan2Images";
+  static const String likeAddSuccess = "likeAddSuccess";
+  static const String connectViaFacebook = "connectViaFacebook";
+  static const String noImgae = "noImgae";
+  static const String specifications = "specifications";
+  static const String viewMore = "viewMore";
+  static const String viewLess = "viewLess";
+  static const String theMerchant = "theMerchant";
+  static const String merchantProducts = "merchantProducts";
 
 
 

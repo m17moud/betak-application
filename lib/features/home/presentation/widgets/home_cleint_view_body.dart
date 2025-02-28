@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
-import '../../../../core/utils/string_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/string_manager.dart';
 import '../../../../core/utils/styles.dart';
 import '../../../../core/widgets/loading_error.dart';
 import '../cubit/home_cubit.dart';

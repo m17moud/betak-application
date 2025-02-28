@@ -46,7 +46,6 @@ class _ProductViewBodyState extends State<ProductViewBody> {
             child: widget.productsModel.images!.isNotEmpty
                 ? Column(
                     children: [
-                      // Image Slider (PageView)
                       Expanded(
                         child: PageView.builder(
                           controller: _pageController,
@@ -87,7 +86,11 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                       ),
                     ],
                   )
-                : const Center(child: Text("لا يوجد صورة")),
+                : Center(
+                    child: Text(
+                    AppStrings.noImgae.tr(),
+                    style: Styles.styleRegularInter16,
+                  )),
           ),
           Padding(
             padding: EdgeInsets.only(right: paddingRight, top: paddingTop),
@@ -171,7 +174,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                'المواصفات',
+               AppStrings.specifications.tr(),
                 style: Styles.styleRegularIrina22.copyWith(
                   fontSize: width * 0.055,
                   fontWeight: FontWeight.bold,
@@ -188,8 +191,8 @@ class _ProductViewBodyState extends State<ProductViewBody> {
               trimMode: TrimMode.Line,
               trimLines: 2,
               colorClickableText: ColorManager.black,
-              trimCollapsedText: 'عرض المزيد',
-              trimExpandedText: '.عرض اقل',
+              trimCollapsedText: AppStrings.viewMore.tr(),
+              trimExpandedText: AppStrings.viewLess.tr(),
               style: Styles.styleBoldIrinaSans20.copyWith(),
               textAlign: TextAlign.justify,
             ),
@@ -211,7 +214,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                   );
                 },
                 child: Text(
-                  "التاجر : ${widget.productsModel.seller!.sname}",
+                  "${AppStrings.theMerchant.tr()} : ${widget.productsModel.seller!.sname}",
                   style: TextStyle(
                     fontSize: width * 0.047,
                     fontWeight: FontWeight.bold,

@@ -1,26 +1,25 @@
 
 
-import '../../features/manage_product/presentation/pages/manage_product_screen.dart';
-
-import '../../features/category_products/data/models/products_model.dart';
-import '../../features/category_products/presentation/views/category_products_view.dart';
-import '../../features/home/data/models/home_department_response_model.dart';
-import '../../features/merchant_products_for_client/presentation/pages/merhcant_products_for_client_view.dart';
-import '../../features/product/presentation/views/widgets/merchant_product_view.dart';
-import '../widgets/choose_user_type.dart';
-import '../../features/add_product/presentation/pages/add_product_screen.dart';
-import '../../features/home/presentation/pages/home_merchant_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../features/add_product/presentation/pages/add_product_screen.dart';
 import '../../features/auth_for_client/sign_in/presentation/pages/client_sign_in_view.dart';
 import '../../features/auth_for_client/sign_up/presentation/pages/client_sign_up_view.dart';
 import '../../features/auth_for_merchants/sign_in/presentation/pages/merchant_sign_in_view.dart';
 import '../../features/auth_for_merchants/sign_up/presentation/pages/merchant_sign_up_view.dart';
+import '../../features/category_products/data/models/products_model.dart';
+import '../../features/category_products/presentation/views/category_products_view.dart';
+import '../../features/home/data/models/home_department_response_model.dart';
 import '../../features/home/presentation/pages/home_cleint_view.dart';
+import '../../features/home/presentation/pages/home_merchant_view.dart';
+import '../../features/manage_product/presentation/pages/manage_product_screen.dart';
+import '../../features/merchant_products_for_client/presentation/pages/merhcant_products_for_client_view.dart';
 import '../../features/product/presentation/views/client_product_view.dart';
+import '../../features/product/presentation/views/widgets/merchant_product_view.dart';
 import '../../features/splash/presentation/views/loading_splash_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
+import '../widgets/choose_user_type.dart';
 import 'color_manager.dart';
 import 'string_manager.dart';
 

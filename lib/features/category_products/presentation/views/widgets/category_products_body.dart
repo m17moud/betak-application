@@ -8,7 +8,7 @@ import '../../../../../core/widgets/loading_error.dart';
 import '../../../../home/data/models/home_department_response_model.dart';
 import '../../../data/models/products_model.dart';
 import '../../cubit/category_products_cubit.dart';
-import 'app_logo.dart';
+import 'app_logo_with_search.dart';
 import 'category_title.dart';
 import 'no_prodcuts.dart';
 import 'products.dart';
@@ -32,7 +32,7 @@ class _CategoryProductsViewBodyState extends State<CategoryProductsViewBody> {
 
     return Column(
       children: [
-        FadeInDown(child: AppLogo(height: height, width: width)),
+        FadeInDown(child: AppLogoWithSearch(height: height, width: width)),
         FadeInRight(
           child: CategoryTitle(
             departmentName: widget.departmentResponseModel.name!,

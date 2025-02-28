@@ -1,11 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/styles.dart';
-import 'custom_search_text_field.dart';
+import '../../../core/utils/styles.dart';
+import '../../category_products/presentation/views/widgets/search_field_for_merhcant_products.dart';
 
-class AppLogo extends StatelessWidget {
-  const AppLogo({
+class MerchantProductsAppLogo extends StatelessWidget {
+  const MerchantProductsAppLogo({
     super.key,
     required this.height,
     required this.width,
@@ -31,7 +31,7 @@ class AppLogo extends StatelessWidget {
           ),
           FadeInRight(
               delay: const Duration(milliseconds: 500),
-              child: CustomSearchTextField(
+              child: SearchFieldForMerhcantProducts(
                 screenWidth: width,
               )),
         ],
