@@ -11,7 +11,10 @@ abstract class CustomerLoginRepository {
     required String loginpassword,
   });
 
-  Future<Either<Failure, void>> customerLogout();
+  Future<Either<Failure, void>> customerLogout({ required String pkey,
+    required String tp,
+    required String id,
+  });
 
 
 

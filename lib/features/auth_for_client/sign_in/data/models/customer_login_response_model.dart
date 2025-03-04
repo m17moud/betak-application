@@ -12,12 +12,14 @@ class CustomerLoginResponseModel {
   String? CustomerMobile;
   String? CustomerEmail;
   DateTime? CustomerDate;
+  String? sessionid;
   CustomerLoginResponseModel({
     required this.CustomerID,
     required this.CustomerName,
     required this.CustomerMobile,
     required this.CustomerEmail,
     required this.CustomerDate,
+    required this.sessionid
   });
   factory CustomerLoginResponseModel.fromJson(Map<String, dynamic> json) => _$CustomerLoginResponseModelFromJson(json);
 

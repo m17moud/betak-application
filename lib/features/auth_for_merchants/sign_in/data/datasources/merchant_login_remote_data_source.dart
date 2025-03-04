@@ -6,6 +6,7 @@ import '../models/merchant_login_response_model.dart';
 
 abstract class MerchantLoginRemoteDataSource {
   Future<MerchantLoginResponseModel> login(String pkey,String loginemail, String loginpassword);
+  Future<void> logout(String pkey,String tp, String id);
 
 }
 class MerchantLoginRemoteDataSourceImpl extends MerchantLoginRemoteDataSource {
@@ -20,6 +21,10 @@ class MerchantLoginRemoteDataSourceImpl extends MerchantLoginRemoteDataSource {
       'loginemail':loginemail ,
       'loginpassword': loginpassword,
     });
+
+
+    print("frrrrrrrrrrrrrrrom data ${formData.fields}");
+
     var response = await dio.post(
       ApiConstants.merchantSignIn,
       data: formData
@@ -29,6 +34,26 @@ class MerchantLoginRemoteDataSourceImpl extends MerchantLoginRemoteDataSource {
 
 
       return logResponse;
+
+  }
+
+
+  @override
+  Future<void> logout(String pkey,String tp, String id) async {
+    var formData = FormData.fromMap({
+      ApiConstants.pKey :pkey,
+      ApiConstants.id:id ,
+      ApiConstants.tp: tp,
+
+    });
+
+ await dio.post(
+        ApiConstants.logout,
+        data: formData,
+
+
+    );
+
 
   }
 }

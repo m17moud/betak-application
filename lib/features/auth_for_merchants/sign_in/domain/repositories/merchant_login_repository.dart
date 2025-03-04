@@ -12,7 +12,10 @@ abstract class MerchantLoginRepository {
     required String loginpassword,
   });
 
-  Future<Either<Failure, void>> MerchantLogout();
+  Future<Either<Failure, void>> MerchantLogout({ required String pkey,
+    required String tp,
+    required String id,
+  });
 
 
 

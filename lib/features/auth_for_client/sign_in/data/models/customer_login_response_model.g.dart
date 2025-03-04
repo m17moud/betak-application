@@ -16,6 +16,7 @@ CustomerLoginResponseModel _$CustomerLoginResponseModelFromJson(
       CustomerDate: json['CustomerDate'] == null
           ? null
           : DateTime.parse(json['CustomerDate'] as String),
+      sessionid: json['sessionid'] as String?,
     );
 
 Map<String, dynamic> _$CustomerLoginResponseModelToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$CustomerLoginResponseModelToJson(
       'CustomerMobile': instance.CustomerMobile,
       'CustomerEmail': instance.CustomerEmail,
       'CustomerDate': instance.CustomerDate?.toIso8601String(),
+      'sessionid': instance.sessionid,
     };

@@ -52,6 +52,12 @@ class ApiConstants {
   static String get checkLike => dotenv.env['CHECK_LIKE'] ?? 'default_path';
   static String get checkLikePKey => dotenv.env['CHECK_LIKE_PKEY'] ?? 'default_pkey';
 
+  // Logout
+  static String get logout => dotenv.env['LOGOUT'] ?? 'default_path';
+  static String get logoutPKey => dotenv.env['LOGOUT_PKEY'] ?? 'default_pkey';
+  static String get logoutSellerTP => dotenv.env['LOGOUT_SELLER_TP'] ?? 'default_path';
+  static String get logoutCustomerTP => dotenv.env['LOGOUT_CUSTOMER_TP'] ?? 'default_pkey';
+
   // API Keys
   static String get status => dotenv.env['STATUS'] ?? 'default_status';
   static String get errorMessage => dotenv.env['ERROR_MESSAGE'] ?? 'default_error_message';

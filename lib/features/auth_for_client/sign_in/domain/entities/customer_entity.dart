@@ -8,6 +8,7 @@ class CustomerEntity extends Equatable {
   String customerMobile;
   String customerEmail;
   DateTime customerDate;
+  String sessionid;
 
   CustomerEntity({
     required this.customerId,
@@ -15,9 +16,10 @@ class CustomerEntity extends Equatable {
     required this.customerMobile,
     required this.customerEmail,
     required this.customerDate,
+    required this.sessionid
   });
 
   @override
   List<Object?> get props =>
-      [customerId, customerName, customerMobile, customerEmail, customerDate];
+      [customerId, customerName, customerMobile, customerEmail, customerDate,sessionid];
 }

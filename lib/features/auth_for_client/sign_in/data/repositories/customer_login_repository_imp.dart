@@ -64,9 +64,14 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
   }
 
   @override
-  Future<Either<Failure, void>> customerLogout() async {
+  Future<Either<Failure, void>> customerLogout({ required String pkey,
+    required String tp,
+    required String id,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
+        await _remote.logout(pkey, tp, id);
+
         await _local.logout();
         return const Right(null);
       } catch (e) {

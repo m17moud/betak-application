@@ -12,6 +12,8 @@ class MerchantEntity extends Equatable {
   String sellerAddress;
   String sellerDepartmentId;
   DateTime sellerDate;
+  String? sessionid;
+
 
   MerchantEntity({
     required this.sellerId,
@@ -23,6 +25,7 @@ class MerchantEntity extends Equatable {
     required this.sellerAddress,
     required this.sellerDate,
     required this.sellerDepartmentId,
+    required this.sessionid
   });
   @override
   List<Object?> get props => [
@@ -34,6 +37,7 @@ class MerchantEntity extends Equatable {
         sellerProductsType,
         sellerAddress,
         sellerDate,
-        sellerDepartmentId
+        sellerDepartmentId,
+    sessionid
       ];
 }

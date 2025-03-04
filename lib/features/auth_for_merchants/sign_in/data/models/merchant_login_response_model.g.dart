@@ -20,6 +20,7 @@ MerchantLoginResponseModel _$MerchantLoginResponseModelFromJson(
           ? null
           : DateTime.parse(json['SellerDate'] as String),
       SellerDepartment: json['SellerDepartment'] as String?,
+      sessionid: json['sessionid'] as String?,
     );
 
 Map<String, dynamic> _$MerchantLoginResponseModelToJson(
@@ -34,4 +35,5 @@ Map<String, dynamic> _$MerchantLoginResponseModelToJson(
       'SellerAddress': instance.SellerAddress,
       'SellerDepartment': instance.SellerDepartment,
       'SellerDate': instance.SellerDate?.toIso8601String(),
+      'sessionid': instance.sessionid,
     };

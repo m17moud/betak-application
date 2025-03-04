@@ -15,6 +15,8 @@ class MerchantLoginResponseModel {
   String? SellerAddress;
   String? SellerDepartment;
   DateTime? SellerDate;
+  String? sessionid;
+
 
   MerchantLoginResponseModel({
     required this.SellerID,
@@ -26,6 +28,7 @@ class MerchantLoginResponseModel {
     required this.SellerProductsType,
     required this.SellerDate,
     required this.SellerDepartment,
+    required this.sessionid
   });
 
   factory MerchantLoginResponseModel.fromJson(Map<String, dynamic> json) =>

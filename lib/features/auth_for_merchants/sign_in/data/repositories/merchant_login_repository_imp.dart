@@ -65,9 +65,13 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
   }
 
   @override
-  Future<Either<Failure, void>> MerchantLogout() async {
+  Future<Either<Failure, void>> MerchantLogout({ required String pkey,
+    required String tp,
+    required String id,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
+        await _remote.logout(pkey,tp,id);
         await _local.logout();
         return const Right(null);
       } catch (e) {

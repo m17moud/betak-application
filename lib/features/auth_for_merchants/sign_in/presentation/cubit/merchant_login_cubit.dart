@@ -2,8 +2,10 @@
 
 import 'dart:convert';
 
+import 'package:betak/core/utils/string_manager.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:meta/meta.dart';
 
@@ -43,9 +45,25 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
   Future<void> logoutUser() async {
     emit(Loading());
     try {
-      final result = await merchantLogout.call(NoParams());
+      FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+      String? authJson =
+      await secureStorage.read(key: Constants.merchantSecureStorage);
+      if (authJson != null) {
+        final merchantData=MerchantLoginResponseModel.fromJson(jsonDecode(authJson));
+
+
+
+        final result = await merchantLogout.call(Parameters(pkey:  ApiConstants.logoutPKey, tp: ApiConstants.logoutSellerTP, id: merchantData.SellerID!));
       if (result != const Left(NetworkFailure())) {
         emit(MerchantLoggedOut());
+      }
+      else{
+        emit(MerchantLoginError(message: AppStrings.locNetworkErrorDescription.tr()));
+      }
+    }
+    else{
+        emit(MerchantLoginError(message: AppStrings.error.tr()));
       }
     } catch (e) {
       emit(MerchantLoginError(message: e.toString()));
