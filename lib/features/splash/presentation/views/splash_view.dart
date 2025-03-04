@@ -1,3 +1,4 @@
+import 'package:betak/features/auth_for_client/client_check_session/presentation/cubit/client_check_session_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +17,7 @@ class SplashView extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => sl<MerchantLoginCubit>()),
         BlocProvider(create: (context) => sl<CustomerLoginCubit>()),
+        BlocProvider(create: (context) => sl<ClientCheckSessionCubit>()),
       ],
       child: const Scaffold(
         backgroundColor: Styles.blueSky,

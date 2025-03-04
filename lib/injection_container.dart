@@ -2,6 +2,11 @@
 
 import 'package:betak/features/add_like/domain/usecases/add_like_usecase.dart';
 import 'package:betak/features/add_like/presentation/cubit/add_like_cubit.dart';
+import 'package:betak/features/auth_for_client/client_check_session/data/datasources/client_check_session_remote_datasource.dart';
+import 'package:betak/features/auth_for_client/client_check_session/data/repositories/client_check_session_repository_impl.dart';
+import 'package:betak/features/auth_for_client/client_check_session/domain/repositories/client_check_session_repository.dart';
+import 'package:betak/features/auth_for_client/client_check_session/domain/usecases/client_check_session_usecase.dart';
+import 'package:betak/features/auth_for_client/client_check_session/presentation/cubit/client_check_session_cubit.dart';
 import 'package:betak/features/category_products/data/datasources/products_remote_data_source.dart';
 import 'package:betak/features/category_products/data/repositories/products_repository_impl.dart';
 import 'package:betak/features/category_products/domain/repositories/product_repository.dart';
@@ -105,7 +110,7 @@ Future<void> init() async {
   );
 // update product
   sl.registerLazySingleton<ManageProductRemoteDatasource>(
-        () => ManageProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+    () => ManageProductRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
   sl.registerLazySingleton<ProductsRemoteDataSource>(
@@ -116,6 +121,11 @@ Future<void> init() async {
 
   sl.registerLazySingleton<AddLikeRemoteDataSource>(
     () => AddLikeRemoteDataSourceImpl(dio: DioConsumer(dio: sl())),
+  );
+
+// check client session
+  sl.registerLazySingleton<ClientCheckSessionRemoteDatasource>(
+    () => ClientCheckSessionRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
   //! Repositories
@@ -178,7 +188,13 @@ Future<void> init() async {
 
   // update product
   sl.registerLazySingleton<ManageProductRepository>(
-        () => ManageProductRepositoryImpl(manageProductRemoteDatasource: sl(), networkInfo: sl()),
+    () => ManageProductRepositoryImpl(
+        manageProductRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
+// client session
+  sl.registerLazySingleton<ClientCheckSessionRepository>(
+    () => ClientCheckSessionRepositoryImpl(remote: sl(), networkInfo: sl()),
   );
 
   //! Use cases
@@ -201,13 +217,15 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProductsUsecase(sl()));
   // update product
 
-  sl.registerLazySingleton(() => UpdateProductUsecase(manageProductRepository: sl()));
-  sl.registerLazySingleton(() => DeleteProductUsecase(manageProductRepository: sl()));
-// add like 
+  sl.registerLazySingleton(
+      () => UpdateProductUsecase(manageProductRepository: sl()));
+  sl.registerLazySingleton(
+      () => DeleteProductUsecase(manageProductRepository: sl()));
+// add like
 
   sl.registerLazySingleton(() => AddLikeUsecase(addLikeRepository: sl()));
-
-
+// client session
+  sl.registerLazySingleton(() => ClientCheckSessionUsecase(sl()));
 
   //! Cubits
   sl.registerFactory(
@@ -226,18 +244,23 @@ Future<void> init() async {
     () => HomeCubit(homeUsecase: sl()),
   );
   sl.registerFactory(
-    () => AddProductCubit(addProductUsecase: sl(),productsUsecase: sl()),
+    () => AddProductCubit(addProductUsecase: sl(), productsUsecase: sl()),
   );
   sl.registerFactory(
-        () => CategoryProductsCubit(productsUsecase: sl()),
+    () => CategoryProductsCubit(productsUsecase: sl()),
   );
   sl.registerFactory(
-        () => MerchantProductsCubit(productsUsecase: sl()),
+    () => MerchantProductsCubit(productsUsecase: sl()),
   );
   sl.registerFactory(
-        () => AddLikeCubit(addLikeUsecase: sl()),
+    () => AddLikeCubit(addLikeUsecase: sl()),
   );
   sl.registerFactory(
-        () => ManageProductCubit(deleteProductUsecase:sl(),updateProductUsecase: sl()),
+    () => ManageProductCubit(
+        deleteProductUsecase: sl(), updateProductUsecase: sl()),
+  );
+
+  sl.registerFactory(
+    () => ClientCheckSessionCubit(checkSessionUsecase: sl()),
   );
 }

@@ -11,7 +11,6 @@ import 'package:meta/meta.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/error/failures.dart';
-import '../../../../../core/usecases/usecase.dart';
 import '../../data/models/customer_login_response_model.dart';
 import '../../domain/usecases/customer_login_usecase.dart';
 import '../../domain/usecases/customer_logout_usecase.dart';
@@ -42,33 +41,31 @@ class CustomerLoginCubit extends Cubit<CustomerLoginState> {
 
   /// Handles user logout logic.
   Future<void> logoutUser() async {
-
     emit(Loading());
     try {
       FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
       String? authJson =
-      await secureStorage.read(key: Constants.customerSecureStorage);
+          await secureStorage.read(key: Constants.customerSecureStorage);
       if (authJson != null) {
-        final customerData=CustomerLoginResponseModel.fromJson(jsonDecode(authJson));
+        final customerData =
+            CustomerLoginResponseModel.fromJson(jsonDecode(authJson));
 
-
-
-        final result = await customerLogout.call(Parameters(pkey:  ApiConstants.logoutPKey, tp: ApiConstants.logoutCustomerTP, id: customerData.CustomerID!));
+        final result = await customerLogout.call(Parameters(
+            pkey: ApiConstants.logoutPKey,
+            tp: ApiConstants.logoutCustomerTP,
+            id: customerData.CustomerID!));
         if (result != const Left(NetworkFailure())) {
           emit(LoggedOut());
-        }
-        else{
+        } else {
           emit(LoginError(message: AppStrings.locNetworkErrorDescription.tr()));
         }
-      }
-      else{
+      } else {
         emit(LoginError(message: AppStrings.error.tr()));
       }
     } catch (e) {
       emit(LoginError(message: e.toString()));
     }
-
   }
 
   /// Checks if the user is already authenticated.

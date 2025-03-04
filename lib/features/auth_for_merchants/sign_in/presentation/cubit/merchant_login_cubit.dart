@@ -12,7 +12,6 @@ import 'package:meta/meta.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/error/failures.dart';
-import '../../../../../core/usecases/usecase.dart';
 import '../../data/models/merchant_login_response_model.dart';
 import '../../domain/usecases/merchant_login_usecase.dart';
 import '../../domain/usecases/merchant_logout_usecase.dart';

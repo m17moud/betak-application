@@ -33,7 +33,6 @@ class GoneException implements Exception {
   GoneException({required this.errModel});
 }
 
-
 class ServerLoginAuthException implements Exception {
   final ErrorModel errModel;
 

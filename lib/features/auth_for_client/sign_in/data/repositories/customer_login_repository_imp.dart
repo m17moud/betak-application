@@ -64,7 +64,8 @@ class CustomerLoginRepositoryImp extends CustomerLoginRepository {
   }
 
   @override
-  Future<Either<Failure, void>> customerLogout({ required String pkey,
+  Future<Either<Failure, void>> customerLogout({
+    required String pkey,
     required String tp,
     required String id,
   }) async {
