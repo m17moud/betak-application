@@ -13,10 +13,14 @@ String? validateEmail(String? value) {
   if (value == null || value.isEmpty) {
     return AppStrings.pleaseEnterYourEmail.tr();
   }
+
+  value = value.trim();
+
   final regex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
   if (!regex.hasMatch(value)) {
     return AppStrings.pleaseEnterAValidEmail.tr();
   }
+
   return null;
 }
 
@@ -74,7 +78,7 @@ String? validateProductName(String? value) {
     return AppStrings.pleaseEnterProductName.tr();
   }
   if (value.length < 5) {
-    return  AppStrings.cantBeLessThan5.tr();
+    return AppStrings.cantBeLessThan5.tr();
   }
   return null;
 }

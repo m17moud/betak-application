@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,10 +11,12 @@ void main() async {
   await dotenv.load(fileName: ".env");
   await di.init();
   await EasyLocalization.ensureInitialized();
-  runApp(EasyLocalization(
-      supportedLocales: const [Locale("ar")],
-      fallbackLocale: const Locale('ar'),
-      startLocale: const Locale('ar'),
-      path: 'assets/translations',
-      child: const BetakApplication()));
+  runApp(DevicePreview(
+    builder: (context) => EasyLocalization(
+        supportedLocales: const [Locale("ar")],
+        fallbackLocale: const Locale('ar'),
+        startLocale: const Locale('ar'),
+        path: 'assets/translations',
+        child: const BetakApplication()),
+  ));
 }
