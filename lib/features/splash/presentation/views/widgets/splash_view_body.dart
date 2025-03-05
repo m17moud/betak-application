@@ -70,7 +70,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                         Assets.imagesLogo,
                       ),
                       SizedBox(
-                        height: screenHeight * 0.02,
+                        height: screenHeight * 0.015,
                       ),
                       Text(
                         AppStrings.splashScreenText.tr(),
