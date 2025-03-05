@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:betak/core/utils/string_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';

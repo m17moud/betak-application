@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_client/client_check_session/data/models/client_check_session_response_model.dart';
+import '../../data/models/client_check_session_response_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failures.dart';

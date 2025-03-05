@@ -174,7 +174,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-               AppStrings.specifications.tr(),
+                AppStrings.specifications.tr(),
                 style: Styles.styleRegularIrina22.copyWith(
                   fontSize: width * 0.055,
                   fontWeight: FontWeight.bold,
@@ -190,7 +190,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
               widget.productsModel.pdescribtion!,
               trimMode: TrimMode.Line,
               trimLines: 2,
-              colorClickableText: ColorManager.black,
+              colorClickableText: ColorManager.blue,
               trimCollapsedText: AppStrings.viewMore.tr(),
               trimExpandedText: AppStrings.viewLess.tr(),
               style: Styles.styleBoldIrinaSans20.copyWith(),

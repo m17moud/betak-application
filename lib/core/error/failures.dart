@@ -2,8 +2,6 @@ import 'package:equatable/equatable.dart';
 
 import '../utils/string_manager.dart';
 
-
-
 abstract class Failure extends Equatable {
   final String message;
 
@@ -14,6 +12,13 @@ abstract class Failure extends Equatable {
 
 class ServerFailure extends Failure {
   const ServerFailure({super.message = AppStrings.locServerErrorMessage});
+  @override
+  List<Object?> get props => [];
+}
+
+class SessionExpiredFailure extends Failure {
+  const SessionExpiredFailure(
+      {super.message = AppStrings.locSessionErrorMessage});
   @override
   List<Object?> get props => [];
 }
@@ -29,8 +34,6 @@ class ConflictFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
-
-
 
 class UnAuthorizedFailure extends Failure {
   const UnAuthorizedFailure(

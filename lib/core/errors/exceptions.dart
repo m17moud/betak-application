@@ -39,6 +39,13 @@ class ServerLoginAuthException implements Exception {
   ServerLoginAuthException({required this.errModel});
 }
 
+
+class SessionExpiredException implements Exception {
+  final ErrorModel errModel;
+
+  SessionExpiredException({required this.errModel});
+}
+
 class UnAuthorizedException implements Exception {
   final ErrorModel errModel;
 
@@ -70,7 +77,7 @@ void handleDioExceptions(DioException e) {
           throw UnAuthorizedException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 403: //forbidden
-          throw ServerException(
+          throw SessionExpiredException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 404: //not found
           throw ServerLoginAuthException(

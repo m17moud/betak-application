@@ -22,3 +22,9 @@ class ClientCheckSessionFailure extends ClientCheckSessionState {
 
   const ClientCheckSessionFailure({required this.message});
 }
+
+class ClientCheckSessionNetworkFailure extends ClientCheckSessionState {
+  final String message;
+
+  const ClientCheckSessionNetworkFailure({required this.message});
+}

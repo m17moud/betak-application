@@ -3,30 +3,32 @@ import 'package:dartz/dartz.dart';
 import '../../../../../core/Network/network_info.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/errors/exceptions.dart';
-import '../../domain/repositories/client_check_session_repository.dart';
-import '../datasources/client_check_session_remote_datasource.dart';
-import '../models/client_check_session_response_model.dart';
+import '../../domain/repositories/merchant_check_session_repository.dart';
+import '../datasources/merhcant_check_session_remote_datasource.dart';
+import '../models/merchant_check_session_response_model.dart';
 
-class ClientCheckSessionRepositoryImpl extends ClientCheckSessionRepository {
-  final ClientCheckSessionRemoteDatasource _remote;
+class MerchantCheckSessionRepositoryImpl
+    extends MerchantCheckSessionRepository {
+  final MerchantCheckSessionRemoteDatasource _remote;
   final NetworkInfo _networkInfo;
 
-  ClientCheckSessionRepositoryImpl({
-    required ClientCheckSessionRemoteDatasource remote,
+  MerchantCheckSessionRepositoryImpl({
+    required MerchantCheckSessionRemoteDatasource remote,
     required NetworkInfo networkInfo,
   })  : _remote = remote,
         _networkInfo = networkInfo;
 
   @override
-  Future<Either<Failure, ClientCheckSessionResponseModel>> clientCheckSession(
-      {required String pkey,
-      required String tp,
-      required String id,
-      required String sessionId}) async {
+  Future<Either<Failure, MerchantCheckSessionResponseModel>>
+      merhcantCheckSession(
+          {required String pkey,
+          required String tp,
+          required String id,
+          required String sessionId}) async {
     if (await _networkInfo.isConnected) {
       try {
         var checkSessionData =
-            await _remote.clientCheckSession(pkey, tp, id, sessionId);
+            await _remote.merhcantCheckSession(pkey, tp, id, sessionId);
 
         return Right(checkSessionData);
       } on ServerException {

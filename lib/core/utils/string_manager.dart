@@ -2,6 +2,7 @@ class AppStrings {
   //!localization strings
 
 // initial
+  static const String techMark= "techMark";
   static const String chooseUserType= "chooseUserType";
   static const String splashScreenText= "splashScreenText";
   static const String cleint= "cleint";
@@ -100,6 +101,7 @@ class AppStrings {
   static const String locNetworkError = "network_error";
   static const String locServerError = "server_error";
   static const String locServerErrorMessage = "server_error_message";
+  static const String locSessionErrorMessage = "session_error_message";
   static const String locNoInternetConnection = "no_internet_connection";
   static const String locNetworkErrorTitle = "network_error_title";
   static const String locNetworkErrorDescription = "network_error_description";
@@ -137,6 +139,7 @@ class AppStrings {
   static const String continueText ="continueText";
   static const String success ="success";
   static const String warning="warning";
+  static const String from="from";
   // products
   static const String myProducts = "myProducts";
   static const String noProductsFound = "noProductsFound";

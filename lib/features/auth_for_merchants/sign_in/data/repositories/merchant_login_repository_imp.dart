@@ -41,8 +41,6 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
         return const Left(LoginAuthFailure());
       } on UnAuthorizedException {
         return const Left(UnAuthorizedFailure());
-      } on ConflictException {
-        return const Left(ConflictFailure());
       } on GoneException {
         return const Left(GoneFailure());
       }

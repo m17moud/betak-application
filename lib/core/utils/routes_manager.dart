@@ -1,11 +1,11 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../features/add_product/presentation/pages/add_product_screen.dart';
+import '../../features/auth_for_client/client_check_session/presentation/widgets/check_client_session_screen.dart';
 import '../../features/auth_for_client/sign_in/presentation/pages/client_sign_in_view.dart';
 import '../../features/auth_for_client/sign_up/presentation/pages/client_sign_up_view.dart';
+import '../../features/auth_for_merchants/merhcant_check_session/presentation/widgets/check_merchant_session_screen.dart';
 import '../../features/auth_for_merchants/sign_in/presentation/pages/merchant_sign_in_view.dart';
 import '../../features/auth_for_merchants/sign_up/presentation/pages/merchant_sign_up_view.dart';
 import '../../features/category_products/data/models/products_model.dart';
@@ -37,6 +37,8 @@ class Routes {
 
   static const String homeCleintRoute = "/home_cleint_view";
   static const String homeMerchantRoute = "/home_merchant_view";
+  static const String checkMerchantSession = "/check_merchant_session";
+  static const String checkClientSession = "/check_client_session";
 
   static const String categoryProducts = "/category_products_view";
 
@@ -50,6 +52,8 @@ class Routes {
   static Map<String, Widget Function(BuildContext, dynamic)> routesList = {
     loadingSplashRoute: (context, _) => const LoadingSplashView(),
     splashRoute: (context, _) => const SplashView(),
+    checkClientSession: (context, _) => const CheckClientSessionScreen(),
+    checkMerchantSession: (context, _) => const CheckMerchantSessionScreen(),
     clientSignInRoute: (context, _) => const ClientSignInView(),
     clientSignUpRoute: (context, _) => const ClientSignUpView(),
     merchantSignInRoute: (context, _) => const MerchantSignInView(),
@@ -64,17 +68,16 @@ class Routes {
           args['productsModel'] as ProductsModel;
       return ClientProductView(
         productsModel: productsModel,
-        isMerchant: isMerchant, 
+        isMerchant: isMerchant,
       );
     },
     merchantProductRoute: (context, args) {
-      final bool isMerchant =
-          args['isMerchant'] as bool; 
+      final bool isMerchant = args['isMerchant'] as bool;
       final ProductsModel productsModel =
           args['productsModel'] as ProductsModel;
       return MerchantProductView(
         productsModel: productsModel,
-        isMerchant: isMerchant, 
+        isMerchant: isMerchant,
       );
     },
     updateProductRoute: (context, args) =>

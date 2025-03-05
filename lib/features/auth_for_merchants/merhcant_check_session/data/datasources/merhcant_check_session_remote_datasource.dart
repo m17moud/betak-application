@@ -1,20 +1,20 @@
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
-import '../models/client_check_session_response_model.dart';
+import '../models/merchant_check_session_response_model.dart';
 
-abstract class ClientCheckSessionRemoteDatasource {
-  Future<ClientCheckSessionResponseModel> clientCheckSession(
+abstract class MerchantCheckSessionRemoteDatasource {
+  Future<MerchantCheckSessionResponseModel> merhcantCheckSession(
       String pkey, String tp, String id, String sessionId);
 }
 
-class ClientCheckSessionRemoteDatasourceImpl
-    extends ClientCheckSessionRemoteDatasource {
+class MerchantCheckSessionRemoteDatasourceImpl
+    extends MerchantCheckSessionRemoteDatasource {
   final DioConsumer dio;
 
-  ClientCheckSessionRemoteDatasourceImpl({required this.dio});
+  MerchantCheckSessionRemoteDatasourceImpl({required this.dio});
 
   @override
-  Future<ClientCheckSessionResponseModel> clientCheckSession(
+  Future<MerchantCheckSessionResponseModel> merhcantCheckSession(
       String pkey, String tp, String id, String sessionId) async {
     Map<String, dynamic> queryParameters = {
       "pkey": pkey,
@@ -26,7 +26,7 @@ class ClientCheckSessionRemoteDatasourceImpl
     var result = await dio.get(ApiConstants.checkSession,
         queryParameters: queryParameters);
 
-    var checkSessionInfo = ClientCheckSessionResponseModel.fromJson(result);
+    var checkSessionInfo = MerchantCheckSessionResponseModel.fromJson(result);
     return checkSessionInfo;
   }
 }

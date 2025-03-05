@@ -46,6 +46,11 @@ import 'features/auth_for_client/sign_up/data/repositories/client_signup_reposit
 import 'features/auth_for_client/sign_up/domain/repositories/client_signup_repository.dart';
 import 'features/auth_for_client/sign_up/domain/usecases/add_client_usecase.dart';
 import 'features/auth_for_client/sign_up/presentation/cubit/sign_up_cubit.dart';
+import 'features/auth_for_merchants/merhcant_check_session/data/datasources/merhcant_check_session_remote_datasource.dart';
+import 'features/auth_for_merchants/merhcant_check_session/data/repositories/merhcant_check_session_repository_impl.dart';
+import 'features/auth_for_merchants/merhcant_check_session/domain/repositories/merchant_check_session_repository.dart';
+import 'features/auth_for_merchants/merhcant_check_session/domain/usecases/merchant_check_session_usecase.dart';
+import 'features/auth_for_merchants/merhcant_check_session/presentation/cubit/merhcant_check_session_cubit.dart';
 import 'features/auth_for_merchants/sign_in/data/datasources/merchant_login_local_data_source.dart';
 import 'features/auth_for_merchants/sign_in/data/datasources/merchant_login_remote_data_source.dart';
 import 'features/auth_for_merchants/sign_in/data/repositories/merchant_login_repository_imp.dart';
@@ -128,6 +133,11 @@ Future<void> init() async {
     () => ClientCheckSessionRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
+  // check merhcant session
+  sl.registerLazySingleton<MerchantCheckSessionRemoteDatasource>(
+    () => MerchantCheckSessionRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
+
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
     () => CustomerLoginRepositoryImp(
@@ -196,6 +206,10 @@ Future<void> init() async {
   sl.registerLazySingleton<ClientCheckSessionRepository>(
     () => ClientCheckSessionRepositoryImpl(remote: sl(), networkInfo: sl()),
   );
+  // merchant session
+  sl.registerLazySingleton<MerchantCheckSessionRepository>(
+    () => MerchantCheckSessionRepositoryImpl(remote: sl(), networkInfo: sl()),
+  );
 
   //! Use cases
   //client
@@ -226,7 +240,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddLikeUsecase(addLikeRepository: sl()));
 // client session
   sl.registerLazySingleton(() => ClientCheckSessionUsecase(sl()));
-
+// Merchant session
+  sl.registerLazySingleton(() => MerchantCheckSessionUsecase(sl()));
   //! Cubits
   sl.registerFactory(
     () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
@@ -262,5 +277,9 @@ Future<void> init() async {
 
   sl.registerFactory(
     () => ClientCheckSessionCubit(checkSessionUsecase: sl()),
+  );
+
+  sl.registerFactory(
+    () => MerchantCheckSessionCubit(checkSessionUsecase: sl()),
   );
 }

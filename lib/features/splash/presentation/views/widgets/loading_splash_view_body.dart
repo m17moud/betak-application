@@ -1,3 +1,6 @@
+import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -24,24 +27,54 @@ class _LoadingSplashViewBodyState extends State<LoadingSplashViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
+    return Stack(
       children: [
-        Center(child: SvgPicture.asset(Assets.imagesLogo)),
-        const SizedBox(
-          height: 22,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: SvgPicture.asset(
+                Assets.imagesLogo,
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * 0.03,
+            ),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.35,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const LinearProgressIndicator(
+                    color: Styles.blueSky,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 145, right: 136),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: const LinearProgressIndicator(
-                color: Styles.blueSky,
-              ),
+        Positioned(
+          bottom: screenHeight * 0.1,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Column(
+              children: [
+                Text(AppStrings.from.tr(),
+                    style: Styles.styleBoldInriaSans16
+                        .copyWith(color: ColorManager.textFormFillColor)),
+                Text(AppStrings.techMark.tr(),
+                    style: Styles.styleBoldIrinaSans20
+                        .copyWith(color: ColorManager.white)),
+              ],
             ),
           ),
         ),

@@ -23,7 +23,6 @@ class MerchantLoginRemoteDataSourceImpl extends MerchantLoginRemoteDataSource {
     });
 
 
-    print("frrrrrrrrrrrrrrrom data ${formData.fields}");
 
     var response = await dio.post(
       ApiConstants.merchantSignIn,

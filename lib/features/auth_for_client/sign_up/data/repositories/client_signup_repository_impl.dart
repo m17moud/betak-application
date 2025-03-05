@@ -26,6 +26,8 @@ class ClientSignupRepositoryImpl extends ClientSignupRepository {
         return const Left(ServerFailure());
       } on UnAuthorizedException {
         return const Left(UnAuthorizedFailure());
+      } on ConflictException {
+        return const Left(ConflictFailure());
       }
     } else {
       return const Left(NetworkFailure());

@@ -1,9 +1,9 @@
-import '../../../../../core/utils/color_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
@@ -26,8 +26,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       _navigated = true;
       Future.delayed(const Duration(seconds: 1), () {
         if (mounted) {
-          // ignore: use_build_context_synchronously
-          Navigator.pushReplacementNamed(context, routeName);
+          Navigator.pushNamedAndRemoveUntil(
+            // ignore: use_build_context_synchronously
+            context, routeName, (route) => false,
+          );
         }
       });
     }
@@ -42,30 +44,71 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return BlocBuilder<CustomerLoginCubit, CustomerLoginState>(
       builder: (context, customerState) {
         return BlocBuilder<MerchantLoginCubit, MerchantLoginState>(
           builder: (context, merchantState) {
             if (customerState is LoggedIn) {
-              _navigateToPage(context, Routes.homeCleintRoute);
+              _navigateToPage(context, Routes.checkClientSession);
             } else if (merchantState is MerchantLoggedIn) {
-              _navigateToPage(context, Routes.homeMerchantRoute);
+              _navigateToPage(context, Routes.checkMerchantSession);
             } else if (customerState is LoggedOut &&
                 merchantState is MerchantLoggedOut) {
               _navigateToPage(context, Routes.chooseUserType);
             }
 
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(Assets.imagesLogo),
-                  const SizedBox(height: 8),
-                  Text(AppStrings.splashScreenText.tr(),
-                      style: Styles.styleBoldInriaSans16
-                          .copyWith(color: ColorManager.white)),
-                ],
-              ),
+            return Stack(
+              children: [
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        Assets.imagesLogo,
+                      ),
+                      SizedBox(
+                        height: screenHeight * 0.02,
+                      ),
+                      Text(
+                        AppStrings.splashScreenText.tr(),
+                        style: Styles.styleBoldInriaSans16.copyWith(
+                          color: ColorManager.white,
+                          fontSize: screenWidth * 0.04,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: screenHeight * 0.1,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          AppStrings.from.tr(),
+                          style: Styles.styleBoldInriaSans16.copyWith(
+                            color: ColorManager.textFormFillColor,
+                            fontSize: screenWidth * 0.04,
+                          ),
+                        ),
+                        Text(
+                          AppStrings.techMark.tr(),
+                          style: Styles.styleBoldIrinaSans20.copyWith(
+                            color: ColorManager.white,
+                            fontSize: screenWidth * 0.05,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             );
           },
         );

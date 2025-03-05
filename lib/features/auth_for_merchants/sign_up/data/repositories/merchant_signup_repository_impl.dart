@@ -20,12 +20,15 @@ class MerchantSignupRepositoryImpl extends MerchantSignupRepository {
   Future<Either<Failure, void>> addMerchant(merchantSignupEntity) async {
     if (await _networkInfo.isConnected) {
       try {
-        await _merchantSignupRemoteDatasource.merchantSignup(merchantSignupEntity);
+        await _merchantSignupRemoteDatasource
+            .merchantSignup(merchantSignupEntity);
         return const Right(null);
       } on ServerException {
         return const Left(ServerFailure());
       } on UnAuthorizedException {
         return const Left(UnAuthorizedFailure());
+      } on ConflictException {
+        return const Left(ConflictFailure());
       }
     } else {
       return const Left(NetworkFailure());
