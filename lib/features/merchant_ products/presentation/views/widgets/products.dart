@@ -39,7 +39,7 @@ class _ProductsState extends State<Products> {
           crossAxisCount: 1,
           crossAxisSpacing: widget.width * 0.03,
           mainAxisSpacing: widget.height * 0.04,
-          childAspectRatio: 0.75,
+          childAspectRatio: 1,
         ),
         itemCount: widget.departmentProducts.length,
         itemBuilder: (BuildContext context, int index) {
@@ -54,7 +54,6 @@ class _ProductsState extends State<Products> {
                     arguments: product);
               },
               child: AnimatedContainer(
-
                 duration: const Duration(milliseconds: 300),
                 decoration: BoxDecoration(
                   boxShadow: hoveredIndex == index
@@ -81,7 +80,6 @@ class _ProductsState extends State<Products> {
                           borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(12)),
                           child: CachedNetworkImage(
-
                             imageUrl: product.images?.isNotEmpty == true
                                 ? product.images![0]
                                 : 'https://via.placeholder.com/150',
@@ -95,8 +93,8 @@ class _ProductsState extends State<Products> {
                             ),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
-                            fit: BoxFit.fill,
-                            width:double.infinity,
+                            fit: BoxFit.contain,
+                            width: double.infinity,
                             height: double.minPositive,
                           ),
                         ),
@@ -116,7 +114,6 @@ class _ProductsState extends State<Products> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-
                             const SizedBox(height: 5),
                             Row(
                               children: [

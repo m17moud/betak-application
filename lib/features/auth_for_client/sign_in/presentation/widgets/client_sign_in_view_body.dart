@@ -151,7 +151,10 @@ class ClientSignInViewBody extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, Routes.clientForgotPasswrodRoute);
+                          },
                           child: Text(AppStrings.forgotPassword.tr()),
                         ),
                       ],

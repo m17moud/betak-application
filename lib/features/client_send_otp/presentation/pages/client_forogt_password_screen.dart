@@ -1,4 +1,5 @@
 import 'package:betak/core/utils/color_manager.dart';
+import 'package:betak/core/utils/routes_manager.dart';
 import 'package:betak/core/utils/string_manager.dart';
 import 'package:betak/core/utils/styles.dart';
 import 'package:betak/core/widgets/custom_button.dart';
@@ -64,7 +65,11 @@ class ClientForogtPasswordScreen extends StatelessWidget {
                   backgroundColor: Styles.blueSky,
                   text: AppStrings.confirm.tr(),
                   onPressed: () {
-                    if (formKey.currentState?.validate() ?? false) {}
+                    if (formKey.currentState?.validate() ?? false) {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.clientVerifyOtpRoute,
+                          arguments: emailController.text.trim());
+                    }
                   },
                   fontSize: fontSize,
                 ),

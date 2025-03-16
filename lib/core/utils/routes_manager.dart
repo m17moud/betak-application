@@ -1,3 +1,6 @@
+import 'package:betak/features/client_change_password/presentation/pages/client_reset_password_screen.dart';
+import 'package:betak/features/client_send_otp/presentation/pages/client_forogt_password_screen.dart';
+import 'package:betak/features/client_verify_otp/presentation/pages/client_verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -34,6 +37,10 @@ class Routes {
 
   static const String merchantSignInRoute = "/merchant_sign_in_view";
   static const String merchantSignUpRoute = "/merchant_sign_up_view";
+
+  static const String clientForgotPasswrodRoute = "/client_forgot_password";
+  static const String clientVerifyOtpRoute = "/client_verify_otp";
+  static const String clientResetPasswordRoute = "/client_reset_password";
 
   static const String homeCleintRoute = "/home_cleint_view";
   static const String homeMerchantRoute = "/home_merchant_view";
@@ -95,6 +102,11 @@ class Routes {
     },
     addProductRoute: (context, _) => const AddProductScreen(),
     chooseUserType: (context, _) => const ChooseUserType(),
+    clientForgotPasswrodRoute: (context, _) =>
+        const ClientForogtPasswordScreen(),
+    clientVerifyOtpRoute: (context, args) =>
+        ClientVerifyOtpScreen(userEmail: args as String),
+    clientResetPasswordRoute: (context, _) => const ClientResetPasswordScreen(),
   };
 
   static Scaffold get unDefinedRoute {

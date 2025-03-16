@@ -1,4 +1,5 @@
 import 'package:betak/core/utils/color_manager.dart';
+import 'package:betak/core/utils/routes_manager.dart';
 import 'package:betak/core/utils/string_manager.dart';
 import 'package:betak/core/utils/styles.dart';
 import 'package:betak/core/widgets/custom_button.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class ClientVerifyOtpScreen extends StatefulWidget {
-  const ClientVerifyOtpScreen({super.key});
+  final String userEmail;
+  const ClientVerifyOtpScreen({super.key, required this.userEmail});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -62,7 +64,7 @@ class _ClientVerifyOtpScreenState extends State<ClientVerifyOtpScreen> {
         backgroundColor: Styles.flyByNight,
         title: Center(
             child: Text(
-          'رمز التحقق',
+          AppStrings.verifyEmail.tr(),
           style:
               Styles.styleBoldIrinaSans20.copyWith(color: ColorManager.white),
         )),
@@ -75,7 +77,7 @@ class _ClientVerifyOtpScreenState extends State<ClientVerifyOtpScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: screenHeight * 0.03),
-              Text(AppStrings.enterOtp.tr(),
+              Text("${AppStrings.enterOtp.tr()} \n ${widget.userEmail}",
                   textAlign: TextAlign.center,
                   style: Styles.styleBoldIrinaSans20),
               SizedBox(height: screenWidth * 0.05),
@@ -109,7 +111,10 @@ class _ClientVerifyOtpScreenState extends State<ClientVerifyOtpScreen> {
                 onPressed: () {
                   focusNode.unfocus();
                   if (formKey.currentState!.validate()) {
-                    debugPrint('OTP Verified: $otp');
+                    Navigator.pushReplacementNamed(
+                      context,
+                      Routes.clientResetPasswordRoute,
+                    );
                   } else {
                     setState(() {
                       isValid = false;
