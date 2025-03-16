@@ -121,6 +121,10 @@ class AppStrings {
   //logout
   static const String logout = "logout";
   static const String logoutError = "logoutError";
+  // otp 
+  
+  static const String enterOtp = "enterOtp";
+  static const String invalidOtp = "invalidOtp";
 
 
 

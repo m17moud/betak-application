@@ -110,5 +110,8 @@
     "merchantProducts": "منتجات التاجر",
     "from": "From",
     "techMark": "TechMark",
-    "enterEmailToVerify": "ادخل بريدك الإلكتروني لإرسال رمز التحقق"
+    "enterEmailToVerify": "ادخل بريدك الإلكتروني لإرسال رمز التحقق",
+    "enterOtp": " ادخل رمز التحقق المكون من 6 ارقام المرسل الي البريد الالكتروني",
+    "invalidOtp":"رمز غير صالح"
+
 }
