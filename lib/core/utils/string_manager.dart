@@ -36,6 +36,7 @@ class AppStrings {
   static const String chooseCategory = "chooseCategory";
   static const String mustChooseCategory = "mustChooseCategory";
   static const String mainPage = "mainPage";
+  static const String enterEmailToVerify = "enterEmailToVerify";
 
 
 
