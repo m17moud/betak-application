@@ -91,9 +91,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       return const LoadingDialog();
                     }
                     if (state is AddProductError) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-
-    ErrorDialog.show(
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        ErrorDialog.show(
                           context: context,
                           message: AppStrings.errorAddProduct,
                           onPressed: () {
@@ -103,12 +102,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               (route) => false,
                             );
                           },
-    );
-    });
+                        );
+                      });
                     }
                     if (state is ProductSizeError) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-
                         ErrorDialog.show(
                           context: context,
                           message: AppStrings.productSizeError,
@@ -116,7 +114,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               Routes.homeMerchantRoute,
-                                  (route) => false,
+                              (route) => false,
                             );
                           },
                         );
@@ -238,6 +236,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           SnackBar(
                                             content: Text(
                                                 AppStrings.mustAddImage.tr()),
+                                            backgroundColor: ColorManager.error,
+                                          ),
+                                        );
+                                        return;
+                                      }
+
+                                      if (images.length > 2) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                                AppStrings.cantAddMoreThan2Images.tr()),
                                             backgroundColor: ColorManager.error,
                                           ),
                                         );

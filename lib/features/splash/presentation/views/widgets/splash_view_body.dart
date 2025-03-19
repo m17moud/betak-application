@@ -83,31 +83,23 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                     ],
                   ),
                 ),
-                Positioned(
-                  bottom: screenHeight * 0.1,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          AppStrings.from.tr(),
-                          style: Styles.styleBoldInriaSans16.copyWith(
-                            color: ColorManager.textFormFillColor,
-                            fontSize: screenWidth * 0.04,
-                          ),
-                        ),
-                        Text(
-                          AppStrings.techMark.tr(),
-                          style: Styles.styleBoldIrinaSans20.copyWith(
-                            color: ColorManager.white,
-                            fontSize: screenWidth * 0.05,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                        Positioned(
+          bottom: screenHeight * 0.1,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Column(
+              children: [
+                Text(AppStrings.from.tr(),
+                    style: Styles.styleBoldInriaSans16
+                        .copyWith(color: ColorManager.textFormFillColor)),
+                Text(AppStrings.techMark.tr(),
+                    style: Styles.styleBoldIrinaSans20
+                        .copyWith(color: ColorManager.white)),
+              ],
+            ),
+          ),
+        ),
               ],
             );
           },
