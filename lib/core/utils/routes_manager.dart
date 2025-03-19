@@ -1,6 +1,6 @@
 import 'package:betak/features/client_change_password/presentation/pages/client_reset_password_screen.dart';
-import 'package:betak/features/client_send_otp/presentation/pages/client_forogt_password_screen.dart';
 import 'package:betak/features/client_verify_otp/presentation/pages/client_verify_otp_screen.dart';
+import 'package:betak/features/send_otp/presentation/pages/forogt_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -102,8 +102,8 @@ class Routes {
     },
     addProductRoute: (context, _) => const AddProductScreen(),
     chooseUserType: (context, _) => const ChooseUserType(),
-    clientForgotPasswrodRoute: (context, _) =>
-        const ClientForogtPasswordScreen(),
+    clientForgotPasswrodRoute: (context, args) =>
+         ForgotPasswordScreen(userType: args as String),
     clientVerifyOtpRoute: (context, args) =>
         ClientVerifyOtpScreen(userEmail: args as String),
     clientResetPasswordRoute: (context, _) => const ClientResetPasswordScreen(),

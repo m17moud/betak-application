@@ -19,6 +19,11 @@ import 'package:betak/features/manage_product/domain/usecases/delete_product_use
 import 'package:betak/features/manage_product/domain/usecases/update_product_usecase.dart';
 import 'package:betak/features/manage_product/presentation/cubit/manage_product_cubit.dart';
 import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+import 'package:betak/features/send_otp/data/datasources/send_otp_remote_datasource.dart';
+import 'package:betak/features/send_otp/data/repositories/send_otp_repository_impl.dart';
+import 'package:betak/features/send_otp/domain/repositories/send_otp_repository.dart';
+import 'package:betak/features/send_otp/domain/usecases/send_otp_usecase.dart';
+import 'package:betak/features/send_otp/presentation/cubit/send_otp_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -138,6 +143,11 @@ Future<void> init() async {
     () => MerchantCheckSessionRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
+  // send otp
+  sl.registerLazySingleton<SendOtpRemoteDatasource>(
+        () => SendOtpRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
+
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
     () => CustomerLoginRepositoryImp(
@@ -211,6 +221,11 @@ Future<void> init() async {
     () => MerchantCheckSessionRepositoryImpl(remote: sl(), networkInfo: sl()),
   );
 
+  //send otp
+  sl.registerLazySingleton<SendOtpRepository>(
+        () => SendOtpRepositoryImpl(sendOtpRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
   //! Use cases
   //client
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -242,6 +257,10 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ClientCheckSessionUsecase(sl()));
 // Merchant session
   sl.registerLazySingleton(() => MerchantCheckSessionUsecase(sl()));
+
+  //send otp
+  sl.registerLazySingleton(() => SendOtpUsecase(sendOtpRepository:sl()));
+
   //! Cubits
   sl.registerFactory(
     () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
@@ -282,4 +301,8 @@ Future<void> init() async {
   sl.registerFactory(
     () => MerchantCheckSessionCubit(checkSessionUsecase: sl()),
   );
+  sl.registerFactory(
+        () => SendOtpCubit(sendOtpUsecase: sl()),
+  );
+
 }

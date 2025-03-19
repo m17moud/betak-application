@@ -153,7 +153,7 @@ class ClientSignInViewBody extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(
-                                context, Routes.clientForgotPasswrodRoute);
+                                context, Routes.clientForgotPasswrodRoute,arguments: AppStrings.cleint);
                           },
                           child: Text(AppStrings.forgotPassword.tr()),
                         ),

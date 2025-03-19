@@ -117,5 +117,7 @@
     "rewritePassword": "أعد كنابة كلمة المرور",
     "createNewPassword": "إنشاء كلمة مرور جديدة",
     "passwordsNotEqual": "كلمات المرور غير متطابقة",
-    "verifyEmail":"التأكد من الحساب"
+    "verifyEmail":"التأكد من الحساب",
+    "emailNotFound": "هذا البريد الإلكتروني غير مسجل",
+    "sendOtpSuccess":"تم إرسال رمز التحقق إلى بريدك الإلكتروني"
 }

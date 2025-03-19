@@ -145,7 +145,10 @@ class MerchantSignInViewBody extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, Routes.clientForgotPasswrodRoute,arguments: AppStrings.merchant);
+                          },
                           child: Text(AppStrings.forgotPassword.tr()),
                         ),
                       ],

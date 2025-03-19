@@ -77,17 +77,34 @@ class _ManageProductScreen extends State<ManageProductScreen> {
       allImages = [...existingImages, ...images];
     });
   }
-
-  void _removeImage(int index, {bool isExisting = false}) {
+  //
+  // void _removeImage(int index, {bool isExisting = false}) {
+  //   setState(() {
+  //     if (isExisting) {
+  //       existingImages.removeAt(index);
+  //     } else {
+  //       images.removeAt(index);
+  //     }
+  //     allImages = [...existingImages, ...images];
+  //   });
+  // }
+  void _removeImage(int index) {
     setState(() {
-      if (isExisting) {
+      if (index < existingImages.length) {
+        // The image is from existingImages, remove from there
         existingImages.removeAt(index);
       } else {
-        images.removeAt(index);
+        // Adjust index for images list
+        int adjustedIndex = index - existingImages.length;
+        if (adjustedIndex < images.length) {
+          images.removeAt(adjustedIndex);
+        }
       }
+      // Refresh the allImages list
       allImages = [...existingImages, ...images];
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -231,9 +248,10 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                               top: 0,
                                               right: 0,
                                               child: GestureDetector(
-                                                onTap: () => _removeImage(index,
-                                                    isExisting: allImages[index]
-                                                        is String),
+                                                // onTap: () => _removeImage(index,
+                                                //     isExisting: allImages[index]
+                                                //         is String),
+                                                onTap: () => _removeImage(index),
                                                 child: CircleAvatar(
                                                   radius: screenWidth * 0.04,
                                                   backgroundColor:

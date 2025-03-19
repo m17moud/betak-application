@@ -159,6 +159,11 @@ class AppStrings {
   static const String theMerchant = "theMerchant";
   static const String merchantProducts = "merchantProducts";
 
+  // send otp
+  static const String emailNotFound = "emailNotFound";
+  static const String sendOtpSuccess = "sendOtpSuccess";
+
+
   static const List<String> noRouteFound = [
     "ما هذا المكان!",
     "يبدوا ان هنالك خطأ ما!"

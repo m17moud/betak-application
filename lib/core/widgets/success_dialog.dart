@@ -11,9 +11,12 @@ class SuccessDialog {
     required BuildContext context,
     required String message,
     required VoidCallback onPressed,
+    bool barrierDismissible = true,
+
   }) {
     QuickAlert.show(
       context: context,
+      barrierDismissible: barrierDismissible,
       title: AppStrings.success.tr(),
       text: message.tr(),
       type: QuickAlertType.success,
