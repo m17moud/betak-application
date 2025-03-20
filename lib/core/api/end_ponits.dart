@@ -92,8 +92,7 @@ class ApiConstants {
       dotenv.env['CHECK_SESSION_CUSTOMER_TP'] ?? 'default_pkey';
 
   // send otp
-  static String get sendOTP =>
-      dotenv.env['SEND_OTP'] ?? 'default_path';
+  static String get sendOTP => dotenv.env['SEND_OTP'] ?? 'default_path';
 
   static String get sendOTPPKey =>
       dotenv.env['SEND_OTP_PKEY'] ?? 'default_pkey';
@@ -102,6 +101,15 @@ class ApiConstants {
   static String get sendOTPCustomerTP =>
       dotenv.env['SEND_OTP_CUSTOMER_TP'] ?? 'default_pkey';
 
+  // verify otp
+  static String get verifyOTP => dotenv.env['VERIFY_OTP'] ?? 'default_path';
+
+  static String get verifyOTPPKey =>
+      dotenv.env['VERIFY_OTP_PKEY'] ?? 'default_pkey';
+  static String get verifyOTPSellerTP =>
+      dotenv.env['VERIFY_OTP_SELLER_TP'] ?? 'default_path';
+  static String get verifyOTPCustomerTP =>
+      dotenv.env['VERIFY_OTP_CUSTOMER_TP'] ?? 'default_pkey';
 
   // API Keys
   static String get status => dotenv.env['STATUS'] ?? 'default_status';

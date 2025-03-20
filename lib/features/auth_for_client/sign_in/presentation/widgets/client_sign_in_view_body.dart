@@ -42,7 +42,7 @@ class ClientSignInViewBody extends StatelessWidget {
           Navigator.pop(context); // Hide loading dialog
           Navigator.pushNamedAndRemoveUntil(
             context,
-            Routes.homeCleintRoute,
+            Routes.homeClientRoute,
             (route) => false,
           );
         } else if (state is LoginError) {
@@ -153,7 +153,7 @@ class ClientSignInViewBody extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(
-                                context, Routes.clientForgotPasswrodRoute,arguments: AppStrings.cleint);
+                                context, Routes.clientForgotPasswrodRoute,arguments: AppStrings.client);
                           },
                           child: Text(AppStrings.forgotPassword.tr()),
                         ),

@@ -5,7 +5,7 @@ class AppStrings {
   static const String techMark = "techMark";
   static const String chooseUserType = "chooseUserType";
   static const String splashScreenText = "splashScreenText";
-  static const String cleint = "cleint";
+  static const String client = "client";
   static const String merchant = "merchant";
   static const String betak = "betak";
   static const String welcomeTo = "welcomeTo";
@@ -162,6 +162,7 @@ class AppStrings {
   // send otp
   static const String emailNotFound = "emailNotFound";
   static const String sendOtpSuccess = "sendOtpSuccess";
+  static const String wrongOtp = "wrongOtp";
 
 
   static const List<String> noRouteFound = [

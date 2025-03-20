@@ -24,7 +24,7 @@ class CheckClientSessionScreen extends StatelessWidget {
             } else if (state is ClientCheckSessionSuccess) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  Routes.homeCleintRoute,
+                  Routes.homeClientRoute,
                   (route) => false,
                 );
               });

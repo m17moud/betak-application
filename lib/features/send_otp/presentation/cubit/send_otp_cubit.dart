@@ -12,21 +12,15 @@ class SendOtpCubit extends Cubit<SendOtpState> {
   final SendOtpUsecase sendOtpUsecase;
   SendOtpCubit({required this.sendOtpUsecase}) : super(SendOtpInitial());
 
-
-
-  Future<void> sendOTP(
-      final String email,
-      final String userType
-      ) async {
+  Future<void> sendOTP(final String email, final String userType,) async {
     FormData formData;
-    if(userType==AppStrings.cleint) {
-       formData = FormData.fromMap({
+    if (userType == AppStrings.client) {
+      formData = FormData.fromMap({
         ApiConstants.pKey: ApiConstants.sendOTPPKey,
         ApiConstants.tp: ApiConstants.sendOTPCustomerTP,
         'email': email,
       });
-    }
-    else{
+    } else {
       formData = FormData.fromMap({
         ApiConstants.pKey: ApiConstants.sendOTPPKey,
         ApiConstants.tp: ApiConstants.sendOTPSellerTP,
@@ -35,21 +29,19 @@ class SendOtpCubit extends Cubit<SendOtpState> {
     }
     emit(SendOtpLoading());
 
-
     final failureOrLogin = await sendOtpUsecase.call(formData);
 
     failureOrLogin.fold(
-          (failure) {
+      (failure) {
         if (failure is LoginAuthFailure) {
-          emit(SendOtpError(message: AppStrings.emailNotFound));
+          emit(const SendOtpError(message: AppStrings.emailNotFound));
         } else if (failure is NetworkFailure) {
-          emit(SendOtpError(message: AppStrings.locNetworkErrorMessage));
-        }
-        else{
+          emit(const SendOtpError(message: AppStrings.locNetworkErrorMessage));
+        } else {
           emit(SendOtpError(message: failure.message));
-
         }
-      },          (success) => emit(SendOtpSuccess()),
+      },
+      (success) => emit(SendOtpSuccess()),
     );
   }
 }

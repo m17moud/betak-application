@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,20 +10,21 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/error_dialog.dart';
 import '../../../../core/widgets/loading_dialog.dart';
-import '../../../../core/widgets/success_dialog.dart';
 import '../../../../core/widgets/text_form_validation.dart';
 import '../../../../injection_container.dart';
 import '../cubit/send_otp_cubit.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   final String userType;
-  const ForgotPasswordScreen({super.key,required this.userType});
+  const ForgotPasswordScreen({super.key, required this.userType});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<SendOtpCubit>(),
-      child: ForgotPasswordView(userType: userType,),
+      child: ForgotPasswordView(
+        userType: userType,
+      ),
     );
   }
 }
@@ -53,7 +53,8 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         title: Center(
           child: Text(
             AppStrings.forgotPassword.tr(),
-            style: Styles.styleBoldIrinaSans20.copyWith(color: ColorManager.white),
+            style:
+                Styles.styleBoldIrinaSans20.copyWith(color: ColorManager.white),
           ),
         ),
         backgroundColor: Styles.flyByNight,
@@ -67,17 +68,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               builder: (context) => const LoadingDialog(),
             );
           } else if (state is SendOtpSuccess) {
-            Navigator.pop(context); // Hide loading dialog
-            SuccessDialog.show(
-              context: context,
-              barrierDismissible: false,
-              message: AppStrings.sendOtpSuccess.tr(),
-              onPressed: () {
-                Navigator.pushReplacementNamed(
-                  context,
-                  Routes.clientVerifyOtpRoute,
-                  arguments: emailController.text.trim(),
-                );
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.verifyOtpRoute,
+              arguments: {
+                'userType': widget.userType,
+                'userEmail': emailController.text.trim()
               },
             );
           } else if (state is SendOtpError) {
@@ -126,8 +122,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         context.read<SendOtpCubit>().sendOTP(
-                          emailController.text.trim(), widget.userType,
-                        );
+                              emailController.text.trim(),
+                              widget.userType,
+                            );
                       }
                     },
                     fontSize: fontSize,

@@ -73,6 +73,11 @@ import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/repositories/home_department_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
+import 'features/verify_otp/data/datasources/verify_otp_remote_datasource.dart';
+import 'features/verify_otp/data/repositories/verfiy_otp_repository_impl.dart';
+import 'features/verify_otp/domain/repositories/verify_otp_repository.dart';
+import 'features/verify_otp/domain/usecases/verify_otp_usecase.dart';
+import 'features/verify_otp/presentation/cubit/verify_otp_cubit.dart';
 
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -145,9 +150,13 @@ Future<void> init() async {
 
   // send otp
   sl.registerLazySingleton<SendOtpRemoteDatasource>(
-        () => SendOtpRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+    () => SendOtpRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
+  // verify otp
+  sl.registerLazySingleton<VerifyOtpRemoteDatasource>(
+    () => VerifyOtpRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
     () => CustomerLoginRepositoryImp(
@@ -223,7 +232,14 @@ Future<void> init() async {
 
   //send otp
   sl.registerLazySingleton<SendOtpRepository>(
-        () => SendOtpRepositoryImpl(sendOtpRemoteDatasource: sl(), networkInfo: sl()),
+    () =>
+        SendOtpRepositoryImpl(sendOtpRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
+  // Verify otp
+  sl.registerLazySingleton<VerifyOtpRepository>(
+    () => VerifyOtpRepositoryImpl(
+        verifyOtpRemoteDatasource: sl(), networkInfo: sl()),
   );
 
   //! Use cases
@@ -259,7 +275,10 @@ Future<void> init() async {
   sl.registerLazySingleton(() => MerchantCheckSessionUsecase(sl()));
 
   //send otp
-  sl.registerLazySingleton(() => SendOtpUsecase(sendOtpRepository:sl()));
+  sl.registerLazySingleton(() => SendOtpUsecase(sendOtpRepository: sl()));
+
+  // Verify otp
+  sl.registerLazySingleton(() => VerifyOtpUsecase(verifyOtpRepository: sl()));
 
   //! Cubits
   sl.registerFactory(
@@ -302,7 +321,9 @@ Future<void> init() async {
     () => MerchantCheckSessionCubit(checkSessionUsecase: sl()),
   );
   sl.registerFactory(
-        () => SendOtpCubit(sendOtpUsecase: sl()),
+    () => SendOtpCubit(sendOtpUsecase: sl()),
   );
-
+  sl.registerFactory(
+    () => VerifyOtpCubit(verifyOtpUsecase: sl()),
+  );
 }

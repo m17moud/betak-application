@@ -10,14 +10,14 @@ import 'categories.dart';
 import 'categories_title.dart';
 import 'home_logo.dart';
 
-class HomeCleintViewBody extends StatefulWidget {
-  const HomeCleintViewBody({super.key});
+class HomeClientViewBody extends StatefulWidget {
+  const HomeClientViewBody({super.key});
 
   @override
-  State<HomeCleintViewBody> createState() => _HomeCleintViewBodyState();
+  State<HomeClientViewBody> createState() => _HomeClientViewBodyState();
 }
 
-class _HomeCleintViewBodyState extends State<HomeCleintViewBody> {
+class _HomeClientViewBodyState extends State<HomeClientViewBody> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
