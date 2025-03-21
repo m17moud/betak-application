@@ -91,6 +91,37 @@ class ApiConstants {
   static String get checkSessionCustomerTP =>
       dotenv.env['CHECK_SESSION_CUSTOMER_TP'] ?? 'default_pkey';
 
+  // send otp
+  static String get sendOTP => dotenv.env['SEND_OTP'] ?? 'default_path';
+
+  static String get sendOTPPKey =>
+      dotenv.env['SEND_OTP_PKEY'] ?? 'default_pkey';
+  static String get sendOTPSellerTP =>
+      dotenv.env['SEND_OTP_SELLER_TP'] ?? 'default_path';
+  static String get sendOTPCustomerTP =>
+      dotenv.env['SEND_OTP_CUSTOMER_TP'] ?? 'default_pkey';
+
+  // verify otp
+  static String get verifyOTP => dotenv.env['VERIFY_OTP'] ?? 'default_path';
+
+  static String get verifyOTPPKey =>
+      dotenv.env['VERIFY_OTP_PKEY'] ?? 'default_pkey';
+  static String get verifyOTPSellerTP =>
+      dotenv.env['VERIFY_OTP_SELLER_TP'] ?? 'default_path';
+  static String get verifyOTPCustomerTP =>
+      dotenv.env['VERIFY_OTP_CUSTOMER_TP'] ?? 'default_pkey';
+
+        // reset password
+  static String get resetPassword => dotenv.env['RESET_PASSWORD'] ?? 'default_path';
+
+  static String get resetPasswordPKey =>
+      dotenv.env['RESET_PASSWORD_PKEY'] ?? 'default_pkey';
+  static String get resetPasswordSellerTP =>
+      dotenv.env['RESET_PASSWORD_SELLER_TP'] ?? 'default_path';
+  static String get resetPasswordCustomerTP =>
+      dotenv.env['RESET_PASSWORD_CUSTOMER_TP'] ?? 'default_pkey';
+
+
   // API Keys
   static String get status => dotenv.env['STATUS'] ?? 'default_status';
   static String get errorMessage =>

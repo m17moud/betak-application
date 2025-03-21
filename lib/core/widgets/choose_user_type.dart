@@ -44,7 +44,7 @@ class ChooseUserType extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, Routes.clientSignInRoute);
               },
-              text: AppStrings.cleint.tr(),
+              text: AppStrings.client.tr(),
               textStyle:
                   Styles.styleSemiBoldInter22.copyWith(color: Colors.white),
               buttonWidth: screenWidth * 0.9,

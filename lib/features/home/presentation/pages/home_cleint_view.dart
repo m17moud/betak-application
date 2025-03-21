@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_client/client_check_session/presentation/cubit/client_check_session_cubit.dart';
+import '../../../auth_for_client/client_check_session/presentation/cubit/client_check_session_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,14 +13,14 @@ import '../../../auth_for_client/sign_in/presentation/cubit/customer_login_cubit
 import '../cubit/home_cubit.dart';
 import '../widgets/home_cleint_view_body.dart';
 
-class HomeCleintView extends StatefulWidget {
-  const HomeCleintView({super.key});
+class HomeClientView extends StatefulWidget {
+  const HomeClientView({super.key});
 
   @override
-  State<HomeCleintView> createState() => _HomeViewState();
+  State<HomeClientView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeCleintView> {
+class _HomeViewState extends State<HomeClientView> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -49,7 +49,7 @@ class _HomeViewState extends State<HomeCleintView> {
           builder: (context, state) {
             return Scaffold(
               backgroundColor: ColorManager.white,
-              body: const HomeCleintViewBody(),
+              body: const HomeClientViewBody(),
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.endFloat,
               floatingActionButton: SpeedDial(

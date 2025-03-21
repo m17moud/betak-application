@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import '../../../../../core/utils/string_manager.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,6 +10,7 @@ import 'package:meta/meta.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/error/failures.dart';
+import '../../../../../core/utils/string_manager.dart';
 import '../../data/models/customer_login_response_model.dart';
 import '../../domain/usecases/customer_login_usecase.dart';
 import '../../domain/usecases/customer_logout_usecase.dart';

@@ -1,6 +1,6 @@
-import 'package:betak/features/client_change_password/presentation/pages/client_reset_password_screen.dart';
-import 'package:betak/features/client_send_otp/presentation/pages/client_forogt_password_screen.dart';
-import 'package:betak/features/client_verify_otp/presentation/pages/client_verify_otp_screen.dart';
+import '../../features/reset_password/presentation/pages/reset_password_screen.dart';
+import '../../features/verify_otp/presentation/pages/verify_otp_screen.dart';
+import '../../features/send_otp/presentation/pages/forogt_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -39,10 +39,10 @@ class Routes {
   static const String merchantSignUpRoute = "/merchant_sign_up_view";
 
   static const String clientForgotPasswrodRoute = "/client_forgot_password";
-  static const String clientVerifyOtpRoute = "/client_verify_otp";
-  static const String clientResetPasswordRoute = "/client_reset_password";
+  static const String verifyOtpRoute = "/verify_otp";
+  static const String resetPasswordRoute = "/reset_password";
 
-  static const String homeCleintRoute = "/home_cleint_view";
+  static const String homeClientRoute = "/home_client_view";
   static const String homeMerchantRoute = "/home_merchant_view";
   static const String checkMerchantSession = "/check_merchant_session";
   static const String checkClientSession = "/check_client_session";
@@ -65,7 +65,7 @@ class Routes {
     clientSignUpRoute: (context, _) => const ClientSignUpView(),
     merchantSignInRoute: (context, _) => const MerchantSignInView(),
     merchantSignUpRoute: (context, _) => const MerchantSignUpView(),
-    homeCleintRoute: (context, _) => const HomeCleintView(),
+    homeClientRoute: (context, _) => const HomeClientView(),
     homeMerchantRoute: (context, _) => const HomeMerchantView(),
     categoryProducts: (context, args) => CategoryProductsView(
         departmentResponseModel: args as HomeDepartmentResponseModel),
@@ -102,11 +102,18 @@ class Routes {
     },
     addProductRoute: (context, _) => const AddProductScreen(),
     chooseUserType: (context, _) => const ChooseUserType(),
-    clientForgotPasswrodRoute: (context, _) =>
-        const ClientForogtPasswordScreen(),
-    clientVerifyOtpRoute: (context, args) =>
-        ClientVerifyOtpScreen(userEmail: args as String),
-    clientResetPasswordRoute: (context, _) => const ClientResetPasswordScreen(),
+    clientForgotPasswrodRoute: (context, args) =>
+        ForgotPasswordScreen(userType: args as String),
+    verifyOtpRoute: (context, args) {
+      final String userType = args['userType'] as String;
+      final String userEmail = args['userEmail'] as String;
+      return VerifyOtpScreen(userEmail: userEmail, userType: userType);
+    },
+    resetPasswordRoute: (context, args) {
+      final String userType = args['userType'] as String;
+      final String userEmail = args['userEmail'] as String;
+      return ResetPasswordScreen(userEmail: userEmail, userType: userType);
+    },
   };
 
   static Scaffold get unDefinedRoute {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:betak/core/error/failures.dart';
+import '../../../../../core/error/failures.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

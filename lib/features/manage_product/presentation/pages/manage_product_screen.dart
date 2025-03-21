@@ -78,16 +78,20 @@ class _ManageProductScreen extends State<ManageProductScreen> {
     });
   }
 
-  void _removeImage(int index, {bool isExisting = false}) {
+  void _removeImage(int index) {
     setState(() {
-      if (isExisting) {
+      if (index < existingImages.length) {
         existingImages.removeAt(index);
       } else {
-        images.removeAt(index);
+        int adjustedIndex = index - existingImages.length;
+        if (adjustedIndex < images.length) {
+          images.removeAt(adjustedIndex);
+        }
       }
       allImages = [...existingImages, ...images];
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -231,9 +235,7 @@ class _ManageProductScreen extends State<ManageProductScreen> {
                                               top: 0,
                                               right: 0,
                                               child: GestureDetector(
-                                                onTap: () => _removeImage(index,
-                                                    isExisting: allImages[index]
-                                                        is String),
+                                                onTap: () => _removeImage(index),
                                                 child: CircleAvatar(
                                                   radius: screenWidth * 0.04,
                                                   backgroundColor:

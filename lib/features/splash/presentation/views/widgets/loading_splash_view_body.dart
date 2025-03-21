@@ -1,10 +1,10 @@
-import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/utils/string_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/utils/string_manager.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../generated/assets.dart';
 

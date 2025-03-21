@@ -19,6 +19,12 @@ import 'package:betak/features/manage_product/domain/usecases/delete_product_use
 import 'package:betak/features/manage_product/domain/usecases/update_product_usecase.dart';
 import 'package:betak/features/manage_product/presentation/cubit/manage_product_cubit.dart';
 import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+import 'package:betak/features/reset_password/domain/usecases/reset_password_usecase.dart';
+import 'package:betak/features/send_otp/data/datasources/send_otp_remote_datasource.dart';
+import 'package:betak/features/send_otp/data/repositories/send_otp_repository_impl.dart';
+import 'package:betak/features/send_otp/domain/repositories/send_otp_repository.dart';
+import 'package:betak/features/send_otp/domain/usecases/send_otp_usecase.dart';
+import 'package:betak/features/send_otp/presentation/cubit/send_otp_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -68,6 +74,15 @@ import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/repositories/home_department_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
+import 'features/reset_password/data/datasources/reset_password_remote_datasource.dart';
+import 'features/reset_password/data/repositories/reset_password_repository_impl.dart';
+import 'features/reset_password/domain/repositories/reset_password_repository.dart';
+import 'features/reset_password/presentation/cubit/reset_password_cubit.dart';
+import 'features/verify_otp/data/datasources/verify_otp_remote_datasource.dart';
+import 'features/verify_otp/data/repositories/verfiy_otp_repository_impl.dart';
+import 'features/verify_otp/domain/repositories/verify_otp_repository.dart';
+import 'features/verify_otp/domain/usecases/verify_otp_usecase.dart';
+import 'features/verify_otp/presentation/cubit/verify_otp_cubit.dart';
 
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -136,6 +151,20 @@ Future<void> init() async {
   // check merhcant session
   sl.registerLazySingleton<MerchantCheckSessionRemoteDatasource>(
     () => MerchantCheckSessionRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
+
+  // send otp
+  sl.registerLazySingleton<SendOtpRemoteDatasource>(
+    () => SendOtpRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
+
+  // verify otp
+  sl.registerLazySingleton<VerifyOtpRemoteDatasource>(
+    () => VerifyOtpRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
+  // reset pass
+  sl.registerLazySingleton<ResetPasswordRemoteDatasource>(
+    () => ResetPasswordRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
 
   //! Repositories
@@ -211,6 +240,24 @@ Future<void> init() async {
     () => MerchantCheckSessionRepositoryImpl(remote: sl(), networkInfo: sl()),
   );
 
+  //send otp
+  sl.registerLazySingleton<SendOtpRepository>(
+    () =>
+        SendOtpRepositoryImpl(sendOtpRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
+  // Verify otp
+  sl.registerLazySingleton<VerifyOtpRepository>(
+    () => VerifyOtpRepositoryImpl(
+        verifyOtpRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
+  // reset pass
+  sl.registerLazySingleton<ResetPasswordRepository>(
+    () => ResetPasswordRepositoryImpl(
+        resetPasswordRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
   //! Use cases
   //client
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -242,6 +289,17 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ClientCheckSessionUsecase(sl()));
 // Merchant session
   sl.registerLazySingleton(() => MerchantCheckSessionUsecase(sl()));
+
+  //send otp
+  sl.registerLazySingleton(() => SendOtpUsecase(sendOtpRepository: sl()));
+
+  // Verify otp
+  sl.registerLazySingleton(() => VerifyOtpUsecase(verifyOtpRepository: sl()));
+
+  // reset pass
+  sl.registerLazySingleton(
+      () => ResetPasswordUsecase(resetPasswordRepository: sl()));
+
   //! Cubits
   sl.registerFactory(
     () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
@@ -281,5 +339,14 @@ Future<void> init() async {
 
   sl.registerFactory(
     () => MerchantCheckSessionCubit(checkSessionUsecase: sl()),
+  );
+  sl.registerFactory(
+    () => SendOtpCubit(sendOtpUsecase: sl()),
+  );
+  sl.registerFactory(
+    () => VerifyOtpCubit(verifyOtpUsecase: sl()),
+  );
+  sl.registerFactory(
+    () => ResetPasswordCubit(resetPasswordUsecase: sl()),
   );
 }

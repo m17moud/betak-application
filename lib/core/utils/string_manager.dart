@@ -5,7 +5,7 @@ class AppStrings {
   static const String techMark = "techMark";
   static const String chooseUserType = "chooseUserType";
   static const String splashScreenText = "splashScreenText";
-  static const String cleint = "cleint";
+  static const String client = "client";
   static const String merchant = "merchant";
   static const String betak = "betak";
   static const String welcomeTo = "welcomeTo";
@@ -141,6 +141,8 @@ class AppStrings {
   static const String success = "success";
   static const String warning = "warning";
   static const String from = "from";
+  static const String errorTryAgain = "errorTryAgain";
+
   // products
   static const String myProducts = "myProducts";
   static const String noProductsFound = "noProductsFound";
@@ -158,6 +160,15 @@ class AppStrings {
   static const String viewLess = "viewLess";
   static const String theMerchant = "theMerchant";
   static const String merchantProducts = "merchantProducts";
+
+  // send otp
+  static const String emailNotFound = "emailNotFound";
+  static const String sendOtpSuccess = "sendOtpSuccess";
+  static const String wrongOtp = "wrongOtp";
+
+// reset password
+  static const String notEqualPassword = "notEqualPassword";
+  static const String resetPasswordSuccess = "resetPasswordSuccess";
 
   static const List<String> noRouteFound = [
     "ما هذا المكان!",
