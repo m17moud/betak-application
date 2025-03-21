@@ -108,7 +108,11 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
             Future.microtask(() {
               Navigator.pushReplacementNamed(
                 context,
-                Routes.clientResetPasswordRoute,
+                Routes.resetPasswordRoute,
+                arguments: {
+                  'userType': widget.userType,
+                  'userEmail': widget.userEmail
+                },
               );
             });
           } else if (state is VerifyOtpError) {

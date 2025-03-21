@@ -141,6 +141,8 @@ class AppStrings {
   static const String success = "success";
   static const String warning = "warning";
   static const String from = "from";
+  static const String errorTryAgain = "errorTryAgain";
+
   // products
   static const String myProducts = "myProducts";
   static const String noProductsFound = "noProductsFound";
@@ -164,6 +166,9 @@ class AppStrings {
   static const String sendOtpSuccess = "sendOtpSuccess";
   static const String wrongOtp = "wrongOtp";
 
+// reset password
+  static const String notEqualPassword = "notEqualPassword";
+  static const String resetPasswordSuccess = "resetPasswordSuccess";
 
   static const List<String> noRouteFound = [
     "ما هذا المكان!",

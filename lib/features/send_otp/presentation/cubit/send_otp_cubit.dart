@@ -1,7 +1,7 @@
-import 'package:betak/core/api/end_ponits.dart';
-import 'package:betak/core/error/failures.dart';
-import 'package:betak/core/utils/string_manager.dart';
-import 'package:betak/features/send_otp/domain/usecases/send_otp_usecase.dart';
+import '../../../../core/api/end_ponits.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/utils/string_manager.dart';
+import '../../domain/usecases/send_otp_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

@@ -19,6 +19,7 @@ import 'package:betak/features/manage_product/domain/usecases/delete_product_use
 import 'package:betak/features/manage_product/domain/usecases/update_product_usecase.dart';
 import 'package:betak/features/manage_product/presentation/cubit/manage_product_cubit.dart';
 import 'package:betak/features/merchant_%20products/presentation/cubit/merchant_products_cubit.dart';
+import 'package:betak/features/reset_password/domain/usecases/reset_password_usecase.dart';
 import 'package:betak/features/send_otp/data/datasources/send_otp_remote_datasource.dart';
 import 'package:betak/features/send_otp/data/repositories/send_otp_repository_impl.dart';
 import 'package:betak/features/send_otp/domain/repositories/send_otp_repository.dart';
@@ -73,6 +74,10 @@ import 'features/home/data/repositories/home_department_repository_impl.dart';
 import 'features/home/domain/repositories/home_department_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/cubit/home_cubit.dart';
+import 'features/reset_password/data/datasources/reset_password_remote_datasource.dart';
+import 'features/reset_password/data/repositories/reset_password_repository_impl.dart';
+import 'features/reset_password/domain/repositories/reset_password_repository.dart';
+import 'features/reset_password/presentation/cubit/reset_password_cubit.dart';
 import 'features/verify_otp/data/datasources/verify_otp_remote_datasource.dart';
 import 'features/verify_otp/data/repositories/verfiy_otp_repository_impl.dart';
 import 'features/verify_otp/domain/repositories/verify_otp_repository.dart';
@@ -157,6 +162,11 @@ Future<void> init() async {
   sl.registerLazySingleton<VerifyOtpRemoteDatasource>(
     () => VerifyOtpRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
   );
+  // reset pass
+  sl.registerLazySingleton<ResetPasswordRemoteDatasource>(
+    () => ResetPasswordRemoteDatasourceImpl(dio: DioConsumer(dio: sl())),
+  );
+
   //! Repositories
   sl.registerLazySingleton<CustomerLoginRepository>(
     () => CustomerLoginRepositoryImp(
@@ -242,6 +252,12 @@ Future<void> init() async {
         verifyOtpRemoteDatasource: sl(), networkInfo: sl()),
   );
 
+  // reset pass
+  sl.registerLazySingleton<ResetPasswordRepository>(
+    () => ResetPasswordRepositoryImpl(
+        resetPasswordRemoteDatasource: sl(), networkInfo: sl()),
+  );
+
   //! Use cases
   //client
   sl.registerLazySingleton(() => CustomerLoginUsecase(sl()));
@@ -279,6 +295,10 @@ Future<void> init() async {
 
   // Verify otp
   sl.registerLazySingleton(() => VerifyOtpUsecase(verifyOtpRepository: sl()));
+
+  // reset pass
+  sl.registerLazySingleton(
+      () => ResetPasswordUsecase(resetPasswordRepository: sl()));
 
   //! Cubits
   sl.registerFactory(
@@ -325,5 +345,8 @@ Future<void> init() async {
   );
   sl.registerFactory(
     () => VerifyOtpCubit(verifyOtpUsecase: sl()),
+  );
+  sl.registerFactory(
+    () => ResetPasswordCubit(resetPasswordUsecase: sl()),
   );
 }

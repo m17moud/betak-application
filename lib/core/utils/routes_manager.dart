@@ -1,6 +1,6 @@
-import 'package:betak/features/client_change_password/presentation/pages/client_reset_password_screen.dart';
-import 'package:betak/features/verify_otp/presentation/pages/verify_otp_screen.dart';
-import 'package:betak/features/send_otp/presentation/pages/forogt_password_screen.dart';
+import '../../features/reset_password/presentation/pages/reset_password_screen.dart';
+import '../../features/verify_otp/presentation/pages/verify_otp_screen.dart';
+import '../../features/send_otp/presentation/pages/forogt_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -40,7 +40,7 @@ class Routes {
 
   static const String clientForgotPasswrodRoute = "/client_forgot_password";
   static const String verifyOtpRoute = "/verify_otp";
-  static const String clientResetPasswordRoute = "/client_reset_password";
+  static const String resetPasswordRoute = "/reset_password";
 
   static const String homeClientRoute = "/home_client_view";
   static const String homeMerchantRoute = "/home_merchant_view";
@@ -109,7 +109,11 @@ class Routes {
       final String userEmail = args['userEmail'] as String;
       return VerifyOtpScreen(userEmail: userEmail, userType: userType);
     },
-    clientResetPasswordRoute: (context, _) => const ClientResetPasswordScreen(),
+    resetPasswordRoute: (context, args) {
+      final String userType = args['userType'] as String;
+      final String userEmail = args['userEmail'] as String;
+      return ResetPasswordScreen(userEmail: userEmail, userType: userType);
+    },
   };
 
   static Scaffold get unDefinedRoute {

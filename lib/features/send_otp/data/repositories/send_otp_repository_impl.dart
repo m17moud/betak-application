@@ -1,5 +1,5 @@
-import 'package:betak/features/send_otp/data/datasources/send_otp_remote_datasource.dart';
-import 'package:betak/features/send_otp/domain/repositories/send_otp_repository.dart';
+import '../datasources/send_otp_remote_datasource.dart';
+import '../../domain/repositories/send_otp_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';

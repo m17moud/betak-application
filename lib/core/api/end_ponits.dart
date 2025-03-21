@@ -111,6 +111,17 @@ class ApiConstants {
   static String get verifyOTPCustomerTP =>
       dotenv.env['VERIFY_OTP_CUSTOMER_TP'] ?? 'default_pkey';
 
+        // reset password
+  static String get resetPassword => dotenv.env['RESET_PASSWORD'] ?? 'default_path';
+
+  static String get resetPasswordPKey =>
+      dotenv.env['RESET_PASSWORD_PKEY'] ?? 'default_pkey';
+  static String get resetPasswordSellerTP =>
+      dotenv.env['RESET_PASSWORD_SELLER_TP'] ?? 'default_path';
+  static String get resetPasswordCustomerTP =>
+      dotenv.env['RESET_PASSWORD_CUSTOMER_TP'] ?? 'default_pkey';
+
+
   // API Keys
   static String get status => dotenv.env['STATUS'] ?? 'default_status';
   static String get errorMessage =>

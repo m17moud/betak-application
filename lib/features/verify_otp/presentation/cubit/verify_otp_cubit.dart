@@ -1,7 +1,7 @@
-import 'package:betak/core/api/end_ponits.dart';
-import 'package:betak/core/error/failures.dart';
-import 'package:betak/core/utils/string_manager.dart';
-import 'package:betak/features/verify_otp/domain/usecases/verify_otp_usecase.dart';
+import '../../../../core/api/end_ponits.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/utils/string_manager.dart';
+import '../../domain/usecases/verify_otp_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
