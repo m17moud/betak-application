@@ -13,6 +13,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
+import 'dart:ui' as ui;
 
 class VerifyOtpScreen extends StatelessWidget {
   final String userType;
@@ -140,26 +141,28 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
                   style: Styles.styleBoldIrinaSans20,
                 ),
                 SizedBox(height: screenWidth * 0.05),
-                Pinput(
-                  controller: pinController,
-                  focusNode: focusNode,
-                  length: 6,
-                  defaultPinTheme: defaultPinTheme,
-                  separatorBuilder: (index) =>
-                      SizedBox(width: screenWidth * 0.03),
-                  onChanged: (value) {
-                    setState(() {
-                      otp = value;
-                      isValid = true;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty || value.length < 6) {
-                      return AppStrings.invalidOtp.tr();
-                    }
-                    return null;
-                  },
-                  keyboardType: TextInputType.number,
+                Directionality(textDirection: ui.TextDirection.ltr,
+                  child: Pinput(
+                    controller: pinController,
+                    focusNode: focusNode,
+                    length: 6,
+                    defaultPinTheme: defaultPinTheme,
+                    separatorBuilder: (index) =>
+                        SizedBox(width: screenWidth * 0.03),
+                    onChanged: (value) {
+                      setState(() {
+                        otp = value;
+                        isValid = true;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 6) {
+                        return AppStrings.invalidOtp.tr();
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.number,
+                  ),
                 ),
                 SizedBox(height: screenWidth * 0.05),
                 CustomButton1(
