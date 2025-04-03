@@ -22,9 +22,36 @@ class ClientCheckSessionFailure extends ClientCheckSessionState {
 
   const ClientCheckSessionFailure({required this.message});
 }
+class ClientPaymentRequiredFailure extends ClientCheckSessionState {
+  final String message;
+
+  const ClientPaymentRequiredFailure({required this.message});
+}
 
 class ClientCheckSessionNetworkFailure extends ClientCheckSessionState {
   final String message;
 
   const ClientCheckSessionNetworkFailure({required this.message});
+
+}
+
+class ClientPaymentSuccess extends ClientCheckSessionState {
+  final ClientPaymentModel paymentURL;
+
+  const ClientPaymentSuccess({required this.paymentURL});
+}
+
+class ClientPaymentLoading extends ClientCheckSessionState {
+
+}
+class ClientPaymentFailure extends ClientCheckSessionState {
+  final String message;
+
+  const ClientPaymentFailure({required this.message});
+}
+class ClientPaymentNetworkFailure extends ClientCheckSessionState {
+  final String message;
+
+  const ClientPaymentNetworkFailure({required this.message});
+
 }

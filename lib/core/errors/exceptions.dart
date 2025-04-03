@@ -51,6 +51,11 @@ class UnAuthorizedException implements Exception {
 
   UnAuthorizedException({required this.errModel});
 }
+class PaymentRequiredException implements Exception {
+  final ErrorModel errModel;
+
+  PaymentRequiredException({required this.errModel});
+}
 
 void handleDioExceptions(DioException e) {
   switch (e.type) {
@@ -75,6 +80,9 @@ void handleDioExceptions(DioException e) {
               errModel: ErrorModel.fromJson(e.response!.data));
         case 401: //unauthorized
           throw UnAuthorizedException(
+              errModel: ErrorModel.fromJson(e.response!.data));
+        case 402: //payment required
+          throw PaymentRequiredException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 403: //forbidden
           throw SessionExpiredException(

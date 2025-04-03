@@ -23,3 +23,28 @@ class MerchantLoginError extends MerchantLoginState {
 
   List<Object> get props => [message];
 }
+
+class MerchantPaymentSuccess extends MerchantLoginState {
+  final MerchantPaymentModel paymentURL;
+
+  MerchantPaymentSuccess({required this.paymentURL});
+}
+
+class MerchantPaymentLoading extends MerchantLoginState {
+
+}
+class MerchantPaymentFailure extends MerchantLoginState {
+  final String message;
+
+  MerchantPaymentFailure({required this.message});
+}
+class MerchantPaymentNetworkFailure extends MerchantLoginState {
+  final String message;
+
+  MerchantPaymentNetworkFailure({required this.message});
+
+}
+class MerchantPaymentRequiredFailure extends MerchantLoginState {
+  final String message;
+  MerchantPaymentRequiredFailure({required this.message});
+}

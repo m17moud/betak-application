@@ -1,7 +1,9 @@
+import 'package:betak/core/widgets/warning_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/string_manager.dart';
@@ -30,7 +32,7 @@ class MerchantSignInViewBody extends StatelessWidget {
 
     return BlocConsumer<MerchantLoginCubit, MerchantLoginState>(
       listener: (context, state) {
-        if (state is Loading) {
+        if (state is Loading|| state is MerchantPaymentLoading) {
           showDialog(
             context: context,
             builder: (context) {
@@ -39,23 +41,41 @@ class MerchantSignInViewBody extends StatelessWidget {
           );
         } else if (state is MerchantLoggedIn) {
           
-          Navigator.pop(context); // Hide loading dialog
+          Navigator.pop(context);
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.homeMerchantRoute,
             (route) => false,
           );
-        } else if (state is MerchantLoginError) {
-          Navigator.pop(context); // Hide loading dialog
+        } else if (state is MerchantLoginError|| state is MerchantPaymentFailure) {
+          Navigator.pop(context);
           ErrorDialog.show(
             context: context,
-            message: state.message,
+            message: (state as dynamic).message,
             onPressed: () {
               Navigator.pop(context);
             },
           );
+        }else if (state is MerchantPaymentRequiredFailure) {
+          Navigator.pop(context);
+
+          WarningDialog.show(
+            context: context,
+            message: state.message.tr(),
+            onPressed: () {
+              final email = _emailController.text.trim();
+              context.read<MerchantLoginCubit>().merchantPayment(email);
+
+            },
+          );
         }
-      },
+        else if (state is MerchantPaymentSuccess) {
+          launchUrl(Uri.parse(state.paymentURL.payurl!));
+        }
+
+      }
+
+      ,
       builder: (context, state) {
         return Form(
           child: Padding(

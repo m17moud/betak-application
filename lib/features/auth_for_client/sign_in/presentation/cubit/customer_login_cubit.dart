@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:betak/features/auth_for_client/client_check_session/data/models/client_payment_model.dart';
+import 'package:betak/features/auth_for_client/client_check_session/domain/usecases/client_payment_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,9 +22,10 @@ part 'customer_login_state.dart';
 class CustomerLoginCubit extends Cubit<CustomerLoginState> {
   final CustomerLoginUsecase customerLogin;
   final CustomerLogoutUseCase customerLogout;
+  final ClientPaymentUsecase clientPaymentUsecase;
 
   CustomerLoginCubit(
-      {required this.customerLogin, required this.customerLogout})
+      {required this.customerLogin, required this.customerLogout,required this.clientPaymentUsecase})
       : super(CustomerLoginInitial());
 
   /// Handles user login logic.
@@ -34,7 +37,13 @@ class CustomerLoginCubit extends Cubit<CustomerLoginState> {
         loginpassword: password));
 
     failureOrLogin.fold(
-      (failure) => emit(LoginError(message: failure.message)),
+        (failure){
+    if (failure is PaymentRequiredFailure ){
+      emit(ClientPaymentRequiredFailure(message: failure.message));
+}
+    else{
+      emit(LoginError(message: failure.message));
+    }},
       (customerInfo) => emit(LoggedIn(customerInfo: customerInfo)),
     );
   }
@@ -89,4 +98,27 @@ class CustomerLoginCubit extends Cubit<CustomerLoginState> {
       emit(LoginError(message: e.toString()));
     }
   }
+
+  Future<void> clientPayment(String email) async {
+    emit(ClientPaymentLoading());
+
+        final failureOrLogin = await clientPaymentUsecase.call(
+            ClientPaymentParameters(
+              pkey: ApiConstants.paymentPKey,
+              tp: ApiConstants.paymentCustomerTP,
+              email: email));
+        failureOrLogin.fold(
+              (failure) {
+            if (failure is NetworkFailure) {
+              emit(LoginError(message: AppStrings.locNetworkErrorMessage));
+            }
+            else {
+              emit(ClientPaymentFailure(message: failure.message));
+            }
+          },
+              (payment) =>
+              emit(ClientPaymentSuccess(paymentURL: payment)),
+        );
+      }
+
 }

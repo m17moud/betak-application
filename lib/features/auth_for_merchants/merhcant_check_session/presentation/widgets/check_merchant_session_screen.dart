@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:betak/core/widgets/warning_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/widgets/error_dialog.dart';
@@ -20,7 +23,7 @@ class CheckMerchantSessionScreen extends StatelessWidget {
       child: Scaffold(
         body: BlocBuilder<MerchantCheckSessionCubit, MerchantCheckSessionState>(
           builder: (context, state) {
-            if (state is MerchantCheckSessionLoading) {
+            if (state is MerchantCheckSessionLoading || state is MerchantPaymentLoading) {
               // Show loading dialog
               return const LoadingDialog();
             } else if (state is MerchantCheckSessionSuccess) {
@@ -31,18 +34,33 @@ class CheckMerchantSessionScreen extends StatelessWidget {
                 );
               });
             } 
-            else if (state is MerchantCheckSessionNetworkFailure) {
+            else if (state is MerchantCheckSessionNetworkFailure || state is MerchantPaymentNetworkFailure) {
                WidgetsBinding.instance.addPostFrameCallback((_){
               ErrorDialog.show(
                 context: context,
-                message: state.message,
+                message: (state as dynamic).message,
                 onPressed: () {
                   exit(0);
                 },
               );});
             }
+            else if (state is MerchantPaymentRequiredFailure) {
+              WidgetsBinding.instance.addPostFrameCallback((_){
+                WarningDialog.show(
+                  context: context,
+                  message: state.message.tr(),
+                  onPressed: () {
+                    context.read<MerchantCheckSessionCubit>().merchantPayment();
+                  },
+                );});
+            }
+            else if (state is MerchantPaymentSuccess) {
+              context.read<MerchantCheckSessionCubit>().clearLocalStorage();
+
+              launchUrl(Uri.parse(state.paymentURL.payurl!));
+            }
             
-            else if (state is MerchantCheckSessionFailure) {
+            else if (state is MerchantCheckSessionFailure || state is MerchantPaymentFailure) {
               context.read<MerchantCheckSessionCubit>().clearLocalStorage();
 
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -52,7 +70,7 @@ class CheckMerchantSessionScreen extends StatelessWidget {
                 );
                 ErrorDialog.show(
                   context: context,
-                  message: state.message,
+                  message: (state as dynamic).message.tr(),
                   onPressed: () {
                     Navigator.pop(context);
                   },

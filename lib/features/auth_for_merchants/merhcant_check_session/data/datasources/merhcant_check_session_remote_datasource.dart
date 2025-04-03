@@ -1,3 +1,6 @@
+import 'package:betak/features/auth_for_merchants/merhcant_check_session/data/models/merchant_payment_model.dart';
+import 'package:dio/dio.dart';
+
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../models/merchant_check_session_response_model.dart';
@@ -5,6 +8,9 @@ import '../models/merchant_check_session_response_model.dart';
 abstract class MerchantCheckSessionRemoteDatasource {
   Future<MerchantCheckSessionResponseModel> merhcantCheckSession(
       String pkey, String tp, String id, String sessionId);
+  Future<MerchantPaymentModel> merchantPayment(
+      String pkey, String tp, String email);
+
 }
 
 class MerchantCheckSessionRemoteDatasourceImpl
@@ -28,5 +34,24 @@ class MerchantCheckSessionRemoteDatasourceImpl
 
     var checkSessionInfo = MerchantCheckSessionResponseModel.fromJson(result);
     return checkSessionInfo;
+  }
+
+
+  Future<MerchantPaymentModel> merchantPayment(String pkey, String tp, String email)async{
+
+    var formData = FormData.fromMap({
+      ApiConstants.pKey: pkey,
+      ApiConstants.tp: tp,
+      'email': email,
+    });
+    var response = await dio.post(ApiConstants.payment, data: formData);
+
+    var logResponse = MerchantPaymentModel.fromJson(response);
+
+    return logResponse;
+
+
+
+
   }
 }

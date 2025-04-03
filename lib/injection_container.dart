@@ -6,7 +6,9 @@ import 'package:betak/features/auth_for_client/client_check_session/data/datasou
 import 'package:betak/features/auth_for_client/client_check_session/data/repositories/client_check_session_repository_impl.dart';
 import 'package:betak/features/auth_for_client/client_check_session/domain/repositories/client_check_session_repository.dart';
 import 'package:betak/features/auth_for_client/client_check_session/domain/usecases/client_check_session_usecase.dart';
+import 'package:betak/features/auth_for_client/client_check_session/domain/usecases/client_payment_usecase.dart';
 import 'package:betak/features/auth_for_client/client_check_session/presentation/cubit/client_check_session_cubit.dart';
+import 'package:betak/features/auth_for_merchants/merhcant_check_session/domain/usecases/merchant_payment_usecase.dart';
 import 'package:betak/features/category_products/data/datasources/products_remote_data_source.dart';
 import 'package:betak/features/category_products/data/repositories/products_repository_impl.dart';
 import 'package:betak/features/category_products/domain/repositories/product_repository.dart';
@@ -300,12 +302,21 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => ResetPasswordUsecase(resetPasswordRepository: sl()));
 
+  // client payment
+  sl.registerLazySingleton(
+          () => ClientPaymentUsecase( sl()));
+
+  // merchant payment
+  sl.registerLazySingleton(
+          () => MerchantPaymentUsecase( sl()));
+
+
   //! Cubits
   sl.registerFactory(
-    () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl()),
+    () => CustomerLoginCubit(customerLogin: sl(), customerLogout: sl(),clientPaymentUsecase: sl()),
   );
   sl.registerFactory(
-    () => MerchantLoginCubit(merchantLogin: sl(), merchantLogout: sl()),
+    () => MerchantLoginCubit(merchantLogin: sl(), merchantLogout: sl(), merchantPaymentUsecase: sl()),
   );
   sl.registerFactory(
     () => SignUpCubit(addClientUsecase: sl()),
@@ -334,11 +345,11 @@ Future<void> init() async {
   );
 
   sl.registerFactory(
-    () => ClientCheckSessionCubit(checkSessionUsecase: sl()),
+    () => ClientCheckSessionCubit(checkSessionUsecase: sl(),clientPaymentUsecase: sl()),
   );
 
   sl.registerFactory(
-    () => MerchantCheckSessionCubit(checkSessionUsecase: sl()),
+    () => MerchantCheckSessionCubit(checkSessionUsecase: sl(),merchantPaymentUsecase: sl()),
   );
   sl.registerFactory(
     () => SendOtpCubit(sendOtpUsecase: sl()),
@@ -349,4 +360,5 @@ Future<void> init() async {
   sl.registerFactory(
     () => ResetPasswordCubit(resetPasswordUsecase: sl()),
   );
+
 }
