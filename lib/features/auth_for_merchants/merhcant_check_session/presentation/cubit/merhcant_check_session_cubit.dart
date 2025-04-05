@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../domain/usecases/merchant_payment_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -13,8 +14,9 @@ import 'merhcant_check_session_state.dart';
 
 class MerchantCheckSessionCubit extends Cubit<MerchantCheckSessionState> {
   final MerchantCheckSessionUsecase checkSessionUsecase;
+  final MerchantPaymentUsecase merchantPaymentUsecase;
 
-  MerchantCheckSessionCubit({required this.checkSessionUsecase})
+  MerchantCheckSessionCubit({required this.checkSessionUsecase,required this.merchantPaymentUsecase})
       : super(MerchantCheckSessionInitial());
 
   Future<void> clearLocalStorage() async {
@@ -44,6 +46,9 @@ class MerchantCheckSessionCubit extends Cubit<MerchantCheckSessionState> {
             if (failure is NetworkFailure) {
               emit(
                   MerchantCheckSessionNetworkFailure(message: failure.message));
+            }else if (failure is PaymentRequiredFailure ){
+              emit(MerchantPaymentRequiredFailure(message: failure.message));
+
             } else {
               emit(MerchantCheckSessionFailure(message: failure.message));
             }
@@ -58,4 +63,41 @@ class MerchantCheckSessionCubit extends Cubit<MerchantCheckSessionState> {
       emit(MerchantCheckSessionFailure(message: e.toString()));
     }
   }
+
+  Future<void> merchantPayment() async {
+    emit(MerchantPaymentLoading());
+    try {
+      FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+      String? authJson =
+      await secureStorage.read(key: Constants.merchantSecureStorage);
+      if (authJson != null) {
+        final merchantData =
+        MerchantLoginResponseModel.fromJson(jsonDecode(authJson));
+        final failureOrLogin = await merchantPaymentUsecase.call(
+            MerchantPaymentParameters(
+              pkey: ApiConstants.paymentPKey,
+              tp: ApiConstants.paymentSellerTP,
+              email: merchantData.SellerEmail!,));
+        failureOrLogin.fold(
+              (failure) {
+            if (failure is NetworkFailure) {
+              emit(MerchantPaymentNetworkFailure(message: failure.message));
+            }
+            else {
+              emit(MerchantPaymentFailure(message: failure.message));
+            }
+          },
+              (payment) =>
+              emit(MerchantPaymentSuccess(paymentURL: payment)),
+        );
+      } else {
+        emit(const MerchantCheckSessionFailure(message: AppStrings.error));
+      }
+    } catch (e) {
+      emit(MerchantCheckSessionFailure(message: e.toString()));
+    }
+  }
+
+
 }

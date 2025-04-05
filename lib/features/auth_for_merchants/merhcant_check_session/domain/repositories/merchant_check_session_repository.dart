@@ -1,3 +1,4 @@
+import '../../data/models/merchant_payment_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failures.dart';
@@ -10,4 +11,12 @@ abstract class MerchantCheckSessionRepository {
     required String id,
     required String sessionId,
   });
+
+  Future<Either<Failure, MerchantPaymentModel>> merchantPayment({
+    required String pkey,
+    required String tp,
+    required String email,
+
+  });
+
 }

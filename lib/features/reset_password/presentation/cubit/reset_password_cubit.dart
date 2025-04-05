@@ -1,8 +1,8 @@
-import '../../../../core/api/end_ponits.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/api/end_ponits.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/utils/string_manager.dart';
 import '../../domain/usecases/reset_password_usecase.dart';

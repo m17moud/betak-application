@@ -43,6 +43,8 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
         return const Left(UnAuthorizedFailure());
       } on GoneException {
         return const Left(GoneFailure());
+      }on PaymentRequiredException {
+        return const Left(PaymentRequiredFailure());
       }
     } else {
       return const Left(NetworkFailure());

@@ -1,3 +1,6 @@
+import '../models/client_payment_model.dart';
+import 'package:dio/dio.dart';
+
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../models/client_check_session_response_model.dart';
@@ -5,6 +8,9 @@ import '../models/client_check_session_response_model.dart';
 abstract class ClientCheckSessionRemoteDatasource {
   Future<ClientCheckSessionResponseModel> clientCheckSession(
       String pkey, String tp, String id, String sessionId);
+
+  Future<ClientPaymentModel> clientPayment(
+      String pkey, String tp, String email);
 }
 
 class ClientCheckSessionRemoteDatasourceImpl
@@ -29,4 +35,23 @@ class ClientCheckSessionRemoteDatasourceImpl
     var checkSessionInfo = ClientCheckSessionResponseModel.fromJson(result);
     return checkSessionInfo;
   }
+
+  @override
+  Future<ClientPaymentModel> clientPayment(String pkey, String tp, String email)async{
+
+    var formData = FormData.fromMap({
+      ApiConstants.pKey: pkey,
+      ApiConstants.tp: tp,
+      'email': email,
+    });
+    var response = await dio.post(ApiConstants.payment, data: formData);
+    var logResponse = ClientPaymentModel.fromJson(response);
+
+    return logResponse;
+
+
+
+
+  }
+
 }

@@ -1,7 +1,9 @@
+import '../../../../../core/widgets/warning_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
@@ -31,7 +33,7 @@ class ClientSignInViewBody extends StatelessWidget {
 
     return BlocConsumer<CustomerLoginCubit, CustomerLoginState>(
       listener: (context, state) {
-        if (state is Loading) {
+        if (state is Loading || state is ClientPaymentLoading) {
           showDialog(
             context: context,
             builder: (context) {
@@ -45,16 +47,31 @@ class ClientSignInViewBody extends StatelessWidget {
             Routes.homeClientRoute,
             (route) => false,
           );
-        } else if (state is LoginError) {
+        } else if (state is LoginError || state is ClientPaymentFailure) {
           Navigator.pop(context); // Hide loading dialog
 
           ErrorDialog.show(
             context: context,
-            message: state.message,
+            message: (state as dynamic).message,
             onPressed: () {
               Navigator.pop(context);
             },
           );
+        } else if (state is ClientPaymentRequiredFailure) {
+          Navigator.pop(context); // Hide loading dialog
+
+          WarningDialog.show(
+            context: context,
+            message: state.message.tr(),
+            onPressed: () {
+              Navigator.pop(context); // Hide warning dialog
+              final email = _emailController.text.trim();
+              context.read<CustomerLoginCubit>().clientPayment(email);
+            },
+          );
+        } else if (state is ClientPaymentSuccess) {
+          Navigator.pop(context); // Hide loading dialog
+          launchUrl(Uri.parse(state.paymentURL.payurl!));
         }
       },
       builder: (context, state) {
@@ -153,7 +170,8 @@ class ClientSignInViewBody extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(
-                                context, Routes.clientForgotPasswrodRoute,arguments: AppStrings.client);
+                                context, Routes.clientForgotPasswrodRoute,
+                                arguments: AppStrings.client);
                           },
                           child: Text(AppStrings.forgotPassword.tr()),
                         ),

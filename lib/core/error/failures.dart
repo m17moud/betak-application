@@ -41,7 +41,12 @@ class UnAuthorizedFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
-
+class PaymentRequiredFailure extends Failure {
+  const PaymentRequiredFailure(
+      {super.message = AppStrings.paymentRequiredMessage});
+  @override
+  List<Object?> get props => [];
+}
 class LoginAuthFailure extends Failure {
   const LoginAuthFailure({super.message = AppStrings.locLoginAuthErrorMessage});
   @override

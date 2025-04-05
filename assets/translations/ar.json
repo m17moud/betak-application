@@ -123,5 +123,6 @@
     "wrongOtp": "رمز التحقق غير صحيح",
     "errorTryAgain": "حدث خطأ يرجى المحاولة مرة أخرى",
     "notEqualPassword": "كلمات المرور غير متشابهة",
-    "resetPasswordSuccess": "تم إنشاء كلمة المرور"
+    "resetPasswordSuccess": "تم إنشاء كلمة المرور",
+    "paymentRequiredMessage": "انتهت صلاحية اشتراكك اضغط تأكيد للانتقال إلى صفحة الدفع و تجديد الإشتراك"
 }

@@ -1,3 +1,4 @@
+import '../models/merchant_payment_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';
@@ -39,6 +40,31 @@ class MerchantCheckSessionRepositoryImpl
         return const Left(UnAuthorizedFailure());
       } on SessionExpiredException {
         return const Left(SessionExpiredFailure());
+      }on PaymentRequiredException {
+        return const Left(PaymentRequiredFailure());
+      }
+    } else {
+      return const Left(NetworkFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, MerchantPaymentModel>> merchantPayment(
+      {required String pkey,
+        required String tp,
+        required String email}) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        var paymentURL =
+        await _remote.merchantPayment(pkey, tp, email );
+
+        return Right(paymentURL);
+      } on ServerException {
+        return const Left(ServerFailure());
+      } on ServerLoginAuthException {
+        return const Left(LoginAuthFailure());
+      } on UnAuthorizedException {
+        return const Left(UnAuthorizedFailure());
       }
     } else {
       return const Left(NetworkFailure());

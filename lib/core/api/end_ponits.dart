@@ -121,6 +121,15 @@ class ApiConstants {
   static String get resetPasswordCustomerTP =>
       dotenv.env['RESET_PASSWORD_CUSTOMER_TP'] ?? 'default_pkey';
 
+  //Payment
+  static String get payment => dotenv.env['PAYMENT'] ?? 'default_path';
+  static String get paymentPKey =>
+      dotenv.env['PAYMENT_PKEY'] ?? 'default_pkey';
+  static String get paymentSellerTP =>
+      dotenv.env['PAYMENT_SELLER_TP'] ?? 'default_path';
+  static String get paymentCustomerTP =>
+      dotenv.env['PAYMENT_CUSTOMER_TP'] ?? 'default_pkey';
+
 
   // API Keys
   static String get status => dotenv.env['STATUS'] ?? 'default_status';

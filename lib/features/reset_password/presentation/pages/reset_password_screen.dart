@@ -1,20 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../injection_container.dart';
 
+import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/string_manager.dart';
-import '../../../../core/widgets/custom_button.dart';
-import '../../../../features/reset_password/presentation/cubit/reset_password_cubit.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_title_text.dart';
 import '../../../../core/widgets/error_dialog.dart';
-import '../../../../core/widgets/password_text_field.dart';
 import '../../../../core/widgets/loading_dialog.dart';
+import '../../../../core/widgets/password_text_field.dart';
 import '../../../../core/widgets/success_dialog.dart';
 import '../../../../core/widgets/text_form_validation.dart';
+import '../../../../features/reset_password/presentation/cubit/reset_password_cubit.dart';
+import '../../../../injection_container.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   final String userType;

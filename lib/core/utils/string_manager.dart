@@ -115,6 +115,10 @@ class AppStrings {
   //login errors
   static const String locLoginError = "login_error";
   static const String locLoginErrorMessage = "login_error_message";
+  //payment error
+    static const String paymentRequired = "paymentRequired";
+  static const String paymentRequiredMessage = "paymentRequiredMessage";
+
   //logout
   static const String logout = "logout";
   static const String logoutError = "logoutError";
