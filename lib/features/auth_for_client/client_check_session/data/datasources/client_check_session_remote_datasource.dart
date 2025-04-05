@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_client/client_check_session/data/models/client_payment_model.dart';
+import '../models/client_payment_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/api/dio_consumer.dart';

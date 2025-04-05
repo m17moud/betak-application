@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:ui' as ui;
+
 import 'package:betak/core/utils/color_manager.dart';
 import 'package:betak/core/utils/routes_manager.dart';
 import 'package:betak/core/utils/string_manager.dart';
@@ -13,7 +15,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
-import 'dart:ui' as ui;
 
 class VerifyOtpScreen extends StatelessWidget {
   final String userType;

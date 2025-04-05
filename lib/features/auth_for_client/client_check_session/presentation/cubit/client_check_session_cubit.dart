@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:betak/features/auth_for_client/client_check_session/data/models/client_payment_model.dart';
-import 'package:betak/features/auth_for_client/client_check_session/domain/usecases/client_payment_usecase.dart';
+import '../../data/models/client_payment_model.dart';
+import '../../domain/usecases/client_payment_usecase.dart';
 
 import '../../../../../core/error/failures.dart';
 import 'package:bloc/bloc.dart';

@@ -1,6 +1,3 @@
-import '../../features/reset_password/presentation/pages/reset_password_screen.dart';
-import '../../features/verify_otp/presentation/pages/verify_otp_screen.dart';
-import '../../features/send_otp/presentation/pages/forogt_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,8 +17,11 @@ import '../../features/manage_product/presentation/pages/manage_product_screen.d
 import '../../features/merchant_products_for_client/presentation/pages/merhcant_products_for_client_view.dart';
 import '../../features/product/presentation/views/client_product_view.dart';
 import '../../features/product/presentation/views/widgets/merchant_product_view.dart';
+import '../../features/reset_password/presentation/pages/reset_password_screen.dart';
+import '../../features/send_otp/presentation/pages/forogt_password_screen.dart';
 import '../../features/splash/presentation/views/loading_splash_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
+import '../../features/verify_otp/presentation/pages/verify_otp_screen.dart';
 import '../widgets/choose_user_type.dart';
 import 'color_manager.dart';
 import 'string_manager.dart';

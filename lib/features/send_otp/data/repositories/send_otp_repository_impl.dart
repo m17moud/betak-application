@@ -1,10 +1,10 @@
-import '../datasources/send_otp_remote_datasource.dart';
-import '../../domain/repositories/send_otp_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/errors/exceptions.dart';
+import '../../domain/repositories/send_otp_repository.dart';
+import '../datasources/send_otp_remote_datasource.dart';
 
 
 class SendOtpRepositoryImpl extends SendOtpRepository {

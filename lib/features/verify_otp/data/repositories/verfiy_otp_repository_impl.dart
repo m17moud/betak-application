@@ -1,9 +1,9 @@
-import '../../domain/repositories/verify_otp_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/errors/exceptions.dart';
+import '../../domain/repositories/verify_otp_repository.dart';
 import '../datasources/verify_otp_remote_datasource.dart';
 
 class VerifyOtpRepositoryImpl extends VerifyOtpRepository {

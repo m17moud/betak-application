@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_merchants/merhcant_check_session/data/models/merchant_payment_model.dart';
+import '../models/merchant_payment_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';

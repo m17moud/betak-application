@@ -1,4 +1,4 @@
-import 'package:betak/features/auth_for_merchants/merhcant_check_session/data/models/merchant_payment_model.dart';
+import '../models/merchant_payment_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/api/dio_consumer.dart';
@@ -10,7 +10,6 @@ abstract class MerchantCheckSessionRemoteDatasource {
       String pkey, String tp, String id, String sessionId);
   Future<MerchantPaymentModel> merchantPayment(
       String pkey, String tp, String email);
-
 }
 
 class MerchantCheckSessionRemoteDatasourceImpl
@@ -36,9 +35,9 @@ class MerchantCheckSessionRemoteDatasourceImpl
     return checkSessionInfo;
   }
 
-
-  Future<MerchantPaymentModel> merchantPayment(String pkey, String tp, String email)async{
-
+  @override
+  Future<MerchantPaymentModel> merchantPayment(
+      String pkey, String tp, String email) async {
     var formData = FormData.fromMap({
       ApiConstants.pKey: pkey,
       ApiConstants.tp: tp,
@@ -49,9 +48,5 @@ class MerchantCheckSessionRemoteDatasourceImpl
     var logResponse = MerchantPaymentModel.fromJson(response);
 
     return logResponse;
-
-
-
-
   }
 }
