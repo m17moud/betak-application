@@ -1,9 +1,9 @@
-import '../models/client_payment_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../models/client_check_session_response_model.dart';
+import '../models/client_payment_model.dart';
 
 abstract class ClientCheckSessionRemoteDatasource {
   Future<ClientCheckSessionResponseModel> clientCheckSession(

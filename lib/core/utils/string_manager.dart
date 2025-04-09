@@ -106,6 +106,8 @@ class AppStrings {
   static const String locNetworkErrorMessage = "network_error_message";
   static const String locConflictMessage = "conflictMessage";
   static const String locGoneMessage = "goneMessage";
+  static const String locPaymentAfterSignUpRequiredMessage =
+      "PaymentAfterSignUpRequiredMessage";
 
   //auth errors
   static const String locUnAuthorizedError = "unauthorized_error";
@@ -116,7 +118,7 @@ class AppStrings {
   static const String locLoginError = "login_error";
   static const String locLoginErrorMessage = "login_error_message";
   //payment error
-    static const String paymentRequired = "paymentRequired";
+  static const String paymentRequired = "paymentRequired";
   static const String paymentRequiredMessage = "paymentRequiredMessage";
 
   //logout

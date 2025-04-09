@@ -57,12 +57,13 @@ class ClientSignInViewBody extends StatelessWidget {
               Navigator.pop(context);
             },
           );
-        } else if (state is ClientPaymentRequiredFailure) {
+        } else if (state is ClientPaymentRequiredFailure ||
+            state is ClientPaymentAfterSignUpFailure) {
           Navigator.pop(context); // Hide loading dialog
 
           WarningDialog.show(
             context: context,
-            message: state.message.tr(),
+            message: (state as dynamic).message,
             onPressed: () {
               Navigator.pop(context); // Hide warning dialog
               final email = _emailController.text.trim();

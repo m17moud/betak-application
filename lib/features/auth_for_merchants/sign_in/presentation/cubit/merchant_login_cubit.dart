@@ -25,9 +25,10 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
   final MerchantLogoutUseCase merchantLogout;
   final MerchantPaymentUsecase merchantPaymentUsecase;
 
-
   MerchantLoginCubit(
-      {required this.merchantLogin, required this.merchantLogout,required this.merchantPaymentUsecase})
+      {required this.merchantLogin,
+      required this.merchantLogout,
+      required this.merchantPaymentUsecase})
       : super(MerchantLoginInitial());
 
   /// Handles user login logic.
@@ -39,14 +40,17 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
         loginpassword: password));
 
     failureOrLogin.fold(
-          (failure){
-        if (failure is PaymentRequiredFailure ){
-          emit(MerchantPaymentRequiredFailure(message: failure.message));
-        }
-        else{
+      (failure) {
+        if (failure is PaymentRequiredFailure) {
+          emit(MerchantPaymentRequiredFailure(message: failure.message.tr()));
+        } else if (failure is PaymentAfterSignUpRequiredFailure) {
+          emit(
+              MerchantPaymentAfterSignUpFailure(message: failure.message.tr()));
+        } else {
           emit(MerchantLoginError(message: failure.message));
-        }},
-          (merchantInfo) => emit(MerchantLoggedIn(merchantInfo: merchantInfo)),
+        }
+      },
+      (merchantInfo) => emit(MerchantLoggedIn(merchantInfo: merchantInfo)),
     );
   }
 
@@ -57,21 +61,22 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
       FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
       String? authJson =
-      await secureStorage.read(key: Constants.merchantSecureStorage);
+          await secureStorage.read(key: Constants.merchantSecureStorage);
       if (authJson != null) {
-        final merchantData=MerchantLoginResponseModel.fromJson(jsonDecode(authJson));
+        final merchantData =
+            MerchantLoginResponseModel.fromJson(jsonDecode(authJson));
 
-
-
-        final result = await merchantLogout.call(Parameters(pkey:  ApiConstants.logoutPKey, tp: ApiConstants.logoutSellerTP, id: merchantData.SellerID!));
-      if (result != const Left(NetworkFailure())) {
-        emit(MerchantLoggedOut());
-      }
-      else{
-        emit(MerchantLoginError(message: AppStrings.locNetworkErrorDescription.tr()));
-      }
-    }
-    else{
+        final result = await merchantLogout.call(Parameters(
+            pkey: ApiConstants.logoutPKey,
+            tp: ApiConstants.logoutSellerTP,
+            id: merchantData.SellerID!));
+        if (result != const Left(NetworkFailure())) {
+          emit(MerchantLoggedOut());
+        } else {
+          emit(MerchantLoginError(
+              message: AppStrings.locNetworkErrorDescription.tr()));
+        }
+      } else {
         emit(MerchantLoginError(message: AppStrings.error.tr()));
       }
     } catch (e) {
@@ -91,7 +96,7 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
       if (authJson != null) {
         emit(MerchantLoggedIn(
           merchantInfo:
-          MerchantLoginResponseModel.fromJson(jsonDecode(authJson)),
+              MerchantLoginResponseModel.fromJson(jsonDecode(authJson)),
         ));
       } else {
         emit(MerchantLoggedOut());
@@ -110,18 +115,14 @@ class MerchantLoginCubit extends Cubit<MerchantLoginState> {
             tp: ApiConstants.paymentSellerTP,
             email: email));
     failureOrLogin.fold(
-          (failure) {
+      (failure) {
         if (failure is NetworkFailure) {
           emit(MerchantPaymentNetworkFailure(message: failure.message));
-        }
-        else {
+        } else {
           emit(MerchantPaymentFailure(message: failure.message));
         }
       },
-          (payment) =>
-          emit(MerchantPaymentSuccess(paymentURL: payment)),
+      (payment) => emit(MerchantPaymentSuccess(paymentURL: payment)),
     );
   }
-
-
 }

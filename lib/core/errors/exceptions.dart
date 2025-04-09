@@ -39,7 +39,6 @@ class ServerLoginAuthException implements Exception {
   ServerLoginAuthException({required this.errModel});
 }
 
-
 class SessionExpiredException implements Exception {
   final ErrorModel errModel;
 
@@ -51,10 +50,17 @@ class UnAuthorizedException implements Exception {
 
   UnAuthorizedException({required this.errModel});
 }
+
 class PaymentRequiredException implements Exception {
   final ErrorModel errModel;
 
   PaymentRequiredException({required this.errModel});
+}
+
+class PaymentAfterSignUpRequiredException implements Exception {
+  final ErrorModel errModel;
+
+  PaymentAfterSignUpRequiredException({required this.errModel});
 }
 
 void handleDioExceptions(DioException e) {
@@ -93,11 +99,13 @@ void handleDioExceptions(DioException e) {
         case 409: //conflict
           throw ConflictException(
               errModel: ErrorModel.fromJson(e.response!.data));
-               case 410: //Deleted
-          throw GoneException(
-              errModel: ErrorModel.fromJson(e.response!.data));
+        case 410: //Deleted
+          throw GoneException(errModel: ErrorModel.fromJson(e.response!.data));
         case 422: //  Unprocessable Entity
           throw ServerException(
+              errModel: ErrorModel.fromJson(e.response!.data));
+        case 428: 
+          throw PaymentAfterSignUpRequiredException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 500: //  Unprocessable Entity
           throw ServerException(

@@ -1,19 +1,19 @@
 import 'dart:convert';
 
-import '../../data/models/client_payment_model.dart';
-import '../../domain/usecases/client_payment_usecase.dart';
-
-import '../../../../../core/error/failures.dart';
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/constants/constants.dart';
+import '../../../../../core/error/failures.dart';
 import '../../../../../core/utils/string_manager.dart';
 import '../../../sign_in/data/models/customer_login_response_model.dart';
 import '../../data/models/client_check_session_response_model.dart';
+import '../../data/models/client_payment_model.dart';
 import '../../domain/usecases/client_check_session_usecase.dart';
+import '../../domain/usecases/client_payment_usecase.dart';
 
 part 'client_check_session_state.dart';
 
@@ -21,7 +21,8 @@ class ClientCheckSessionCubit extends Cubit<ClientCheckSessionState> {
   final ClientCheckSessionUsecase checkSessionUsecase;
   final ClientPaymentUsecase clientPaymentUsecase;
 
-  ClientCheckSessionCubit({required this.checkSessionUsecase,required this.clientPaymentUsecase})
+  ClientCheckSessionCubit(
+      {required this.checkSessionUsecase, required this.clientPaymentUsecase})
       : super(ClientCheckSessionInitial());
 
   Future<void> clearLocalStorage() async {
@@ -49,14 +50,12 @@ class ClientCheckSessionCubit extends Cubit<ClientCheckSessionState> {
         failureOrLogin.fold(
           (failure) {
             if (failure is NetworkFailure) {
-              emit(ClientCheckSessionNetworkFailure(message: failure.message));
-            } else if (failure is PaymentRequiredFailure ){
-              emit(ClientPaymentRequiredFailure(message: failure.message));
-
-            }
-
-            else {
-              emit(ClientCheckSessionFailure(message: failure.message));
+              emit(ClientCheckSessionNetworkFailure(
+                  message: failure.message.tr()));
+            } else if (failure is PaymentRequiredFailure) {
+              emit(ClientPaymentRequiredFailure(message: failure.message.tr()));
+            } else {
+              emit(ClientCheckSessionFailure(message: failure.message.tr()));
             }
           },
           (sessionInfo) =>
@@ -70,33 +69,31 @@ class ClientCheckSessionCubit extends Cubit<ClientCheckSessionState> {
     }
   }
 
-
   Future<void> clientPayment() async {
     emit(ClientPaymentLoading());
     try {
       FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
       String? authJson =
-      await secureStorage.read(key: Constants.customerSecureStorage);
+          await secureStorage.read(key: Constants.customerSecureStorage);
       if (authJson != null) {
         final customerData =
-        CustomerLoginResponseModel.fromJson(jsonDecode(authJson));
-        final failureOrLogin = await clientPaymentUsecase.call(
-            ClientPaymentParameters(
-                pkey: ApiConstants.paymentPKey,
-                tp: ApiConstants.paymentCustomerTP,
-                email: customerData.CustomerEmail!,));
+            CustomerLoginResponseModel.fromJson(jsonDecode(authJson));
+        final failureOrLogin =
+            await clientPaymentUsecase.call(ClientPaymentParameters(
+          pkey: ApiConstants.paymentPKey,
+          tp: ApiConstants.paymentCustomerTP,
+          email: customerData.CustomerEmail!,
+        ));
         failureOrLogin.fold(
-              (failure) {
+          (failure) {
             if (failure is NetworkFailure) {
               emit(ClientPaymentNetworkFailure(message: failure.message));
-            }
-            else {
+            } else {
               emit(ClientPaymentFailure(message: failure.message));
             }
           },
-              (payment) =>
-              emit(ClientPaymentSuccess(paymentURL: payment)),
+          (payment) => emit(ClientPaymentSuccess(paymentURL: payment)),
         );
       } else {
         emit(const ClientCheckSessionFailure(message: AppStrings.error));

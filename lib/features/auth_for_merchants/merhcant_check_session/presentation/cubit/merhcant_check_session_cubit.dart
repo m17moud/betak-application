@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import '../../domain/usecases/merchant_payment_usecase.dart';
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../../core/api/end_ponits.dart';
@@ -10,6 +10,7 @@ import '../../../../../core/error/failures.dart';
 import '../../../../../core/utils/string_manager.dart';
 import '../../../sign_in/data/models/merchant_login_response_model.dart';
 import '../../domain/usecases/merchant_check_session_usecase.dart';
+import '../../domain/usecases/merchant_payment_usecase.dart';
 import 'merhcant_check_session_state.dart';
 
 class MerchantCheckSessionCubit extends Cubit<MerchantCheckSessionState> {
@@ -45,12 +46,12 @@ class MerchantCheckSessionCubit extends Cubit<MerchantCheckSessionState> {
           (failure) {
             if (failure is NetworkFailure) {
               emit(
-                  MerchantCheckSessionNetworkFailure(message: failure.message));
+                  MerchantCheckSessionNetworkFailure(message: failure.message.tr()));
             }else if (failure is PaymentRequiredFailure ){
-              emit(MerchantPaymentRequiredFailure(message: failure.message));
+              emit(MerchantPaymentRequiredFailure(message: failure.message.tr()));
 
             } else {
-              emit(MerchantCheckSessionFailure(message: failure.message));
+              emit(MerchantCheckSessionFailure(message: failure.message.tr()));
             }
           },
           (sessionInfo) =>

@@ -43,8 +43,10 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
         return const Left(UnAuthorizedFailure());
       } on GoneException {
         return const Left(GoneFailure());
-      }on PaymentRequiredException {
+      } on PaymentRequiredException {
         return const Left(PaymentRequiredFailure());
+      } on PaymentAfterSignUpRequiredException {
+        return const Left(PaymentAfterSignUpRequiredFailure());
       }
     } else {
       return const Left(NetworkFailure());
@@ -65,13 +67,14 @@ class MerchantLoginRepositoryImp extends MerchantLoginRepository {
   }
 
   @override
-  Future<Either<Failure, void>> MerchantLogout({ required String pkey,
+  Future<Either<Failure, void>> MerchantLogout({
+    required String pkey,
     required String tp,
     required String id,
   }) async {
     if (await _networkInfo.isConnected) {
       try {
-        await _remote.logout(pkey,tp,id);
+        await _remote.logout(pkey, tp, id);
         await _local.logout();
         return const Right(null);
       } catch (e) {

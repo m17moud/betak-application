@@ -1,4 +1,3 @@
-import '../models/client_payment_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/Network/network_info.dart';
@@ -7,6 +6,7 @@ import '../../../../../core/errors/exceptions.dart';
 import '../../domain/repositories/client_check_session_repository.dart';
 import '../datasources/client_check_session_remote_datasource.dart';
 import '../models/client_check_session_response_model.dart';
+import '../models/client_payment_model.dart';
 
 class ClientCheckSessionRepositoryImpl extends ClientCheckSessionRepository {
   final ClientCheckSessionRemoteDatasource _remote;

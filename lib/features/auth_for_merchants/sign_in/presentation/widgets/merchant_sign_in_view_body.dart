@@ -1,4 +1,3 @@
-import '../../../../../core/widgets/warning_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +14,7 @@ import '../../../../../core/widgets/error_dialog.dart';
 import '../../../../../core/widgets/loading_dialog.dart';
 import '../../../../../core/widgets/password_text_field.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
+import '../../../../../core/widgets/warning_dialog.dart';
 import '../../../../../generated/assets.dart';
 import '../cubit/merchant_login_cubit.dart';
 
@@ -56,12 +56,13 @@ class MerchantSignInViewBody extends StatelessWidget {
               Navigator.pop(context);
             },
           );
-        } else if (state is MerchantPaymentRequiredFailure) {
+        } else if (state is MerchantPaymentRequiredFailure ||
+            state is MerchantPaymentAfterSignUpFailure) {
           Navigator.pop(context); // Hide loading dialog
 
           WarningDialog.show(
             context: context,
-            message: state.message.tr(),
+            message: (state as dynamic).message,
             onPressed: () {
               Navigator.pop(context); // Hide warning dialog
               final email = _emailController.text.trim();

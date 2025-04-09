@@ -25,7 +25,9 @@ class CustomerLoginCubit extends Cubit<CustomerLoginState> {
   final ClientPaymentUsecase clientPaymentUsecase;
 
   CustomerLoginCubit(
-      {required this.customerLogin, required this.customerLogout,required this.clientPaymentUsecase})
+      {required this.customerLogin,
+      required this.customerLogout,
+      required this.clientPaymentUsecase})
       : super(CustomerLoginInitial());
 
   /// Handles user login logic.
@@ -37,13 +39,15 @@ class CustomerLoginCubit extends Cubit<CustomerLoginState> {
         loginpassword: password));
 
     failureOrLogin.fold(
-        (failure){
-    if (failure is PaymentRequiredFailure ){
-      emit(ClientPaymentRequiredFailure(message: failure.message));
-}
-    else{
-      emit(LoginError(message: failure.message));
-    }},
+      (failure) {
+        if (failure is PaymentRequiredFailure) {
+          emit(ClientPaymentRequiredFailure(message: failure.message.tr()));
+        } else if (failure is PaymentAfterSignUpRequiredFailure) {
+          emit(ClientPaymentAfterSignUpFailure(message: failure.message.tr()));
+        } else {
+          emit(LoginError(message: failure.message));
+        }
+      },
       (customerInfo) => emit(LoggedIn(customerInfo: customerInfo)),
     );
   }
@@ -102,23 +106,20 @@ class CustomerLoginCubit extends Cubit<CustomerLoginState> {
   Future<void> clientPayment(String email) async {
     emit(ClientPaymentLoading());
 
-        final failureOrLogin = await clientPaymentUsecase.call(
-            ClientPaymentParameters(
-              pkey: ApiConstants.paymentPKey,
-              tp: ApiConstants.paymentCustomerTP,
-              email: email));
-        failureOrLogin.fold(
-              (failure) {
-            if (failure is NetworkFailure) {
-              emit(LoginError(message: AppStrings.locNetworkErrorMessage));
-            }
-            else {
-              emit(ClientPaymentFailure(message: failure.message));
-            }
-          },
-              (payment) =>
-              emit(ClientPaymentSuccess(paymentURL: payment)),
-        );
-      }
-
+    final failureOrLogin = await clientPaymentUsecase.call(
+        ClientPaymentParameters(
+            pkey: ApiConstants.paymentPKey,
+            tp: ApiConstants.paymentCustomerTP,
+            email: email));
+    failureOrLogin.fold(
+      (failure) {
+        if (failure is NetworkFailure) {
+          emit(LoginError(message: AppStrings.locNetworkErrorMessage));
+        } else {
+          emit(ClientPaymentFailure(message: failure.message));
+        }
+      },
+      (payment) => emit(ClientPaymentSuccess(paymentURL: payment)),
+    );
+  }
 }

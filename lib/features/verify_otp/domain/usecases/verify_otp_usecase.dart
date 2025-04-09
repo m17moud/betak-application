@@ -1,8 +1,9 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../repositories/verify_otp_repository.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 class VerifyOtpUsecase implements UseCase<void, FormData> {
   final VerifyOtpRepository verifyOtpRepository;

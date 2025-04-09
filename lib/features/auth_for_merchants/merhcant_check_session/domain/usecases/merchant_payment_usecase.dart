@@ -1,10 +1,10 @@
-import '../../data/models/merchant_payment_model.dart';
-import '../repositories/merchant_check_session_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
+import '../../data/models/merchant_payment_model.dart';
+import '../repositories/merchant_check_session_repository.dart';
 
 
 class MerchantPaymentUsecase

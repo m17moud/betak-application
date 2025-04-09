@@ -1,9 +1,9 @@
-import '../models/merchant_payment_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../models/merchant_check_session_response_model.dart';
+import '../models/merchant_payment_model.dart';
 
 abstract class MerchantCheckSessionRemoteDatasource {
   Future<MerchantCheckSessionResponseModel> merhcantCheckSession(

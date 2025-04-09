@@ -1,9 +1,9 @@
-import '../../data/models/client_payment_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
+import '../../data/models/client_payment_model.dart';
 import '../repositories/client_check_session_repository.dart';
 
 class ClientPaymentUsecase
