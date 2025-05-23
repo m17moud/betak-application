@@ -35,6 +35,7 @@ class ClientSignInViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is Loading || state is ClientPaymentLoading) {
           showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return const LoadingDialog();

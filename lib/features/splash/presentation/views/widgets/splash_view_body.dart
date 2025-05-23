@@ -1,3 +1,5 @@
+
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +21,24 @@ class SplashViewBody extends StatefulWidget {
 }
 
 class _SplashViewBodyState extends State<SplashViewBody> {
+  bool _showLoading = true;
   bool _navigated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Switch from loading indicator to text after 3 seconds
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          _showLoading = false;
+        });
+        // Check authentication status after text appears
+        context.read<CustomerLoginCubit>().checkAuthStatus();
+        context.read<MerchantLoginCubit>().checkAuthStatus();
+      }
+    });
+  }
 
   void _navigateToPage(BuildContext context, String routeName) {
     if (!_navigated) {
@@ -27,19 +46,13 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       Future.delayed(const Duration(seconds: 1), () {
         if (mounted) {
           Navigator.pushNamedAndRemoveUntil(
-            // ignore: use_build_context_synchronously
-            context, routeName, (route) => false,
+            context,
+            routeName,
+            (route) => false,
           );
         }
       });
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    context.read<CustomerLoginCubit>().checkAuthStatus();
-    context.read<MerchantLoginCubit>().checkAuthStatus();
   }
 
   @override
@@ -51,55 +64,78 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       builder: (context, customerState) {
         return BlocBuilder<MerchantLoginCubit, MerchantLoginState>(
           builder: (context, merchantState) {
-            if (customerState is LoggedIn) {
-              _navigateToPage(context, Routes.checkClientSession);
-            } else if (merchantState is MerchantLoggedIn) {
-              _navigateToPage(context, Routes.checkMerchantSession);
-            } else if (customerState is LoggedOut &&
-                merchantState is MerchantLoggedOut) {
-              _navigateToPage(context, Routes.chooseUserType);
+            // Handle navigation only after loading is complete
+            if (!_showLoading) {
+              if (customerState is LoggedIn) {
+                _navigateToPage(context, Routes.checkClientSession);
+              } else if (merchantState is MerchantLoggedIn) {
+                _navigateToPage(context, Routes.checkMerchantSession);
+              } else if (customerState is LoggedOut &&
+                  merchantState is MerchantLoggedOut) {
+                _navigateToPage(context, Routes.chooseUserType);
+              }
             }
 
             return Stack(
               children: [
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: SvgPicture.asset(
                         Assets.imagesLogo,
                       ),
-                      SizedBox(
-                        height: screenHeight * 0.015,
-                      ),
-                      Text(
-                        AppStrings.splashScreenText.tr(),
-                        style: Styles.styleBoldInriaSans16.copyWith(
-                          color: ColorManager.white,
-                          fontSize: screenWidth * 0.04,
+                    ),
+                    SizedBox(height: screenHeight * 0.015),
+                    _showLoading
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: screenWidth * 0.035,
+                              horizontal: screenWidth * 0.35,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const LinearProgressIndicator(
+                                color: Styles.blueSky,
+                              ),
+                            ),
+                          )
+                        : Text(
+                            AppStrings.splashScreenText.tr(),
+                            style: Styles.styleBoldInriaSans16.copyWith(
+                              color: ColorManager.white,
+                              fontSize: screenWidth * 0.04,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                  ],
+                ),
+                Positioned(
+                  bottom: screenHeight * 0.1,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          AppStrings.from.tr(),
+                          style: Styles.styleBoldInriaSans16.copyWith(
+                            color: ColorManager.textFormFillColor,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                        Text(
+                          AppStrings.techMark.tr(),
+                          style: Styles.styleBoldIrinaSans20.copyWith(
+                            color: ColorManager.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                        Positioned(
-          bottom: screenHeight * 0.1,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: Column(
-              children: [
-                Text(AppStrings.from.tr(),
-                    style: Styles.styleBoldInriaSans16
-                        .copyWith(color: ColorManager.textFormFillColor)),
-                Text(AppStrings.techMark.tr(),
-                    style: Styles.styleBoldIrinaSans20
-                        .copyWith(color: ColorManager.white)),
-              ],
-            ),
-          ),
-        ),
               ],
             );
           },

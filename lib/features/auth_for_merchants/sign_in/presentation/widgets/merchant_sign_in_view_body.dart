@@ -34,6 +34,7 @@ class MerchantSignInViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is Loading || state is MerchantPaymentLoading) {
           showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return const LoadingDialog();

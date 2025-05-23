@@ -7,6 +7,7 @@ import '../core/utils/routes_manager.dart';
 class BetakApplication extends StatelessWidget {
   const BetakApplication({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +16,7 @@ class BetakApplication extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       builder: DevicePreview.appBuilder,
-      initialRoute: Routes.loadingSplashRoute,
+      initialRoute: Routes.splashRoute,
       onGenerateRoute:
           RouteGenerator.getRoute, // Use RouteGenerator for navigation
     );

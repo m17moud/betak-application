@@ -19,7 +19,6 @@ import '../../features/product/presentation/views/client_product_view.dart';
 import '../../features/product/presentation/views/widgets/merchant_product_view.dart';
 import '../../features/reset_password/presentation/pages/reset_password_screen.dart';
 import '../../features/send_otp/presentation/pages/forogt_password_screen.dart';
-import '../../features/splash/presentation/views/loading_splash_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 import '../../features/verify_otp/presentation/pages/verify_otp_screen.dart';
 import '../widgets/choose_user_type.dart';
@@ -27,8 +26,7 @@ import 'color_manager.dart';
 import 'string_manager.dart';
 
 class Routes {
-  static const String loadingSplashRoute = "/";
-  static const String splashRoute = "/splash_view";
+  static const String splashRoute = "/";
   static const String chooseUserType = "/choose_user_type";
 
   static const String clientSignInRoute = "/client_sign_in_view";
@@ -57,7 +55,6 @@ class Routes {
   static const String updateProductRoute = "/manage_product_screen";
 
   static Map<String, Widget Function(BuildContext, dynamic)> routesList = {
-    loadingSplashRoute: (context, _) => const LoadingSplashView(),
     splashRoute: (context, _) => const SplashView(),
     checkClientSession: (context, _) => const CheckClientSessionScreen(),
     checkMerchantSession: (context, _) => const CheckMerchantSessionScreen(),
