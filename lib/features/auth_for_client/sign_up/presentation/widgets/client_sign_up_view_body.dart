@@ -41,6 +41,7 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
       listener: (context, state) {
         if (state is SignUpLoading) {
           showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return const LoadingDialog();
@@ -67,7 +68,6 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
             message: state.message,
             onPressed: () {
               Navigator.pop(context);
-              
             },
           );
         }

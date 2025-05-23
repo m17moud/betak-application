@@ -55,6 +55,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
       listener: (context, state) {
         if (state is MerchantSignUpLoading) {
           showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return const LoadingDialog();

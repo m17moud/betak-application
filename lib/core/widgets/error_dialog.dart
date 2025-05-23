@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
@@ -14,6 +13,7 @@ class ErrorDialog {
   }) {
     QuickAlert.show(
       context: context,
+      barrierDismissible: false,
       title: AppStrings.error.tr(),
       text: message.tr(),
       type: QuickAlertType.error,
