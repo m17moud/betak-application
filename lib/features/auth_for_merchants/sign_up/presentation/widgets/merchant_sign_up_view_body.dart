@@ -1,3 +1,4 @@
+import 'policy_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -206,32 +207,10 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                   checkVisibility: false,
                   screenWidth: screenWidth,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.alreadyHaveAcount.tr(),
-                      style: Styles.styleSemiBoldInter20
-                          .copyWith(color: Styles.flyByNight),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, Routes.merchantSignInRoute);
-                      },
-                      child: Text(
-                        AppStrings.login.tr(),
-                        style: Styles.styleSemiBoldInter20
-                            .copyWith(color: Styles.blueSky),
-                      ),
-                    )
-                  ],
-                ),
+               const PolicyText(),
+               
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 30, top: 5),
+                  padding: const EdgeInsets.only(bottom: 10, top: 5),
                   child: CustomButton1(
                     backgroundColor: Styles.blueSky,
                     onPressed: () {
@@ -276,6 +255,28 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppStrings.alreadyHaveAcount.tr(),
+                      style: Styles.styleSemiBoldInter20
+                          .copyWith(color: Styles.flyByNight),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, Routes.merchantSignInRoute);
+                      },
+                      child: Text(
+                        AppStrings.login.tr(),
+                        style: Styles.styleSemiBoldInter20
+                            .copyWith(color: Styles.blueSky),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 15,),
               ],
             ),
           ),

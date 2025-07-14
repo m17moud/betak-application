@@ -1,8 +1,8 @@
-import '../../../../core/error/failures.dart';
-import '../../../../core/usecases/usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecases/usecase.dart';
 import '../repositories/reset_password_repository.dart';
 
 class ResetPasswordUsecase implements UseCase<void, FormData> {

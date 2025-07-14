@@ -1,11 +1,12 @@
-import '../../../../core/api/end_ponits.dart';
-import '../../../../core/error/failures.dart';
-import '../../../../core/utils/string_manager.dart';
-import '../../domain/usecases/verify_otp_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../../core/api/end_ponits.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/utils/string_manager.dart';
+import '../../domain/usecases/verify_otp_usecase.dart';
 
 part 'verify_otp_state.dart';
 

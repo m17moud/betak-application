@@ -1,3 +1,4 @@
+import '../../../../auth_for_merchants/sign_up/presentation/widgets/policy_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -130,26 +131,9 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
                   controller: _passwordController,
                 ),
                 const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTitleText(
-                      text: AppStrings.alreadyHaveAcount.tr(),
-                    ),
-                    InkWell(
-                        onTap: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.clientSignInRoute);
-                        },
-                        child: CustomTitleText(
-                          text: AppStrings.login.tr(),
-                          style: Styles.styleSemiBoldInter20
-                              .copyWith(color: Styles.blueSky),
-                        ))
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 30, top: 5),
+                const PolicyText(),
+                     Padding(
+                  padding: const EdgeInsets.only(bottom: 7, top: 5),
                   child: CustomButton1(
                     backgroundColor: Styles.blueSky,
                     onPressed: () {
@@ -171,6 +155,25 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTitleText(
+                      text: AppStrings.alreadyHaveAcount.tr(),
+                    ),
+                    InkWell(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.clientSignInRoute);
+                        },
+                        child: CustomTitleText(
+                          text: AppStrings.login.tr(),
+                          style: Styles.styleSemiBoldInter20
+                              .copyWith(color: Styles.blueSky),
+                        ))
+                  ],
+                ),
+           
               ],
             ),
           ),

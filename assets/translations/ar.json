@@ -125,5 +125,8 @@
     "notEqualPassword": "كلمات المرور غير متشابهة",
     "resetPasswordSuccess": "تم إنشاء كلمة المرور",
     "paymentRequiredMessage": "انتهت صلاحية اشتراكك اضغط تأكيد للانتقال إلى صفحة الدفع و تجديد الإشتراك",
-    "PaymentAfterSignUpRequiredMessage": "لإستخدام التطبيق يجب سداد الإشتراك أولا\nهل ترغب في السداد الأن ؟"
+    "PaymentAfterSignUpRequiredMessage": "لإستخدام التطبيق يجب سداد الإشتراك أولا\nهل ترغب في السداد الأن ؟",
+    "agreeToTerms": "بالتسجيل، فإنك توافق على",
+    "privacyPolicy": " سياسة الخصوصية ",
+    "ourPrivacy":"الخاصة بنا."
 }

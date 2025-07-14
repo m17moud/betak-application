@@ -173,8 +173,32 @@ class MerchantSignInViewBody extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    Row(
+                
+                    SizedBox(
+                      height: screenHeight > 892 ? 40 : 30,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: screenHeight * 0.01),
+                      child: CustomButton1(
+                        backgroundColor: Styles.blueSky,
+                        onPressed: () {
+                          final email = _emailController.text.trim();
+                          final password = _passwordController.text.trim();
+                          if (_formKey.currentState?.validate() ?? false) {
+                            context
+                                .read<MerchantLoginCubit>()
+                                .login(email, password);
+                          }
+                        },
+                        text: AppStrings.login.tr(),
+                        textStyle: Styles.styleSemiBoldInter18
+                            .copyWith(color: Colors.white),
+                        buttonWidth: screenWidth * 0.9,
+                        buttonHeight: screenHeight * 0.08,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                        Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomTitleText(
@@ -194,30 +218,6 @@ class MerchantSignInViewBody extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: screenHeight > 892 ? 40 : 30,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 0.04),
-                      child: CustomButton1(
-                        backgroundColor: Styles.blueSky,
-                        onPressed: () {
-                          final email = _emailController.text.trim();
-                          final password = _passwordController.text.trim();
-                          if (_formKey.currentState?.validate() ?? false) {
-                            context
-                                .read<MerchantLoginCubit>()
-                                .login(email, password);
-                          }
-                        },
-                        text: AppStrings.login.tr(),
-                        textStyle: Styles.styleSemiBoldInter18
-                            .copyWith(color: Colors.white),
-                        buttonWidth: screenWidth * 0.9,
-                        buttonHeight: screenHeight * 0.08,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
                     ),
                   ],
                 ),
