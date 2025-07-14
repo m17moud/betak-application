@@ -1,8 +1,8 @@
-import '../../data/models/merchant_payment_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../data/models/merchant_check_session_response_model.dart';
+import '../../data/models/merchant_payment_model.dart';
 
 abstract class MerchantCheckSessionRepository {
   Future<Either<Failure, MerchantCheckSessionResponseModel>> merhcantCheckSession({

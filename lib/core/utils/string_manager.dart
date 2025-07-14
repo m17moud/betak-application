@@ -134,6 +134,10 @@ class AppStrings {
   static const String successSignup = "successSignup";
   static const String verifyEmailMessage = "verifyEmailMessage";
 
+// policy
+  static const String agreeToTerms = "agreeToTerms";
+  static const String privacyPolicy = "privacyPolicy";
+  static const String ourPrivacy = "ourPrivacy";
 //login auth error
   static const String locLoginAuthError = "login_auth_error";
   static const String locLoginAuthErrorMessage = "login_auth_error_message";

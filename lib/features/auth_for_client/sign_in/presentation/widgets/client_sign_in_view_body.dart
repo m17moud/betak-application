@@ -1,4 +1,3 @@
-import '../../../../../core/widgets/warning_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +15,7 @@ import '../../../../../core/widgets/error_dialog.dart';
 import '../../../../../core/widgets/loading_dialog.dart';
 import '../../../../../core/widgets/password_text_field.dart';
 import '../../../../../core/widgets/text_form_validation.dart';
+import '../../../../../core/widgets/warning_dialog.dart';
 import '../../../../../generated/assets.dart';
 import '../cubit/customer_login_cubit.dart';
 
@@ -179,8 +179,32 @@ class ClientSignInViewBody extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    Row(
+               
+                    SizedBox(
+                      height: screenHeight > 892 ? 40 : 30,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: screenHeight * 0.01),
+                      child: CustomButton1(
+                        backgroundColor: Styles.blueSky,
+                        onPressed: () {
+                          final email = _emailController.text.trim();
+                          final password = _passwordController.text.trim();
+                          if (_formKey.currentState?.validate() ?? false) {
+                            context
+                                .read<CustomerLoginCubit>()
+                                .login(email, password);
+                          }
+                        },
+                        text: AppStrings.login.tr(),
+                        textStyle: Styles.styleSemiBoldInter18
+                            .copyWith(color: ColorManager.white),
+                        buttonWidth: screenWidth * 0.9,
+                        buttonHeight: screenHeight * 0.08,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                         Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomTitleText(
@@ -200,30 +224,6 @@ class ClientSignInViewBody extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: screenHeight > 892 ? 40 : 30,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 0.04),
-                      child: CustomButton1(
-                        backgroundColor: Styles.blueSky,
-                        onPressed: () {
-                          final email = _emailController.text.trim();
-                          final password = _passwordController.text.trim();
-                          if (_formKey.currentState?.validate() ?? false) {
-                            context
-                                .read<CustomerLoginCubit>()
-                                .login(email, password);
-                          }
-                        },
-                        text: AppStrings.login.tr(),
-                        textStyle: Styles.styleSemiBoldInter18
-                            .copyWith(color: ColorManager.white),
-                        buttonWidth: screenWidth * 0.9,
-                        buttonHeight: screenHeight * 0.08,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
                     ),
                   ],
                 ),
