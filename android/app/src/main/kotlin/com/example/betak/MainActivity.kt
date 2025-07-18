@@ -1,4 +1,4 @@
-package com.example.betak
+package com.techmark.betak
 
 import io.flutter.embedding.android.FlutterActivity
 
