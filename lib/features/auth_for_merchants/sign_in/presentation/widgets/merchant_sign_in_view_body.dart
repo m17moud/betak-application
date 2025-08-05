@@ -86,7 +86,7 @@ class MerchantSignInViewBody extends StatelessWidget {
                   children: [
                     const SizedBox(height: 60),
                     Center(child: SvgPicture.asset(Assets.imagesLogo1)),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -97,7 +97,7 @@ class MerchantSignInViewBody extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 15),
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
@@ -194,7 +194,7 @@ class MerchantSignInViewBody extends StatelessWidget {
                         textStyle: Styles.styleSemiBoldInter18
                             .copyWith(color: Colors.white),
                         buttonWidth: screenWidth * 0.9,
-                        buttonHeight: screenHeight * 0.08,
+                        buttonHeight: screenHeight * 0.07,
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),

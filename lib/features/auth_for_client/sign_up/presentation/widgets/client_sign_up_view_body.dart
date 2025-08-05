@@ -173,7 +173,7 @@ class _ClientSignUpViewBodyState extends State<ClientSignUpViewBody> {
                         ))
                   ],
                 ),
-           
+           const SizedBox(height: 20,)
               ],
             ),
           ),

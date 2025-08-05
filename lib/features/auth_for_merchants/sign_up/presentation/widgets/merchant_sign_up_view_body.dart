@@ -276,7 +276,7 @@ class _MerchantSignUpViewBodyState extends State<MerchantSignUpViewBody> {
                     )
                   ],
                 ),
-                const SizedBox(height: 15,),
+                const SizedBox(height: 20,),
               ],
             ),
           ),

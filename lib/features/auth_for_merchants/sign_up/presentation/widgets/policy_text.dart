@@ -1,9 +1,10 @@
-import '../../../../../core/utils/string_manager.dart';
-import '../../../../../core/utils/styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../../core/utils/string_manager.dart';
+import '../../../../../core/utils/styles.dart';
 
 class PolicyText extends StatelessWidget {
   const PolicyText({super.key});
