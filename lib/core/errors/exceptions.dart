@@ -91,8 +91,14 @@ void handleDioExceptions(DioException e) {
           throw PaymentRequiredException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 403: //forbidden
-          throw SessionExpiredException(
-              errModel: ErrorModel.fromJson(e.response!.data));
+          final err = ErrorModel.fromJson(e.response!.data);
+          if (err.errorMessage.toLowerCase().contains("inactive")) {
+            throw ServerLoginAuthException(
+                errModel: ErrorModel.fromJson(e.response!.data));
+          } else {
+            throw SessionExpiredException(
+                errModel: ErrorModel.fromJson(e.response!.data));
+          }
         case 404: //not found
           throw ServerLoginAuthException(
               errModel: ErrorModel.fromJson(e.response!.data));
@@ -104,7 +110,7 @@ void handleDioExceptions(DioException e) {
         case 422: //  Unprocessable Entity
           throw ServerException(
               errModel: ErrorModel.fromJson(e.response!.data));
-        case 428: 
+        case 428:
           throw PaymentAfterSignUpRequiredException(
               errModel: ErrorModel.fromJson(e.response!.data));
         case 500: //  Unprocessable Entity
