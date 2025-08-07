@@ -22,7 +22,8 @@ class CheckClientSessionScreen extends StatelessWidget {
       child: Scaffold(
         body: BlocBuilder<ClientCheckSessionCubit, ClientCheckSessionState>(
           builder: (context, state) {
-            if (state is ClientCheckSessionLoading || state is ClientPaymentLoading) {
+            if (state is ClientCheckSessionLoading ||
+                state is ClientPaymentLoading) {
               return const LoadingDialog();
             } else if (state is ClientCheckSessionSuccess) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -31,7 +32,8 @@ class CheckClientSessionScreen extends StatelessWidget {
                   (route) => false,
                 );
               });
-            } else if (state is ClientCheckSessionNetworkFailure|| state is ClientPaymentNetworkFailure) {
+            } else if (state is ClientCheckSessionNetworkFailure ||
+                state is ClientPaymentNetworkFailure) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 ErrorDialog.show(
                   context: context,
@@ -41,24 +43,23 @@ class CheckClientSessionScreen extends StatelessWidget {
                   },
                 );
               });
-            }
-            else if (state is ClientPaymentRequiredFailure ) {
-              WidgetsBinding.instance.addPostFrameCallback((_){
+            } else if (state is ClientPaymentRequiredFailure) {
+              context.read<ClientCheckSessionCubit>().clearLocalStorage();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 WarningDialog.show(
                   context: context,
                   message: state.message.tr(),
                   onPressed: () {
                     context.read<ClientCheckSessionCubit>().clientPayment();
                   },
-                );});
-            }
-    else if (state is ClientPaymentSuccess) {
+                );
+              });
+            } else if (state is ClientPaymentSuccess) {
               context.read<ClientCheckSessionCubit>().clearLocalStorage();
 
               launchUrl(Uri.parse(state.paymentURL.payurl!));
-              }
-
-            else if (state is ClientCheckSessionFailure || state is ClientPaymentFailure) {
+            } else if (state is ClientCheckSessionFailure ||
+                state is ClientPaymentFailure) {
               context.read<ClientCheckSessionCubit>().clearLocalStorage();
 
               WidgetsBinding.instance.addPostFrameCallback((_) {

@@ -2,7 +2,7 @@ name: betak
 description: "An ecommerce app."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+8
+version: 1.0.0+9
 
 environment:
   sdk: '>=3.4.3 <4.0.0'

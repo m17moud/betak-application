@@ -23,7 +23,8 @@ class CheckMerchantSessionScreen extends StatelessWidget {
       child: Scaffold(
         body: BlocBuilder<MerchantCheckSessionCubit, MerchantCheckSessionState>(
           builder: (context, state) {
-            if (state is MerchantCheckSessionLoading || state is MerchantPaymentLoading) {
+            if (state is MerchantCheckSessionLoading ||
+                state is MerchantPaymentLoading) {
               // Show loading dialog
               return const LoadingDialog();
             } else if (state is MerchantCheckSessionSuccess) {
@@ -33,34 +34,35 @@ class CheckMerchantSessionScreen extends StatelessWidget {
                   (route) => false,
                 );
               });
-            } 
-            else if (state is MerchantCheckSessionNetworkFailure || state is MerchantPaymentNetworkFailure) {
-               WidgetsBinding.instance.addPostFrameCallback((_){
-              ErrorDialog.show(
-                context: context,
-                message: (state as dynamic).message,
-                onPressed: () {
-                  exit(0);
-                },
-              );});
-            }
-            else if (state is MerchantPaymentRequiredFailure) {
-              WidgetsBinding.instance.addPostFrameCallback((_){
+            } else if (state is MerchantCheckSessionNetworkFailure ||
+                state is MerchantPaymentNetworkFailure) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                ErrorDialog.show(
+                  context: context,
+                  message: (state as dynamic).message,
+                  onPressed: () {
+                    exit(0);
+                  },
+                );
+              });
+            } else if (state is MerchantPaymentRequiredFailure) {
+              context.read<MerchantCheckSessionCubit>().clearLocalStorage();
+
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 WarningDialog.show(
                   context: context,
                   message: state.message.tr(),
                   onPressed: () {
                     context.read<MerchantCheckSessionCubit>().merchantPayment();
                   },
-                );});
-            }
-            else if (state is MerchantPaymentSuccess) {
+                );
+              });
+            } else if (state is MerchantPaymentSuccess) {
               context.read<MerchantCheckSessionCubit>().clearLocalStorage();
 
               launchUrl(Uri.parse(state.paymentURL.payurl!));
-            }
-            
-            else if (state is MerchantCheckSessionFailure || state is MerchantPaymentFailure) {
+            } else if (state is MerchantCheckSessionFailure ||
+                state is MerchantPaymentFailure) {
               context.read<MerchantCheckSessionCubit>().clearLocalStorage();
 
               WidgetsBinding.instance.addPostFrameCallback((_) {
